@@ -31,15 +31,15 @@ root.render(
       <Route path="/LogIn" element={<LogIn />} />
       <Route path="/SignUp" element={<SignUp />} />
       <Route path="/HomePage" element={<HomePage />} />
-      <Route path="/PackDetails" element={<PackDetails />} />
-      <Route path="/PackGroupChat" element={<PackGroupChat />} />
-      <Route path="/EventDetails" element={<EventDetails />} />
+      <Route path="/:packid/PackDetails" element={<PackDetails />} />
+      <Route path="/:chatid/PackGroupChat" element={<PackGroupChat />} />
+      <Route path="/:eventid/EventDetails" element={<EventDetails />} />
       <Route path="/DiscoverMain" element={<DiscoverMain />} />
-      <Route path="/DiscoverChat" element={<DiscoverChat />} />
-      <Route path="/ProfileList" element={<ProfileList />} />
+      <Route path="/:chatid/DiscoverChat" element={<DiscoverChat />} />
+      <Route path="/:userid/ProfileList" element={<ProfileList />} />
       {/* We can use parameters in react router to go to individual profiles */}
-      <Route path="/Profile" element={<Profile />} />
-      <Route path="/ProfileSettings" element={<ProfileSettings />} />
+      <Route path="/:userid/Profile" element={<Profile />} />
+      <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
     </Routes>
   </BrowserRouter>
 )
