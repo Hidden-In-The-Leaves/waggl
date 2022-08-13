@@ -1,9 +1,9 @@
-const { Client, Pool } = require("pg");
+const { Pool } = require("pg");
 
 const credentials = {
-  user: "postgres",
-  database: "sdc_curium",
-  password: "postgres",
+  user: process.env.PGUSER,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
 };
 
 const pool = new Pool(credentials);
