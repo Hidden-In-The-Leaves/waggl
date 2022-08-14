@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export default function HomePage (props) {
 
@@ -12,3 +13,8 @@ export default function HomePage (props) {
     </div>
   )
 }
+
+const SubTitle = styled.div`
+  font-size: 32px;
+  font-weight: 800;
+`;
