@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import styled from 'styled-components';
 
 export default function App () {
   return (
@@ -10,38 +10,43 @@ export default function App () {
       and use a route by setting attribute "to" equal
       to a route that is found in index.js*/}
       <Link to="/LogIn">
-        <button>This is a Link to the Log In page!</button>
+        <Button>This is a Link to the Log In page!</Button>
       </Link>
       <Link to="/SignUp">
-        <button>This is a Link to the Sign Up page!</button>
+        <Button>This is a Link to the Sign Up page!</Button>
       </Link>
       <Link to="/HomePage">
-        <button>This is a Link to the Home page!</button>
+        <Button>This is a Link to the Home page!</Button>
       </Link>
       <Link to="/PackDetails">
-        <button>This is a Link to the Pack Details page!</button>
+        <Button>This is a Link to the Pack Details page!</Button>
       </Link>
       <Link to="/PackGroupChat">
-        <button>This is a Link to the Pack Group Chat page!</button>
+        <Button>This is a Link to the Pack Group Chat page!</Button>
       </Link>
       <Link to="/EventDetails">
-        <button>This is a Link to the Event Details page!</button>
+        <Button>This is a Link to the Event Details page!</Button>
       </Link>
       <Link to="/DiscoverMain">
-        <button>This is a Link to the Discover Main page!</button>
+        <Button>This is a Link to the Discover Main page!</Button>
       </Link>
       <Link to="/DiscoverChat">
-        <button>This is a Link to the Discover Chat page!</button>
+        <Button>This is a Link to the Discover Chat page!</Button>
       </Link>
       <Link to="/ProfileList">
-        <button>This is a Link to the Profile List page!</button>
+        <Button>This is a Link to the Profile List page!</Button>
       </Link>
       <Link to="/Profile">
-        <button>This is a Link to a profile page!</button>
+        <Button>This is a Link to a profile page!</Button>
       </Link>
       <Link to="/ProfileSettings">
-        <button>This is a Link to the Profile Settings page!</button>
+        <Button>This is a Link to the Profile Settings page!</Button>
       </Link>
     </div>
   )
 }
+
+const Button = styled.button`
+  padding: 10px;
+  margin: 10px;
+`;

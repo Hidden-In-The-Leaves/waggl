@@ -1,14 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import PackItem from './PackItem';
+import { SectionTitle } from '../../styledComponents';
 
-function PackList({ title, packList }) {
+export default function PackList({ title, packs }) {
   return (
-    <div>
-      <div>
+    <Div>
+      <SectionTitle>
         {title}
-      </div>
-      {packList.map((pack) => <PackItem key={pack.id} pack={pack} />)}
-    </div>
+      </SectionTitle>
+      {packs.map((pack) => <PackItem key={pack.id} pack={pack} />)}
+    </Div>
   )
 }
+
+const Div = styled.div`
+  margin: 30px 0;
+`;
