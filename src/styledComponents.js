@@ -32,14 +32,6 @@ export const Container_2_3 = styled(Container)`
   width: 70%;
 `;
 
-export const Flex = styled.div`
-  display: flex;
-  flex-direction: ${props => props.flexDirection ? props.flexDirection : 'row'};
-  align-items: ${props => props.alignItems ? props.alignItems : 'initial'};
-  margin: ${props => props.margin ? props.margin : 0};
-  justify-content: ${props => props.justifyContent ? props.justifyContent : 'initial'};
-  box-sizing:border-box;;
-`;
 
 export const Button = styled.button`
   color: white;

@@ -1,21 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Flex } from '../../styledComponents';
 
 export default function PackItem({ pack }) {
   const packDescription = pack.description.length > 30 ? pack.description.substring(0, 30) + '...' : pack.description;
 
   return (
-    <Flex flexDirection="row" alignItems="center" margin="5% 0">
+    <FlexContainer>
       <RoundImg src={pack.photo} />
-      <Flex flexDirection="column">
+      <FlexColumn>
         <MainText>{pack.name}</MainText>
         <SubText>{packDescription}</SubText>
-      </Flex>
-    </Flex>
+      </FlexColumn>
+    </FlexContainer>
   )
 }
 
+const FlexContainer = styled.div`
+  display: flex;
+  box-sizing:border-box;
+  flex-direction: row;
+  align-items: center;
+  margin: 5% 0;
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+`;
 
 const RoundImg = styled.img`
   width: 60px;

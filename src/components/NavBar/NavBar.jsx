@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Flex, Button } from '../../styledComponents';
+import { Button } from '../../styledComponents';
 
 export default function NavBar({ type }) {
     return (
