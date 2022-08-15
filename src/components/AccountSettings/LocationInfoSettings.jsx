@@ -5,7 +5,7 @@ export default function LocationInfoSettings(props) {
 
   const [locationEdit, setLocationEdit] = useState([]);
   const [city, setCity] = useState({});
-  const [state, setState] = useState({});
+  const [userState, setUserState] = useState({});
   const [discoveryRadius, setDiscoveryRadius] = useState({});
 
   const testData = {
@@ -18,8 +18,61 @@ export default function LocationInfoSettings(props) {
     discovery_radius: '5 miles'
   }
 
-  getLocationInfo = () => { };
-  setLocationInfo = () => { };
+  handleLocationSettingsEdit = (event) => {
+    setLocationEdit(true);
+  };
+
+  handleLocationSettingsUpdate = (event) => {
+    event.preventDefault();
+
+    // send updated info to server
+    const config = {
+      method: 'PUT',
+      url: '/accountSettings/locationInfo',
+      data: {
+       city: city,
+        state: userState,
+        discovery_radius: discoveryRadius,
+      }
+    }
+
+    axios(config)
+      .then(() => {
+        getLocationInfo();
+      })
+      .catch(err => console.log(err));
+
+    setLocationEdit(false);
+  };
+
+  handleCityChange = (event) => {
+    setCity(event.target.value);
+  };
+  handleStateChange = (event) => {
+    setState(event.target.value);
+  };
+  handleDisoveryRadiusChange = (event) => {
+    setDiscoveryRadius(event.target.value);
+  };
+
+  getLocationInfo = () => {
+    const config = {
+      method: 'GET',
+      url: '/accountSettings/locationInfo'
+    }
+
+    axios(config)
+    .then(res => {
+      setLocationInfo(res.data)
+    })
+    .catch(err => console.log(err));
+  };
+
+  setLocationInfo = (data) => {
+    setCity(data.city);
+    setUserState(data.state);
+    setDiscoveryRadius(data.discovery_radius);
+  };
 
   useEffect(() => {
     if (locationEdit.length === 0) {

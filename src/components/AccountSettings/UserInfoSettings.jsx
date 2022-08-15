@@ -50,42 +50,7 @@ export default function UserInfoSettings(props) {
     setPassword(event.target.value);
   };
 
-  handleLocationSettingsEdit = (event) => {
-    setLocationEdit(true);
-  };
 
-  handleLocationSettingsUpdate = (event) => {
-    event.preventDefault();
-
-    // send updated info to server
-    const config = {
-      method: 'PUT',
-      url: '/accountSettings/locationInfo',
-      data: {
-       city: city,
-        state: state,
-        discovery_radius: discoveryRadius,
-      }
-    }
-
-    axios(config)
-      .then(() => {
-        getLocationInfo();
-      })
-      .catch(err => console.log(err));
-
-    setLocationEdit(false);
-  };
-
-  handleCityChange = (event) => {
-    setCity(event.target.value);
-  };
-  handleStateChange = (event) => {
-    setState(event.target.value);
-  };
-  handleDisoveryRadiusChange = (event) => {
-    setDiscoveryRadius(event.target.value);
-  };
 
   getUserInfo = () => {
     const config = {
@@ -107,7 +72,7 @@ export default function UserInfoSettings(props) {
     setPassword('password');
   };
 
-  seEffect(() => {
+  useEffect(() => {
     if (userEdit.length === 0) {
       setUserEdit(false);
     }
