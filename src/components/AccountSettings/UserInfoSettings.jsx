@@ -31,10 +31,9 @@ export default function UserInfoSettings(props) {
     axios(config)
       .then(() => {
         getUserInfo();
+        setUserEdit(false);
       })
       .catch(err => console.log(err));
-
-    setUserEdit(false);
   };
 
   handleFirstNameChange = (event) => {
@@ -93,19 +92,19 @@ export default function UserInfoSettings(props) {
         <fieldset disabled={!userEdit}>
           <label>
             First Name
-            <input type="text" value={firstName}></input>
+            <input type="text" value={firstName} onChange={handleFirstNameChange}></input>
           </label>
           <label>
             Last Name
-            <input type="text" value={lastName}></input>
+            <input type="text" value={lastName} onChange={handleLastNameChange}></input>
           </label>
           <label>
             Email
-            <input type="text" value={email}></input>
+            <input type="text" value={email} onChange={handleEmailChange}></input>
           </label>
           <label>
             Password
-            <input type="password" value={password}></input>
+            <input type="password" value={password} onChange={handlePasswordChange}></input>
           </label>
           <input type="submit" value="Update User Information"></input>
         </fieldset>

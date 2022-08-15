@@ -39,10 +39,9 @@ export default function LocationInfoSettings(props) {
     axios(config)
       .then(() => {
         getLocationInfo();
+        setLocationEdit(false);
       })
       .catch(err => console.log(err));
-
-    setLocationEdit(false);
   };
 
   handleCityChange = (event) => {
@@ -91,15 +90,15 @@ export default function LocationInfoSettings(props) {
         <fieldset disabled={!locationEdit}>
           <label>
             City
-            <input type="text" value={city}></input>
+            <input type="text" value={city} onChange={handleCityChange}></input>
           </label>
           <label>
             State
-            <input type="text" value={state}></input>
+            <input type="text" value={state} onChange={handleStateChange}></input>
           </label>
           <label>
             Discovery Radius
-            <input type="text" value={discoveryRadius}></input>
+            <input type="text" value={discoveryRadius} onChange={handleDisoveryRadiusChange}></input>
           </label>
           <input type="submit" value="Update Location Settings"></input>
         </fieldset>
