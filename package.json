@@ -6,12 +6,13 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
     "dev": "webpack serve --open --port 8080",
-    "build": "webpack",
+    "build": "webpack --watch",
     "pg:init": "pg_ctl init -D waggl",
     "pg:createdb": "createdb -h 127.0.0.1 waggl",
     "pg:start": "pg_ctl -D waggl start",
     "pg:stop": "pg_ctl -D waggl stop",
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "start-dev": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "node-pg": "^1.0.1",
+    "pg": "^8.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -43,6 +45,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.19",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.10.0",
     "wepback": "^1.0.0"

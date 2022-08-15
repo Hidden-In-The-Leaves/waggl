@@ -6,7 +6,7 @@ export default function PackItem({ pack }) {
 
   return (
     <FlexContainer>
-      <RoundImg src={pack.photo} />
+      <RoundImg src={pack.url} />
       <FlexColumn>
         <MainText>{pack.name}</MainText>
         <SubText>{packDescription}</SubText>
