@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import UserInfoSettings from './UserInfoSettings';
+import LocationInfoSettings from './LocationInfoSettings';
+import PrivacySettings from './PrivacySettings';
 
 export default function AccountSettings (props) {
 
@@ -9,6 +12,9 @@ export default function AccountSettings (props) {
       <Link to="/">
         <button>This is a Link to App "Page"!</button>
       </Link>
+      <UserInfoSettings />
+      <LocationInfoSettings />
+      <PrivacySettings />
     </div>
   )
-}
+};

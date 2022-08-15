@@ -1,5 +1,5 @@
 const express = require('express');
-const accountSettingsController = require('../controllers/messageController.js');
+const accountSettingsController = require('../controllers/accountSettingsController.js');
 
 const router = express.Router();
 

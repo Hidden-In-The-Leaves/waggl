@@ -43,9 +43,9 @@ root.render(
       {/* We can use parameters in react router to go to individual profiles */}
       <Route path="/:userid/Profile" element={<Profile />} />
       <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
-      <Route path="/:userid/AccountSettings" element={<AccountSettings />} />
-      <Route path="/:userid/AccountSettings/GeneralAccountSettings" element={<GeneralAccountSettings />} />
-      <Route path="/:userid/AccountSettings/PrivacySettings" element={<PrivacySettings />} />
+      <Route path="/AccountSettings" element={<AccountSettings />} />
+      <Route path="/GeneralAccountSettings" element={<GeneralAccountSettings />} />
+      <Route path="/PrivacySettings" element={<PrivacySettings />} />
     </Routes>
   </BrowserRouter>
 )
