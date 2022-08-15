@@ -5,10 +5,13 @@ const router = express.Router();
 
 router.route('/')
   .get(packsController.getAll)
-  // .post('some controller')
-  // .put('some controller')
+  .post(packsController.createPack)
 
-router.route('/:userid')
+router.route('/:id')
+  .put(packsController.updatePack)
+  .delete(packsController.deletePack)
+
+router.route('/user/:userid')
   .get(packsController.getByUserId)
 
 module.exports = router;

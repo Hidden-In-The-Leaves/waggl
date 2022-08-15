@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function PackItem({ pack }) {
-  const packDescription = pack.description.length > 30 ? pack.description.substring(0, 30) + '...' : pack.description;
+  const packDescription = pack.description?.length > 30 ? pack.description.substring(0, 30) + '...' : pack.description;
 
   return (
     <FlexContainer>
