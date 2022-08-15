@@ -1,9 +1,11 @@
-const express = require('express');
-const messageController = require('../controllers/messageController.js');
+const express = require("express");
+const { getMessage } = require("../controllers/messageController.js");
 
 const router = express.Router();
 
-router.route('/')
-  .get(messageController.getMessage);
+<<<<<<< HEAD
+=======
+router.route("/").get(getMessage);
+>>>>>>> e4818081a1512b41658dcb9abd9a02cf0a589e58
 
 module.exports = router;
