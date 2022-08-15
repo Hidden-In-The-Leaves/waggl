@@ -43,6 +43,15 @@ export default function App () {
       <Link to="/ProfileSettings">
         <button>This is a Link to the Profile Settings page!</button>
       </Link>
+      <Link to="/AccountSettings">
+        <button>This is a Link to the Account Settings page!</button>
+      </Link>
+      <Link to="/AccountSettings/GeneralAccountSettings">
+        <button>This is a Link to the General Account Settings page!</button>
+      </Link>
+      <Link to="/AccountSettings/PrivacySettings">
+        <button>This is a Link to the Privacy Settings page!</button>
+      </Link>
     </div>
   )
 }

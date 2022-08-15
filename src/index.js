@@ -15,6 +15,9 @@ import DiscoverChat from './components/Discover/DiscoverChat/DiscoverChat.jsx';
 import ProfileList from './components/Profiles/ProfileList.jsx';
 import Profile from './components/Profiles/Profile.jsx';
 import ProfileSettings from './components/ProfileSettings/ProfileSettings.jsx';
+import AccountSettings from './components/AccountSettings/AccountSettings.jsx';
+import GeneralAccountSettings from './components/AccountSettings/GeneralAccountSettings.jsx';
+import PrivacySettings from './components/AccountSettings/PrivacySettings.jsx';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -40,6 +43,9 @@ root.render(
       {/* We can use parameters in react router to go to individual profiles */}
       <Route path="/:userid/Profile" element={<Profile />} />
       <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
+      <Route path="/:userid/AccountSettings" element={<AccountSettings />} />
+      <Route path="/:userid/AccountSettings/GeneralAccountSettings" element={<GeneralAccountSettings />} />
+      <Route path="/:userid/AccountSettings/PrivacySettings" element={<PrivacySettings />} />
     </Routes>
   </BrowserRouter>
 )
