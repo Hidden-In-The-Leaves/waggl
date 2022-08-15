@@ -16,19 +16,6 @@ const ProfileList = lazy(() => import('./components/Profiles/ProfileList.jsx'));
 const Profile = lazy(() => import('./components/Profiles/Profile.jsx'));
 const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileSettings.jsx'));
 
-// import App from './App.jsx';
-// import LogIn from './components/LandingPage/LogIn/LogIn.jsx';
-// import SignUp from './components/LandingPage/SignUp/SignUp.jsx';
-// import HomePage from './components/HomePage/HomePage.jsx';
-// import PackDetails from './components/Packs/PackDetails.jsx';
-// import PackGroupChat from './components/Packs/PackDetails.jsx';
-// import EventDetails from './components/Events/EventDetails.jsx';
-// import DiscoverMain from './components/Discover/DiscoverMain/DiscoverMain.jsx';
-// import DiscoverChat from './components/Discover/DiscoverChat/DiscoverChat.jsx';
-// import ProfileList from './components/Profiles/ProfileList.jsx';
-// import Profile from './components/Profiles/Profile.jsx';
-// import ProfileSettings from './components/ProfileSettings/ProfileSettings.jsx';
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
