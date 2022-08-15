@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
+import React from "react";
+import { Link } from "react-router-dom";
+import NavBar from "./components/NavBar/NavBar";
 
-export default function App () {
+export default function App() {
   return (
     <div>
       <NavBar type="welcome" />
@@ -44,5 +44,5 @@ export default function App () {
         <button>This is a Link to the Profile Settings page!</button>
       </Link>
     </div>
-  )
+  );
 }
