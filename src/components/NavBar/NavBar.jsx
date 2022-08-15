@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button } from '../../styledComponents';
 
+// takes in a type
+// 'welcome' => navigation bar with login and signup
+// 'home' => navigation bar after successful login / signup
 export default function NavBar({ type }) {
     return (
       <HeaderContainer>
-        <Flex flexDirection="row" alignItems="center" margin="0 4%" justifyContent="space-between">
           <NameLink to={type === 'home' ? "/HomePage" : "/"}>
             Waggl
           </NameLink>
-          <Flex className="nav" flexDirection="row" justifyContent="flex-end" alignItems="center">
+          <NavItems>
             {type === 'home' && (
-              homeNavs.map((nav) => (
-                <NavItem to={nav.to} key={nav.text}>
+              homeNavs.map((nav, idx) => (
+                <NavItem to={nav.to} key={nav.text} last={idx === homeNavs.length - 1}>
                   <Icon src={nav.src} alt={nav.alt} />
                 <NavText>{nav.text}</NavText>
                 </NavItem>
@@ -29,8 +31,7 @@ export default function NavBar({ type }) {
                 </ButtonLink>
               </>
             )}
-          </Flex>
-        </Flex>
+          </NavItems>
       </HeaderContainer>
     );
 }
@@ -62,10 +63,42 @@ const homeNavs = [
   },
 ];
 
+const HeaderContainer = styled.div`
+  background-color: white;
+  border-bottom: 1px solid #FF8700;
+  border-radius: 0 30px;
+  padding: 10px 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+`;
+
 const NameLink = styled(Link)`
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #FF8700;
+  text-decoration: none;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;
+
+const NavItems = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const NavItem = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: ${props => props.last ? '0 0 0 30px' : '0 30px'};
   text-decoration: none;
   &:hover {
     opacity: 60%;
@@ -84,31 +117,13 @@ const NavText = styled.div`
   color: #FF8700;
 `;
 
-const HeaderContainer = styled.div`
-  border-bottom: 1px solid #FF8700;
-  border-radius: 30px;
-  padding: 10px 0;
-`;
-
-const NavItem = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 10%;
-  text-decoration: none;
-  &:hover {
-    opacity: 60%;
-    cursor: pointer;
-  }
-`;
-
 const ButtonLink = styled(Link)`
   border-radius: 30px;
   font-size: 14px;
   color: white;
   background-color: #FF8700;
   padding: 3% 0;
-  width: 120px;
+  width: 90px;
   text-align: center;
   text-decoration: none;
   margin-left: 10px;

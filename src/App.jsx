@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import NavBar from './components/NavBar/NavBar';
 
 export default function App () {
   return (
     <div>
+      <NavBar type="welcome" />
       <h1>This is the app!</h1>
       {/* to use react router you can wrap elements in a link component
       and use a route by setting attribute "to" equal
@@ -45,8 +46,3 @@ export default function App () {
     </div>
   )
 }
-
-const Button = styled.button`
-  padding: 10px;
-  margin: 10px;
-`;
