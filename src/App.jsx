@@ -24,7 +24,7 @@ export default function App () {
       <Link to="/PackGroupChat">
         <button>This is a Link to the Pack Group Chat page!</button>
       </Link>
-      <Link to="/EventDetails">
+      <Link to="/:eventid/EventDetails">
         <button>This is a Link to the Event Details page!</button>
       </Link>
       <Link to="/DiscoverMain">
