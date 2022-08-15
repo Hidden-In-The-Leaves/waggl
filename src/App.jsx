@@ -11,37 +11,37 @@ export default function App () {
       and use a route by setting attribute "to" equal
       to a route that is found in index.js*/}
       <Link to="/LogIn">
-        <Button>This is a Link to the Log In page!</Button>
+        <button>This is a Link to the Log In page!</button>
       </Link>
       <Link to="/SignUp">
-        <Button>This is a Link to the Sign Up page!</Button>
+        <button>This is a Link to the Sign Up page!</button>
       </Link>
       <Link to="/HomePage">
-        <Button>This is a Link to the Home page!</Button>
+        <button>This is a Link to the Home page!</button>
       </Link>
       <Link to="/PackDetails">
-        <Button>This is a Link to the Pack Details page!</Button>
+        <button>This is a Link to the Pack Details page!</button>
       </Link>
       <Link to="/PackGroupChat">
-        <Button>This is a Link to the Pack Group Chat page!</Button>
+        <button>This is a Link to the Pack Group Chat page!</button>
       </Link>
       <Link to="/EventDetails">
-        <Button>This is a Link to the Event Details page!</Button>
+        <button>This is a Link to the Event Details page!</button>
       </Link>
       <Link to="/DiscoverMain">
-        <Button>This is a Link to the Discover Main page!</Button>
+        <button>This is a Link to the Discover Main page!</button>
       </Link>
       <Link to="/DiscoverChat">
-        <Button>This is a Link to the Discover Chat page!</Button>
+        <button>This is a Link to the Discover Chat page!</button>
       </Link>
       <Link to="/ProfileList">
-        <Button>This is a Link to the Profile List page!</Button>
+        <button>This is a Link to the Profile List page!</button>
       </Link>
       <Link to="/Profile">
-        <Button>This is a Link to a profile page!</Button>
+        <button>This is a Link to a profile page!</button>
       </Link>
       <Link to="/ProfileSettings">
-        <Button>This is a Link to the Profile Settings page!</Button>
+        <button>This is a Link to the Profile Settings page!</button>
       </Link>
     </div>
   )
