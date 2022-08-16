@@ -8,11 +8,16 @@ import FeedList from './FeedList';
 export default function Feed() {
   return (
     <Container_1_3>
-      <Title>
+      <BorderedTitle>
         Home
-      </Title>
+      </BorderedTitle>
       <FeedList />
     </Container_1_3>
   );
 }
 
+const BorderedTitle = styled(Title)`
+  border-bottom: 1px solid #D9D9D9;
+  margin: 5px 0;
+  padding: 20px 0;
+`;

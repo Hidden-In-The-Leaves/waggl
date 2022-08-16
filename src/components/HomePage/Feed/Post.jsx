@@ -26,7 +26,7 @@ const FlexRow = styled.div`
 
 const Container = styled.div`
   padding: 15px;
-  border-top: 1px solid #D9D9D9;
+  border-bottom: 1px solid #D9D9D9;
 `;
 
 const RoundImg = styled.img`
