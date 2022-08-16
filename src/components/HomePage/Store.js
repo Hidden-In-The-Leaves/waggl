@@ -66,3 +66,20 @@ export const usePostsStore = create((set) => ({
     }
   },
 }));
+
+export const useEventsStore = create((set) => ({
+  events: [],
+  getEvents: async (userid) => {
+    const config = {
+      method: 'GET',
+      url: '/api/events',
+      params: { user_id: userid },
+    };
+    try {
+      const response = await axios(config);
+      set((state) => ({ events: response.data }));
+    } catch (e) {
+      console.log('error getting events', e);
+    }
+  },
+}));
