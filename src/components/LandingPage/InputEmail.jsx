@@ -6,9 +6,10 @@ export default function InputUsername({ usernameChangeHandler }) {
     <>
       {' '}
       <label>
-        Username:
+        Email:
         <br />
         <input
+          id="loginEmail"
           type="text"
           name="username"
           required

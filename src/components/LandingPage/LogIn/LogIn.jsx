@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import NavBar from '../../NavBar/NavBar';
-import InputUsername from '../InputUsername';
+import InputEmail from '../InputEmail';
 import InputPassword from '../InputPassword';
 import SignInWithGoogleButton from '../SignInWithGoogleButton';
 import SubmitButton from '../SubmitButton';
 
 export default function LogIn() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const usernameChangeHandler = (e) => {
-    setUsername(e.target.value);
+    setEmail(e.target.value);
   };
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   };
   const loginClickHandler = () => {
-    console.log(username, ' && ', password);
+    console.log(email, ' && ', password);
   };
   return (
     <div>
@@ -26,7 +26,7 @@ export default function LogIn() {
       <SignInWithGoogleButton />
       <p>------------ or ------------</p>
       <form>
-        <InputUsername usernameChangeHandler={usernameChangeHandler} />
+        <InputEmail usernameChangeHandler={usernameChangeHandler} />
         <InputPassword passwordChangeHandler={passwordChangeHandler} />
         <SubmitButton value="Login" buttonClickHandler={loginClickHandler} />
       </form>
