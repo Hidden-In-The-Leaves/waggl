@@ -11,8 +11,7 @@
     "pg:createdb": "createdb -h 127.0.0.1 waggl",
     "pg:start": "pg_ctl -D waggl start",
     "pg:stop": "pg_ctl -D waggl stop",
-    "start": "node ./server/index.js",
-    "start-dev": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "node-pg": "^1.0.1",
+    "nodemon": "^2.0.19",
     "pg": "^8.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
