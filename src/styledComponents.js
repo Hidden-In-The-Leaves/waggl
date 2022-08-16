@@ -22,14 +22,15 @@ export const Container = styled.div`
   border-left: 0.5px solid #D9D9D9;
   border-right: 0.5px solid #D9D9D9;
   box-sizing: border-box;
+  height: 92vh;
 `;
 
 export const Container_1_3 = styled(Container)`
-  width: 30%;
+  width: 33%;
 `;
 
 export const Container_2_3 = styled(Container)`
-  width: 70%;
+  width: 66%;
 `;
 
 
