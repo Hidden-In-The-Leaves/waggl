@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export default function PackItem({ pack }) {
   const packDescription = pack.description?.length > 30 ? pack.description.substring(0, 30) + '...' : pack.description;
@@ -8,7 +9,9 @@ export default function PackItem({ pack }) {
     <FlexContainer>
       <RoundImg src={pack.url} />
       <FlexColumn>
-        <MainText>{pack.name}</MainText>
+        {/* <Link to={`/PackDetails/${pack.id}`}> */}
+          <MainText>{pack.name}</MainText>
+        {/* </Link> */}
         <SubText>{packDescription}</SubText>
       </FlexColumn>
     </FlexContainer>
@@ -27,6 +30,10 @@ const FlexColumn = styled.div`
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
 `;
 
 const RoundImg = styled.img`
