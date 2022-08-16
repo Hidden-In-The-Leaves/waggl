@@ -31,6 +31,8 @@ const signInWithGoogle = () => {
           firstName: string
           lastName: string
           photoUrl:string
+          displayName:string
+          fullName: string
         }
       }
       */
