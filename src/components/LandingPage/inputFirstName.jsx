@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function InputUsername({ emailChangeHandler }) {
+export default function InputUsername({ firstnameChangeHandler }) {
   return (
     <>
       {' '}
       <label>
-        Email:
+        First Name:
         <br />
         <input
           id="loginEmail"
           type="text"
-          name="email"
+          name="firstname"
           required
-          onChange={emailChangeHandler}
+          onChange={firstnameChangeHandler}
         />
       </label>
       <br />
@@ -22,5 +22,5 @@ export default function InputUsername({ emailChangeHandler }) {
 }
 
 InputUsername.propTypes = {
-  emailChangeHandler: PropTypes.func.isRequired,
+  firstnameChangeHandler: PropTypes.func.isRequired,
 };

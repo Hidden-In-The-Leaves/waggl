@@ -10,7 +10,7 @@ import SubmitButton from '../SubmitButton';
 export default function LogIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const usernameChangeHandler = (e) => {
+  const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };
   const passwordChangeHandler = (e) => {
@@ -23,10 +23,10 @@ export default function LogIn() {
     <div>
       <NavBar type="welcome" />
       <h3>Login</h3>
-      <SignInWithGoogleButton />
+      <SignInWithGoogleButton value="Login with Google" />
       <p>------------ or ------------</p>
       <form>
-        <InputEmail usernameChangeHandler={usernameChangeHandler} />
+        <InputEmail emailChangeHandler={emailChangeHandler} />
         <InputPassword passwordChangeHandler={passwordChangeHandler} />
         <SubmitButton value="Login" buttonClickHandler={loginClickHandler} />
       </form>
