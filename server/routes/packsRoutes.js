@@ -1,17 +1,22 @@
 const express = require('express');
-const packsController = require('../controllers/packsController.js');
+const packsController = require('../controllers/packsController');
 
 const router = express.Router();
 
 router.route('/')
-  .get(packsController.getAll)
+  .get(packsController.getPacks)
   .post(packsController.createPack)
+  .put(packsController.updatePack);
 
 router.route('/:id')
-  .put(packsController.updatePack)
-  .delete(packsController.deletePack)
+  .delete(packsController.deletePack);
 
-router.route('/user/:userid')
-  .get(packsController.getByUserId)
+router.route('/posts')
+  .get(packsController.getPosts)
+  .post(packsController.createPost)
+  .put(packsController.updatePost);
+
+router.route('/posts/:id')
+  .delete(packsController.deletePost);
 
 module.exports = router;
