@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import PackItem from './PackItem';
 import { SectionTitle } from '../../../styledComponents';
-import { usePackStore } from './../Store';
 
 export default function PackList({ title, packs }) {
   return (
@@ -14,7 +14,7 @@ export default function PackList({ title, packs }) {
         {packs.map((pack) => <PackItem key={pack.id} pack={pack} />)}
       </Scroller>
     </Div>
-  )
+  );
 }
 
 const Div = styled.div`
@@ -23,5 +23,5 @@ const Div = styled.div`
 
 const Scroller = styled.div`
   overflow-y: auto;
-  max-height: 28vh;
+  max-height: 29vh;
 `;

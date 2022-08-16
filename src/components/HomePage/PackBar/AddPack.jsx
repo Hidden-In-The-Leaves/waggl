@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
 import Modal from '../../commonComponents/Modal';
-import { Button, SectionTitle, InputLabel, Input, InputContainer, TextArea } from '../../../styledComponents'
+import {
+  Button, SectionTitle, InputLabel, Input, TextArea,
+} from '../../../styledComponents';
 import uploadPhoto from '../../../lib/uploadPhoto';
 import { usePackStore } from '../Store';
 
@@ -20,9 +20,9 @@ export default function AddPack() {
 
   useEffect(() => {
     setFormValue({});
-  }, [openForm])
+  }, [openForm]);
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     setOpenForm(true);
   };
 
@@ -102,7 +102,7 @@ export default function AddPack() {
         </Form>
       </Modal>
     </>
-  )
+  );
 }
 
 const Form = styled.form`
@@ -132,6 +132,10 @@ const PlusImg = styled.img`
   width: 30px;
   height: 30px;
   padding: 0 10px;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
 `;
 
 const FloatRight = styled.div`

@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from 'react';
 import styled from 'styled-components';
-import { SubTitle, Container_1_3 } from '../../../styledComponents';
+import { SubTitle, Container_1_4 } from '../../../styledComponents';
 import PackList from './PackList';
 import SearchBar from './SearchBar';
 import AddPack from './AddPack';
@@ -13,7 +13,7 @@ export default function PackBar() {
   const otherPacks = usePackStore((state) => state.allPacksFiltered);
 
   return (
-    <Container_1_3>
+    <Container_1_4>
       <TitleContainer>
         <SubTitle>Packs</SubTitle>
         <AddPack />
@@ -21,7 +21,7 @@ export default function PackBar() {
       <SearchBar />
       <PackList title="My Packs" packs={userPacks} />
       <PackList title="Other Packs" packs={otherPacks} />
-    </Container_1_3>
+    </Container_1_4>
   );
 }
 
