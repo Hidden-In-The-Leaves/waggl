@@ -1,20 +1,20 @@
-import React, { Suspense, lazy } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { createRoot } from "react-dom/client";
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
 import "./main.css";
 
-import App from "./App.jsx";
-import LogIn from "./components/LandingPage/LogIn/LogIn.jsx";
-import SignUp from "./components/LandingPage/SignUp/SignUp.jsx";
-import HomePage from "./components/HomePage/HomePage.jsx";
-import PackDetails from "./components/Packs/PackDetails.jsx";
-import PackGroupChat from "./components/Packs/PackDetails.jsx";
-const EventDetails = lazy(() => import("./components/Events/EventDetails.jsx"));
-import DiscoverMain from "./components/Discover/DiscoverMain/DiscoverMain.jsx";
-import DiscoverChat from "./components/Discover/DiscoverChat/DiscoverChat.jsx";
-import ProfileList from "./components/Profiles/ProfileList.jsx";
-import Profile from "./components/Profiles/Profile.jsx";
-import ProfileSettings from "./components/ProfileSettings/ProfileSettings.jsx";
+const App = lazy(() => import('./App.jsx'));
+const LogIn = lazy(() => import('./components/LandingPage/LogIn/LogIn.jsx'));
+const SignUp = lazy(() => import('./components/LandingPage/SignUp/SignUp.jsx'));
+const HomePage = lazy(() => import('./components/HomePage/HomePage.jsx'));
+const PackDetails = lazy(() => import('./components/Packs/PackDetails.jsx'));
+const PackGroupChat = lazy(() => import('./components/Packs/PackDetails.jsx'));
+const EventDetails = lazy(() => import('./components/Events/EventDetails.jsx'));
+const DiscoverMain = lazy(() => import('./components/Discover/DiscoverMain/DiscoverMain.jsx'));
+const DiscoverChat = lazy(() => import('./components/Discover/DiscoverChat/DiscoverChat.jsx'));
+const ProfileList = lazy(() => import('./components/Profiles/ProfileList.jsx'));
+const Profile = lazy(() => import('./components/Profiles/Profile.jsx'));
+const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileSettings.jsx'));
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -22,6 +22,7 @@ root.render(
   //The whole App is wrapped in a browser router component
   //which holds all of the "routes" which are basically endpoints
   <BrowserRouter>
+    {/* for react routers code splitting */}
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         {/* to create a route you use a Route component
@@ -43,5 +44,5 @@ root.render(
         <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
       </Routes>
     </Suspense>
-  </BrowserRouter>
-);
+  </BrowserRouter >
+)
