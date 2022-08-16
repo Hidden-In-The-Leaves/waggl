@@ -1,5 +1,5 @@
 import React from 'react';
-import { SubTitle } from '../../../styledComponents';
+import { SubTitle, Container_1_4 } from '../../../styledComponents';
 import { useEventsStore } from '../Store';
 import EventItem from './EventItem';
 
@@ -7,9 +7,9 @@ export default function Events() {
   const events = useEventsStore((state) => state.events);
 
   return (
-    <div>
+    <Container_1_4>
       <SubTitle>Events</SubTitle>
-      {events.map((event) => <EventItem data={event} />)}
-    </div>
+      {events.map((event) => <EventItem key={event.id} data={event} />)}
+    </Container_1_4>
   );
 }

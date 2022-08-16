@@ -40,7 +40,7 @@ const RoundImg = styled.img`
 const MainText = styled.div`
   font-size: 16px;
   font-weight: bold;
-  padding-right: 10%;
+  padding-right: 3%;
 `;
 
 const SubText = styled.div`

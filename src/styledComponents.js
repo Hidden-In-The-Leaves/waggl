@@ -18,7 +18,7 @@ export const SectionTitle = styled.div`
 `;
 
 export const Container = styled.div`
-  padding: 0 3%;
+  padding: 0 1%;
   border-left: 0.5px solid #D9D9D9;
   border-right: 0.5px solid #D9D9D9;
   box-sizing: border-box;
@@ -33,6 +33,17 @@ export const Container_2_3 = styled(Container)`
   width: 66%;
 `;
 
+export const Container_1_4 = styled(Container)`
+  width: 25%;
+`;
+
+export const Container_3_4 = styled(Container)`
+  width: 75%;
+`;
+
+export const Container_1_2 = styled(Container)`
+  width: 50%;
+`;
 
 export const Button = styled.button`
   color: white;
