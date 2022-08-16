@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import NavBar from '../../NavBar/NavBar';
-import SignInWithGoogleButton from '../SignInWithGoogleButton';
-import InputEmail from '../InputEmail';
-import InputPassword from '../InputPassword';
-import SubmitButton from '../SubmitButton';
-import InputFirstName from '../inputFirstName';
-import InputLastName from '../InputLastName';
+import {
+  SignInWithGoogleButton,
+  InputEmail,
+  InputPassword,
+  SubmitButton,
+  InputFirstName,
+  InputLastName,
+} from '../InputForm';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -40,7 +42,7 @@ export default function SignUp() {
         <InputLastName lastnameChangeHandler={lastnameChangeHandler} />
         <InputEmail emailChangeHandler={emailChangeHandler} />
         <InputPassword passwordChangeHandler={passwordChangeHandler} />
-        <SubmitButton value="Login" buttonClickHandler={signupClickHandler} />
+        <SubmitButton value="Sign Up" buttonClickHandler={signupClickHandler} />
       </form>
       <Link to="/">
         <button>This is a Link to App "Page"!</button>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import signInWithGoogle from '../../Firebase/firebase-config';
+import signInWithGoogle from '../../../Firebase/firebase-config';
 
 export default function SignInWithGoogle({ value }) {
   return (

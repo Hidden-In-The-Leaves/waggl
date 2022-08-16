@@ -8,7 +8,7 @@ export default function InputUsername({ passwordChangeHandler }) {
         Password:
         <br />
         <input
-          id="loginEmail"
+          id="loginPassword"
           type="text"
           name="password"
           required

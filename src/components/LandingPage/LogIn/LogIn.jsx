@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import NavBar from '../../NavBar/NavBar';
-import InputEmail from '../InputEmail';
-import InputPassword from '../InputPassword';
-import SignInWithGoogleButton from '../SignInWithGoogleButton';
-import SubmitButton from '../SubmitButton';
+import {
+  InputEmail,
+  InputPassword,
+  SignInWithGoogleButton,
+  SubmitButton,
+} from '../InputForm';
 
 export default function LogIn() {
   const [email, setEmail] = useState('');
