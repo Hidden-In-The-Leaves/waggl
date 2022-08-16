@@ -30,8 +30,8 @@ const FlexColumn = styled.div`
 `;
 
 const RoundImg = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 3%;

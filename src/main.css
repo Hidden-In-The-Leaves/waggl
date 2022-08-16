@@ -6,3 +6,8 @@ body {
   font-family: 'Lato', Helvetica, sans-serif;
   margin: 0;
 }
+
+.MuiDialog-paper {
+  width: 40%;
+  max-height: 80%;
+}

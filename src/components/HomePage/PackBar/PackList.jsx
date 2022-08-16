@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PackItem from './PackItem';
-import { SectionTitle } from '../../styledComponents';
-import { usePackStore } from './Store';
+import { SectionTitle } from '../../../styledComponents';
+import { usePackStore } from './../Store';
 
 export default function PackList({ title, packs }) {
   return (
@@ -23,5 +23,5 @@ const Div = styled.div`
 
 const Scroller = styled.div`
   overflow-y: auto;
-  max-height: 30vh;
+  max-height: 28vh;
 `;

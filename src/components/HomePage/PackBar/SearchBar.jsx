@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSearchStore, usePackStore } from './Store';
+import { useSearchStore, usePackStore } from './../Store';
 
 export default function SearchBar() {
   const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
@@ -36,7 +36,7 @@ const BarContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-  padding: 15px;
+  padding: 3%;
   border: 1px solid #9F9F9F;
   border-radius: 10px;
   width: 100%;
@@ -50,7 +50,7 @@ const SearchInput = styled.input`
 const SearchIcon = styled.img`
     position: absolute;
     right: 2%;
-    padding: 11px;
+    padding: 2%;
     width: 25px;
     height: 25px;
 `;
