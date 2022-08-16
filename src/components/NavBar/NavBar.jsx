@@ -15,7 +15,7 @@ export default function NavBar({ type }) {
           <NavItems>
             {type === 'home' && (
               homeNavs.map((nav, idx) => (
-                <NavItem to={nav.to} key={nav.text} last={idx === homeNavs.length - 1}>
+                <NavItem to={nav.to} key={nav.text} last={(idx === homeNavs.length - 1).toString()}>
                   <Icon src={nav.src} alt={nav.alt} />
                 <NavText>{nav.text}</NavText>
                 </NavItem>
@@ -66,7 +66,7 @@ const homeNavs = [
 const HeaderContainer = styled.div`
   background-color: white;
   border-bottom: 1px solid #FF8700;
-  border-radius: 0 30px;
+  border-radius: 0 0 30px 30px;
   padding: 10px 3%;
   display: flex;
   flex-direction: row;
@@ -74,6 +74,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   position: sticky;
   top: 0;
+  z-index: 5;
 `;
 
 const NameLink = styled(Link)`
@@ -98,7 +99,7 @@ const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: ${props => props.last ? '0 0 0 30px' : '0 30px'};
+  margin: ${props => props.last === 'true' ? '0 0 0 30px' : '0 30px'};
   text-decoration: none;
   &:hover {
     opacity: 60%;
