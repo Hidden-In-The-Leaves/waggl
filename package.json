@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint",
     "dev": "webpack serve --open --port 8080",
-    "build": "webpack",
+    "build": "webpack --watch",
     "pg:init": "pg_ctl init -D waggl",
     "pg:createdb": "createdb -h 127.0.0.1 waggl",
     "pg:start": "pg_ctl -D waggl start",
