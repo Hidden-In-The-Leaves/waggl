@@ -132,6 +132,10 @@ const PlusImg = styled.img`
   width: 30px;
   height: 30px;
   padding: 0 10px;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
 `;
 
 const FloatRight = styled.div`

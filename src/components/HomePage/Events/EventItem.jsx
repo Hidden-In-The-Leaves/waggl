@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import isTomorrow from 'date-fns/isTomorrow';
 import { SectionTitle } from '../../../styledComponents';
 
@@ -25,8 +26,9 @@ export default function EventItem({ data }) {
 
   let endTime = endDate.toLocaleTimeString().split(' ');
   endTime = `${endTime[0].substring(0, endTime[0].length - 3)} ${endTime[1]}`;
-  console.log(data)
 
+  // add code below to link car to event detail
+  /* <Link to={`/EventDetails/${data.id}`}> </Link>*/
   return (
     <CardContainer>
       <DateContainer>
@@ -38,7 +40,7 @@ export default function EventItem({ data }) {
         </StyledText>
       </DateContainer>
       <DetailsContainer>
-        <StyledText fontSize="16px" padding="1% 0">
+        <StyledText fontSize="16px" padding="1% 0" fontWeight="600">
           {data.event_name}
         </StyledText>
         <StyledText>
@@ -70,6 +72,10 @@ const CardContainer = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
 `;
 
 const DateContainer = styled.div`
@@ -84,7 +90,7 @@ const DetailsContainer = styled.div`
 
 const StyledText = styled.div`
   font-size: ${props => props.fontSize ? props.fontSize : '14px'};
-  font-weight: ${props => props.fontWeight ? props.fontWeight : 'regular'};
+  font-weight: ${props => props.fontWeight ? props.fontWeight : '400'};
   padding: ${props => props.padding ? props.padding : '0.5% 0'};
 `;
 

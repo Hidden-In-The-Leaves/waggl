@@ -41,6 +41,10 @@ const MainText = styled.div`
   font-size: 16px;
   font-weight: bold;
   padding-right: 3%;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
 `;
 
 const SubText = styled.div`

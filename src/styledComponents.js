@@ -53,6 +53,10 @@ export const Button = styled.button`
   border-radius: 30px;
   border-color: #FF8700;
   border-style: solid;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
 `;
 
 export const InputLabel = styled.label`
