@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSearchStore, usePackStore } from './../Store';
+import { useSearchStore, usePackStore } from '../Store';
 
 export default function SearchBar() {
   const setSearchTerm = useSearchStore((state) => state.setSearchTerm);
@@ -18,7 +18,7 @@ export default function SearchBar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
