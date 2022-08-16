@@ -35,14 +35,16 @@ export const usePackStore = create((set, get) => ({
     }
   },
   filter: (term) => {
-    const regex = new RegExp(`${term}`, 'g');
+    // const regex = new RegExp(`${term}`, 'gi');
     const filteredAll = get()
       .allPacks
-      .filter((el) => regex.test(el.name) || regex.test(el.description));
+      .filter((el) => el.name.toLowerCase().includes(term)
+      || el.description?.toLowerCase().includes(term));
 
     const filteredUser = get()
       .userPacks
-      .filter((el) => regex.test(el.name) || regex.test(el.description));
+      .filter((el) => el.name.toLowerCase().includes(term)
+      || el.description?.toLowerCase().includes(term));
 
     set((state) => ({ allPacksFiltered: filteredAll, userPacksFiltered: filteredUser }));
   },
