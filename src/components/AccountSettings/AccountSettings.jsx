@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
 import PrivacySettings from './PrivacySettings';
-import { Container_1_3, Container_2_3 } from '../../styledComponents';
+import {
+  Container_1_3, Container_2_3, Title, Button,
+} from '../../styledComponents';
 
 export default function AccountSettings() {
   const [onUserInfo, setOnUserInfo] = useState([]);
@@ -42,20 +44,20 @@ export default function AccountSettings() {
     return (
       <div>
 
-        <h1>This is the Account Settings!</h1>
+        <Title>Account Settings</Title>
         <Link to="/">
-          <button type="button">This is a Link to App Page!</button>
+          <Button type="button">This is a Link to App Page!</Button>
         </Link>
 
         <Container_1_3>
           <div className="profilePictureUpload">INSERT PROFILE PICTURE UPLOAD</div>
 
           <div>
-            {onUserInfo ? <button type="button" id="userInfoButton" className="settingsMenuButtonHighlighted" onClick={handleUserInfoButton}>User Information</button> : <button type="button" id="userInfoButton" className="settingsMenuButton" onClick={handleUserInfoButton}>User Information</button>}
+            {onUserInfo ? <Button type="button" id="userInfoButton" className="settingsMenuButtonHighlighted" onClick={handleUserInfoButton}>User Information</Button> : <Button type="button" id="userInfoButton" className="settingsMenuButton" onClick={handleUserInfoButton}>User Information</Button>}
 
-            {onLocationInfo ? <button type="button" id="locationSettingsButton" className="settingsMenuButtonHighlighted" onClick={handleLocationSettingsButton}>Location Settings</button> : <button type="button" id="locationSettingsButton" className="settingsMenuButton" onClick={handleLocationSettingsButton}>Location Settings</button>}
+            {onLocationInfo ? <Button type="button" id="locationSettingsButton" className="settingsMenuButtonHighlighted" onClick={handleLocationSettingsButton}>Location Settings</Button> : <Button type="button" id="locationSettingsButton" className="settingsMenuButton" onClick={handleLocationSettingsButton}>Location Settings</Button>}
 
-            {onPrivacySettings ? <button type="button" id="privacySettingsButton" className="settingsMenuButtonHighlighted" onClick={handlePrivacySettingsButton}>Privacy Settings</button> : <button type="button" id="privacySettingsButton" className="settingsMenuButton" onClick={handlePrivacySettingsButton}>Privacy Settings</button>}
+            {onPrivacySettings ? <Button type="button" id="privacySettingsButton" className="settingsMenuButtonHighlighted" onClick={handlePrivacySettingsButton}>Privacy Settings</Button> : <Button type="button" id="privacySettingsButton" className="settingsMenuButton" onClick={handlePrivacySettingsButton}>Privacy Settings</Button>}
           </div>
 
           <button type="button" id="signoutButton">Sign Out</button>

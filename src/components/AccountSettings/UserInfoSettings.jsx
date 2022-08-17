@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  InputLabel, SectionTitle, Button, Input,
+} from '../../styledComponents';
 
 export default function UserInfoSettings() {
   const [userEdit, setUserEdit] = useState([]);
@@ -83,28 +86,28 @@ export default function UserInfoSettings() {
 
   return (
     <div>
-      <h2>User Information</h2>
-      <button type="button" onClick={handleUserInformationEdit}>Edit User Information</button>
+      <SectionTitle>User Information</SectionTitle>
+      <Button type="button" onClick={handleUserInformationEdit}>Edit User Information</Button>
 
       <form onSubmit={handleUserInformationUpdate}>
         <fieldset disabled={!userEdit}>
-          <label>
+          <InputLabel>
             First Name
-            <input type="text" value={firstName} onChange={handleFirstNameChange} />
-          </label>
-          <label>
+            <Input type="text" value={firstName} onChange={handleFirstNameChange} />
+          </InputLabel>
+          <InputLabel>
             Last Name
-            <input type="text" value={lastName} onChange={handleLastNameChange} />
-          </label>
-          <label>
+            <Input type="text" value={lastName} onChange={handleLastNameChange} />
+          </InputLabel>
+          <InputLabel>
             Email
-            <input type="text" value={email} onChange={handleEmailChange} />
-          </label>
-          <label>
+            <Input type="text" value={email} onChange={handleEmailChange} />
+          </InputLabel>
+          <InputLabel>
             Password
-            <input type="password" value={password} onChange={handlePasswordChange} />
-          </label>
-          <input type="submit" value="Update User Information" />
+            <Input type="password" value={password} onChange={handlePasswordChange} />
+          </InputLabel>
+          <Input type="submit" value="Update User Information" />
         </fieldset>
       </form>
     </div>

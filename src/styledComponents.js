@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import styled from 'styled-components';
 
 export const Title = styled.div`
@@ -40,4 +41,41 @@ export const Button = styled.button`
   color: white;
   background-color: #FF8700;
   border-radius: 30px;
+  padding: 3px 10px;
+  border-radius: 30px;
+  border-color: #FF8700;
+  border-style: solid;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;
+
+export const InputLabel = styled.label`
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Input = styled.input`
+  border: 1px solid #9F9F9F;
+  border-radius: 10px;
+  margin: 5px 0 15px 0;
+  height: 40px;
+  ::placeholder {
+    color: #9A9A9A;
+    font-size: 16px;
+  }
+`;
+
+export const TextArea = styled.textarea`
+  border: 1px solid #9F9F9F;
+  border-radius: 10px;
+  margin: 5px 0 15px 0;
+  height: 40px;
+  font-family: inherit;
+  ::placeholder {
+    color: #9A9A9A;
+    font-size: 16px;
+  }
 `;
