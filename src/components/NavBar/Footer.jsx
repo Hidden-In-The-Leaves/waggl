@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <FooterContainer>
       <Title>Waggl</Title>
-      <div style={{ padding: '10px' }}>Copyright©︎ 2022 Waggl</div>
+      <div style={{ padding: '10px' }}>Copyright©︎ 2022</div>
     </FooterContainer>
   );
 }

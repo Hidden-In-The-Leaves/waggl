@@ -8,7 +8,7 @@ import MeetTheTeam from './MeetTheTeam';
 import Team from './Team';
 
 // take in a type depending on the login situation. could just be a store state too.
-export default function AboutUs({ type = "welcome" }) {
+export default function AboutUs({ type = 'welcome' }) {
   return (
     <>
       <NavBar type={type} />
@@ -32,7 +32,7 @@ const Container = styled.div`
   top: 0;
   width: 100%;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
   overflow-y: scroll;
   height: 100vh;
 `;
