@@ -1,27 +1,30 @@
+/* eslint-disable camelcase */
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
 import PrivacySettings from './PrivacySettings';
+import { Container_1_3, Container_2_3 } from '../../styledComponents';
 
-export default function AccountSettings(props) {
-  const [onUserInfo, setOnUserInfo] = ({});
-  const [onLocationInfo, setOnLocationInfo] = ({});
-  const [onPrivacySettings, setOnPrivacySettings] = ({});
+export default function AccountSettings() {
+  const [onUserInfo, setOnUserInfo] = useState([]);
+  const [onLocationInfo, setOnLocationInfo] = useState([]);
+  const [onPrivacySettings, setOnPrivacySettings] = useState([]);
 
-  handleUserInfoButton = () => {
+  const handleUserInfoButton = () => {
     setOnUserInfo(true);
     setOnLocationInfo(false);
     setOnPrivacySettings(false);
   };
 
-  handleLocationSettingsButton = () => {
+  const handleLocationSettingsButton = () => {
     setOnUserInfo(false);
     setOnLocationInfo(true);
     setOnPrivacySettings(false);
   };
 
-  handlePrivacySettingsButton = () => {
+  const handlePrivacySettingsButton = () => {
     setOnUserInfo(false);
     setOnLocationInfo(false);
     setOnPrivacySettings(true);
@@ -35,31 +38,38 @@ export default function AccountSettings(props) {
     }
   });
 
-  return (
-    <div>
+  if (onUserInfo === true || onLocationInfo === true || onPrivacySettings === true) {
+    return (
+      <div>
 
-      <h1>This is the Account Settings!</h1>
-      <Link to="/">
-        <button>This is a Link to App "Page"!</button>
-      </Link>
+        <h1>This is the Account Settings!</h1>
+        <Link to="/">
+          <button type="button">This is a Link to App Page!</button>
+        </Link>
 
-      <div className="1/3left">
+        <Container_1_3>
+          <div className="profilePictureUpload">INSERT PROFILE PICTURE UPLOAD</div>
 
-        {onUserInfo ? <button id="userInfoButton" className="settingsMenuButtonHighlighted" onClick={handleUserInfoButton}>User Information</button> : <button id="userInfoButton" className="settingsMenuButton" onClick={handleUserInfoButton}>User Information</button>}
+          <div>
+            {onUserInfo ? <button type="button" id="userInfoButton" className="settingsMenuButtonHighlighted" onClick={handleUserInfoButton}>User Information</button> : <button type="button" id="userInfoButton" className="settingsMenuButton" onClick={handleUserInfoButton}>User Information</button>}
 
-        {onLocationInfo ? <button id="locationSettingsButton" className="settingsMenuButtonHighlighted" onClick={handleLocationSettingsButton}>Location Settings</button> : <button id="locationSettingsButton" className="settingsMenuButton" onClick={handleLocationSettingsButton}>Location Settings</button>}
+            {onLocationInfo ? <button type="button" id="locationSettingsButton" className="settingsMenuButtonHighlighted" onClick={handleLocationSettingsButton}>Location Settings</button> : <button type="button" id="locationSettingsButton" className="settingsMenuButton" onClick={handleLocationSettingsButton}>Location Settings</button>}
 
-        {onPrivacySettings ? <button id="privacySettingsButton" className="settingsMenuButtonHighlighted" onClick={handlePrivacySettingsButton}>Privacy Settings</button> : <button id="privacySettingsButton" className="settingsMenuButton" onClick={handlePrivacySettingsButton}>Privacy Settings</button>}
+            {onPrivacySettings ? <button type="button" id="privacySettingsButton" className="settingsMenuButtonHighlighted" onClick={handlePrivacySettingsButton}>Privacy Settings</button> : <button type="button" id="privacySettingsButton" className="settingsMenuButton" onClick={handlePrivacySettingsButton}>Privacy Settings</button>}
+          </div>
 
+          <button type="button" id="signoutButton">Sign Out</button>
+
+        </Container_1_3>
+
+        <Container_2_3>
+
+          {onUserInfo && <UserInfoSettings />}
+          {onLocationInfo && <LocationInfoSettings />}
+          {onPrivacySettings && <PrivacySettings />}
+
+        </Container_2_3>
       </div>
-
-      <div className="2/3right">
-
-        {onUserInfo && <UserInfoSettings />}
-        {onLocationInfo && <LocationInfoSettings />}
-        {onPrivacySettings && <PrivacySettings />}
-
-      </div>
-    </div>
-  )
-};
+    );
+  }
+}

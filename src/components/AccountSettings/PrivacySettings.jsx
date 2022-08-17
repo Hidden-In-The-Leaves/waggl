@@ -1,65 +1,72 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function PrivacySettings(props) {
-  const [privacySettingsEdit, setPrivacySettingsEdit] = ({});
-  const [locationSharing, setLocationSharing] = useState({});
-  const [packVisibility, setPackVisibility] = useState({});
+export default function PrivacySettings() {
+  const [privacySettingsEdit, setPrivacySettingsEdit] = useState([]);
+  const [locationSharing, setLocationSharing] = useState([]);
+  const [packVisibility, setPackVisibility] = useState([]);
 
-  handlePrivacySettingsEdit = () => {
+  const handlePrivacySettingsEdit = () => {
     setPrivacySettingsEdit(true);
   };
 
-  handleLocationSharingOn = () => {
+  const handleLocationSharingOn = () => {
     setLocationSharing(true);
   };
 
-  handleLocationSharingOff = () => {
+  const handleLocationSharingOff = () => {
     setLocationSharing(false);
   };
 
-  handlePackVisibilityOn = () => {
+  const handlePackVisibilityOn = () => {
     setPackVisibility(true);
   };
 
-  handlePackVisibilityOff = () => {
+  const handlePackVisibilityOff = () => {
     setPackVisibility(false);
   };
 
-  handlePrivacySettingsUpdate = (event) => {
-    event.preventDefault();
-
-    const config = {
-      method: 'PUT',
-      url: 'accountSettings/privacySettings',
-      data: {
-        locationSharing: locationSharing,
-        packVisibility: packVisibility,
-      },
-    };
-
-    axios(config)
-    .then(() => {
-      getPrivacySettings();
-      setPrivacySettingsEdit(false);
-    })
-    .catch(err => console.log(err))
+  const setPrivacySettings = (data) => {
+    setLocationSharing(data.location_sharing);
+    setPackVisibility(data.pack_visibility);
   };
 
-  getPrivacySettings = () => {
+  const getPrivacySettings = () => {
     const config = {
       method: 'GET',
-      url: 'accountSettings/privacySettings'
+      url: '/api/accountSettings/privacySettings',
     };
 
     axios(config)
       .then((res) => {
-        setPrivacySettings(res.data)
+        console.log(res.data);
+        setPrivacySettings(res.data);
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  setPrivacySettings = (data) => { };
+  const handlePrivacySettingsUpdate = (event) => {
+    event.preventDefault();
+
+    const config = {
+      method: 'PUT',
+      url: '/api/accountSettings/privacySettings',
+      data: {
+        location_sharing: locationSharing,
+        pack_visibility: packVisibility,
+      },
+    };
+
+    axios(config)
+      .then(() => {
+        getPrivacySettings();
+        setPrivacySettingsEdit(false);
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     if (typeof privacySettingsEdit === 'object') {
@@ -71,18 +78,21 @@ export default function PrivacySettings(props) {
   return (
     <div>
       <h2>Privacy Settings</h2>
-      <button onClick={handlePrivacySettingsEdit}>Edit Privacy Settings</button>
+      <button type="button" onClick={handlePrivacySettingsEdit}>Edit Privacy Settings</button>
 
       <form onSubmit={handlePrivacySettingsUpdate}>
-        <fieldset disabled={!privacySettingsEdit}></fieldset>
-        <label>Location Sharing
-          <input type="radio" value="On" name="locationSharing" onClick={handleLocationSharingOn}></input>
-          <input type="radio" value="Off" name="locationSharing" onClick={handleLocationSharingOff}></input>
-        </label>
-        <label>Pack Visibility
-          <input type="radio" value="On" name="packVisibility" onClick={handlePackVisibilityOn}></input>
-          <input type="radio" value="On" name="packVisibility" onClick={handlePackVisibilityOff}></input>
-        </label>
+        <fieldset disabled={!privacySettingsEdit}>
+          <label>
+            Location Sharing
+            <input type="radio" value="On" name="locationSharing" onClick={handleLocationSharingOn} />
+            <input type="radio" value="Off" name="locationSharing" onClick={handleLocationSharingOff} />
+          </label>
+          <label>
+            Pack Visibility
+            <input type="radio" value="On" name="packVisibility" onClick={handlePackVisibilityOn} />
+            <input type="radio" value="Off" name="packVisibility" onClick={handlePackVisibilityOff} />
+          </label>
+        </fieldset>
       </form>
 
     </div>

@@ -1,11 +1,9 @@
-const express = require('express');
-const messageController = require('../controllers/messageController.js');
+/* const express = require('express');
+const { messageController } = require('../controllers/messageController');
 
 const router = express.Router();
 
 router.route('/')
-  .get(messageController)
-  .post('some controller')
-  .put('some controller')
+  .get(messageController);
 
-module.exports = router;
+module.exports = router; */

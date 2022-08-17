@@ -1,76 +1,66 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function LocationInfoSettings(props) {
-
+export default function LocationInfoSettings() {
   const [locationEdit, setLocationEdit] = useState([]);
   const [city, setCity] = useState({});
   const [userState, setUserState] = useState({});
   const [discoveryRadius, setDiscoveryRadius] = useState({});
 
-  const testData = {
-    first_name: 'John',
-    last_name: 'Doe',
-    email: 'jdoe@gmail.com',
-    password: 'mypassword',
-    city: 'Chicago',
-    state: 'Illinois',
-    discovery_radius: '5 miles'
-  }
-
-  handleLocationSettingsEdit = (event) => {
+  const handleLocationSettingsEdit = () => {
     setLocationEdit(true);
   };
 
-  handleLocationSettingsUpdate = (event) => {
+  const setLocationInfo = (data) => {
+    setCity(data.city);
+    setUserState(data.state);
+    setDiscoveryRadius(data.discovery_radius);
+  };
+
+  const getLocationInfo = () => {
+    const config = {
+      method: 'GET',
+      url: '/api/accountSettings/locationInfo',
+    };
+
+    axios(config)
+      .then((res) => {
+        setLocationInfo(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleLocationSettingsUpdate = (event) => {
     event.preventDefault();
 
     // send updated info to server
     const config = {
       method: 'PUT',
-      url: '/accountSettings/locationInfo',
+      url: '/api/accountSettings/locationInfo',
       data: {
-       city: city,
+        city,
         state: userState,
         discovery_radius: discoveryRadius,
-      }
-    }
+      },
+    };
 
     axios(config)
       .then(() => {
         getLocationInfo();
         setLocationEdit(false);
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
-  handleCityChange = (event) => {
+  const handleCityChange = (event) => {
     setCity(event.target.value);
   };
-  handleStateChange = (event) => {
-    setState(event.target.value);
+  const handleStateChange = (event) => {
+    setUserState(event.target.value);
   };
-  handleDisoveryRadiusChange = (event) => {
+  const handleDisoveryRadiusChange = (event) => {
     setDiscoveryRadius(event.target.value);
-  };
-
-  getLocationInfo = () => {
-    const config = {
-      method: 'GET',
-      url: '/accountSettings/locationInfo'
-    }
-
-    axios(config)
-    .then(res => {
-      setLocationInfo(res.data)
-    })
-    .catch(err => console.log(err));
-  };
-
-  setLocationInfo = (data) => {
-    setCity(data.city);
-    setUserState(data.state);
-    setDiscoveryRadius(data.discovery_radius);
   };
 
   useEffect(() => {
@@ -85,24 +75,24 @@ export default function LocationInfoSettings(props) {
   return (
     <div>
       <h2>Location</h2>
-      <button onClick={handleLocationSettingsEdit}>Edit Location Settings</button>
+      <button type="button" onClick={handleLocationSettingsEdit}>Edit Location Settings</button>
       <form onSubmit={handleLocationSettingsUpdate}>
         <fieldset disabled={!locationEdit}>
           <label>
             City
-            <input type="text" value={city} onChange={handleCityChange}></input>
+            <input type="text" value={city} onChange={handleCityChange} />
           </label>
           <label>
             State
-            <input type="text" value={state} onChange={handleStateChange}></input>
+            <input type="text" value={userState} onChange={handleStateChange} />
           </label>
           <label>
             Discovery Radius
-            <input type="text" value={discoveryRadius} onChange={handleDisoveryRadiusChange}></input>
+            <input type="text" value={discoveryRadius} onChange={handleDisoveryRadiusChange} />
           </label>
-          <input type="submit" value="Update Location Settings"></input>
+          <input type="submit" value="Update Location Settings" />
         </fieldset>
       </form>
     </div>
   );
-};
+}

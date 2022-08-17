@@ -36,7 +36,6 @@ export const Container_1_2 = styled(Container)`
   width: 50%;
 `;
 
-
 export const Button = styled.button`
   color: white;
   background-color: #FF8700;
