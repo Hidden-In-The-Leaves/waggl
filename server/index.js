@@ -1,13 +1,20 @@
+/* eslint-disable no-console */
 const express = require("express");
 const path = require("path");
 const dotenv = require("dotenv");
+const db = require("../database/postgres");
+const accountSettingsRoutes = require("./routes/accountSettingsRoutes");
+// const messageRoutes = require('./routes/messageRoutes');
+const packsRoutes = require("./routes/packsRoutes");
+const eventsRoutes = require("./routes/eventsRoutes");
+
 dotenv.config();
-const db = require("../database/postgres.js");
 const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-db.connect(function (err) {
+
+db.connect((err) => {
   if (err) {
     console.log(err);
   } else {
@@ -27,12 +34,15 @@ app.use(express.static(path.join(__dirname, "../dist")));
 app.use(cors());
 app.use("/api/message", () => socketRouter());
 app.use("/api/messages", messageRoutes);
-
-// app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "../dist")));
+app.use("/api/accountSettings", accountSettingsRoutes);
+app.use("/api/packs", packsRoutes);
+app.use("/api/events", eventsRoutes);
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
-//example query:
-//app.get('some endpoint', async (req, res) => {
+// example query:
+// app.get('some endpoint', async (req, res) => {
 // const yourData = await.process.postgresql.query(
 // 'Your query here;'
 // )

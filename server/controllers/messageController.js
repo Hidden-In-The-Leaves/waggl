@@ -1,4 +1,4 @@
-const db = require("../../database/postgres.js");
+const db = require("../../database/postgres");
 
 /**
  * @route /api/messages?user1=?&user2=?
