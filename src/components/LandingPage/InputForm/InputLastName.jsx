@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputLabel, Input } from '../../../styledComponents';
 
 export default function InputUsername({ lastnameChangeHandler }) {
   return (
     <>
       {' '}
-      <label>
+      <InputLabel>
         Last Name:
         <br />
-        <input
+        <Input
           id="loginEmail"
           type="text"
           name="firstname"
           required
           onChange={lastnameChangeHandler}
         />
-      </label>
+      </InputLabel>
       <br />
     </>
   );

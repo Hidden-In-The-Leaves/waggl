@@ -10,6 +10,12 @@ import {
   InputFirstName,
   InputLastName,
 } from '../InputForm';
+import {
+  SectionTitle,
+  Container,
+  Container_1_2,
+  Button,
+} from '../../../styledComponents';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -34,19 +40,32 @@ export default function SignUp() {
   return (
     <div>
       <NavBar type="welcome" />
-      <h1>Sign Up in here!</h1>
-      <SignInWithGoogleButton value="Sign up with Google" />
-      <p>------------ or ------------</p>
-      <form>
-        <InputFirstName firstnameChangeHandler={firstnameChangeHandler} />
-        <InputLastName lastnameChangeHandler={lastnameChangeHandler} />
-        <InputEmail emailChangeHandler={emailChangeHandler} />
-        <InputPassword passwordChangeHandler={passwordChangeHandler} />
-        <SubmitButton value="Sign Up" buttonClickHandler={signupClickHandler} />
-      </form>
-      <Link to="/">
-        <button>This is a Link to App "Page"!</button>
-      </Link>
+      <Cols>
+        <Container_1_2>Something</Container_1_2>
+        <Container_1_2>
+          <SectionTitle>Sign Up in here!</SectionTitle>
+          <SignInWithGoogleButton value="Sign up with Google" />
+          <SectionTitle>------------ or ------------</SectionTitle>
+          <form>
+            <InputFirstName firstnameChangeHandler={firstnameChangeHandler} />
+            <InputLastName lastnameChangeHandler={lastnameChangeHandler} />
+            <InputEmail emailChangeHandler={emailChangeHandler} />
+            <InputPassword passwordChangeHandler={passwordChangeHandler} />
+            <SubmitButton
+              value="Sign Up"
+              buttonClickHandler={signupClickHandler}
+            />
+          </form>
+          <Link to="/">
+            <Button>This is a Link to App "Page"!</Button>
+          </Link>
+        </Container_1_2>
+      </Cols>
     </div>
   );
 }
+
+const Cols = styled.div`
+  display: flex;
+  flex-direction: row;
+`;

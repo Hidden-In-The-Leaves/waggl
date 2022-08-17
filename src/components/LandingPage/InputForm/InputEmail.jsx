@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { InputLabel, Input } from '../../../styledComponents';
+
 export default function InputUsername({ emailChangeHandler }) {
   return (
     <>
       {' '}
-      <label>
+      <InputLabel>
         Email:
         <br />
-        <input
+        <Input
           id="loginEmail"
           type="text"
           name="email"
           required
           onChange={emailChangeHandler}
         />
-      </label>
+      </InputLabel>
       <br />
     </>
   );

@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { InputLabel, Input } from '../../../styledComponents';
 
 export default function InputUsername({ passwordChangeHandler }) {
   return (
     <>
-      <label>
+      <InputLabel>
         Password:
         <br />
-        <input
+        <Input
           id="loginPassword"
           type="text"
           name="password"
           required
           onChange={passwordChangeHandler}
         />
-      </label>
+      </InputLabel>
       <br />
     </>
   );

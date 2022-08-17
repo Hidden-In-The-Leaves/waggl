@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Button } from '../../../styledComponents';
+
 export default function SubmitButton({ value, buttonClickHandler }) {
   return (
-    <button type="button" onClick={buttonClickHandler}>
+    <Button type="button" onClick={buttonClickHandler}>
       {value}
-    </button>
+    </Button>
   );
 }
 
