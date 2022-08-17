@@ -54,4 +54,29 @@ module.exports = {
     // setDistance(distance);
     return distance;
   },
+  // relies on the getDistance helper fn
+  sortBy: (radius, center, ...rest) => {
+    const sortedResults = [];
+    rest.forEach((obj) => {
+      const inRange = [];
+      const distance = getDistance(center, obj); /* <== might need to get the proper alias fro getDistance helper fn */
+      if (distance <= radius) {
+        inRange.push(distance, obj);
+        sortedResults.push(inRange);
+      }
+    });
+    sortedResults.sort((a, b) => {
+      // a is closer
+      if (a[0] < b[0]) {
+        return -1;
+      }
+      // b is closer
+      if (a[0] > b[0]) {
+        return 1;
+      }
+      // a, b same distance
+      return 0;
+    });
+    return sortedResults;
+  },
 };
