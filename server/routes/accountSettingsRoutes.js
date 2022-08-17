@@ -4,12 +4,15 @@ const accountSettingsController = require('../controllers/accountSettingsControl
 const router = express.Router();
 
 router.route('/userInfo')
-  .get(accountSettingsController.getUserInfo);
+  .get(accountSettingsController.getUserInfo)
+  .put(accountSettingsController.putUserInfo);
 
 router.route('/privacySettings')
-  .get(accountSettingsController.getPrivacySettings);
+  .get(accountSettingsController.getPrivacySettings)
+  .put(accountSettingsController.putPrivacySettings);
 
 router.route('/locationInfo')
-  .get(accountSettingsController.getLocationInfo);
+  .get(accountSettingsController.getLocationInfo)
+  .put(accountSettingsController.putLocationInfo);
 
 module.exports = router;

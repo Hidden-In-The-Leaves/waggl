@@ -16,35 +16,38 @@ export default function App() {
       <Link to="/SignUp">
         <button>This is a Link to the Sign Up page!</button>
       </Link>
-      <Link to="/SignUp">
+      <Link to="/HomePage/:userid">
         <button type="button">This is a Link to the Home page!</button>
       </Link>
-      <Link to="/SignUp">
+      <Link to="/AboutUs">
         <button type="button">This is a Link to the About Us!</button>
       </Link>
-      <Link to="/SignUp">
+      <Link to="/PackDetails/:packid">
         <button type="button">This is a Link to the Pack Details page!</button>
       </Link>
-      <Link to="/:chatid/PackGroupChat">
-        <button>This is a Link to the Pack Group Chat page!</button>
+      <Link to="/PackGroupChat/:packid">
+        <button type="button">This is a Link to the Pack Group Chat page!</button>
       </Link>
-      <Link to="/:eventid/EventDetails">
-        <button>This is a Link to the Event Details page!</button>
+      <Link to="/EventDetails/:eventid">
+        <button type="button">This is a Link to the Event Details page!</button>
       </Link>
-      <Link to="/DiscoverMain">
-        <button>This is a Link to the Discover Main page!</button>
+      <Link to="/DiscoverMain/:userid">
+        <button type="button">This is a Link to the Discover Main page!</button>
       </Link>
-      <Link to="/:chatid/DiscoverChat">
-        <button>This is a Link to the Discover Chat page!</button>
+      <Link to="/DiscoverChat/:chatid">
+        <button type="button">This is a Link to the Discover Chat page!</button>
       </Link>
-      <Link to="/:userid/ProfileList">
-        <button>This is a Link to the Profile List page!</button>
+      <Link to="/ProfileList/:userid">
+        <button type="button">This is a Link to the Profile List page!</button>
       </Link>
-      <Link to="/:userid/Profile">
-        <button>This is a Link to a profile page!</button>
+      <Link to="/Profile/:dogid">
+        <button type="button">This is a Link to a profile page!</button>
       </Link>
-      <Link to="/:userid/ProfileSettings">
-        <button>This is a Link to the Profile Settings page!</button>
+      <Link to="/ProfileSettings/:userid">
+        <button type="button">This is a Link to the Profile Settings page!</button>
+      </Link>
+      <Link to="/AccountSettings/:userid">
+        <button type="button">This is a Link to the Account Settings page!</button>
       </Link>
     </div>
   );

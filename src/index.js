@@ -47,7 +47,6 @@ root.render(
         <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
         <Route path="/:userid/AccountSettings" element={<AccountSettings />} />
         <Route path="/AboutUs" element={<AboutUs />} />
-
       </Routes>
     </Suspense>
   </BrowserRouter >
