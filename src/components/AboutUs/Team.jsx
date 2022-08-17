@@ -5,7 +5,7 @@ import MemberCard from './MemberCard';
 export default function Team() {
   return (
     <Container>
-      <Title>Meet the Team</Title>
+      <Title>Engineering Team</Title>
       <FlexRow>
         {teamMembers.slice(0, 4).map((mem) => <MemberCard key={mem.name} member={mem} />)}
       </FlexRow>
