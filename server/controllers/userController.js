@@ -4,6 +4,7 @@ const db = require('../../database/postgres');
 
 module.exports = {
   createUser: ({ body }, res) => {
+    console.log('body ', body);
     db.query(`
     INSERT INTO users (first_name, last_name, email, password)
     VALUES ( $1, $2, $3, $4 ) RETURNING ID as user_id
@@ -61,28 +62,3 @@ module.exports = {
   },
 
 };
-
-/**
- *
- * sample:
- * juannncodes@gmail.com
- * CREATE TABLE "users"(
- *     "id" SERIAL NOT NULL,
-    "first_name" VARCHAR(255) NOT NULL,
-    "last_name" VARCHAR(255) NOT NULL,
-    "email" VARCHAR(255) NOT NULL,
-    "password" VARCHAR(255) NOT NULL,
-    "profile_pic_url" VARCHAR(255),
-    "latitude" VARCHAR(255),
-    "longitude" VARCHAR(255),
-    "city" VARCHAR(255),
-    "state" VARCHAR(255)
- */
-
-
-// {
-//   first_name: 'John',
-//     last_name: 'Wick',
-//       email: 'johnwick@gmail.com',
-//         password: 'johnwick',
-// }

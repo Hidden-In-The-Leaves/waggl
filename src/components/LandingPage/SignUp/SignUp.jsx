@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
-import NavBar from '../../NavBar/NavBar';
 import {
   SignInWithGoogleButton,
   InputEmail,
@@ -18,8 +16,12 @@ import {
   LinkButton,
   ContainerHalf,
 } from '../StyledFormComponents';
+import NavBar from '../../NavBar/NavBar';
+import { createUser } from '../Parse';
+import useUserStore from '../../../UserStore';
 
 export default function SignUp() {
+  const setUserId = useUserStore((state) => state.setUserId);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -37,7 +39,15 @@ export default function SignUp() {
     setPassword(e.target.value);
   };
   const signupClickHandler = () => {
-    console.log(email, ' && ', password, ' && ', firstName, ' && ', lastName);
+    // console.log(email, ' && ', password, ' && ', firstName, ' && ', lastName);
+    createUser(firstName, lastName, password, email)
+      .then((response) => {
+        console.log(response.data);
+        setUserId(response.data[0].user_id);
+      })
+      .catch((error) => {
+        console.log('unable to create user ', error);
+      });
   };
   return (
     <div>

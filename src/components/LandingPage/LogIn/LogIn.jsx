@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import NavBar from '../../NavBar/NavBar';
 import {
   InputEmail,
   InputPassword,
@@ -16,8 +15,13 @@ import {
   ContainerHalf,
   ContainerHalfForImage,
 } from '../StyledFormComponents';
+import NavBar from '../../NavBar/NavBar';
+import { getUser } from '../Parse';
+import { useUserStore } from '../../../UserStore';
 
 export default function LogIn() {
+  const userId = useUserStore((state) => state.userId);
+  const setUserId = useUserStore((state) => state.setUserId);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const emailChangeHandler = (e) => {
@@ -27,7 +31,23 @@ export default function LogIn() {
     setPassword(e.target.value);
   };
   const loginClickHandler = () => {
-    console.log(email, ' && ', password);
+    // console.log(email, ' && ', password);
+    getUser(email)
+      .then((response) => {
+        if (
+          response.data.length === 0 ||
+          password !== response.data[0].password
+        ) {
+          alert('invaild username or password');
+        } else {
+          setUserId(response.data[0].id);
+        }
+        console.log(response.data);
+        console.log(userId);
+      })
+      .catch((error) => {
+        console.log('unable to get user information', error);
+      });
   };
   return (
     <div>
