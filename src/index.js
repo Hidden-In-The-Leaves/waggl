@@ -15,7 +15,7 @@ const DiscoverChat = lazy(() => import('./components/Discover/DiscoverChat/Disco
 const ProfileList = lazy(() => import('./components/Profiles/ProfileList.jsx'));
 const Profile = lazy(() => import('./components/Profiles/Profile.jsx'));
 const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileSettings.jsx'));
-const AccountSettings = last(() => import('./components/AccountSettings/AccountSettings.jsx'));
+const AccountSettings = lazy(() => import('./components/AccountSettings/AccountSettings.jsx'));
 
 const container = document.getElementById("root");
 const root = createRoot(container);
