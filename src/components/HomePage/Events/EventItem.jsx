@@ -28,7 +28,7 @@ export default function EventItem({ data }) {
   endTime = `${endTime[0].substring(0, endTime[0].length - 3)} ${endTime[1]}`;
 
   // add code below to link car to event detail
-  /* <Link to={`/EventDetails/${data.id}`}> </Link>*/
+  /* <Link to={`/EventDetails/${data.id}`}> </Link> */
   return (
     <CardContainer>
       <DateContainer>
