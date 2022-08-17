@@ -9,12 +9,12 @@ export default function App() {
       <h1>This is the app!</h1>
       {/* to use react router you can wrap elements in a link component
       and use a route by setting attribute "to" equal
-      to a route that is found in index.js*/}
+      to a route that is found in index.js */}
       <Link to="/LogIn">
-        <button>This is a Link to the Log In page!</button>
+        <button type="button">This is a Link to the Log In page!</button>
       </Link>
       <Link to="/SignUp">
-        <button>This is a Link to the Sign Up page!</button>
+        <button type="button">This is a Link to the Sign Up page!</button>
       </Link>
       <Link to="/HomePage/:userid">
         <button type="button">This is a Link to the Home page!</button>
