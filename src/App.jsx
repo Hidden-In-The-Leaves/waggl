@@ -10,9 +10,11 @@ export default function App() {
       {/* to use react router you can wrap elements in a link component
       and use a route by setting attribute "to" equal
       to a route that is found in index.js*/}
-      <Link to='/LogIn'>
-        <button type='button'>This is a Link to the Log In page!</button>
-      </Link>
+      {/* <Link as={button}to='/LogIn'> */}
+      <button as={Link} to='/Login' type='button'>
+        This is a Link to the Log In page!
+      </button>
+      {/* </Link> */}
       <Link to='/SignUp'>
         <button type='button'>This is a Link to the Sign Up page!</button>
       </Link>
@@ -20,6 +22,15 @@ export default function App() {
         <button type='button'>This is a Link to the Home page!</button>
       </Link>
       <Link to='/PackDetails'>
+        <button type='button'>This is a Link to the Pack Details page!</button>
+      </Link>
+      <Link to='/SignUp'>
+        <button type='button'>This is a Link to the Home page!</button>
+      </Link>
+      <Link to='/SignUp'>
+        <button type='button'>This is a Link to the About Us!</button>
+      </Link>
+      <Link to='/SignUp'>
         <button type='button'>This is a Link to the Pack Details page!</button>
       </Link>
       <Link to='/PackGroupChat'>
