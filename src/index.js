@@ -8,20 +8,22 @@ const LogIn = lazy(() => import("./components/LandingPage/LogIn/LogIn.jsx"));
 const SignUp = lazy(() => import("./components/LandingPage/SignUp/SignUp.jsx"));
 const HomePage = lazy(() => import("./components/HomePage/HomePage.jsx"));
 const PackDetails = lazy(() => import("./components/Packs/PackDetails.jsx"));
-const PackGroupChat = lazy(() => import("./components/Packs/PackDetails.jsx"));
+const PackGroupChat = lazy(() =>
+  import("./components/Packs/PackGroupChat.jsx")
+);
 const EventDetails = lazy(() => import("./components/Events/EventDetails.jsx"));
 const DiscoverMain = lazy(() =>
   import("./components/Discover/DiscoverMain/DiscoverMain.jsx")
 );
 const DiscoverChat = lazy(() =>
-  import("./components/Discover/DiscoverChat/DiscoverChat.jsx")
+  import("./components/Discover/DiscoverChat/Chat.jsx")
 );
 const ProfileList = lazy(() => import("./components/Profiles/ProfileList.jsx"));
 const Profile = lazy(() => import("./components/Profiles/Profile.jsx"));
 const ProfileSettings = lazy(() =>
   import("./components/ProfileSettings/ProfileSettings.jsx")
 );
-const AccountSettings = last(() =>
+const AccountSettings = lazy(() =>
   import("./components/AccountSettings/AccountSettings.jsx")
 );
 import NavBar from "./components/NavBar/NavBar";
@@ -45,10 +47,10 @@ root.render(
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/HomePage' element={<HomePage />} />
         <Route path='/:packid/PackDetails' element={<PackDetails />} />
-        <Route path='/:packid/PackGroupChat' element={<PackGroupChat />} />
+        <Route path='/PackGroupChat' element={<PackGroupChat />} />
         <Route path='/:eventid/EventDetails' element={<EventDetails />} />
         <Route path='/DiscoverMain' element={<DiscoverMain />} />
-        <Route path='/:chatid/DiscoverChat' element={<DiscoverChat />} />
+        <Route path='/DiscoverChat' element={<DiscoverChat />} />
         <Route path='/:userid/ProfileList' element={<ProfileList />} />
         {/* We can use parameters in react router to go to individual profiles */}
         <Route path='/:userid/Profile' element={<Profile />} />
