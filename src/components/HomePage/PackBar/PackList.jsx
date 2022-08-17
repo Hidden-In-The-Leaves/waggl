@@ -24,4 +24,9 @@ const Div = styled.div`
 const Scroller = styled.div`
   overflow-y: auto;
   max-height: 29vh;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  &::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
 `;

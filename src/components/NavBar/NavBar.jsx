@@ -22,6 +22,9 @@ export default function NavBar({ type }) {
         )}
         {type === 'welcome' && (
           <>
+            <NavItem to="/AboutUs">
+              <NavText>About Us</NavText>
+            </NavItem>
             <NavItem to="/LogIn">
               <NavText>Login</NavText>
             </NavItem>
@@ -60,6 +63,12 @@ const homeNavs = [
     alt: 'an icon of a gear wheel',
     text: 'Setting',
   },
+  // {
+  //   to: '/AboutUs',
+  //   src: 'https://img.icons8.com/external-sbts2018-solid-sbts2018/58/ff8700/external-about-us-basic-ui-elements-2.3-sbts2018-solid-sbts2018.png',
+  //   alt: 'an icon of two person',
+  //   text: 'About Us',
+  // },
 ];
 
 const HeaderContainer = styled.div`
