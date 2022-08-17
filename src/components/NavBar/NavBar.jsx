@@ -1,39 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Button } from '../../styledComponents';
 
 // takes in a type
 // 'welcome' => navigation bar with login and signup
 // 'home' => navigation bar after successful login / signup
 export default function NavBar({ type }) {
-    return (
-      <HeaderContainer>
-          <NameLink to={type === 'home' ? "/HomePage" : "/"}>
-            Waggl
-          </NameLink>
-          <NavItems>
-            {type === 'home' && (
-              homeNavs.map((nav, idx) => (
-                <NavItem to={nav.to} key={nav.text} last={idx === homeNavs.length - 1}>
-                  <Icon src={nav.src} alt={nav.alt} />
-                <NavText>{nav.text}</NavText>
-                </NavItem>
-              ))
-            )}
-            {type === 'welcome' && (
-              <>
-                <NavItem to="/LogIn">
-                  <NavText>Login</NavText>
-                </NavItem>
-                <ButtonLink to="/SignUp" role="button">
-                    Sign Up
-                </ButtonLink>
-              </>
-            )}
-          </NavItems>
-      </HeaderContainer>
-    );
+  return (
+    <HeaderContainer>
+      <NameLink to={type === 'home' ? "/HomePage" : "/"}>
+        Waggl
+      </NameLink>
+      <NavItems>
+        {type === 'home' && (
+          homeNavs.map((nav, idx) => (
+            <NavItem to={nav.to} key={nav.text} last={(idx === homeNavs.length - 1).toString()}>
+              <Icon src={nav.src} alt={nav.alt} />
+            <NavText>{nav.text}</NavText>
+            </NavItem>
+          ))
+        )}
+        {type === 'welcome' && (
+          <>
+            <NavItem to="/LogIn">
+              <NavText>Login</NavText>
+            </NavItem>
+            <ButtonLink to="/SignUp" role="button">
+              Sign Up
+            </ButtonLink>
+          </>
+        )}
+      </NavItems>
+    </HeaderContainer>
+  );
 }
 
 const homeNavs = [
@@ -66,14 +65,16 @@ const homeNavs = [
 const HeaderContainer = styled.div`
   background-color: white;
   border-bottom: 1px solid #FF8700;
-  border-radius: 0 30px;
-  padding: 10px 3%;
+  border-radius: 0 0 30px 30px;
+  padding: 0 3%;
+  height: 8vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
+  z-index: 5;
 `;
 
 const NameLink = styled(Link)`
@@ -98,7 +99,7 @@ const NavItem = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: ${props => props.last ? '0 0 0 30px' : '0 30px'};
+  margin: ${props => props.last === 'true' ? '0 0 0 30px' : '0 30px'};
   text-decoration: none;
   &:hover {
     opacity: 60%;

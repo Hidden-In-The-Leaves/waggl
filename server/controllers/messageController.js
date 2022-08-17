@@ -5,10 +5,7 @@ const db = require('../../database/postgres');
  * @method GET
  * @desc get a message
  */
-const getMessage = async () => {
-  db.query();
-};
 
-module.exports = {
-  getMessage,
-};
+const getMessage = async (req, res) => {};
+
+module.exports = { getMessage };

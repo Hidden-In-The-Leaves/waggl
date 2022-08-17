@@ -1,9 +1,8 @@
-/* const express = require('express');
-const { messageController } = require('../controllers/messageController');
+const express = require('express');
+const { getMessage } = require('../controllers/messageController');
 
 const router = express.Router();
 
-router.route('/')
-  .get(messageController);
+router.route('/').get(getMessage);
 
-module.exports = router; */
+module.exports = router;
