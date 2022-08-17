@@ -15,12 +15,8 @@ const DiscoverChat = lazy(() => import('./components/Discover/DiscoverChat/Disco
 const ProfileList = lazy(() => import('./components/Profiles/ProfileList.jsx'));
 const Profile = lazy(() => import('./components/Profiles/Profile.jsx'));
 const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileSettings.jsx'));
-<<<<<<< HEAD
-const AccountSettings = lazy(() => import('./components/AccountSettings/AccountSettings.jsx'));
-=======
 const AccountSettings = last(() => import('./components/AccountSettings/AccountSettings.jsx'));
 const AboutUs = lazy(() => import('./components/AboutUs/AboutUs.jsx'));
->>>>>>> f6183366bfe83e88860025ee53c4643d066ab376
 
 const container = document.getElementById("root");
 const root = createRoot(container);
