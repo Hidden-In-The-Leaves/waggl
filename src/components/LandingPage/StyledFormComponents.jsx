@@ -55,4 +55,21 @@ const ContainerHalf = styled.div`
   width: 50%;
 `;
 
-export { Cols, LinkButton, CenterText, BigButton, GoogleButton, ContainerHalf };
+const ContainerHalfForImage = styled.div`
+  border-left: 0.5px solid #d9d9d9;
+  border-right: 0.5px solid #d9d9d9;
+  height: 92vh;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+`;
+
+export {
+  Cols,
+  LinkButton,
+  CenterText,
+  BigButton,
+  GoogleButton,
+  ContainerHalf,
+  ContainerHalfForImage,
+};

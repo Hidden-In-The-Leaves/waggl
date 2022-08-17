@@ -15,6 +15,7 @@ import {
   CenterText,
   LinkButton,
   ContainerHalf,
+  ContainerHalfForImage,
 } from '../StyledFormComponents';
 
 export default function LogIn() {
@@ -32,8 +33,23 @@ export default function LogIn() {
   return (
     <div>
       <NavBar type="welcome" />
+
       <Cols>
-        <Container_1_2>something</Container_1_2>
+        {/* <Container_1_2>
+          <img
+            src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3062&q=80"
+            alt="dog look at you"
+            width="100%"
+            height="100%"
+          />
+        </Container_1_2> */}
+        <ContainerHalfForImage>
+          <img
+            sizes="(max-width: 767px) 100vw, 100vw"
+            src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+            alt="yellow Labrador retriever biting yellow tulip flower"
+          />
+        </ContainerHalfForImage>
         <ContainerHalf>
           <SectionTitle>Login</SectionTitle>
           <SignInWithGoogleButton value="Login with Google" />
