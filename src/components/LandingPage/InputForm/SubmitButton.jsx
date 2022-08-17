@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from '../../../styledComponents';
+import { BigButton } from '../StyledFormComponents';
 
 export default function SubmitButton({ value, buttonClickHandler }) {
   return (
-    <Button type="button" onClick={buttonClickHandler}>
+    <BigButton type="button" onClick={buttonClickHandler}>
       {value}
-    </Button>
+    </BigButton>
   );
 }
 

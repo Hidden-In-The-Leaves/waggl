@@ -9,12 +9,13 @@ import {
   SignInWithGoogleButton,
   SubmitButton,
 } from '../InputForm';
+import { SectionTitle, Container_1_2, Button } from '../../../styledComponents';
 import {
-  SectionTitle,
-  Container,
-  Container_1_2,
-  Button,
-} from '../../../styledComponents';
+  Cols,
+  CenterText,
+  LinkButton,
+  ContainerHalf,
+} from '../StyledFormComponents';
 
 export default function LogIn() {
   const [email, setEmail] = useState('');
@@ -33,10 +34,10 @@ export default function LogIn() {
       <NavBar type="welcome" />
       <Cols>
         <Container_1_2>something</Container_1_2>
-        <Container_1_2>
+        <ContainerHalf>
           <SectionTitle>Login</SectionTitle>
           <SignInWithGoogleButton value="Login with Google" />
-          <SectionTitle>------------ or ------------</SectionTitle>
+          <CenterText>------------ or ------------</CenterText>
           <form>
             <InputEmail emailChangeHandler={emailChangeHandler} />
             <InputPassword passwordChangeHandler={passwordChangeHandler} />
@@ -45,16 +46,17 @@ export default function LogIn() {
               buttonClickHandler={loginClickHandler}
             />
           </form>
+          <span>Didn't have an account?</span>
+          {'    '}
+          <Link to="/SignUp">
+            <LinkButton type="button">Sign up</LinkButton>
+          </Link>
+          <br />
           <Link to="/">
             <Button type="button">This is a Link to App "Page"!</Button>
           </Link>
-        </Container_1_2>
+        </ContainerHalf>
       </Cols>
     </div>
   );
 }
-
-const Cols = styled.div`
-  display: flex;
-  flex-direction: row;
-`;

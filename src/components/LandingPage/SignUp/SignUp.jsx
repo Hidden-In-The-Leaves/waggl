@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import NavBar from '../../NavBar/NavBar';
 import {
@@ -10,12 +11,13 @@ import {
   InputFirstName,
   InputLastName,
 } from '../InputForm';
+import { SectionTitle, Container_1_2, Button } from '../../../styledComponents';
 import {
-  SectionTitle,
-  Container,
-  Container_1_2,
-  Button,
-} from '../../../styledComponents';
+  Cols,
+  CenterText,
+  LinkButton,
+  ContainerHalf,
+} from '../StyledFormComponents';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -42,10 +44,10 @@ export default function SignUp() {
       <NavBar type="welcome" />
       <Cols>
         <Container_1_2>Something</Container_1_2>
-        <Container_1_2>
-          <SectionTitle>Sign Up in here!</SectionTitle>
+        <ContainerHalf>
+          <SectionTitle>Sign Up</SectionTitle>
           <SignInWithGoogleButton value="Sign up with Google" />
-          <SectionTitle>------------ or ------------</SectionTitle>
+          <CenterText>------------ or ------------</CenterText>
           <form>
             <InputFirstName firstnameChangeHandler={firstnameChangeHandler} />
             <InputLastName lastnameChangeHandler={lastnameChangeHandler} />
@@ -56,16 +58,17 @@ export default function SignUp() {
               buttonClickHandler={signupClickHandler}
             />
           </form>
+          <span>Already have an account</span>
+          {'   '}
+          <Link to="/LogIn">
+            <LinkButton type="button">Login</LinkButton>
+          </Link>
+          <br />
           <Link to="/">
             <Button>This is a Link to App "Page"!</Button>
           </Link>
-        </Container_1_2>
+        </ContainerHalf>
       </Cols>
     </div>
   );
 }
-
-const Cols = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
