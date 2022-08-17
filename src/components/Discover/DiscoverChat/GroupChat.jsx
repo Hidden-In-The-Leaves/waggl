@@ -11,6 +11,9 @@ import {
   Message,
   MessageInput,
   MessageSendIcon,
+  CircleImage,
+  MessageFromOtherContainer,
+  MessageInputContainer,
 } from "./Chat.styled";
 
 export default function GroupChat({ sender, pack_id, socket, pack_name }) {
@@ -91,29 +94,22 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
               )}
               {m.users.user_id !== sender.id && (
                 <div style={{ display: "flex" }}>
-                  <img
-                    src={m.users.image}
-                    style={{
-                      height: "55px",
-                      width: "55px",
-                      borderRadius: "50%",
-                    }}
-                  />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <p style={{ margin: "0", padding: "0 10px" }}>
+                  <CircleImage src={m.users.image} />
+                  <MessageFromOtherContainer>
+                    <Message>
                       {m.users.first_name} {m.users.last_name}
-                    </p>
-                    <MessageFromOther>
-                      <p style={{ padding: "0 10px" }}>{m.message_text}</p>
+                    </Message>
+                    <MessageFromOther style={{ width: "100%" }}>
+                      <Message>{m.message_text}</Message>
                     </MessageFromOther>
-                  </div>
+                  </MessageFromOtherContainer>
                 </div>
               )}
               <div ref={bottomRef}></div>
             </div>
           ))}
       </ChatContainer>
-      <div style={{ height: "60px" }}>
+      <MessageInputContainer>
         <MessageInput
           type='text'
           value={message}
@@ -124,7 +120,7 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
           className='fa-solid fa-paper-plane'
           onClick={sendGroupMessage}
         ></MessageSendIcon>
-      </div>
+      </MessageInputContainer>
     </div>
   );
 }

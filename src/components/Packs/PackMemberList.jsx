@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Title } from "../Discover/DiscoverChat/Chat.styled";
+// import { SubTitle } from "../Discover/DiscoverChat/Chat.styled";
+import {
+  PackContainer,
+  PackMemberContainer,
+  SubTitle,
+  Members,
+  PacksList,
+  CircleImage,
+  MemberName,
+  MemberLocation,
+} from "./Packs.styled";
 
 export default function PackMemberList({
   packId,
@@ -28,87 +38,48 @@ export default function PackMemberList({
   };
   console.log(packs);
   return (
-    <div
-      style={{
-        width: "35%",
-        borderRight: "2px red solid",
-      }}
-    >
-      <div
+    <PackContainer>
+      <PackMemberContainer
         style={{
-          // width: "35%",
-          // borderRight: "2px solid red",
           height: packs.length > 1 ? "45vh" : "",
-          overflow: "auto",
         }}
       >
-        {packs[0] && memberList[0] && (
-          <Title style={{ borderBottom: "none" }}>{pack_name} Members</Title>
-        )}
+        {packs[0] && memberList[0] && <SubTitle>{pack_name} Members</SubTitle>}
         {memberList.map((member, index) => (
-          <div
-            key={index}
-            style={{ display: "flex", margin: "10px 10px 10px 5%" }}
-          >
-            <img
-              src={member.image}
-              style={{
-                height: "60px",
-                width: "60px",
-                borderRadius: "50%",
-                marginRight: "10px",
-              }}
-            />
+          <Members key={index}>
+            <CircleImage src={member.image} />
             <div>
-              <p style={{ margin: "10px 0 0 0" }}>
+              <MemberName>
                 {member.first_name} {member.last_name}
-              </p>
-              <p style={{ marginTop: "0" }}>default location</p>
+              </MemberName>
+              <MemberLocation>default location</MemberLocation>
             </div>
-          </div>
+          </Members>
         ))}
-      </div>
+      </PackMemberContainer>
       {packs.length > 1 && (
-        <div
-          style={{
-            // width: "35%",
-            // borderRight: "2px solid red",
-            // height: packs.length > 1 ? "45vh" : "",
-            overflow: "auto",
-          }}
-        >
-          <Title style={{ borderBottom: "none" }}>Other Packs</Title>
+        <PackMemberContainer>
+          <SubTitle>Other Packs</SubTitle>
           {packs.map((pack) => {
             if (pack.pack_id !== packId) {
               return (
-                <div
+                <PacksList
                   key={pack.pack_id}
-                  style={{ display: "flex", margin: "10px 10px 10px 5%" }}
                   onClick={() =>
                     clickHandler(pack.pack_id, pack.pack[0].pack_name)
                   }
                 >
-                  <img
-                    src={pack.pack[0].image}
-                    style={{
-                      height: "60px",
-                      width: "60px",
-                      borderRadius: "50%",
-                      marginRight: "10px",
-                    }}
-                  />
+                  <CircleImage src={pack.pack[0].image} />
                   <div>
-                    <p style={{ margin: "10px 0 0 0" }}>
-                      {pack.pack[0].pack_name}
-                    </p>
-                    <p style={{ marginTop: "0" }}>description</p>
+                    <MemberName>{pack.pack[0].pack_name}</MemberName>
+                    <MemberLocation>description</MemberLocation>
                   </div>
-                </div>
+                </PacksList>
               );
             }
           })}
-        </div>
+        </PackMemberContainer>
       )}
-    </div>
+    </PackContainer>
   );
 }

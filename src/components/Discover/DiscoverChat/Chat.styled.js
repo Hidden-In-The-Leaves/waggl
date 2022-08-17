@@ -1,12 +1,22 @@
 import styled from "styled-components";
 
-export const Title = styled.h1`
+export const Title = styled.div`
   border-bottom: 1px lightgrey solid;
   padding-left: 5%;
+  padding-bottom: 20px;
+  font-size: 28px;
+  font-weight: 900;
+  margin: 20px 0;
 `;
 
+export const SubTitle = styled.div`
+  font-size: 24px;
+  font-weight: 900;
+  margin: 20px 0;
+  padding-left: 5%;
+`;
 export const ChatContainer = styled.div`
-  height: 70vh;
+  height: 65vh;
   overflow: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -38,9 +48,10 @@ export const MessageFromOther = styled.div`
   min-height: 62px;
   min-width: 100px;
   border-radius: 20px;
+  color: black;
   background-color: rgba(217, 217, 217, 0.35);
   font-size: 20px;
-  color: black;
+  justify-align: center;
   margin: 10px 5%;
   text-align: center;
 `;
@@ -59,4 +70,19 @@ export const MessageInput = styled.input`
 export const MessageSendIcon = styled.i`
   font-size: 30px;
   color: lightgrey;
+`;
+
+export const CircleImage = styled.img`
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+`;
+
+export const MessageFromOtherContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const MessageInputContainer = styled.div`
+  height: 60px;
 `;

@@ -36,11 +36,11 @@ root.render(
       <Route path='/HomePage' element={<HomePage />} />
       <Route path='/:packid/PackDetails' element={<PackDetails />} />
       {/* <Route path='/:chatid/PackGroupChat' element={<PackGroupChat />} /> */}
-      <Route path='/' element={<PackGroupChat />} />
+      {/* <Route path='/' element={<PackGroupChat />} /> */}
       <Route path='/:eventid/EventDetails' element={<EventDetails />} />
       <Route path='/DiscoverMain' element={<DiscoverMain />} />
       {/* <Route path='/DiscoverChat' element={<Chat />} /> */}
-      {/* <Route path='/' element={<Chat />} /> */}
+      <Route path='/' element={<Chat />} />
       <Route path='/:userid/ProfileList' element={<ProfileList />} />
       {/* We can use parameters in react router to go to individual profiles */}
       <Route path='/:userid/Profile' element={<Profile />} />

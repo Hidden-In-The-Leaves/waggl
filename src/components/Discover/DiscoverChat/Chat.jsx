@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DiscoverChat from "./DiscoverChat";
-import GroupChat from "./GroupChat";
 import MatchList from "./MatchList";
 import io from "socket.io-client";
 const socket = io("http://localhost:5000");
@@ -54,15 +53,7 @@ export default function Chat() {
       </div>
       <div style={{ display: "flex" }}>
         <MatchList />
-        {/* {u.id && r.id && <DiscoverChat user1={u} user2={r} socket={socket} />} */}
-        {packId && (
-          <GroupChat
-            sender={u}
-            pack_id={packId}
-            socket={socket}
-            pack_name={"test pack"}
-          />
-        )}
+        {u.id && r.id && <DiscoverChat user1={u} user2={r} socket={socket} />}
       </div>
     </>
   );

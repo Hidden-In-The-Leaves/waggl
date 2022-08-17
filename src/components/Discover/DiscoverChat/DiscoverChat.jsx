@@ -13,14 +13,6 @@ import {
   MessageSendIcon,
 } from "./Chat.styled";
 
-// const user_1 = {
-//   id: 1,
-//   username: "test",
-// };
-// const user_2 = {
-//   id: 2,
-//   username: "test2",
-// };
 export default function DiscoverChat({ user1, user2, socket }) {
   const [message, setMessage] = useState("");
   const [messagesList, setMessagesList] = useState([]);
@@ -66,10 +58,6 @@ export default function DiscoverChat({ user1, user2, socket }) {
   };
   return (
     <div style={{ width: "100%" }}>
-      {/* <h1>This is the Discover's chat!!</h1>
-      <Link to='/'>
-        <button>This is a Link to App "Page"!</button>
-      </Link> */}
       <Title>{user2.username}</Title>
       <ChatContainer>
         {messagesList.map((m, index) => (
