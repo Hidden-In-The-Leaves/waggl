@@ -1,5 +1,8 @@
 const axios = require('axios');
 
+// GPS objects should be JS Objects with a lat and lng property
+// ex: {lat: 56564, lng: 775045}
+
 module.exports = {
   getGPS: (addy) => {
     let result = {};
@@ -55,6 +58,7 @@ module.exports = {
     return distance;
   },
   // relies on the getDistance helper fn
+  // input the radius size in miles, the center of the radius and any other gps objects to be sorted
   sortBy: (radius, center, ...rest) => {
     const sortedResults = [];
     rest.forEach((obj) => {
