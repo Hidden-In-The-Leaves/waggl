@@ -1,15 +1,74 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import NavBar from "../../NavBar/NavBar";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-export default function SignUp(props) {
+import NavBar from '../../NavBar/NavBar';
+import {
+  SignInWithGoogleButton,
+  InputEmail,
+  InputPassword,
+  SubmitButton,
+  InputFirstName,
+  InputLastName,
+} from '../InputForm';
+import { SectionTitle, Container_1_2, Button } from '../../../styledComponents';
+import {
+  Cols,
+  CenterText,
+  LinkButton,
+  ContainerHalf,
+} from '../StyledFormComponents';
+
+export default function SignUp() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const firstnameChangeHandler = (e) => {
+    setFirstName(e.target.value);
+  };
+  const lastnameChangeHandler = (e) => {
+    setLastName(e.target.value);
+  };
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
+  const signupClickHandler = () => {
+    console.log(email, ' && ', password, ' && ', firstName, ' && ', lastName);
+  };
   return (
     <div>
       <NavBar type="welcome" />
-      <h1>Sign Up in here!</h1>
-      <Link to="/">
-        <button>This is a Link to App "Page"!</button>
-      </Link>
+      <Cols>
+        <Container_1_2>Something</Container_1_2>
+        <ContainerHalf>
+          <SectionTitle>Sign Up</SectionTitle>
+          <SignInWithGoogleButton value="Sign up with Google" />
+          <CenterText>------------ or ------------</CenterText>
+          <form>
+            <InputFirstName firstnameChangeHandler={firstnameChangeHandler} />
+            <InputLastName lastnameChangeHandler={lastnameChangeHandler} />
+            <InputEmail emailChangeHandler={emailChangeHandler} />
+            <InputPassword passwordChangeHandler={passwordChangeHandler} />
+            <SubmitButton
+              value="Sign Up"
+              buttonClickHandler={signupClickHandler}
+            />
+          </form>
+          <span>Already have an account</span>
+          {'   '}
+          <Link to="/LogIn">
+            <LinkButton type="button">Login</LinkButton>
+          </Link>
+          <br />
+          <Link to="/">
+            <Button>This is a Link to App "Page"!</Button>
+          </Link>
+        </ContainerHalf>
+      </Cols>
     </div>
   );
 }

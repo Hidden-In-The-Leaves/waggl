@@ -2,16 +2,22 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const cors = require('cors');
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  },
+});
 const db = require('../database/postgres');
 const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 const packsRoutes = require('./routes/packsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
 
 dotenv.config();
-const cors = require('cors');
-
-const app = express();
-const PORT = process.env.PORT || 5000;
 
 db.connect((err) => {
   if (err) {
@@ -20,15 +26,11 @@ db.connect((err) => {
     console.log('DB connected');
   }
 });
-const server = require('http').createServer(app);
-const io = require('socket.io')(server, {
-  cors: {
-    origin: '*',
-  },
-});
 app.use(express.json());
-const socketRouter = require('./routes/socketRouter.js')(io);
-const messageRoutes = require('./routes/messageRoutes.js');
+const socketRouter = require('./routes/socketRouter')(io);
+
+const messageRoutes = require('./routes/messageRoutes');
+
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(cors());
 app.use('/api/message', () => socketRouter());
