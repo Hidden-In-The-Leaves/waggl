@@ -34,6 +34,7 @@ root.render(
         {/* <Route path="/" element={<App />} /> */}
         <Route path="/" element={<App />} />
         <Route path="/LogIn" element={<LogIn />} />
+        {/* <Route path="/" element={<SignUp />} /> */}
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/:packid/PackDetails" element={<PackDetails />} />
