@@ -5,11 +5,15 @@ const userController = require('../controllers/userController');
 const router = express.Router();
 
 router.route('/signUp')
-  // .get(packsController.getPacks)
   .post(userController.createUser);
 
 router.route('/login')
   .get(userController.getUserByEmail);
-// .post(packsController.createPack);
+
+router.route('/signUp/thirdParty')
+  .post(userController.createUserByThridProvider);
+
+router.route('/')
+  .get(userController.getUsers);
 
 module.exports = router;
