@@ -24,8 +24,6 @@ export const Container = styled.div`
   border-right: 0.5px solid #D9D9D9;
   box-sizing: border-box;
   height: 92vh;
-  display: flex;
-  flex-direction: row;
 `;
 
 export const Container_1_3 = styled(Container)`
@@ -63,8 +61,6 @@ export const Button = styled.button`
   border-radius: 30px;
   border-color: #FF8700;
   border-style: solid;
-  width: 200px;
-  height: 50px;
   &:hover {
     opacity: 60%;
     cursor: pointer;

@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import {
-  InputLabel, SectionTitle, Button, Input,
+  InputLabel, SectionTitle, Input,
 } from '../../styledComponents';
 
 export default function LocationInfoSettings() {
@@ -76,11 +77,11 @@ export default function LocationInfoSettings() {
   });
 
   return (
-    <div>
+    <div style={{ minWidth: 500 }}>
       <SectionTitle>Location</SectionTitle>
       <Button type="button" onClick={handleLocationSettingsEdit}>Edit Location Settings</Button>
       <br />
-      <form onSubmit={handleLocationSettingsUpdate}>
+      <form style={{ margin: 50 }} onSubmit={handleLocationSettingsUpdate}>
         <fieldset disabled={!locationEdit}>
           <InputLabel>
             City
@@ -100,3 +101,20 @@ export default function LocationInfoSettings() {
     </div>
   );
 }
+
+const Button = styled.button`
+  color: white;
+  background-color: #FF8700;
+  border-radius: 30px;
+  padding: 3px 10px;
+  margin: 5px;
+  border-radius: 30px;
+  border-color: #FF8700;
+  border-style: solid;
+  width: 200px;
+  height: 50px;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;

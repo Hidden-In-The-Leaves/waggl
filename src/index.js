@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import "./main.css";
 
-const App = lazy(() => import('./App.jsx'));
+const App = lazy(() => import('./components/AccountSettings/AccountSettings.jsx'));
 const LogIn = lazy(() => import('./components/LandingPage/LogIn/LogIn.jsx'));
 const SignUp = lazy(() => import('./components/LandingPage/SignUp/SignUp.jsx'));
 const HomePage = lazy(() => import('./components/HomePage/HomePage.jsx'));
