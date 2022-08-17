@@ -76,7 +76,7 @@ const Img = styled.img`
 `;
 
 const ImgEnlarged = styled.img`
-  width: 80vh;
+  /* width: 80vh; */
   max-height: 70%;
   object-fit: cover;
 `;

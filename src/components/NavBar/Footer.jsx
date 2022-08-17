@@ -6,11 +6,8 @@ import Box from '@mui/material/Box';
 export default function Footer() {
   return (
     <FooterContainer>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Title>Waggl</Title>
-        <div style={{ padding: '10px' }}>Copyright©︎ 2022 Waggl</div>
-      </div>
-      <StyledLink to="/AboutUs">About Us</StyledLink>
+      <Title>Waggl</Title>
+      <div style={{ padding: '10px' }}>Copyright©︎ 2022 Waggl</div>
     </FooterContainer>
   );
 }
@@ -41,8 +38,9 @@ const FooterContainer = styled.footer`
   flex-direction: row;
   align-items: center;
   scroll-snap-align: start;
-  justify-content: space-between;
+  justify-content: center;
   border-radius: 10px 10px 0 0;
   padding: 0 3%;
   box-sizing: border-box;
+  z-index: 1000;
 `;

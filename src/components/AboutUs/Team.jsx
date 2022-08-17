@@ -17,8 +17,8 @@ export default function Team() {
 }
 
 const Container = styled.div`
-  height: 100vh;
-  padding-top: 5vh;
+  /* height: 100vh; */
+  padding: 8vh 0;
   scroll-snap-align: start;
   width: 100vw;
   background-color: white;
@@ -32,6 +32,10 @@ const Title = styled.div`
   font-size: 36px;
   font-weight: 900;
   padding: 2% 0;
+  @media (max-width: 768px) {
+    font-size: 24px;
+    padding-top: 4vh;
+  }
 `;
 
 const FlexRow = styled.div`
@@ -39,6 +43,10 @@ const FlexRow = styled.div`
   flex-direction: row;
   align-items: baseline;
   padding: 10px 0;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const teamMembers = [
