@@ -55,7 +55,7 @@ const homeNavs = [
     text: 'Profiles',
   },
   {
-    to: '/ProfileSettings',
+    to: '/AccountSettings',
     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/settings--v1.png',
     alt: 'an icon of a gear wheel',
     text: 'Setting',

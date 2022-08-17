@@ -4,18 +4,18 @@ import styled from 'styled-components';
 export const Title = styled.div`
   font-size: 28px;
   font-weight: 900;
-  margin: 20px 0;
+  margin: 20px;
 `;
 
 export const SubTitle = styled.div`
   font-size: 24px;
   font-weight: 900;
-  margin: 20px 0;
+  margin: 20px;
 `;
 
 export const SectionTitle = styled.div`
   font-size: 20px;
-  margin: 3% 0;
+  margin: 20px;
 `;
 
 export const Container = styled.div`
@@ -24,14 +24,22 @@ export const Container = styled.div`
   border-right: 0.5px solid #D9D9D9;
   box-sizing: border-box;
   height: 92vh;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Container_1_3 = styled(Container)`
   width: 33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Container_2_3 = styled(Container)`
   width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Container_1_4 = styled(Container)`
@@ -51,9 +59,12 @@ export const Button = styled.button`
   background-color: #FF8700;
   border-radius: 30px;
   padding: 3px 10px;
+  margin: 5px;
   border-radius: 30px;
   border-color: #FF8700;
   border-style: solid;
+  width: 200px;
+  height: 50px;
   &:hover {
     opacity: 60%;
     cursor: pointer;
