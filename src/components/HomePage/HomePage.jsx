@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PackBar from './PackBar/PackBar';
 import NavBar from '../NavBar/NavBar';
+import Footer from '../NavBar/Footer';
 import Feed from './Feed/Feed';
 import Events from './Events/Events';
 
@@ -31,6 +32,7 @@ export default function HomePage() {
       {/* <Link to="/">
         <button>This is a Link to App "Page"!</button>
       </Link> */}
+      <Footer type="home" />
     </PageContainer>
   );
 }

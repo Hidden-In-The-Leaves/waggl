@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 export default function Post({ post }) {
+  const [imageOpen, setImageOpen] = useState(false);
+
   return (
     <Container>
       <FlexRow>
-        <RoundImg src={post.poster_photo_url}/>
+        <RoundImg src={post.poster_photo_url} />
         <MainText>{post.poster}</MainText>
         <SubText>{formatDistanceToNow(new Date(post.posted_time))} ago</SubText>
       </FlexRow>
       <Text>{post.text}</Text>
       {post.photo_url && (
-        <Img src={post.photo_url} />
+        <Img src={post.photo_url} onClick={() => setImageOpen(true)} />
       )}
+      <Dialog open={imageOpen} onClose={() => setImageOpen(false)} fullWidth>
+        <ImgEnlarged src={post.photo_url} />
+      </Dialog>
     </Container>
   );
 }
@@ -62,4 +69,14 @@ const Img = styled.img`
   object-fit: cover;
   border-radius: 10px;
   margin: 3% 0;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;
+
+const ImgEnlarged = styled.img`
+  width: 80vh;
+  max-height: 70%;
+  object-fit: cover;
 `;
