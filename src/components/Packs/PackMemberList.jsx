@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 // import { SubTitle } from "../Discover/DiscoverChat/Chat.styled";
 import {
   PackContainer,
@@ -10,7 +10,7 @@ import {
   CircleImage,
   MemberName,
   MemberLocation,
-} from "./Packs.styled";
+} from './Packs.styled';
 
 export default function PackMemberList({
   packId,
@@ -41,7 +41,7 @@ export default function PackMemberList({
     <PackContainer>
       <PackMemberContainer
         style={{
-          height: packs.length > 1 ? "45vh" : "",
+          height: packs.length > 1 ? '45vh' : '',
         }}
       >
         {packs[0] && memberList[0] && <SubTitle>{pack_name} Members</SubTitle>}

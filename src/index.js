@@ -9,7 +9,9 @@ const LogIn = lazy(() => import("./components/LandingPage/LogIn/LogIn.jsx"));
 const SignUp = lazy(() => import("./components/LandingPage/SignUp/SignUp.jsx"));
 const HomePage = lazy(() => import("./components/HomePage/HomePage.jsx"));
 const PackDetails = lazy(() => import("./components/Packs/PackDetails.jsx"));
-const PackGroupChat = lazy(() => import("./components/Packs/PackDetails.jsx"));
+const PackGroupChat = lazy(() =>
+  import("./components/Packs/PackGroupChat.jsx")
+);
 const EventDetails = lazy(() => import("./components/Events/EventDetails.jsx"));
 const DiscoverMain = lazy(() =>
   import("./components/Discover/DiscoverMain/DiscoverMain.jsx")
@@ -33,7 +35,7 @@ root.render(
   //The whole App is wrapped in a browser router component
   //which holds all of the "routes" which are basically endpoints
   <BrowserRouter>
-    <NavBar type='welcome' />
+    {/* <NavBar type='welcome' /> */}
     {/* for react routers code splitting */}
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -44,17 +46,17 @@ root.render(
         <Route path='/' element={<App />} />
         <Route path='/LogIn' element={<LogIn />} />
         <Route path='/SignUp' element={<SignUp />} />
-        <Route path='/HomePage' element={<HomePage />} />
-        <Route path='/:packid/PackDetails' element={<PackDetails />} />
-        <Route path='/PackGroupChat' element={<PackGroupChat />} />
-        <Route path='/:eventid/EventDetails' element={<EventDetails />} />
-        <Route path='/DiscoverMain' element={<DiscoverMain />} />
-        <Route path='/DiscoverChat' element={<DiscoverChat />} />
-        <Route path='/:userid/ProfileList' element={<ProfileList />} />
+        <Route path='/HomePage/:userid' element={<HomePage />} />
+        <Route path='/PackDetails/:packid' element={<PackDetails />} />
+        <Route path='/PackGroupChat/:packid' element={<PackGroupChat />} />
+        <Route path='/EventDetails/:eventid' element={<EventDetails />} />
+        <Route path='/DiscoverMain/:userid' element={<DiscoverMain />} />
+        <Route path='/DiscoverChat/:chatid' element={<DiscoverChat />} />
+        <Route path='/ProfileList/:userid' element={<ProfileList />} />
         {/* We can use parameters in react router to go to individual profiles */}
-        <Route path='/:userid/Profile' element={<Profile />} />
-        <Route path='/:userid/ProfileSettings' element={<ProfileSettings />} />
-        <Route path='/:userid/AccountSettings' element={<AccountSettings />} />
+        <Route path='/Profile/:dogid' element={<Profile />} />
+        <Route path='/ProfileSettings/:userid' element={<ProfileSettings />} />
+        <Route path='/AccountSettings/:userid' element={<AccountSettings />} />
         <Route path='/AboutUs' element={<AboutUs />} />
       </Routes>
     </Suspense>

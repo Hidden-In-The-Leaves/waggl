@@ -1,4 +1,4 @@
-const db = require("../../database/postgres");
+const db = require('../../database/postgres');
 
 /**
  * @route /api/messages?user1=?&user2=?
@@ -14,7 +14,7 @@ const getMessage = async (req, res) => {
   if (messages) {
     res.status(200).send(messages.rows);
   } else {
-    res.send({ Error: "some error" });
+    res.send({ Error: 'some error' });
   }
 };
 
@@ -32,9 +32,9 @@ const postMessage = async (req, res) => {
     `INSERT INTO direct_messages (sender_id, receiver_id, message_text, posted_time) values (${user1}, ${user2}, '${message}', '${posted_time}');`
   );
   if (a) {
-    res.send({ Success: "message added" });
+    res.send({ Success: 'message added' });
   } else {
-    res.send({ Fail: "unable to add message" });
+    res.send({ Fail: 'unable to add message' });
   }
 };
 
@@ -57,7 +57,7 @@ const getGroupMessage = async (req, res) => {
   if (messages) {
     res.status(200).send(messages.rows[0].messages);
   } else {
-    res.send({ Error: "unable to get messages" });
+    res.send({ Error: 'unable to get messages' });
   }
 };
 
@@ -74,9 +74,9 @@ const postGroupMessage = async (req, res) => {
   const a = await db.query(`
   INSERT INTO group_message (pack_id, message_text, posted_time, user_id) VALUES (${packId}, '${message}', '${posted_time}', '${sender_id}');`);
   if (a) {
-    res.send({ Success: "added a message" });
+    res.send({ Success: 'added a message' });
   } else {
-    res.send({ Fail: "unable to send a message" });
+    res.send({ Fail: 'unable to send a message' });
   }
 };
 
@@ -101,7 +101,7 @@ const getUserPacks = async (req, res) => {
   if (packs) {
     res.status(200).send(packs.rows[0].packs);
   } else {
-    res.send({ Error: "unable to get packs" });
+    res.send({ Error: 'unable to get packs' });
   }
 };
 
@@ -119,7 +119,7 @@ const getPackMember = async (req, res) => {
   if (members) {
     res.status(200).send(members.rows[0].json_agg);
   } else {
-    res.send({ Error: "unable to get members" });
+    res.send({ Error: 'unable to get members' });
   }
 };
 
@@ -137,7 +137,7 @@ const getUser = async (req, res) => {
   if (user) {
     res.status(200).send(user.rows[0]);
   } else {
-    res.send({ Error: "unable to get user" });
+    res.send({ Error: 'unable to get user' });
   }
 };
 module.exports = {
