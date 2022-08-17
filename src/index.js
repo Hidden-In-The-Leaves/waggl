@@ -15,7 +15,12 @@ const DiscoverChat = lazy(() => import('./components/Discover/DiscoverChat/Disco
 const ProfileList = lazy(() => import('./components/Profiles/ProfileList.jsx'));
 const Profile = lazy(() => import('./components/Profiles/Profile.jsx'));
 const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileSettings.jsx'));
+<<<<<<< HEAD
 const AccountSettings = lazy(() => import('./components/AccountSettings/AccountSettings.jsx'));
+=======
+const AccountSettings = last(() => import('./components/AccountSettings/AccountSettings.jsx'));
+const AboutUs = lazy(() => import('./components/AboutUs/AboutUs.jsx'));
+>>>>>>> f6183366bfe83e88860025ee53c4643d066ab376
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -30,6 +35,7 @@ root.render(
       and set the "endpoint" name with the attribute "path"
       and point it to a component acting as a page with the element attribute
        */}
+        {/* <Route path="/" element={<App />} /> */}
         <Route path="/" element={<App />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
@@ -44,6 +50,8 @@ root.render(
         <Route path="/:userid/Profile" element={<Profile />} />
         <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
         <Route path="/:userid/AccountSettings" element={<AccountSettings />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
+
       </Routes>
     </Suspense>
   </BrowserRouter >

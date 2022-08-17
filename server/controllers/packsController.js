@@ -40,14 +40,24 @@ module.exports = {
         });
     }
   },
-
   createPack: ({ body }, res) => {
     /* TODO : generate calendar_id everytime a pack is created - ASK CHRIS*/
     const calendarId = 1;
-    db.query(`
-      INSERT INTO packs (pack_name, calendar_id, owner_id, pack_profile_pic_url, description)
-      VALUES ( $1, $2, $3, $4, $5 )
-    `, [body.name, calendarId, body.owner_id, body.url || '', body.description])
+    db.query(`SELECT count(*) FROM packs WHERE pack_name = $1`, [body.name])
+      .then((result) => {
+        if (result.rows[0].count > 0) {
+          res.status(404).end('pack name is already taken.');
+        } else {
+          return db.query(
+            `WITH insert1 AS (
+              INSERT INTO packs (pack_name, calendar_id, owner_id, pack_profile_pic_url, description)
+              VALUES ( $1, $2, $3, $4, $5 ) RETURNING ID as pack_id
+            )
+            INSERT INTO users_packs_join (pack_id, user_id)
+            SELECT pack_id, $3 FROM insert1
+          `, [body.name, calendarId, body.owner_id, body.url || '', body.description])
+        }
+      })
       .then(() => res.sendStatus(201))
       .catch((err) => {
         console.log('database error - cannot insert pack', err);

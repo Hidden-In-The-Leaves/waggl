@@ -16,11 +16,14 @@ export default function App() {
       <Link to="/SignUp">
         <button>This is a Link to the Sign Up page!</button>
       </Link>
-      <Link to="/HomePage">
-        <button>This is a Link to the Home page!</button>
+      <Link to="/SignUp">
+        <button type="button">This is a Link to the Home page!</button>
       </Link>
-      <Link to="/:packid/PackDetails">
-        <button>This is a Link to the Pack Details page!</button>
+      <Link to="/SignUp">
+        <button type="button">This is a Link to the About Us!</button>
+      </Link>
+      <Link to="/SignUp">
+        <button type="button">This is a Link to the Pack Details page!</button>
       </Link>
       <Link to="/:chatid/PackGroupChat">
         <button>This is a Link to the Pack Group Chat page!</button>
