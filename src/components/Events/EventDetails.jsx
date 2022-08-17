@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import Participant from './Participant';
 import EventMessage from './EventMessage';
 import NavBar from '../NavBar/NavBar';
@@ -13,7 +14,7 @@ export default function EventDetails(props) {
   return (
     <div id="event-details-container">
       <div style={{ width: '100%', height: '200px' }}>
-        <NavBar />
+        <NavBar type="event" />
       </div>
       <AddEvent />
       <div

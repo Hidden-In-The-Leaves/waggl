@@ -8,7 +8,7 @@ import styled from 'styled-components';
 export default function NavBar({ type }) {
   return (
     <HeaderContainer>
-      <NameLink to={type === 'home' ? "/HomePage" : "/"}>
+      <NameLink to={type === 'home' ? "/HomePage/:userid" : "/"}>
         Waggl
       </NameLink>
       <NavItems>
@@ -32,6 +32,14 @@ export default function NavBar({ type }) {
               Sign Up
             </ButtonLink>
           </>
+        )}
+        {type === 'event' && (
+          eventNavs.map((nav, idx) => (
+            <NavItem to={nav.to} key={nav.text} last={(idx === eventNavs.length - 1).toString()}>
+              <Icon src={nav.src} alt={nav.alt} />
+            <NavText>{nav.text}</NavText>
+            </NavItem>
+          ))
         )}
       </NavItems>
     </HeaderContainer>
@@ -69,6 +77,39 @@ const homeNavs = [
   //   alt: 'an icon of two person',
   //   text: 'About Us',
   // },
+];
+
+const eventNavs = [
+  {
+    to: '/DiscoverMain/:userid',
+    src: 'https://img.icons8.com/glyph-neue/64/ff8700/dog-park.png',
+    alt: 'icon of a dog catching a ball',
+    text: 'Discover',
+  },
+  {
+    to: '/DiscoverChat/:chatid',
+    src: 'https://img.icons8.com/ios-glyphs/30/ff8700/chat.png',
+    alt: 'chat icon',
+    text: 'Chat',
+  },
+  {
+    to: '/ProfileList/:userid',
+    src: 'https://img.icons8.com/ios-glyphs/30/ff8700/dog-tag.png',
+    alt: 'an icon of a person in a circle',
+    text: 'Profiles',
+  },
+  {
+    to: '/AccountSettings/:userid',
+    src: 'https://img.icons8.com/ios-glyphs/30/ff8700/settings--v1.png',
+    alt: 'an icon of a gear wheel',
+    text: 'Setting',
+  },
+  {
+    to: '/AboutUs',
+    src: 'https://img.icons8.com/external-sbts2018-solid-sbts2018/58/ff8700/external-about-us-basic-ui-elements-2.3-sbts2018-solid-sbts2018.png',
+    alt: 'an icon of two person',
+    text: 'About Us',
+  },
 ];
 
 const HeaderContainer = styled.div`
