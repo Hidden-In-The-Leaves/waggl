@@ -48,3 +48,11 @@ module.exports = {
     "city" VARCHAR(255),
     "state" VARCHAR(255)
  */
+
+
+// {
+//   first_name: 'John',
+//     last_name: 'Wick',
+//       email: 'johnwick@gmail.com',
+//         password: 'johnwick',
+// }
