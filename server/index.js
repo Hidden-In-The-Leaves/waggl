@@ -7,6 +7,7 @@ const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 // const messageRoutes = require('./routes/messageRoutes');
 const packsRoutes = require('./routes/packsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use('/api/accountSettings', accountSettingsRoutes);
 
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
+app.use('/api/user', userRoutes);
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:
