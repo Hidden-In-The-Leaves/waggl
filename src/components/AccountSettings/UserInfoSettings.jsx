@@ -89,11 +89,13 @@ export default function UserInfoSettings() {
       <SectionTitle>User Information</SectionTitle>
       <Button type="button" onClick={handleUserInformationEdit}>Edit User Information</Button>
 
+      <br />
+
       <form onSubmit={handleUserInformationUpdate}>
         <fieldset disabled={!userEdit}>
           <InputLabel>
             First Name
-            <Input type="text" value={firstName} onChange={handleFirstNameChange} />
+            <input type="text" value={firstName} onChange={handleFirstNameChange} />
           </InputLabel>
           <InputLabel>
             Last Name
@@ -107,7 +109,7 @@ export default function UserInfoSettings() {
             Password
             <Input type="password" value={password} onChange={handlePasswordChange} />
           </InputLabel>
-          <Input type="submit" value="Update User Information" />
+          <Button type="submit">Update User Information</Button>
         </fieldset>
       </form>
     </div>

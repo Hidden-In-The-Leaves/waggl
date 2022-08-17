@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  InputLabel, SectionTitle, Button, Input,
+} from '../../styledComponents';
 
 export default function LocationInfoSettings() {
   const [locationEdit, setLocationEdit] = useState([]);
@@ -74,23 +77,24 @@ export default function LocationInfoSettings() {
 
   return (
     <div>
-      <h2>Location</h2>
-      <button type="button" onClick={handleLocationSettingsEdit}>Edit Location Settings</button>
+      <SectionTitle>Location</SectionTitle>
+      <Button type="button" onClick={handleLocationSettingsEdit}>Edit Location Settings</Button>
+      <br />
       <form onSubmit={handleLocationSettingsUpdate}>
         <fieldset disabled={!locationEdit}>
-          <label>
+          <InputLabel>
             City
-            <input type="text" value={city} onChange={handleCityChange} />
-          </label>
-          <label>
+            <Input type="text" value={city} onChange={handleCityChange} />
+          </InputLabel>
+          <InputLabel>
             State
-            <input type="text" value={userState} onChange={handleStateChange} />
-          </label>
-          <label>
+            <Input type="text" value={userState} onChange={handleStateChange} />
+          </InputLabel>
+          <InputLabel>
             Discovery Radius
-            <input type="text" value={discoveryRadius} onChange={handleDisoveryRadiusChange} />
-          </label>
-          <input type="submit" value="Update Location Settings" />
+            <Input type="text" value={discoveryRadius} onChange={handleDisoveryRadiusChange} />
+          </InputLabel>
+          <Button type="submit">Update Location Settings</Button>
         </fieldset>
       </form>
     </div>
