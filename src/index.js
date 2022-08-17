@@ -18,7 +18,7 @@ const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileS
 const AccountSettings = lazy(() => import('./components/AccountSettings/AccountSettings.jsx'));
 const AboutUs = lazy(() => import('./components/AboutUs/AboutUs.jsx'));
 
-const container = document.getElementById('root');
+const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   //The whole App is wrapped in a browser router component
@@ -36,17 +36,17 @@ root.render(
         <Route path="/LogIn" element={<LogIn />} />
         {/* <Route path="/" element={<SignUp />} /> */}
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/:packid/PackDetails" element={<PackDetails />} />
-        <Route path="/:chatid/PackGroupChat" element={<PackGroupChat />} />
-        <Route path="/:eventid/EventDetails" element={<EventDetails />} />
-        <Route path="/DiscoverMain" element={<DiscoverMain />} />
-        <Route path="/:chatid/DiscoverChat" element={<DiscoverChat />} />
-        <Route path="/:userid/ProfileList" element={<ProfileList />} />
+        <Route path="/HomePage/:userid" element={<HomePage />} />
+        <Route path="/PackDetails/:packid" element={<PackDetails />} />
+        <Route path="/PackGroupChat/:packid" element={<PackGroupChat />} />
+        <Route path="/EventDetails/:eventid" element={<EventDetails />} />
+        <Route path="/DiscoverMain/:userid" element={<DiscoverMain />} />
+        <Route path="/DiscoverChat/:chatid" element={<DiscoverChat />} />
+        <Route path="/ProfileList/:userid" element={<ProfileList />} />
         {/* We can use parameters in react router to go to individual profiles */}
-        <Route path="/:userid/Profile" element={<Profile />} />
-        <Route path="/:userid/ProfileSettings" element={<ProfileSettings />} />
-        <Route path="/:userid/AccountSettings" element={<AccountSettings />} />
+        <Route path="/Profile/:dogid" element={<Profile />} />
+        <Route path="/ProfileSettings/:userid" element={<ProfileSettings />} />
+        <Route path="/AccountSettings/:userid" element={<AccountSettings />} />
         <Route path="/AboutUs" element={<AboutUs />} />
       </Routes>
     </Suspense>
