@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const db = require('../database/postgres');
+const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 // const messageRoutes = require('./routes/messageRoutes');
 const packsRoutes = require('./routes/packsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
@@ -10,7 +11,7 @@ const eventsRoutes = require('./routes/eventsRoutes');
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 db.connect((err) => {
   if (err) {
@@ -24,6 +25,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // app.use('/api/message', messageRoutes);
+app.use('/api/accountSettings', accountSettingsRoutes);
+
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
