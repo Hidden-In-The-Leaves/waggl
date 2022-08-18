@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 
 import { auth, provider } from '../../../Firebase/firebase-config';
@@ -23,20 +23,17 @@ import { getUser } from '../Parse';
 import { useUserStore } from '../../Store';
 
 export default function LogIn() {
+  // ----------------- Zustand States ------------------
   const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+
+  // ----------------- States ------------------
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setUser = ({ id, first_name, last_name, email }) => {
-    const user = {
-      id: id,
-      firstName: first_name,
-      lastName: last_name,
-      email: email,
-    };
-    console.log('user ', user);
-    setUserInfo(user);
-  };
+
+  const navigate = useNavigate();
+
+  // ----------------- Event Handlers ------------------
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -54,9 +51,8 @@ export default function LogIn() {
           alert('invaild username or password');
         } else {
           setUser(response.data[0]);
+          <Link to="/HomePage/:userid" />;
         }
-        console.log(response.data);
-        console.log(userInfo);
       })
       .catch((error) => {
         console.log('unable to get user information', error);
@@ -67,13 +63,12 @@ export default function LogIn() {
     let gFirst_name, gLast_name, gmail, photoUrl;
     signInWithPopup(auth, provider)
       .then((googleUser) => {
-        console.log('Google sign in ', googleUser._tokenResponse);
         gmail = googleUser._tokenResponse.email;
         return getUser(gmail);
       })
       .then((response) => {
         setUser(response.data[0]);
-        console.log(response.data);
+        <Link to="/HomePage/:userid" />;
       })
       .catch((error) => {
         alert('Invaild google account');
@@ -81,6 +76,22 @@ export default function LogIn() {
       });
   };
 
+  // ----------------- Functions ------------------
+  const navigateHome = () => {
+    navigate('/HomePage/:userid');
+  };
+
+  const setUser = ({ id, first_name, last_name, email }) => {
+    const user = {
+      id: id,
+      firstName: first_name,
+      lastName: last_name,
+      email: email,
+    };
+    setUserInfo(user);
+  };
+
+  // ----------------- Render ------------------
   return (
     <div>
       <NavBar type="welcome" />
