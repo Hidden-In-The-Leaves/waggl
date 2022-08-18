@@ -92,7 +92,7 @@ export default function Room({ pack, token, exit }) {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', flex: '1 0 21%' }}>
           {room && (
             <>
-              <Participant participant={room.localParticipant} type={true} />
+              <Participant participant={room.localParticipant} type="self" />
               {participants.map((p) => <Participant key={p.identity} participant={p} />)}
             </>
           )}

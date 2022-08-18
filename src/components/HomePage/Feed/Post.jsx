@@ -8,12 +8,12 @@ import OwnerDetails from '../../Profiles/OwnerDetails';
 export default function Post({ post }) {
   const [imageOpen, setImageOpen] = useState(false);
   const [openOwnerProfile, setOpenOwnerProfile] = useState(false);
-
+  console.log(post)
   return (
     <Container>
       <FlexRow>
         <RoundImg src={post.poster_photo_url} />
-        <MainText onClick={() => openOwnerProfile(true)}>{post.poster}</MainText>
+        <MainText onClick={() => setOpenOwnerProfile(true)}>{post.poster}</MainText>
         <SubText>{formatDistanceToNow(new Date(post.posted_time))} ago</SubText>
       </FlexRow>
       <Text>{post.text}</Text>
@@ -23,7 +23,7 @@ export default function Post({ post }) {
       <Dialog open={imageOpen} onClose={() => setImageOpen(false)} fullWidth>
         <ImgEnlarged src={post.photo_url} />
       </Dialog>
-      <OwnerDetails open={openOwnerProfile} onClose={() => setOpenOwnerProfile(false)} />
+      <OwnerDetails userId={post.poster_id} open={openOwnerProfile} onClose={() => setOpenOwnerProfile(false)} />
     </Container>
   );
 }
