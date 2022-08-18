@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
@@ -50,10 +49,8 @@ export default function AccountSettings() {
     return (
       <div style={{ textAlign: 'center', alignItems: 'center' }}>
         <NavBar type="home" />
-        <Link to="/">
-          <Button type="button">This is a Link to App Page!</Button>
-        </Link>
         <Title>Account Settings</Title>
+        <Button type="button" id="signoutButton" onClick={handleSignOut}>Sign Out</Button>
         <Container>
           <RowButtons>
             <Button type="button" id="userInfoButton" onClick={handleUserInfoButton}>User Information</Button>
@@ -67,8 +64,6 @@ export default function AccountSettings() {
           {onUserInfo && <UserInfoSettings />}
           {onLocationInfo && <LocationInfoSettings />}
           {onPrivacySettings && <PrivacySettings />}
-
-          <Button type="button" id="signoutButton" onClick={handleSignOut}>Sign Out</Button>
 
         </Container>
       </div>
@@ -85,6 +80,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px;
 `;
 
 const Button = styled.button`

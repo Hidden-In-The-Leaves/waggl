@@ -40,28 +40,28 @@ export default function NavBar({ type }) {
 
 const homeNavs = [
   {
-    to: '/DiscoverMain',
+    to: '/DiscoverMain/userid',
     src: 'https://img.icons8.com/glyph-neue/64/ff8700/dog-park.png',
     alt: 'icon of a dog catching a ball',
     text: 'Discover',
   },
   {
-    to: '/DiscoverChat',
+    to: '/DiscoverChat/chatid',
     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/chat.png',
     alt: 'chat icon',
     text: 'Chat',
   },
   {
-    to: '/ProfileList',
+    to: '/ProfileList/userid',
     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/dog-tag.png',
     alt: 'an icon of a person in a circle',
     text: 'Profiles',
   },
   {
-    to: '/AccountSettings',
+    to: '/AccountSettings/:userid',
     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/settings--v1.png',
     alt: 'an icon of a gear wheel',
-    text: 'Setting',
+    text: 'Settings',
   },
   // {
   //   to: '/AboutUs',
