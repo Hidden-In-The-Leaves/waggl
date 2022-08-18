@@ -31,6 +31,9 @@ app.use('/api/accountSettings', accountSettingsRoutes);
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
 app.use('/api/user', userRoutes);
+
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
+
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:
