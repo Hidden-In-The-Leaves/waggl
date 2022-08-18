@@ -39,15 +39,17 @@ module.exports = {
 
     // The math module contains a function named toRadians which converts from degrees to radians
     const lat1 = (gps1.lat * Math.PI) / 180;
-    const lat2 = (gps2.lat * Math.PI) / 180;
+    const lat2 = (Number(gps2.lat) * Math.PI) / 180;
 
     const lng1 = (gps1.lng * Math.PI) / 180;
-    const lng2 = (gps2.lng * Math.PI) / 180;
+    const lng2 = (Number(gps2.lng) * Math.PI) / 180;
 
     // Haversine formula
     const dlng = lng2 - lng1;
     const dlat = lat2 - lat1;
-    const a = Math.sin(dlat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlng / 2) ** 2;
+    const a =
+      Math.sin(dlat / 2) ** 2 +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dlng / 2) ** 2;
     const c = 2 * Math.asin(Math.sqrt(a));
     // earth radius in miles
     const r = 3956;
@@ -59,11 +61,14 @@ module.exports = {
   },
   // relies on the getDistance helper fn
   // input the radius size in miles, the center of the radius and any other gps objects to be sorted
-  sortBy: (radius, center, ...rest) => {
+  sortBy: (radius, center, helper, rest) => {
     const sortedResults = [];
     rest.forEach((obj) => {
       const inRange = [];
-      const distance = getDistance(center, obj); /* <== might need to get the proper alias fro getDistance helper fn */
+      const distance = helper(
+        center,
+        obj
+      ); /* <== might need to get the proper alias fro getDistance helper fn */
       if (distance <= radius) {
         inRange.push(distance, obj);
         sortedResults.push(inRange);

@@ -43,7 +43,7 @@ root.render(
       and set the "endpoint" name with the attribute "path"
       and point it to a component acting as a page with the element attribute
        */}
-        <Route path="/" element={<App />} />
+        {/* <Route path="/" element={<App />} /> */}
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
         <Route path="/HomePage/:userid" element={<HomePage />} />
@@ -51,7 +51,8 @@ root.render(
         <Route path="/PackGroupChat/:packid" element={<PackGroupChat />} />
         <Route path="/EventDetails/:eventid" element={<EventDetails />} />
         <Route path="/DiscoverMain/:userid" element={<DiscoverMain />} />
-        <Route path="/DiscoverChat/:chatid" element={<DiscoverChat />} />
+        {/* <Route path="/DiscoverChat/:chatid" element={<DiscoverChat />} /> */}
+        <Route path="/" element={<DiscoverChat />} />
         <Route path="/ProfileList/:userid" element={<ProfileList />} />
         {/* We can use parameters in react router to go to individual profiles */}
         <Route path="/Profile/:dogid" element={<Profile />} />

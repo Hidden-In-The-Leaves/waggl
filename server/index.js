@@ -16,6 +16,7 @@ const db = require('../database/postgres');
 const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 const packsRoutes = require('./routes/packsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
+const testRoutes = require('./routes/testRoutes');
 
 dotenv.config();
 
@@ -40,6 +41,9 @@ app.use(express.static(path.join(__dirname, '../dist')));
 app.use('/api/accountSettings', accountSettingsRoutes);
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
+// for test
+app.use('/api/test', testRoutes);
+
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:
