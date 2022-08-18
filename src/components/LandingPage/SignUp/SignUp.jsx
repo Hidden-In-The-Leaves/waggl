@@ -16,18 +16,32 @@ import {
   LinkButton,
   ContainerHalf,
   ContainerHalfForImage,
+  HalfImg,
 } from '../StyledFormComponents';
 import NavBar from '../../NavBar/NavBar';
 import { createUser } from '../Parse';
-import useUserStore from '../../../UserStore';
+import { useUserStore } from '../../Store';
 
 export default function SignUp() {
-  const setUserId = useUserStore((state) => state.setUserId);
-  const userId = useUserStore((state) => state.userId);
+  // const setUserId = useUserStore((state) => state.setUserId);
+  // const userId = useUserStore((state) => state.userId);
+  const userInfo = useUserStore((state) => state.userInfo);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setUser = ({ id }, first_name, last_name, email) => {
+    console.log(id);
+    const user = {
+      id: id,
+      firstName: first_name,
+      lastName: last_name,
+      email: email,
+    };
+    console.log(user);
+    setUserInfo(user);
+  };
   const firstnameChangeHandler = (e) => {
     setFirstName(e.target.value);
   };
@@ -48,8 +62,8 @@ export default function SignUp() {
         createUser(firstName, lastName, password, email)
           .then((response) => {
             console.log(response.data);
-            setUserId(response.data[0].user_id);
-            console.log(userId);
+            setUser(response.data[0], firstName, lastName, email);
+            console.log(userInfo);
           })
           .catch((error) => {
             console.log('unable to create user ', error);
@@ -61,13 +75,15 @@ export default function SignUp() {
   };
   return (
     <div>
-      <NavBar type="welcome" />
+      <NavBar type="welcome" style="position: fixed;;" />
       <Cols>
         <ContainerHalfForImage>
-          <img
-            sizes="(max-width: 767px) 100vw, 100vw"
+          <HalfImg
+            // sizes="(max-width: 767px) 100vw, 100vw"
             src="https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8ZG9nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1100&q=60"
             alt="yellow Labrador retriever biting yellow tulip flower"
+            height="100%"
+            width="100%"
           />
         </ContainerHalfForImage>
         <ContainerHalf>

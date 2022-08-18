@@ -14,16 +14,27 @@ import {
   LinkButton,
   ContainerHalf,
   ContainerHalfForImage,
+  HalfImg,
 } from '../StyledFormComponents';
 import NavBar from '../../NavBar/NavBar';
 import { getUser } from '../Parse';
-import useUserStore from '../../../UserStore';
+import { useUserStore } from '../../Store';
 
 export default function LogIn() {
-  const userId = useUserStore((state) => state.userId);
-  const setUserId = useUserStore((state) => state.setUserId);
+  const userInfo = useUserStore((state) => state.userInfo);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setUser = ({ id, first_name, last_name, email }) => {
+    const user = {
+      id: id,
+      firstName: first_name,
+      lastName: last_name,
+      email: email,
+    };
+    console.log(user);
+    setUserInfo(user);
+  };
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -40,10 +51,10 @@ export default function LogIn() {
         ) {
           alert('invaild username or password');
         } else {
-          setUserId(response.data[0].id);
+          setUser(response.data[0]);
         }
         console.log(response.data);
-        console.log(userId);
+        console.log(userInfo);
       })
       .catch((error) => {
         console.log('unable to get user information', error);
@@ -63,23 +74,28 @@ export default function LogIn() {
     //       }
     getUser(data.email)
       .then((response) => {
-        setUserId(response.data[0].id);
+        setUser(response.data[0]);
         console.log('Login ', response.data);
-        console.log(userId);
       })
       .catch((error) => {
         console.log('unable to get user information', error);
       });
+  };
+  const something = {
+    position: 'absolute',
+    'align-self': 'start',
   };
   return (
     <div>
       <NavBar type="welcome" />
       <Cols>
         <ContainerHalfForImage>
-          <img
-            sizes="(max-width: 767px) 100vw, 100vw"
+          <HalfImg
+            // sizes="(max-width: 767px) 100vw, 100vw"
             src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
             alt="yellow Labrador retriever biting yellow tulip flower"
+            height="100%"
+            width="100%"
           />
         </ContainerHalfForImage>
         <ContainerHalf>
