@@ -5,6 +5,15 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { Link } from 'react-router-dom';
 
+/*
+  include this component as part of your component
+  that you want to use this popup for.
+  props:
+    userId : integer,
+    open : boolean (should be set to false initially),
+    onClose : callback function
+    (what you want to do upon "closing" the popup, probably set the "open state" back to false)
+*/
 export default function OwnerDetails({ userId, open, onClose }) {
   if (!open) {
     return null;
