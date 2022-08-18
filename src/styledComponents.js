@@ -4,18 +4,18 @@ import styled from 'styled-components';
 export const Title = styled.div`
   font-size: 28px;
   font-weight: 900;
-  margin: 20px;
+  margin: 20px 0;
 `;
 
 export const SubTitle = styled.div`
   font-size: 24px;
   font-weight: 900;
-  margin: 20px;
+  margin: 20px 0;
 `;
 
 export const SectionTitle = styled.div`
   font-size: 20px;
-  margin: 20px;
+  margin: 3% 0;
 `;
 
 export const Container = styled.div`
@@ -28,12 +28,18 @@ export const Container = styled.div`
 
 export const Container_1_3 = styled(Container)`
   width: 33%;
+<<<<<<< HEAD
   display: flex;
+=======
+>>>>>>> e9df800228dfef850ab5cb2b0e215b6f76846ebc
 `;
 
 export const Container_2_3 = styled(Container)`
   width: 66%;
+<<<<<<< HEAD
   display: flex;
+=======
+>>>>>>> e9df800228dfef850ab5cb2b0e215b6f76846ebc
 `;
 
 export const Container_1_4 = styled(Container)`
@@ -53,7 +59,6 @@ export const Button = styled.button`
   background-color: #FF8700;
   border-radius: 30px;
   padding: 3px 10px;
-  margin: 5px;
   border-radius: 30px;
   border-color: #FF8700;
   border-style: solid;
