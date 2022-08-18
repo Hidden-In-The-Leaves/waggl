@@ -21,6 +21,7 @@ export const usePackStore = create((set, get) => ({
         params: { user_id: userid },
       };
       const response = await axios(config);
+      console.log(response.data)
       const all = response.data.filter((el) => el.joined === 'false');
       const user = response.data.filter((el) => el.joined === 'true');
 

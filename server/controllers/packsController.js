@@ -100,8 +100,7 @@ module.exports = {
       ON p.pack_id = up.pack_id
       INNER JOIN users u
       ON p.poster_id = u.id
-      WHERE u.id = $1
-      OR p.poster_id = $1
+      WHERE up.user_id = $1
       ORDER BY p.posted_time DESC
     `, [query.user_id])
       .then((result) => {

@@ -33,7 +33,7 @@ root.render(
       and point it to a component acting as a page with the element attribute
        */}
         {/* <Route path="/" element={<App />} /> */}
-        <Route path="/" element={<PackVideoChat />} />
+        <Route path="/" element={<App />} />
         <Route path="/LogIn" element={<LogIn />} />
         {/* <Route path="/" element={<SignUp />} /> */}
         <Route path="/SignUp" element={<SignUp />} />
