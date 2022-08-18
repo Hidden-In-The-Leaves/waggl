@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import NavBar from './components/NavBar/NavBar';
 
 export default function App() {
   return (
-    <div>
+    <Main>
       <NavBar type="welcome" />
       <h1>This is the app!</h1>
       {/* to use react router you can wrap elements in a link component
@@ -55,6 +56,17 @@ export default function App() {
           This is a Link to the Account Settings page!
         </button>
       </Link>
-    </div>
+    </Main>
   );
 }
+
+const Main = styled.div`
+  height: 100vh;
+  scroll-snap-align: start;
+  top: 0;
+  width: 100vw;
+  z-index: -1;
+  opacity: 0.8;
+  background-image: url('https://images.unsplash.com/photo-1597633425046-08f5110420b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2970&q=80');
+  background-size: cover;
+`;
