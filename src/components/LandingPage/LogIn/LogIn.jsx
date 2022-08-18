@@ -31,7 +31,23 @@ export default function LogIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // ----------------- Router Navigate ------------------
   const navigate = useNavigate();
+
+  // ----------------- Functions ------------------
+  const navigateHome = () => {
+    navigate('/HomePage/:userid');
+  };
+
+  const setZustandUser = ({ id, first_name, last_name, email }) => {
+    const user = {
+      id: id,
+      firstName: first_name,
+      lastName: last_name,
+      email: email,
+    };
+    setUserInfo(user);
+  };
 
   // ----------------- Event Handlers ------------------
   const emailChangeHandler = (e) => {
@@ -50,8 +66,8 @@ export default function LogIn() {
         ) {
           alert('invaild username or password');
         } else {
-          setUser(response.data[0]);
-          <Link to="/HomePage/:userid" />;
+          setZustandUser(response.data[0]);
+          navigateHome();
         }
       })
       .catch((error) => {
@@ -59,36 +75,21 @@ export default function LogIn() {
       });
   };
 
-  const googleLoginClickHandler = (data) => {
-    let gFirst_name, gLast_name, gmail, photoUrl;
+  const googleLoginClickHandler = () => {
+    let gmail;
     signInWithPopup(auth, provider)
       .then((googleUser) => {
         gmail = googleUser._tokenResponse.email;
         return getUser(gmail);
       })
       .then((response) => {
-        setUser(response.data[0]);
-        <Link to="/HomePage/:userid" />;
+        setZustandUser(response.data[0]);
+        navigateHome();
       })
       .catch((error) => {
         alert('Invaild google account');
         console.log('Unable to sign in with Google ', error);
       });
-  };
-
-  // ----------------- Functions ------------------
-  const navigateHome = () => {
-    navigate('/HomePage/:userid');
-  };
-
-  const setUser = ({ id, first_name, last_name, email }) => {
-    const user = {
-      id: id,
-      firstName: first_name,
-      lastName: last_name,
-      email: email,
-    };
-    setUserInfo(user);
   };
 
   // ----------------- Render ------------------

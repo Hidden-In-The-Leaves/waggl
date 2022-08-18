@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
 
 import { auth, provider } from '../../../Firebase/firebase-config';
@@ -28,14 +28,18 @@ export default function SignUp() {
   // ----------------- Zustand States ------------------
   const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+
   // ----------------- States ------------------
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  // ----------------- Router Navigate ------------------
+  const navigate = useNavigate();
+
   // ----------------- Functions ------------------
-  const setUser = ({ user_id }, firstname, lastname, eMail) => {
+  const setZustandUser = ({ user_id }, firstname, lastname, eMail) => {
     const user = {
       id: user_id,
       firstName: firstname,
@@ -51,6 +55,10 @@ export default function SignUp() {
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
+
+  const navigateHome = () => {
+    navigate('/HomePage/:userid');
+  };
 
   // ----------------- Event Handler ------------------
   const firstnameChangeHandler = (e) => {
@@ -71,7 +79,8 @@ export default function SignUp() {
     } else if (validateEmail(email)) {
       createUser(firstName, lastName, password, email)
         .then((response) => {
-          setUser(response.data[0], firstName, lastName, email);
+          setZustandUser(response.data[0], firstName, lastName, email);
+          navigateHome();
         })
         .catch((error) => {
           console.log('unable to create user ', error);
@@ -93,7 +102,8 @@ export default function SignUp() {
         return createThirdProviderUser(gFirstName, gLastName, gmail, photoUrl);
       })
       .then((response) => {
-        setUser(response.data[0], gFirstName, gLastName, gmail);
+        setZustandUser(response.data[0], gFirstName, gLastName, gmail);
+        navigateHome();
       })
       .catch((error) => {
         console.log('Unable to sign up with Google ', error);
