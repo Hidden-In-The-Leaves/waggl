@@ -94,7 +94,7 @@ module.exports = {
 
   getPosts: ({ query }, res) => {
     db.query(`
-      SELECT p.id, p.pack_id, p.text, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
+      SELECT p.id, p.pack_id, p.text, u.id as poster_id, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
       FROM pack_posts p
       INNER JOIN users_packs_join up
       ON p.pack_id = up.pack_id
