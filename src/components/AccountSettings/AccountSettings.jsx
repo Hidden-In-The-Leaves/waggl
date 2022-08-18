@@ -50,24 +50,25 @@ export default function AccountSettings() {
     return (
       <div style={{ textAlign: 'center', alignItems: 'center' }}>
         <NavBar type="home" />
-        <Title>Account Settings</Title>
         <Link to="/">
           <Button type="button">This is a Link to App Page!</Button>
         </Link>
+        <Title>Account Settings</Title>
         <Container>
           <RowButtons>
-            {onUserInfo ? <Button type="button" id="userInfoButton" className="settingsMenuButtonHighlighted" onClick={handleUserInfoButton}>User Information</Button> : <Button type="button" id="userInfoButton" className="settingsMenuButton" onClick={handleUserInfoButton}>User Information</Button>}
+            <Button type="button" id="userInfoButton" onClick={handleUserInfoButton}>User Information</Button>
 
-            {onLocationInfo ? <Button type="button" id="locationSettingsButton" className="settingsMenuButtonHighlighted" onClick={handleLocationSettingsButton}>Location Settings</Button> : <Button type="button" id="locationSettingsButton" className="settingsMenuButton" onClick={handleLocationSettingsButton}>Location Settings</Button>}
+            <Button type="button" id="locationSettingsButton" onClick={handleLocationSettingsButton}>Location Settings</Button>
 
-            {onPrivacySettings ? <Button type="button" id="privacySettingsButton" className="settingsMenuButtonHighlighted" onClick={handlePrivacySettingsButton}>Privacy Settings</Button> : <Button type="button" id="privacySettingsButton" className="settingsMenuButton" onClick={handlePrivacySettingsButton}>Privacy Settings</Button>}
+            <Button type="button" id="privacySettingsButton" onClick={handlePrivacySettingsButton}>Privacy Settings</Button>
 
-            <Button type="button" id="signoutButton" onClick={handleSignOut}>Sign Out</Button>
           </RowButtons>
 
           {onUserInfo && <UserInfoSettings />}
           {onLocationInfo && <LocationInfoSettings />}
           {onPrivacySettings && <PrivacySettings />}
+
+          <Button type="button" id="signoutButton" onClick={handleSignOut}>Sign Out</Button>
 
         </Container>
       </div>

@@ -29,15 +29,11 @@ export const Container = styled.div`
 export const Container_1_3 = styled(Container)`
   width: 33%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export const Container_2_3 = styled(Container)`
   width: 66%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export const Container_1_4 = styled(Container)`
