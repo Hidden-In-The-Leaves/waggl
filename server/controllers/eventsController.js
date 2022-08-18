@@ -21,9 +21,12 @@ module.exports = {
   },
   postEvent: (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
+    const data = req.body;
     db.query(`
-      INSERT INTO events (owner_id, event_name, description, pack_id, city, state, zipcode, start_time, end_time, event_profile_pic_url, street_address1)
-      VALUES (1, 'Doggo Day', 'Just a day for good doggos to frolic!', 3, 'Miami', 'FL', '33014', '1970-01-01 00:00:01', '1970-01-01 00:00:02', 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80', '6411 NW 162nd St')
+      INSERT INTO events (owner_id, event_name, description, pack_id, city, state, zipcode, start_time, end_time, event_profile_pic_url, street_address1, street_address2)
+      VALUES (
+        ${data.owner_id}, ${data.event_name}, ${data.description}, ${data.pack_id}, ${data.city}, ${data.state}, ${data.zipcode}, ${data.start_time}, ${data.end_time}, ${data.pic}, ${data.street_address1}, ${data.street_address2}
+      )
     `)
       .then((result) => {
         res.send(result.rows);
@@ -71,6 +74,7 @@ module.exports = {
       })
       .catch((err) => {
         console.log('database error - cannot get attendee info', err);
+        res.sendStatus(500);
       });
   }),
   getMessages: ((req, res) => {
@@ -84,6 +88,28 @@ module.exports = {
       })
       .catch((err) => {
         console.log('database error - cannot get messages', err);
+        res.sendStatus(500);
+      });
+  }),
+  postMessage: ((req, res) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // update to match the domain you will make the request from
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept',
+    );
+    console.log(req.body);
+    const data = req.body;
+    console.log(data);
+    db.query(`
+      INSERT INTO event_posts (event_id, text, poster_id, photo_url) VALUES
+      (${data.event_id}, ${data.text}, ${data.poster_id}, ${data.photo_url})
+    `)
+      .then((result) => {
+        res.send('pls');
+      })
+      .catch((err) => {
+        console.log('database error - cannot post messages', err);
+        res.sendStatus(500);
       });
   }),
 };

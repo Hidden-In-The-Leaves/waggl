@@ -16,7 +16,8 @@ router.route('/attendees')
   .get(eventsController.getAttendees);
 
 router.route('/messages')
-  .get(eventsController.getMessages);
+  .get(eventsController.getMessages)
+  .post(eventsController.postMessage);
 
 router.route('/')
   .post(eventsController.postEvent);

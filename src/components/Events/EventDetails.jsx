@@ -9,6 +9,9 @@ import AddEvent from './AddEvent';
 import MapContainer from './Map';
 
 export default function EventDetails(props) {
+  const [currentUser, setCurrentUser] = useState(1);
+  const [currentPack, setCurrentPack] = useState(3);
+  const [currentEvent, setCurrentEvent] = useState(6);
   const [eventInfo, setEventInfo] = useState({});
   const [attendees, setAttendees] = useState([]);
   const [packInfo, setPackInfo] = useState({});
@@ -17,6 +20,7 @@ export default function EventDetails(props) {
   const [eventPic, setEventPic] = useState(
     'https://media.istockphoto.com/photos/labradoodle-dog-ordering-online-by-internet-for-home-delivery-picture-id1365754761',
   );
+  const [textInput, setTextInput] = useState('');
 
   const getEventMessages = async (event_id) => {
     try {
@@ -28,7 +32,29 @@ export default function EventDetails(props) {
       const response = await axios(config);
       setEventMessages(response.data);
     } catch (err) {
-      console.log('error getting event messages', err)
+      console.log('error getting event messages', err);
+    }
+  };
+
+  const makeEventPost = async () => {
+    try {
+      const config = {
+        method: 'POST',
+        url: 'http://localhost:3000/api/events/messages',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: {
+          event_id: currentEvent,
+          text: textInput,
+          poster_id: currentUser,
+          pack_id: currentPack,
+        },
+      };
+      const response = await axios(config);
+      console.log(response);
+    } catch (err) {
+      console.log('error posting event message', err);
     }
   };
 
@@ -146,16 +172,17 @@ export default function EventDetails(props) {
         <div>
           <RoundImg src={currentUserPic} />
           <input
+            onChange={(e) => setTextInput(e.target.value)}
             type="textfield"
             style={{
               height: '200px',
               width: '75%',
               border: '1px solid #9F9F9F',
               borderRadius: '10px',
-              margin: '5px 0 15px 0',
+              margin: '15px 20px',
             }}
           />
-
+          <button type="button" onClick={() => makeEventPost()}>Make Post</button>
           <input type="file" />
         </div>
         <div
