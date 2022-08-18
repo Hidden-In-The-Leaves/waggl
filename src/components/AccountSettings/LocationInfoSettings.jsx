@@ -27,6 +27,7 @@ export default function LocationInfoSettings() {
     } else {
       setUserState(data[0].state);
     }
+
     if (data[1] === null) {
       setDiscoveryRadius('');
     } else {
@@ -57,7 +58,7 @@ export default function LocationInfoSettings() {
       data: {
         city,
         state: userState,
-        discovery_radius: discoveryRadius,
+        discovery_radius: parseInt(discoveryRadius, 10),
       },
     };
 

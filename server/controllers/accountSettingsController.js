@@ -72,6 +72,7 @@ const getLocationInfo = async ({ query }, res) => {
 
 const putLocationInfo = async ({ body }, res) => {
   const id = 1;
+
   db.query(`
     UPDATE users set
     city = '${body.city}',
@@ -82,7 +83,7 @@ const putLocationInfo = async ({ body }, res) => {
       db.query(`
       UPDATE setting_preferences set
       discovery_radius = ${body.discovery_radius}
-      WHERE id = ${id}`)
+      WHERE user_id = ${id}`)
         .then(() => res.sendStatus(204))
         .catch((err) => {
           console.log('database error - cannot update location info', err);
