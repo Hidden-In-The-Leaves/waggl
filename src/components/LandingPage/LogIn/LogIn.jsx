@@ -1,26 +1,42 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { signInWithPopup } from 'firebase/auth';
 
-import NavBar from '../../NavBar/NavBar';
+import { auth, provider } from '../../../Firebase/firebase-config';
 import {
   InputEmail,
   InputPassword,
   SignInWithGoogleButton,
   SubmitButton,
 } from '../InputForm';
-import { SectionTitle, Container_1_2, Button } from '../../../styledComponents';
+import { SectionTitle, Button } from '../../../styledComponents';
 import {
   Cols,
   CenterText,
   LinkButton,
   ContainerHalf,
   ContainerHalfForImage,
+  HalfImg,
 } from '../StyledFormComponents';
+import NavBar from '../../NavBar/NavBar';
+import { getUser } from '../Parse';
+import { useUserStore } from '../../Store';
 
 export default function LogIn() {
+  const userInfo = useUserStore((state) => state.userInfo);
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setUser = ({ id, first_name, last_name, email }) => {
+    const user = {
+      id: id,
+      firstName: first_name,
+      lastName: last_name,
+      email: email,
+    };
+    console.log('user ', user);
+    setUserInfo(user);
+  };
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -28,31 +44,62 @@ export default function LogIn() {
     setPassword(e.target.value);
   };
   const loginClickHandler = () => {
-    console.log(email, ' && ', password);
+    getUser(email)
+      .then((response) => {
+        if (
+          response.data.length === 0 ||
+          password !== response.data[0].password ||
+          password.length > 13
+        ) {
+          alert('invaild username or password');
+        } else {
+          setUser(response.data[0]);
+        }
+        console.log(response.data);
+        console.log(userInfo);
+      })
+      .catch((error) => {
+        console.log('unable to get user information', error);
+      });
   };
+
+  const googleLoginClickHandler = (data) => {
+    let gFirst_name, gLast_name, gmail, photoUrl;
+    signInWithPopup(auth, provider)
+      .then((googleUser) => {
+        console.log('Google sign in ', googleUser._tokenResponse);
+        gmail = googleUser._tokenResponse.email;
+        return getUser(gmail);
+      })
+      .then((response) => {
+        setUser(response.data[0]);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        alert('Invaild google account');
+        console.log('Unable to sign in with Google ', error);
+      });
+  };
+
   return (
     <div>
       <NavBar type="welcome" />
-
       <Cols>
-        {/* <Container_1_2>
-          <img
-            src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3062&q=80"
-            alt="dog look at you"
-            width="100%"
-            height="100%"
-          />
-        </Container_1_2> */}
         <ContainerHalfForImage>
-          <img
-            sizes="(max-width: 767px) 100vw, 100vw"
+          <HalfImg
+            // sizes="(max-width: 767px) 100vw, 100vw"
             src="https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
             alt="yellow Labrador retriever biting yellow tulip flower"
+            height="100%"
+            width="100%"
           />
         </ContainerHalfForImage>
         <ContainerHalf>
           <SectionTitle>Login</SectionTitle>
-          <SignInWithGoogleButton value="Login with Google" />
+          <SignInWithGoogleButton
+            value="Login with Google"
+            userActionHandler={googleLoginClickHandler}
+          />
           <CenterText>------------ or ------------</CenterText>
           <form>
             <InputEmail emailChangeHandler={emailChangeHandler} />
