@@ -9,6 +9,7 @@ export default function Events() {
   return (
     <Container_1_4>
       <SubTitle>Events</SubTitle>
+      {events.length === 0 && <div>No Events.</div>}
       {events.map((event) => <EventItem key={event.id} data={event} />)}
     </Container_1_4>
   );

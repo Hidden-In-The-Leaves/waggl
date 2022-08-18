@@ -7,6 +7,7 @@ export default function FeedList() {
   const posts = usePostsStore((state) => state.posts);
   return (
     <Scroller>
+      {posts.length === 0 && <div>No posts yet.</div>}
       {posts.map((post) => <Post key={post.id} post={post} />)}
     </Scroller>
   )
