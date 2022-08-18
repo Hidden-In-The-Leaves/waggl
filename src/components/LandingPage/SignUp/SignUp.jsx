@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../../Firebase/firebase-config';
 
 import {
   SignInWithGoogleButton,
@@ -19,7 +21,7 @@ import {
   HalfImg,
 } from '../StyledFormComponents';
 import NavBar from '../../NavBar/NavBar';
-import { createUser } from '../Parse';
+import { createUser, createThirdProviderUser } from '../Parse';
 import { useUserStore } from '../../Store';
 
 export default function SignUp() {
@@ -31,15 +33,13 @@ export default function SignUp() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setUser = ({ id }, first_name, last_name, email) => {
-    console.log(id);
+  const setUser = ({ user_id }, first_name, last_name, email) => {
     const user = {
-      id: id,
+      id: user_id,
       firstName: first_name,
       lastName: last_name,
       email: email,
     };
-    console.log(user);
     setUserInfo(user);
   };
   const firstnameChangeHandler = (e) => {
@@ -73,6 +73,32 @@ export default function SignUp() {
       }
     }
   };
+
+  const googleSignupClickHandler = (data) => {
+    let gFirst_name, gLast_name, gmail, photoUrl;
+    signInWithPopup(auth, provider)
+      .then((googleUser) => {
+        console.log('Google sign up1 ', googleUser._tokenResponse);
+        gFirst_name = googleUser._tokenResponse.firstName;
+        gLast_name = googleUser._tokenResponse.lastName;
+        gmail = googleUser._tokenResponse.email;
+        photoUrl = googleUser._tokenResponse.photoUrl;
+        // const { firstName, lastName, email, photoUrl } =
+        //   googleUser._tokenResponse;
+        return createThirdProviderUser(
+          gFirst_name,
+          gLast_name,
+          gmail,
+          photoUrl
+        );
+      })
+      .then((response) => {
+        setUser(response.data[0], gFirst_name, gLast_name, gmail);
+      })
+      .catch((error) => {
+        console.log('Unable to sign up with Google ', error);
+      });
+  };
   return (
     <div>
       <NavBar type="welcome" style="position: fixed;;" />
@@ -88,7 +114,10 @@ export default function SignUp() {
         </ContainerHalfForImage>
         <ContainerHalf>
           <SectionTitle>Sign Up</SectionTitle>
-          <SignInWithGoogleButton value="Sign up with Google" />
+          <SignInWithGoogleButton
+            value="Sign up with Google"
+            userActionHandler={googleSignupClickHandler}
+          />
           <CenterText>------------ or ------------</CenterText>
           <form>
             <InputFirstName firstnameChangeHandler={firstnameChangeHandler} />

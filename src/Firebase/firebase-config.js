@@ -10,11 +10,11 @@ import axios from 'axios';
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyCV0H3GLYarzZEhiZ-Dwoyda5Fu5d4x0E0',
-  authDomain: "blue-ocean-199d5.firebaseapp.com",
-  projectId: "blue-ocean-199d5",
-  storageBucket: "blue-ocean-199d5.appspot.com",
-  messagingSenderId: "702944091231",
-  appId: "1:702944091231:web:1d6ad8570ca075cd12cfea"
+  authDomain: 'blue-ocean-199d5.firebaseapp.com',
+  projectId: 'blue-ocean-199d5',
+  storageBucket: 'blue-ocean-199d5.appspot.com',
+  messagingSenderId: '702944091231',
+  appId: '1:702944091231:web:1d6ad8570ca075cd12cfea',
 };
 
 // Initialize Firebase

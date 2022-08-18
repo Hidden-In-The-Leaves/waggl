@@ -21,7 +21,7 @@ module.exports = {
   createUserByThridProvider: ({ body }, res) => {
     db.query(`
     INSERT INTO users (first_name, last_name, email, password, profile_pic_url)
-    VALUES ( $1, $2, $3, $4, $5 ) RETURNING ID as id
+    VALUES ( $1, $2, $3, $4, $5 ) RETURNING ID as user_id
   `, [body.first_name, body.last_name, body.email, new Date().toString(), body.photoUrl])
       .then((result) => {
         res.send(result.rows);

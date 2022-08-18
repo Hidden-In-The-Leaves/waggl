@@ -62,29 +62,23 @@ export default function LogIn() {
   };
 
   const googleLoginClickHandler = (data) => {
-    //     /**
-    //      *{_tokenResponse:
-    //       {
-    //         email: string
-    //         firstName: string
-    //         lastName: string
-    //         photoUrl:string
-    //         displayName:string
-    //         fullName: string
-    //       }
-    getUser(data.email)
+    signInWithPopup(auth, provider)
+      .then((googleUser) => {
+        console.log('Google sign in ', googleUser._tokenResponse);
+        const { firstName, lastName, email } = googleUser._tokenResponse;
+        return getUser(email);
+      })
       .then((response) => {
         setUser(response.data[0]);
-        console.log('Login ', response.data);
+
+        console.log(response.data);
+        console.log(userInfo);
       })
       .catch((error) => {
-        console.log('unable to get user information', error);
+        console.log('Unable to sign in with Google ', error);
       });
   };
-  const something = {
-    position: 'absolute',
-    'align-self': 'start',
-  };
+
   return (
     <div>
       <NavBar type="welcome" />
