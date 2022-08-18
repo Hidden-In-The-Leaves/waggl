@@ -8,11 +8,24 @@ import ProfileCard from './ProfileCard';
 import AddProfile from './AddProfile';
 import EditProfile from './EditProfile';
 import Modal from '../commonComponents/Modal.jsx';
+import axios from 'axios';
 
 export default function ProfileList(props) {
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [profileData, setProfileData] = useState({});
+
+  const imageTransform = () => {
+    axios({
+      method: 'get',
+      url: `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+    })
+      .then()
+      .catch((err) => {
+        console.log('🟥There was an error converting image to url', err);
+      });
+  };
+
   const handleOpen = () => {
     setShowModal(true);
   };
