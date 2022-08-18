@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import signInWithGoogle from '../../../Firebase/firebase-config';
+import { signInWithGoogle } from '../../../Firebase/firebase-config';
 import { GoogleButton } from '../StyledFormComponents';
 
-export default function SignInWithGoogle({ value }) {
+export default function SignInWithGoogle({ value, userActionHandler }) {
   return (
     <>
       {/* {GoogleLogo} */}
@@ -23,4 +23,5 @@ export default function SignInWithGoogle({ value }) {
 
 SignInWithGoogle.propTypes = {
   value: PropTypes.string.isRequired,
+  userActionHandler: PropTypes.func.isRequired,
 };

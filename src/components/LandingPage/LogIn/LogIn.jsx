@@ -49,6 +49,28 @@ export default function LogIn() {
         console.log('unable to get user information', error);
       });
   };
+
+  const googleLoginClickHandler = (data) => {
+    //     /**
+    //      *{_tokenResponse:
+    //       {
+    //         email: string
+    //         firstName: string
+    //         lastName: string
+    //         photoUrl:string
+    //         displayName:string
+    //         fullName: string
+    //       }
+    getUser(data.email)
+      .then((response) => {
+        setUserId(response.data[0].id);
+        console.log('Login ', response.data);
+        console.log(userId);
+      })
+      .catch((error) => {
+        console.log('unable to get user information', error);
+      });
+  };
   return (
     <div>
       <NavBar type="welcome" />
@@ -62,7 +84,10 @@ export default function LogIn() {
         </ContainerHalfForImage>
         <ContainerHalf>
           <SectionTitle>Login</SectionTitle>
-          <SignInWithGoogleButton value="Login with Google" />
+          <SignInWithGoogleButton
+            value="Login with Google"
+            userActionHandler={googleLoginClickHandler}
+          />
           <CenterText>------------ or ------------</CenterText>
           <form>
             <InputEmail emailChangeHandler={emailChangeHandler} />
