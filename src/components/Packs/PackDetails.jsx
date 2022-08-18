@@ -34,4 +34,4 @@ const dummyData = {
   calendarId: 'kpljvvfi7tlljvrjg334lcgvio@group.calendar.google.com',
 };
 
-const fakeUsers = [{ userName: 'Patt', userImageUrl: 'https://res.cloudinary.com/duzrmpk7h/image/upload/v1660860725/images/Ellipse_17_mcwn2c.png', userLocation: 'New York' }, { userName: 'Matt', userImageUrl: 'https://res.cloudinary.com/duzrmpk7h/image/upload/v1660860725/images/Ellipse_18_muu5bv.png', userLocation: 'New York' }];
+const fakeUsers = [{ userName: 'Patt', userImageUrl: 'https://res.cloudinary.com/duzrmpk7h/image/upload/v1660860725/images/Ellipse_17_mcwn2c.png', userLocation: 'New York' }, { userName: 'Matt', userImageUrl: 'https://res.cloudinary.com/duzrmpk7h/image/upload/v1660860725/images/Ellipse_18_muu5bv.png', userLocation: 'Jersey City' }];
