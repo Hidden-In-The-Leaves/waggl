@@ -77,7 +77,7 @@ const teamMembers = [
     photo_url:
       'https://res.cloudinary.com/djgwnnspi/image/upload/v1660862234/Screen_Shot_2022-08-18_at_4.25.55_PM_mruci4.png',
     linked_in: 'https://www.linkedin.com/in/chenyou-huang/',
-    catchPhrase: 'open to work',
+    catchPhrase: 'nothing',
   },
   {
     name: 'Elizabeth Bivens-Tatum',
