@@ -63,6 +63,7 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
   };
   const closeChat = () => {
     updateChat();
+    navigate('/DiscoverMain');
   };
   return (
     <div style={{ width: '100%' }}>

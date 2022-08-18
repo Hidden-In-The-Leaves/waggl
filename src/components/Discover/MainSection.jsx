@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Title } from './Chat.styled';
 import axios from 'axios';
-import { getDistance, sortBy } from '../../../helpers/geoLocation';
+import { Title } from './Chat.styled';
+import { getDistance, sortBy } from '../../helpers/geoLocation';
 import {
   MainContainer,
-  SectionContainer,
-  ImageContainer,
-  Icon,
-  Image,
-  InfoContainer,
-  Traits,
-  Trait,
   LikeContainer,
   LikeIcon,
   SuperLikeIcon,
@@ -31,7 +24,6 @@ export default function MainSection({
     lat: lat,
     lng: lng,
   };
-  console.log(matchList);
   useEffect(() => {
     if (lat && lng) {
       axios

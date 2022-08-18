@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DiscoverChat from './DiscoverChat';
 import MatchList from './MatchList';
 import MainSection from './MainSection';
-import { useUserStore } from '../../Store.js';
+import { useUserStore } from '../Store.js';
 import io from 'socket.io-client';
 const socket = io('http://localhost:5000');
 
 export default function Chat() {
-  const [user, setUser] = useState('');
   const [receiver, setReceiver] = useState({});
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
   const [match, setMatch] = useState({});
-  const [showInfo, setShowInfo] = useState(true);
+  const { chat } = useParams();
+  const [showInfo, setShowInfo] = useState(chat === undefined ? true : false);
   const [updateList, setUpdateList] = useState(true);
   const userInfo = useUserStore((state) => state.userInfo);
 
@@ -31,6 +31,9 @@ export default function Chat() {
   useEffect(() => {
     getLocation();
   });
+  // useEffect(() => {
+  //   setShowInfo(chat === undefined ? true : false);
+  // }, []);
   const updateReceiver = (data) => {
     setShowInfo(false);
     setReceiver(data);
@@ -49,7 +52,7 @@ export default function Chat() {
           updateReceiver={updateReceiver}
           updateList={updateList}
         />
-        {showInfo && (
+        {chat === undefined && (
           <MainSection
             lat={lat}
             lng={lng}
@@ -57,7 +60,7 @@ export default function Chat() {
             updateMatchList={updateMatchList}
           />
         )}
-        {!showInfo && (
+        {chat !== undefined && receiver.id && (
           <DiscoverChat
             user1={userInfo}
             user2={receiver}

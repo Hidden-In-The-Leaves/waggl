@@ -14,7 +14,7 @@ const PackGroupChat = lazy(() =>
 );
 const EventDetails = lazy(() => import('./components/Events/EventDetails.jsx'));
 const DiscoverMain = lazy(() =>
-  import('./components/Discover/DiscoverChat/DiscoverMain.jsx')
+  import('./components/Discover/DiscoverMain.jsx')
 );
 // const DiscoverChat = lazy(() =>
 //   import('./components/Discover/DiscoverChat/Chat.jsx')
@@ -35,7 +35,7 @@ root.render(
   //The whole App is wrapped in a browser router component
   //which holds all of the "routes" which are basically endpoints
   <BrowserRouter>
-    {/* <NavBar type='welcome' /> */}
+    <NavBar />
     {/* for react routers code splitting */}
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -46,14 +46,14 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/LogIn" element={<LogIn />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/HomePage/:userid" element={<HomePage />} />
+        <Route path="/HomePage" element={<HomePage />} />
         <Route path="/PackDetails/:packid" element={<PackDetails />} />
         <Route path="/PackGroupChat/:packid" element={<PackGroupChat />} />
         <Route path="/" element={<PackGroupChat />} />
         <Route path="/EventDetails/:eventid" element={<EventDetails />} />
         {/* <Route path="/" element={<DiscoverMain />} /> */}
-        {/* <Route path="/DiscoverChat/:chatid" element={<DiscoverChat />} /> */}
-        {/* <Route path="/" element={<DiscoverChat />} /> */}
+        <Route path="/DiscoverMain" element={<DiscoverMain />} exact />
+        <Route path="/DiscoverMain/:chat" element={<DiscoverMain />} exact />
         <Route path="/ProfileList/:userid" element={<ProfileList />} />
         {/* We can use parameters in react router to go to individual profiles */}
         <Route path="/Profile/:dogid" element={<Profile />} />

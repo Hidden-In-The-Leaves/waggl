@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { SubTitle } from './Chat.styled';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import {
   CircleImage,
   Members,
   MemberName,
   MemberLocation,
-} from '../../Packs/Packs.styled';
+} from '../Packs/Packs.styled';
 import {
   MatchContainer,
   MatchListContainer,
@@ -18,18 +19,23 @@ import {
 export default function MatchList({ user, updateReceiver, updateList }) {
   const [matchList, setMatchList] = useState([]);
   const [selected, setSelected] = useState({});
+  const navigate = useNavigate();
   useEffect(() => {
     getMatchList();
   }, [user.id, updateList]);
   const getMatchList = () => {
     axios
       .get(`http://localhost:5000/api/test/like?userid=${user.id}`)
-      .then(({ data }) => setMatchList(data))
+      .then(({ data }) => {
+        updateReceiver(data[0]);
+        setMatchList(data);
+      })
       .catch((err) => console.log(err));
   };
   const clickHandler = (data) => {
     setSelected(data);
     updateReceiver(data);
+    navigate('/DiscoverMain/1');
   };
   const deleteMatch = (data) => {
     if (confirm(`Are you sure want to delete ${data.owner}`) === true) {

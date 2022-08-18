@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar';
+// import NavBar from './components/NavBar/NavBar';
 
 export default function App() {
   return (
     <div>
-      {/* <NavBar type='welcome' /> */}
+      {/* <NavBar type="welcome" /> */}
       <h1>This is the app!</h1>
       {/* to use react router you can wrap elements in a link component
       and use a route by setting attribute "to" equal
@@ -16,7 +16,7 @@ export default function App() {
       <Link to="/SignUp">
         <button type="button">This is a Link to the Sign Up page!</button>
       </Link>
-      <Link to="/HomePage/1">
+      <Link to="/HomePage">
         <button type="button">This is a Link to the Home page!</button>
       </Link>
       <Link to="/AboutUs">
@@ -33,12 +33,12 @@ export default function App() {
       <Link to="/EventDetails/1">
         <button type="button">This is a Link to the Event Details page!</button>
       </Link>
-      <Link to="/DiscoverMain/1">
+      <Link to="/DiscoverMain">
         <button type="button">This is a Link to the Discover Main page!</button>
       </Link>
-      <Link to="/DiscoverChat/1">
+      {/* <Link to="/DiscoverChat">
         <button type="button">This is a Link to the Discover Chat page!</button>
-      </Link>
+      </Link> */}
       <Link to="/ProfileList/1">
         <button type="button">This is a Link to the Profile List page!</button>
       </Link>

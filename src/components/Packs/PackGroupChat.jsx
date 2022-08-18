@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import GroupChat from '../Discover/DiscoverChat/GroupChat';
+import GroupChat from '../Discover/GroupChat';
 import PackMemberList from './PackMemberList';
 import { useUserStore } from '../Store';
 import io from 'socket.io-client';
 const socket = io('http://localhost:5000');
 
-export default function PackGroupChat({ pack }) {
-  const [user, setUser] = useState('');
+export default function PackGroupChat() {
   const [packName, setPackName] = useState('test pack');
   const { packid } = useParams();
   const [packId, setPackId] = useState(packid);
@@ -18,10 +17,7 @@ export default function PackGroupChat({ pack }) {
     setPackId(pId);
     setPackName(name);
   };
-  const clickHandler = () => {
-    const sender = { id, username: user };
-    setU(sender);
-  };
+
   return (
     <div>
       <div style={{ display: 'flex' }}>
