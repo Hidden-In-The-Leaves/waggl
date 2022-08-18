@@ -19,6 +19,7 @@ const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 const packsRoutes = require('./routes/packsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
 const videoRoutes = require('./routes/videoRoutes');
+const usersRoutes = require('./routes/usersRoutes');
 
 db.connect((err) => {
   if (err) {
@@ -47,6 +48,7 @@ app.use('/api/accountSettings', accountSettingsRoutes);
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
 app.use('/api/video', videoRoutes);
+app.use('/api/users', usersRoutes);
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:

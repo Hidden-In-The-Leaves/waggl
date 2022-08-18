@@ -46,7 +46,7 @@ module.exports = {
     db.query(`SELECT count(*) FROM packs WHERE pack_name = $1`, [body.name])
       .then((result) => {
         if (result.rows[0].count > 0) {
-          res.status(404).end('pack name is already taken.');
+          res.status(404).end('Error: pack name is already taken.');
         } else {
           return db.query(
             `WITH insert1 AS (
