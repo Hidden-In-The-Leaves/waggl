@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../../../Firebase/firebase-config';
 
+import { auth, provider } from '../../../Firebase/firebase-config';
 import {
   SignInWithGoogleButton,
   InputEmail,
@@ -78,7 +78,6 @@ export default function SignUp() {
     let gFirst_name, gLast_name, gmail, photoUrl;
     signInWithPopup(auth, provider)
       .then((googleUser) => {
-        console.log('Google sign up1 ', googleUser._tokenResponse);
         gFirst_name = googleUser._tokenResponse.firstName;
         gLast_name = googleUser._tokenResponse.lastName;
         gmail = googleUser._tokenResponse.email;

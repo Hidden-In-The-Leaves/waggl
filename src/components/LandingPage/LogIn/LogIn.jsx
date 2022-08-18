@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
 
+import { auth, provider } from '../../../Firebase/firebase-config';
 import {
   InputEmail,
   InputPassword,
@@ -32,7 +34,7 @@ export default function LogIn() {
       lastName: last_name,
       email: email,
     };
-    console.log(user);
+    console.log('user ', user);
     setUserInfo(user);
   };
   const emailChangeHandler = (e) => {
@@ -62,19 +64,19 @@ export default function LogIn() {
   };
 
   const googleLoginClickHandler = (data) => {
+    let gFirst_name, gLast_name, gmail, photoUrl;
     signInWithPopup(auth, provider)
       .then((googleUser) => {
         console.log('Google sign in ', googleUser._tokenResponse);
-        const { firstName, lastName, email } = googleUser._tokenResponse;
-        return getUser(email);
+        gmail = googleUser._tokenResponse.email;
+        return getUser(gmail);
       })
       .then((response) => {
         setUser(response.data[0]);
-
         console.log(response.data);
-        console.log(userInfo);
       })
       .catch((error) => {
+        alert('Invaild google account');
         console.log('Unable to sign in with Google ', error);
       });
   };
