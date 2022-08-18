@@ -17,7 +17,7 @@ import {
 } from '../StyledFormComponents';
 import NavBar from '../../NavBar/NavBar';
 import { getUser } from '../Parse';
-import { useUserStore } from '../../../UserStore';
+import useUserStore from '../../../UserStore';
 
 export default function LogIn() {
   const userId = useUserStore((state) => state.userId);
@@ -31,12 +31,12 @@ export default function LogIn() {
     setPassword(e.target.value);
   };
   const loginClickHandler = () => {
-    // console.log(email, ' && ', password);
     getUser(email)
       .then((response) => {
         if (
           response.data.length === 0 ||
-          password !== response.data[0].password
+          password !== response.data[0].password ||
+          password.length > 13
         ) {
           alert('invaild username or password');
         } else {
