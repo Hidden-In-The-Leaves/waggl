@@ -7,16 +7,18 @@ import Feed from './Feed/Feed';
 import Events from './Events/Events';
 
 import { usePackStore, usePostsStore, useEventsStore } from './Store';
+import { useUserStore } from '../Store';
 
 export default function HomePage() {
   const resetPacks = usePackStore((state) => state.resetPack);
   const getPosts = usePostsStore((state) => state.getPosts);
   const getEvents = useEventsStore((state) => state.getEvents);
+  const userInfo = useUserStore((state) => state.userInfo);
 
   useEffect(() => {
-    resetPacks(1);
-    getPosts(1);
-    getEvents(1);
+    resetPacks(userInfo.id);
+    getPosts(userInfo.id);
+    getEvents(userInfo.id);
   }, []);
 
   return (
