@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Video from 'twilio-video';
 import styled from 'styled-components';
 import Participant from './Participant';
+import { Title, Button } from '../../styledComponents';
 
-
-export default function Room({ packname, token, exit }) {
+export default function Room({ pack, token, exit }) {
   const [room, setRoom] = useState(null);
   const [participants, setParticipants] = useState([]);
 
@@ -34,7 +34,7 @@ export default function Room({ packname, token, exit }) {
     };
 
     Video.connect(token, {
-      name: packname,
+      name: pack.name,
     })
       .then((returnedRoom) => {
         setRoom(returnedRoom);
@@ -63,24 +63,98 @@ export default function Room({ packname, token, exit }) {
     return () => {
       closeConnection();
     };
-  }, [packname, token]);
+  }, [pack, token]);
 
   return (
-    <div>
-      <h2>packname: {packname}</h2>
-      <button type="button" onClick={closeConnection}>exit</button>
-      <div>
+    <Container>
+      <TitleBar>
+        <FlexContainer>
+          <RoundImg src={pack.url} />
+          <FlexColumn>
+            <Title>{pack.name}</Title>
+            <div style={{ fontSize: '14px' }}>{pack.description}</div>
+          </FlexColumn>
+        </FlexContainer>
+        <Button type="button" onClick={closeConnection}>exit</Button>
+      </TitleBar>
+      {/* <SelfContainer>
         {room && (
-          <Participant participant={room.localParticipant}/>
+          <Participant participant={room.localParticipant} type="self" />
         )}
-      </div>
-      <div>
-        participants
+      </SelfContainer>
+      <OtherParticipants>
         {room && (
           participants.map((p) => <Participant key={p.identity} participant={p} />)
         )}
-      </div>
-    </div>
+      </OtherParticipants> */}
+      <ParticipantsContainer>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', flex: '1 0 21%' }}>
+          {room && (
+            <>
+              <Participant participant={room.localParticipant} type={true} />
+              {participants.map((p) => <Participant key={p.identity} participant={p} />)}
+            </>
+          )}
+        </div>
+      </ParticipantsContainer>
+    </Container>
   );
 }
 
+const FlexContainer = styled.div`
+  display: flex;
+  box-sizing:border-box;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin: 5% 0;
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;
+
+const TitleBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10vh;
+  border-bottom: 1px solid #D9D9D9;
+`;
+
+const RoundImg = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 3%;
+`;
+
+const SelfContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ParticipantsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 84vh;
+`;
+
+const Container = styled.div`
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  flex-direction: column; */
+`;

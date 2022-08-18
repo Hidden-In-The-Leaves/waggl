@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 
-export default function Participant({ participant }) {
+export default function Participant({ participant, type }) {
   const [videoTracks, setVideoTracks] = useState([]);
   const [audioTracks, setAudioTracks] = useState([]);
 
@@ -62,10 +63,49 @@ export default function Participant({ participant }) {
   }, [audioTracks]);
 
   return (
-    <div>
-      <h3>{participant.identity.split(':')[1]}</h3>
-      <video ref={videoRef} autoPlay={true} />
+    <Container type={type}>
+      <VideoDisplay ref={videoRef} autoPlay={true} />
       <audio ref={audioRef} autoPlay={true} muted={true} />
-    </div>
+      <DisplayName>{participant.identity.split(':')[1]}{type && <span style={{fontSize: '15px'}}> (You)</span>}</DisplayName>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: ${props => props.type === 'self' ? '270px' : '230px'};
+  height: ${props => props.type === 'self' ? '210px' : '180px'};
+  border: 1px solid #D9D9D9;
+  border-radius: 10px;
+  align-items: center;
+  margin: 1%;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    width: ${props => props.type === 'self' ? '200px' : '170px'};
+    height: ${props => props.type === 'self' ? '156px' : '132px'};
+  }
+  @media (max-height: 550px) {
+    width: ${props => props.type === 'self' ? '200px' : '170px'};
+    height: ${props => props.type === 'self' ? '156px' : '132px'};
+  }
+`;
+
+const VideoDisplay = styled.video`
+  height: 75%;
+  width: 100%;
+  object-fit: cover;
+`;
+
+const DisplayName = styled.div`
+  margin: auto;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 10px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+  @media (max-height: 550px) {
+    font-size: 16px;
+  }
+`;
