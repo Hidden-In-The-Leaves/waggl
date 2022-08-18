@@ -49,7 +49,7 @@ root.render(
         <Route path="/HomePage" element={<HomePage />} />
         <Route path="/PackDetails/:packid" element={<PackDetails />} />
         <Route path="/PackGroupChat/:packid" element={<PackGroupChat />} />
-        <Route path="/" element={<PackGroupChat />} />
+        {/* <Route path="/" element={<PackGroupChat />} /> */}
         <Route path="/EventDetails/:eventid" element={<EventDetails />} />
         {/* <Route path="/" element={<DiscoverMain />} /> */}
         <Route path="/DiscoverMain" element={<DiscoverMain />} exact />

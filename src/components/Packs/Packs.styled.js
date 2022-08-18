@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PackContainer = styled.div`
   width: 35%;
@@ -22,6 +22,9 @@ export const SubTitle = styled.div`
 export const Members = styled.div`
   display: flex;
   margin: 10px 10px 10px 5%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const PacksList = styled.div`

@@ -58,6 +58,7 @@ export default function Chat() {
             lng={lng}
             getDefaultMatch={getDefaultMatch}
             updateMatchList={updateMatchList}
+            updateReceiver={updateReceiver}
           />
         )}
         {chat !== undefined && receiver.id && (

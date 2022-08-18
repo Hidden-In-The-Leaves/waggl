@@ -13,8 +13,8 @@ const getUsers = async (req, res) => {
     const users = await db.query(
       `select json_agg(st) as results
     from (
-      select d.id, d.name, d.age, d.size, d.likes, d.dislikes, concat(u.first_name, ' ', u.last_name) as owner, u.id as owner_id,
-      u.latitude as lat, u.longitude as lng, u.city, u.state,
+      select d.id, d.name, d.age, d.size, d.likes, d.dislikes, d.description, concat(u.first_name, ' ', u.last_name) as owner, u.id as owner_id,
+      u.latitude as lat, u.longitude as lng, u.city, u.state, u.email, u.profile_pic_url as image,
       (
         select json_agg(t.trait)
         from (

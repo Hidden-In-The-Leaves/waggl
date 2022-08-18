@@ -7,7 +7,7 @@ import io from 'socket.io-client';
 const socket = io('http://localhost:5000');
 
 export default function PackGroupChat() {
-  const [packName, setPackName] = useState('test pack');
+  const [packName, setPackName] = useState('');
   const { packid } = useParams();
   const [packId, setPackId] = useState(packid);
 

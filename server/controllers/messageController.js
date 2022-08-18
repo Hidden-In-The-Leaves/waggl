@@ -119,7 +119,7 @@ const getPackMember = async (req, res) => {
       select p.pack_name,
       (
         select json_agg(json_build_object('first_name', first_name, 'last_name', last_name,
-                         'image', profile_pic_url)) from users u where u.id
+                         'image', profile_pic_url, 'id', id)) from users u where u.id
         in (select user_id from users_packs_join where pack_id=p.id)
       ) as users
       from packs as p where p.id=${packId}

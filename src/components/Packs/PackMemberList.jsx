@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { SubTitle } from "../Discover/DiscoverChat/Chat.styled";
+import { useNavigate } from 'react-router-dom';
 import {
   PackContainer,
   PackMemberContainer,
@@ -18,6 +18,7 @@ export default function PackMemberList({
   updatePackId,
   pack_name,
 }) {
+  const navigate = useNavigate();
   const [packs, setPacks] = useState([]);
   const [memberList, setMemberList] = useState([]);
 
@@ -30,13 +31,18 @@ export default function PackMemberList({
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/messages/pack/members?packId=${packId}`)
-      .then(({ data }) => setMemberList(data))
+      .then(({ data }) => {
+        updatePackId(packId, data.pack_name);
+        setMemberList(data);
+      })
       .catch((err) => console.log(err));
   }, [packId]);
   const clickHandler = (id, name) => {
     updatePackId(id, name);
   };
-  console.log('------', packs, packId);
+  const goToUserProfile = (member) => {
+    navigate(`/ProfileList/${member.id}`);
+  };
   return (
     <PackContainer>
       <PackMemberContainer
@@ -49,7 +55,7 @@ export default function PackMemberList({
         )}
         {memberList.users &&
           memberList.users.map((member, index) => (
-            <Members key={index}>
+            <Members key={index} onClick={() => goToUserProfile(member)}>
               <CircleImage src={member.image} />
               <div>
                 <MemberName>

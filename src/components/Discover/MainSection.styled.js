@@ -92,3 +92,51 @@ export const SuperLikeIcon = styled.img`
     cursor: pointer;
   }
 `;
+
+export const ModalContainer = styled.div`
+  color: white;
+  height: 400px;
+  width: 400px;
+  margin: auto;
+  background-color: #ff8700;
+`;
+
+export const ModalImage = styled.img`
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+`;
+
+export const HeartIcon = styled.i`
+  left: 43%;
+  margin-top: 20%;
+  position: absolute;
+  font-size: 50px;
+  color: white;
+`;
+
+export const Button = styled.button`
+  position: absolute;
+  left: 35%;
+  margin-top: 25%;
+  width: 30%;
+  border-radius: 30px;
+  font-size: 36px;
+  color: #ff8700;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const H2 = styled.h2`
+  position: absolute;
+  width: 40%;
+  left: 30%;
+  margin-top: 45%;
+  &:hover {
+    cursor: pointer;
+  }
+`;

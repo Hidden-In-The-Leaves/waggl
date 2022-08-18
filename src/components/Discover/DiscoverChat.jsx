@@ -59,7 +59,7 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
     }
   };
   const clickHandler = () => {
-    navigate(`/Profile/${user2.id}`);
+    navigate(`/ProfileList/${user2.id}`);
   };
   const closeChat = () => {
     updateChat();

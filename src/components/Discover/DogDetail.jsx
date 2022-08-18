@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SectionContainer,
   ImageContainer,
@@ -9,25 +9,35 @@ import {
   Trait,
 } from './MainSection.styled';
 
-export default function DogDetail({ dog }) {
+export default function DogDetail({ dog, updateImageIndex }) {
   const [imageIndex, setImageIndex] = useState(0);
+  useEffect(() => {
+    setImageIndex(0);
+  }, [dog]);
+  console.log(dog);
   return (
     <SectionContainer>
       <ImageContainer>
         <Icon
           className="fa-solid fa-circle-chevron-left"
-          onClick={() => setImageIndex(imageIndex - 1 < 0 ? 0 : imageIndex - 1)}
+          onClick={() => {
+            setImageIndex(imageIndex - 1 < 0 ? 0 : imageIndex - 1);
+            updateImageIndex(imageIndex - 1 < 0 ? 0 : imageIndex - 1);
+          }}
           title={imageIndex === 0 ? 'This is the first picture' : ''}
         ></Icon>
         <Image src={dog.images[imageIndex]} alt={dog.name} />
         <Icon
           className="fa-solid fa-circle-chevron-right"
           style={{ right: 0 }}
-          onClick={() =>
+          onClick={() => {
             setImageIndex(
               imageIndex + 1 === dog.images.length ? imageIndex : imageIndex + 1
-            )
-          }
+            );
+            updateImageIndex(
+              imageIndex + 1 === dog.images.length ? imageIndex : imageIndex + 1
+            );
+          }}
           title={
             imageIndex === dog.images.length - 1
               ? 'This is the last picture'
@@ -45,7 +55,7 @@ export default function DogDetail({ dog }) {
         <span>
           {dog.city}, {dog.state}
         </span>
-        {dog.likes && <p>"{dog.likes}"</p>}
+        {dog.description && <p>"{dog.description}"</p>}
         {dog.traits.length !== 0 && (
           <div>
             <p style={{ marginBottom: '5px' }}>Traits</p>
@@ -54,7 +64,18 @@ export default function DogDetail({ dog }) {
                 <Trait key={i}>{trait}</Trait>
               ))}
             </Traits>
-            <p>Activity</p>
+          </div>
+        )}
+        {dog.likes && (
+          <div>
+            <p style={{ margin: '5px' }}>Likes</p>
+            <p style={{ margin: '5px' }}>"{dog.likes}"</p>
+          </div>
+        )}
+        {dog.dislikes && (
+          <div>
+            <p style={{ margin: '5px' }}>Dislikes</p>
+            <p style={{ margin: '5px' }}>"{dog.dislikes}"</p>
           </div>
         )}
       </InfoContainer>
