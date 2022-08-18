@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  MainContainer,
   SectionContainer,
   ImageContainer,
   Icon,
@@ -8,9 +7,6 @@ import {
   InfoContainer,
   Traits,
   Trait,
-  LikeContainer,
-  LikeIcon,
-  SuperLikeIcon,
 } from './MainSection.styled';
 
 export default function DogDetail({ dog }) {
@@ -43,6 +39,7 @@ export default function DogDetail({ dog }) {
         <h1>
           {dog.name}, {dog.age}
         </h1>
+        <h3>Owner: {dog.owner}</h3>
         <i className="fa-solid fa-location-dot"></i>
         {'  '}
         <span>

@@ -79,4 +79,27 @@ const getMatchList = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, likeDog, getMatchList };
+/**
+ * @route /api/test/match
+ * @method POST
+ * @desc delete a match
+ */
+const deleteMatch = async (req, res) => {
+  console.log(req.body);
+  const from = req.body.from_id;
+  const to = req.body.to_id;
+  try {
+    await db.query(
+      `DELETE FROM likes_dislikes WHERE from_id=${from} AND to_id IN
+      (
+        SELECT id FROM dogs WHERE user_id=${to}
+      );`
+    );
+    console.log('success');
+    res.send({ Success: 'removed a match' });
+  } catch (err) {
+    res.send({ Error: err.stack });
+  }
+};
+
+module.exports = { getUsers, likeDog, getMatchList, deleteMatch };

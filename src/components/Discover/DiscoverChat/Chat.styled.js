@@ -9,6 +9,27 @@ export const Title = styled.div`
   margin: 20px 0;
 `;
 
+export const NameTitle = styled.div`
+  font-size: 28px;
+  font-weight: 900;
+  margin: 20px 0;
+  &:hover {
+    cursor: pointer;
+    color: lightblue;
+  }
+`;
+
+export const CloseIcon = styled.div`
+  opacity: 70%;
+  color: red;
+  &:hover {
+    cursor: pointer;
+    opacity: 100%;
+  }
+  font-size: 30px;
+  margin: auto;
+`;
+
 export const SubTitle = styled.div`
   font-size: 24px;
   font-weight: 900;

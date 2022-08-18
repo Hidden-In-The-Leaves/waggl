@@ -36,7 +36,7 @@ export default function PackMemberList({
   const clickHandler = (id, name) => {
     updatePackId(id, name);
   };
-  console.log(packs);
+  console.log('------', packs, packId);
   return (
     <PackContainer>
       <PackMemberContainer
@@ -44,24 +44,27 @@ export default function PackMemberList({
           height: packs.length > 1 ? '45vh' : '',
         }}
       >
-        {packs[0] && memberList[0] && <SubTitle>{pack_name} Members</SubTitle>}
-        {memberList.map((member, index) => (
-          <Members key={index}>
-            <CircleImage src={member.image} />
-            <div>
-              <MemberName>
-                {member.first_name} {member.last_name}
-              </MemberName>
-              <MemberLocation>default location</MemberLocation>
-            </div>
-          </Members>
-        ))}
+        {packs[0] && memberList.pack_name && (
+          <SubTitle>{memberList.pack_name} Members</SubTitle>
+        )}
+        {memberList.users &&
+          memberList.users.map((member, index) => (
+            <Members key={index}>
+              <CircleImage src={member.image} />
+              <div>
+                <MemberName>
+                  {member.first_name} {member.last_name}
+                </MemberName>
+                <MemberLocation>default location</MemberLocation>
+              </div>
+            </Members>
+          ))}
       </PackMemberContainer>
       {packs.length > 1 && (
         <PackMemberContainer>
           <SubTitle>Other Packs</SubTitle>
           {packs.map((pack) => {
-            if (pack.pack_id !== packId) {
+            if (pack.pack_id !== Number(packId)) {
               return (
                 <PacksList
                   key={pack.pack_id}

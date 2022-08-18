@@ -115,9 +115,17 @@ const getPackMember = async (req, res) => {
   const packId = req.query.packId;
   try {
     const members = await db.query(`
-    SELECT json_agg(json_build_object('first_name', first_name, 'last_name', last_name, 'image', profile_pic_url)) FROM users WHERE id IN (SELECT user_id FROM users_packs_join WHERE pack_id=${packId})
+    select json_agg(pk) as packs from (
+      select p.pack_name,
+      (
+        select json_agg(json_build_object('first_name', first_name, 'last_name', last_name,
+                         'image', profile_pic_url)) from users u where u.id
+        in (select user_id from users_packs_join where pack_id=p.id)
+      ) as users
+      from packs as p where p.id=${packId}
+    ) pk
     `);
-    res.status(200).send(members.rows[0].json_agg);
+    res.status(200).send(members.rows[0].packs[0]);
   } catch (err) {
     res.send({ Error: err.stack });
   }

@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import io from "socket.io-client";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import io from 'socket.io-client';
+import axios from 'axios';
 import {
-  Title,
+  NameTitle,
   ChatContainer,
   MessageContainer,
   MessageFromMe,
@@ -11,13 +11,15 @@ import {
   Message,
   MessageInput,
   MessageSendIcon,
-} from "./Chat.styled";
+  CloseIcon,
+  CircleImage,
+} from './Chat.styled';
 
-export default function DiscoverChat({ user1, user2, socket }) {
-  const [message, setMessage] = useState("");
+export default function DiscoverChat({ user1, user2, socket, updateChat }) {
+  const [message, setMessage] = useState('');
   const [messagesList, setMessagesList] = useState([]);
   const bottomRef = useRef(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get(
@@ -27,19 +29,19 @@ export default function DiscoverChat({ user1, user2, socket }) {
         setMessagesList(data);
       })
       .catch((err) => console.log(err));
-    socket.emit("user_connected", user1);
+    socket.emit('user_connected', user1);
     // socket.emit("user_connected", user2);
-  }, [socket]);
+  }, [socket, user2]);
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messagesList]);
   // socket.on("user_connected", (user) => setUserList([...userList, user]));
-  socket.on("receive_message", (message) => {
+  socket.on('receive_message', (message) => {
     setMessagesList([...messagesList, message]);
   });
 
   const sendPrivateMessage = (e) => {
-    if (e.keyCode === 13 || (e.type === "click" && message !== "")) {
+    if (e.keyCode === 13 || (e.type === 'click' && message !== '')) {
       let messageData = {
         sender_id: user1.id,
         receiver_id: user2.id,
@@ -48,17 +50,43 @@ export default function DiscoverChat({ user1, user2, socket }) {
         message_text: message,
         posted_time: new Date(),
       };
-      socket.emit("send_private_message", messageData);
+      socket.emit('send_private_message', messageData);
       setMessagesList([...messagesList, messageData]);
       axios
         .post(`http://localhost:5000/api/messages`, messageData)
-        .then(() => setMessage(""))
+        .then(() => setMessage(''))
         .catch((err) => console.log(err));
     }
   };
+  const clickHandler = () => {
+    navigate(`/Profile/${user2.id}`);
+  };
+  const closeChat = () => {
+    updateChat();
+  };
   return (
-    <div style={{ width: "100%" }}>
-      <Title>{user2.username}</Title>
+    <div style={{ width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          height: '74px',
+          borderBottom: '1px lightgrey solid',
+          width: '100%',
+        }}
+      >
+        <div style={{ display: 'flex', width: '70%' }}>
+          <CircleImage
+            src={user2.image}
+            alt="img"
+            style={{ margin: 'auto 15px auto 10%' }}
+          />
+          <NameTitle onClick={clickHandler}>{user2.owner} </NameTitle>
+        </div>
+        <CloseIcon
+          className="fa-solid fa-circle-xmark"
+          onClick={closeChat}
+        ></CloseIcon>
+      </div>
       <ChatContainer>
         {messagesList.map((m, index) => (
           <div key={index}>
@@ -71,7 +99,7 @@ export default function DiscoverChat({ user1, user2, socket }) {
               </MessageContainer>
             )}
             {m.sender_id === user2.id && (
-              <div style={{ display: "flex" }}>
+              <div style={{ display: 'flex' }}>
                 <MessageFromOther>
                   <Message>{m.message_text}</Message>
                 </MessageFromOther>
@@ -81,15 +109,15 @@ export default function DiscoverChat({ user1, user2, socket }) {
           </div>
         ))}
       </ChatContainer>
-      <div style={{ height: "60px" }}>
+      <div style={{ height: '60px' }}>
         <MessageInput
-          type='text'
+          type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyUp={sendPrivateMessage}
         />
         <MessageSendIcon
-          className='fa-solid fa-paper-plane'
+          className="fa-solid fa-paper-plane"
           onClick={sendPrivateMessage}
         ></MessageSendIcon>
       </div>

@@ -25,7 +25,7 @@ export default function App() {
       <Link to="/PackDetails/1">
         <button type="button">This is a Link to the Pack Details page!</button>
       </Link>
-      <Link to="/PackGroupChat/1">
+      <Link to="/PackGroupChat/2">
         <button type="button">
           This is a Link to the Pack Group Chat page!
         </button>

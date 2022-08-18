@@ -17,7 +17,12 @@ import {
 } from './MainSection.styled';
 import DogDetail from './DogDetail';
 
-export default function MainSection({ lat, lng, getDefaultMatch }) {
+export default function MainSection({
+  lat,
+  lng,
+  getDefaultMatch,
+  updateMatchList,
+}) {
   const [matchList, setMatchList] = useState([]);
   const [index, setIndex] = useState(1);
   const [pointer, setPointer] = useState(1);
@@ -26,6 +31,7 @@ export default function MainSection({ lat, lng, getDefaultMatch }) {
     lat: lat,
     lng: lng,
   };
+  console.log(matchList);
   useEffect(() => {
     if (lat && lng) {
       axios
@@ -50,6 +56,7 @@ export default function MainSection({ lat, lng, getDefaultMatch }) {
         setIndex(index + 1 === matchList.length ? index : index + 1);
         setPointer(pointer + 1);
         setImageIndex(0);
+        updateMatchList();
       })
       .catch((err) => console.log(err));
   };
@@ -76,61 +83,6 @@ export default function MainSection({ lat, lng, getDefaultMatch }) {
         </p>
       )}
       {matchList.length > 1 && <DogDetail dog={matchList[index][1]} />}
-      {/* {matchList.length > 1 && (
-        <SectionContainer>
-          <ImageContainer>
-            <Icon
-              className="fa-solid fa-circle-chevron-left"
-              onClick={() =>
-                setImageIndex(imageIndex - 1 < 0 ? 0 : imageIndex - 1)
-              }
-              title={imageIndex === 0 ? 'This is the first picture' : ''}
-            ></Icon>
-            <Image
-              src={matchList[index][1].images[imageIndex]}
-              alt={matchList[index][1].name}
-            />
-            <Icon
-              className="fa-solid fa-circle-chevron-right"
-              style={{ right: 0 }}
-              onClick={() =>
-                setImageIndex(
-                  imageIndex + 1 === matchList[index][1].images.length
-                    ? imageIndex
-                    : imageIndex + 1
-                )
-              }
-              title={
-                imageIndex === matchList[index][1].images.length - 1
-                  ? 'This is the last picture'
-                  : ''
-              }
-            ></Icon>
-          </ImageContainer>
-          <InfoContainer>
-            <h1>
-              {matchList[index][1].name}, {matchList[index][1].age}
-            </h1>
-            <i className="fa-solid fa-location-dot"></i>
-            {'  '}
-            <span>
-              {matchList[index][1].city}, {matchList[index][1].state}
-            </span>
-            {matchList[index][1].likes && <p>"{matchList[index][1].likes}"</p>}
-            {matchList[index][1].traits.length !== 0 && (
-              <div>
-                <p style={{ marginBottom: '5px' }}>Traits</p>
-                <Traits>
-                  {matchList[index][1].traits.map((trait, i) => (
-                    <Trait key={i}>{trait}</Trait>
-                  ))}
-                </Traits>
-                <p>Activity</p>
-              </div>
-            )}
-          </InfoContainer>
-        </SectionContainer>
-      )} */}
       {pointer !== matchList.length && (
         <LikeContainer>
           <LikeIcon
