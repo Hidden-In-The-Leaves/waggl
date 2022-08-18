@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  InputLabel, SectionTitle, Button, Input,
+} from '../../styledComponents';
 
 export default function PrivacySettings() {
   const [privacySettingsEdit, setPrivacySettingsEdit] = useState([]);
@@ -77,21 +80,40 @@ export default function PrivacySettings() {
 
   return (
     <div>
-      <h2>Privacy Settings</h2>
-      <button type="button" onClick={handlePrivacySettingsEdit}>Edit Privacy Settings</button>
+      <SectionTitle>Privacy Settings</SectionTitle>
+      <Button type="button" onClick={handlePrivacySettingsEdit}>Edit Privacy Settings</Button>
+
+      <br />
 
       <form onSubmit={handlePrivacySettingsUpdate}>
         <fieldset disabled={!privacySettingsEdit}>
-          <label>
+          <InputLabel>
             Location Sharing
-            <input type="radio" value="On" name="locationSharing" onClick={handleLocationSharingOn} />
-            <input type="radio" value="Off" name="locationSharing" onClick={handleLocationSharingOff} />
-          </label>
-          <label>
+            <br />
+            <InputLabel>
+              On
+              <Input type="radio" value="On" name="locationSharing" onClick={handleLocationSharingOn} />
+            </InputLabel>
+
+            <InputLabel>
+              Off
+              <Input type="radio" value="Off" name="locationSharing" onClick={handleLocationSharingOff} />
+            </InputLabel>
+
+          </InputLabel>
+          <InputLabel>
             Pack Visibility
-            <input type="radio" value="On" name="packVisibility" onClick={handlePackVisibilityOn} />
-            <input type="radio" value="Off" name="packVisibility" onClick={handlePackVisibilityOff} />
-          </label>
+            <br />
+            <InputLabel>
+              On
+              <Input type="radio" value="On" name="packVisibility" onClick={handlePackVisibilityOn} />
+            </InputLabel>
+            <InputLabel>
+              Off
+              <Input type="radio" value="Off" name="packVisibility" onClick={handlePackVisibilityOff} />
+            </InputLabel>
+          </InputLabel>
+          <Button type="submit">Update Privacy Settings</Button>
         </fieldset>
       </form>
 
