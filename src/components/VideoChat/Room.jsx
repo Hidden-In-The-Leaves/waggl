@@ -77,6 +77,7 @@ export default function Room({ pack, token, exit }) {
         </FlexContainer>
         <Button type="button" onClick={closeConnection}>exit</Button>
       </TitleBar>
+      <div style={{ fontSize: '20px', padding: '20px', textAlign: 'center', fontWeight: 'bold' }}>Video Chat</div>
       {/* <SelfContainer>
         {room && (
           <Participant participant={room.localParticipant} type="self" />
@@ -148,7 +149,7 @@ const ParticipantsContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  height: 84vh;
+  height: 60vh;
 `;
 
 const Container = styled.div`
