@@ -20,10 +20,26 @@ export default function UserInfoSettings() {
   };
 
   const setUserInfo = (data) => {
-    setProfilePictureUrl(data.profile_picture_url);
-    setFirstName(data.first_name);
-    setLastName(data.last_name);
-    setEmail(data.email);
+    if (data.profile_picture_url === undefined) {
+      setProfilePictureUrl('https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg');
+    } else {
+      setProfilePictureUrl(data.profile_picture_url);
+    }
+    if (data.first_name === undefined) {
+      setFirstName('');
+    } else {
+      setFirstName(data.first_name);
+    }
+    if (data.last_name === undefined) {
+      setLastName('');
+    } else {
+      setLastName(data.last_name);
+    }
+    if (data.email === undefined) {
+      setEmail('');
+    } else {
+      setEmail(data.email);
+    }
     setPassword('password');
   };
 

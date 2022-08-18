@@ -1,80 +1,144 @@
-// const db = require('../../database/postgres');
+const db = require('../../database/postgres');
 
-const userData = {
-  profile_picture_url: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg',
-  first_name: 'John',
-  last_name: 'Smith',
-  email: 'jsmith@gmail.com',
+const getUserInfo = async ({ query }, res) => {
+  const id = 1;
+
+  db.query(`
+  SELECT first_name, last_name, email, profile_pic_url FROM users WHERE id = ${id}`)
+    .then((data) => {
+      res.send(data.rows[0]);
+    })
+    .catch((err) => {
+      console.log('database error - cannot get user information', err);
+      res.sendStatus(500);
+    });
 };
 
-let password = 'myPassword';
+const putUserInfo = async ({ body }, res) => {
+  const id = 1;
 
-const locationData = {
-  city: 'Chicago',
-  state: 'Illinois',
-  discovery_radius: '5 miles',
+  if (body.password !== 'password') {
+    db.query(`
+    UPDATE users set
+    first_name = '${body.first_name}',
+    last_name = '${body.last_name}',
+    email = '${body.email}',
+    password = '${body.password}',
+    profile_pic_url = '${body.profile_picture_url}'
+    WHERE id = ${id}
+    `)
+      .then(() => res.sendStatus(204))
+      .catch((err) => {
+        console.log('database error - cannot update user info', err);
+        res.sendStatus(500);
+      });
+  } else {
+    db.query(`
+    UPDATE users set
+    first_name = '${body.first_name}',
+    last_name = '${body.last_name}',
+    email = '${body.email}',
+    profile_pic_url = '${body.profile_picture_url}' WHERE id = ${id}
+    `)
+      .then(() => res.sendStatus(204))
+      .catch((err) => {
+        console.log('database error - cannot update user info', err);
+        res.sendStatus(500);
+      });
+  }
 };
 
-const privacySettings = {
-  packVisibility: true,
-  locationSharing: false,
+const getLocationInfo = async ({ query }, res) => {
+  // console.log(query);
+  const id = 1;
+
+  db.query(`
+  SELECT city, state FROM users WHERE id = ${id}`)
+    .then((data1) => {
+      db.query(`SELECT discovery_radius FROM setting_preferences WHERE user_id = ${id}`)
+        .then((data2) => {
+          res.send([data1.rows[0], data2.rows[0]]);
+        })
+        .catch((err) => {
+          console.log('database error - cannot get user information', err);
+          res.sendStatus(500);
+        });
+    })
+    .catch((err) => {
+      console.log('database error - cannot get user information', err);
+      res.sendStatus(500);
+    });
 };
 
-const getUserInfo = async (req, res) => {
-  // db.query();
-  res.send(userData);
+const putLocationInfo = async ({ body }, res) => {
+  const id = 1;
+  db.query(`
+    UPDATE users set
+    city = '${body.city}',
+    state = '${body.state}'
+    WHERE id = ${id}
+    `)
+    .then(() => {
+      db.query(`
+      UPDATE setting_preferences set
+      discovery_radius = ${body.discovery_radius}
+      WHERE id = ${id}`)
+        .then(() => res.sendStatus(204))
+        .catch((err) => {
+          console.log('database error - cannot update location info', err);
+          res.sendStatus(500);
+        });
+    })
+    .catch((err) => {
+      console.log('database error - cannot update location info', err);
+      res.sendStatus(500);
+    });
 };
 
-const putUserInfo = async (req, res) => {
-  // db.query();
-  if (req.body.profile_picture_url !== userData.profile_picture_url) {
-    userData.profile_picture_url = req.body.profile_picture_url;
-  }
-  if (req.body.first_name !== userData.first_name) {
-    userData.first_name = req.body.first_name;
-  }
-  if (req.body.last_name !== userData.last_name) {
-    userData.last_name = req.body.last_name;
-  }
-  if (req.body.email !== userData.email) {
-    userData.email = req.body.email;
-  }
-  res.send();
+const getPrivacySettings = async ({ query }, res) => {
+  const id = 1;
+  db.query(`
+  SELECT location_sharing, packs_visible FROM setting_preferences WHERE user_id = ${id}`)
+    .then((data) => {
+      res.send(data.rows[0]);
+    })
+    .catch((err) => {
+      console.log('database error - cannot get user information', err);
+      res.sendStatus(500);
+    });
 };
 
-const getLocationInfo = async (req, res) => {
-  // db.query();
-  res.send(locationData);
-};
+const putPrivacySettings = async ({ body }, res) => {
+  const id = 1;
 
-const putLocationInfo = async (req, res) => {
-  // db.query();
-  if (req.body.city !== locationData.city) {
-    locationData.city = req.body.city;
-  }
-  if (req.body.state !== locationData.state) {
-    locationData.state = req.body.state;
-  }
-  if (req.body.discovery_radius !== locationData.discovery_radius) {
-    locationData.discovery_radius = req.body.discovery_radius;
-  }
-  res.send();
-};
-
-const getPrivacySettings = async (req, res) => {
-  // db.query();
-  res.send(privacySettings);
-};
-
-const putPrivacySettings = async (req, res) => {
-  // db.query();
-  if (req.body.packVisibility !== privacySettings.pack_visibility) {
-    privacySettings.pack_visibility = req.body.packVisibility;
-  }
-  if (req.body.location_sharing !== privacySettings.locationSharing) {
-    privacySettings.locationSharing = req.body.location_sharing;
-  }
-  res.send();
+  db.query(`
+  SELECT * FROM setting_preferences WHERE user_id = ${id}`)
+    .then((data) => {
+      if (data.rows.length === 0) {
+        db.query(`INSERT INTO setting_preferences (user_id, location_sharing, packs_visible, discovery_radius) VALUES (${id}, ${body.location_sharing}, ${body.packs_visible}, 0)`)
+          .then(() => res.sendStatus(204))
+          .catch((err) => {
+            console.log('database error - cannot update privacy settings', err);
+            res.sendStatus(500);
+          });
+      } else {
+        db.query(`
+        UPDATE setting_preferences set
+        packs_visible = ${body.packs_visible},
+        location_sharing = ${body.location_sharing}
+        WHERE user_id = ${id}
+        `)
+          .then(() => res.sendStatus(204))
+          .catch((err) => {
+            console.log('database error - cannot update privacy settings', err);
+            res.sendStatus(500);
+          });
+      }
+    })
+    .catch((err) => {
+      console.log('database error - cannot get user information', err);
+      res.sendStatus(500);
+    });
 };
 
 module.exports = {

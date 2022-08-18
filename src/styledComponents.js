@@ -28,18 +28,10 @@ export const Container = styled.div`
 
 export const Container_1_3 = styled(Container)`
   width: 33%;
-<<<<<<< HEAD
-  display: flex;
-=======
->>>>>>> e9df800228dfef850ab5cb2b0e215b6f76846ebc
 `;
 
 export const Container_2_3 = styled(Container)`
   width: 66%;
-<<<<<<< HEAD
-  display: flex;
-=======
->>>>>>> e9df800228dfef850ab5cb2b0e215b6f76846ebc
 `;
 
 export const Container_1_4 = styled(Container)`

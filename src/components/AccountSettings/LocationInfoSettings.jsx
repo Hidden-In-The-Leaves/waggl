@@ -17,9 +17,21 @@ export default function LocationInfoSettings() {
   };
 
   const setLocationInfo = (data) => {
-    setCity(data.city);
-    setUserState(data.state);
-    setDiscoveryRadius(data.discovery_radius);
+    if (data[0].city === undefined) {
+      setCity('');
+    } else {
+      setCity(data[0].city);
+    }
+    if (data[0].state === undefined) {
+      setUserState('');
+    } else {
+      setUserState(data[0].state);
+    }
+    if (data[1] === null) {
+      setDiscoveryRadius('');
+    } else {
+      setDiscoveryRadius(data[1].discovery_radius);
+    }
   };
 
   const getLocationInfo = () => {

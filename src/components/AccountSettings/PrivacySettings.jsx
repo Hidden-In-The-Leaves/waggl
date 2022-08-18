@@ -32,8 +32,16 @@ export default function PrivacySettings() {
   };
 
   const setPrivacySettings = (data) => {
-    setLocationSharing(data.locationSharing);
-    setPackVisibility(data.packVisibility);
+    if (data.location_sharing === undefined) {
+      setLocationSharing(false);
+    } else {
+      setLocationSharing(data.location_sharing);
+    }
+    if (data.packs_visible === undefined) {
+      setPackVisibility(false);
+    } else {
+      setPackVisibility(data.packs_visible);
+    }
   };
 
   const getPrivacySettings = () => {
@@ -59,7 +67,7 @@ export default function PrivacySettings() {
       url: '/api/accountSettings/privacySettings',
       data: {
         location_sharing: locationSharing,
-        pack_visibility: packVisibility,
+        packs_visible: packVisibility,
       },
     };
 
