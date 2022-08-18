@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Container_2_3 } from '../../../styledComponents';
 
-function Feed() {
+function Feed({ packData }) {
   return (
     <Container_2_3>
       <div>FeedPane</div>

@@ -6,6 +6,7 @@ import {
 } from '../../../styledComponents';
 import BannerImage from './BannerImage';
 import Calendar from './Calendar';
+import MemberRow from './MemberRow';
 
 const Row = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
-function Nav({ packData }) {
+function Nav({ packData, fakeUsers }) {
   return (
     <Container_1_3>
       <BannerImage bannerUrl={packData.bannerUrl} />
@@ -25,7 +26,7 @@ function Nav({ packData }) {
       </Row>
       <Calendar calendarId={packData.calendarId} />
       <SubTitle>Group Members</SubTitle>
-      <div>Group members list goes here</div>
+      <MemberRow member={fakeUsers[0]} />
     </Container_1_3>
   );
 }
