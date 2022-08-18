@@ -150,4 +150,18 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  getPack: (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    db.query(`
+      SELECT * FROM packs
+      WHERE id = ${req.query.pack_id}
+    `)
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack', err);
+        res.sendStatus(500);
+      });
+  },
 };

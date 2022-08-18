@@ -1,4 +1,4 @@
-// const db = require('../../database/postgres');
+const db = require('../../database/postgres');
 
 const userData = {
   first_name: 'John',
@@ -18,8 +18,18 @@ const privacySettings = {
 };
 
 const getUserInfo = async (req, res) => {
-  // db.query();
-  res.send(userData);
+  res.header('Access-Control-Allow-Origin', '*');
+  console.log(req.query);
+  db.query(`
+  SELECT * FROM users where id = ${req.query.user_id};
+  `)
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log('database error - cannot get user info', err);
+      res.sendStatus(500);
+    });
 };
 
 const putUserInfo = async (req, res) => {
