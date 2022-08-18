@@ -3,23 +3,23 @@ const db = require('../../database/postgres');
 module.exports = {
   getUserDetails: (req, res) => {
     db.query(`
-      with dogspics as (
-        select d.*, json_agg(dp.url) as photos
-        from dogs d
-        inner join dog_pictures dp
-        on d.id = dp.dog_id
-        group by d.id
-      )
-      select u.*, p.location_sharing, p.packs_visible,
-      json_agg(
-        d.*
-      ) as dogs
-      from users u inner join setting_preferences p
-      on u.id = p.user_id
-      inner join dogspics d
-      on u.id = d.user_id
-      where u.id = $1
-      group by u.id, p.location_sharing, p.packs_visible;
+    WITH DOGSPICS AS
+      (SELECT D.*,
+          JSON_AGG(DP.URL) AS PHOTOS
+        FROM DOGS D
+        INNER JOIN DOG_PICTURES DP ON D.ID = DP.DOG_ID
+        GROUP BY D.ID)
+    SELECT U.*,
+      P.LOCATION_SHARING,
+      P.PACKS_VISIBLE,
+      JSON_AGG(D.*) AS DOGS
+    FROM USERS U
+    INNER JOIN SETTING_PREFERENCES P ON U.ID = P.USER_ID
+    INNER JOIN DOGSPICS D ON U.ID = D.USER_ID
+    WHERE U.ID = $1
+    GROUP BY U.ID,
+      P.LOCATION_SHARING,
+      P.PACKS_VISIBLE;
     `, [req.params.userid])
       .then((result) => res.json(result.rows))
       .catch((err) => {
