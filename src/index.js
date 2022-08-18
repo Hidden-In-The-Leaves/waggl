@@ -17,6 +17,7 @@ const Profile = lazy(() => import('./components/Profiles/Profile.jsx'));
 const ProfileSettings = lazy(() => import('./components/ProfileSettings/ProfileSettings.jsx'));
 const AccountSettings = lazy(() => import('./components/AccountSettings/AccountSettings.jsx'));
 const AboutUs = lazy(() => import('./components/AboutUs/AboutUs.jsx'));
+const PackVideoChat = lazy(() => import('./components/VideoChat/VideoChat.jsx'));
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -32,7 +33,7 @@ root.render(
       and point it to a component acting as a page with the element attribute
        */}
         {/* <Route path="/" element={<App />} /> */}
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<PackVideoChat />} />
         <Route path="/LogIn" element={<LogIn />} />
         {/* <Route path="/" element={<SignUp />} /> */}
         <Route path="/SignUp" element={<SignUp />} />
@@ -48,6 +49,7 @@ root.render(
         <Route path="/ProfileSettings/:userid" element={<ProfileSettings />} />
         <Route path="/AccountSettings/:userid" element={<AccountSettings />} />
         <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/PackVideoChat/:packid" element={<PackVideoChat />} />
       </Routes>
     </Suspense>
   </BrowserRouter >
