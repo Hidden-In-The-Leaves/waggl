@@ -7,10 +7,14 @@ export default function Team() {
     <Container>
       <Title>Our Engineering Team</Title>
       <FlexRow>
-        {teamMembers.slice(0, 4).map((mem) => <MemberCard key={mem.name} member={mem} />)}
+        {teamMembers.slice(0, 4).map((mem) => (
+          <MemberCard key={mem.name} member={mem} />
+        ))}
       </FlexRow>
       <FlexRow>
-        {teamMembers.slice(4).map((mem) => <MemberCard key={mem.name} member={mem} />)}
+        {teamMembers.slice(4).map((mem) => (
+          <MemberCard key={mem.name} member={mem} />
+        ))}
       </FlexRow>
     </Container>
   );
@@ -53,23 +57,27 @@ const teamMembers = [
   {
     name: 'Chris Lathen',
     role: 'Project Manager / Fullstack Developer',
-    photo_url: 'https://ca.slack-edge.com/T01J1BRG8E4-U03AZB6M29Y-60edf7297b54-512',
+    photo_url:
+      'https://ca.slack-edge.com/T01J1BRG8E4-U03AZB6M29Y-60edf7297b54-512',
     linked_in: 'https://www.linkedin.com/in/christopherlathen/',
-    catchPhrase: 'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
+    catchPhrase:
+      'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
   },
   {
     name: 'Juan Pinol',
     role: 'Architecture Owner / Fullstack Developer',
     photo_url: '',
     linked_in: 'https://www.linkedin.com/in/juannnpinol/',
-    catchPhrase: 'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
+    catchPhrase:
+      'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
   },
   {
     name: 'Chenyou Huang',
     role: 'Architecture Owner / Fullstack Developer',
-    photo_url: '',
+    photo_url:
+      'https://res.cloudinary.com/djgwnnspi/image/upload/v1660862234/Screen_Shot_2022-08-18_at_4.25.55_PM_mruci4.png',
     linked_in: 'https://www.linkedin.com/in/chenyou-huang/',
-    catchPhrase: 'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
+    catchPhrase: 'open to work',
   },
   {
     name: 'Elizabeth Bivens-Tatum',
@@ -81,14 +89,16 @@ const teamMembers = [
   {
     name: 'Maria Hirai',
     role: 'UI Owner / Fullstack Developer',
-    photo_url: 'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1660695544/Screen_Shot_2022-08-10_at_11.42.27_xiiuou.png',
+    photo_url:
+      'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1660695544/Screen_Shot_2022-08-10_at_11.42.27_xiiuou.png',
     linked_in: 'https://www.linkedin.com/in/mariahirai/',
     catchPhrase: 'I love seeing products come to real life.',
   },
   {
     name: 'Jordan Addleman',
     role: 'UI Owner / Fullstack Developer',
-    photo_url: 'https://ca.slack-edge.com/T01J1BRG8E4-U03ASMF34DU-f7156d5b60c5-512',
+    photo_url:
+      'https://ca.slack-edge.com/T01J1BRG8E4-U03ASMF34DU-f7156d5b60c5-512',
     linked_in: 'https://www.linkedin.com/in/jordan-addleman/',
     catchPhrase: 'something',
   },
