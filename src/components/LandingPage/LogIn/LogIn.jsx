@@ -36,7 +36,7 @@ export default function LogIn() {
 
   // ----------------- Functions ------------------
   const navigateHome = () => {
-    navigate('/HomePage/:userid');
+    navigate('/HomePage');
   };
 
   const setZustandUser = ({ id, first_name, last_name, email }) => {

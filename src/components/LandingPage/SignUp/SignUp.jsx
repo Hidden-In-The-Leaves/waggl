@@ -57,7 +57,7 @@ export default function SignUp() {
       );
 
   const navigateHome = () => {
-    navigate('/HomePage/:userid');
+    navigate('/HomePage');
   };
 
   // ----------------- Event Handler ------------------

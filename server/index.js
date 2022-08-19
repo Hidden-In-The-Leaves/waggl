@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
   cors: {
@@ -50,6 +50,7 @@ app.use('/api/test', testRoutes);
 app.use('/api/video', videoRoutes);
 app.use('/api/profile', profileRoutes);
 
+console.log('port is ', PORT);
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
