@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import {
-  InputLabel, SectionTitle, Button, Input,
+  InputLabel, SectionTitle, Input,
 } from '../../styledComponents';
 
 export default function UserInfoSettings() {
   const [userEdit, setUserEdit] = useState([]);
+  const [profilePicture, setProfilePicture] = useState([]);
+  const [profilePictureUrl, setProfilePictureUrl] = useState([]);
   const [firstName, setFirstName] = useState({});
   const [lastName, setLastName] = useState({});
   const [email, setEmail] = useState({});
@@ -17,9 +20,26 @@ export default function UserInfoSettings() {
   };
 
   const setUserInfo = (data) => {
-    setFirstName(data.first_name);
-    setLastName(data.last_name);
-    setEmail(data.email);
+    if (data.profile_picture_url === undefined) {
+      setProfilePictureUrl('https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg');
+    } else {
+      setProfilePictureUrl(data.profile_picture_url);
+    }
+    if (data.first_name === undefined) {
+      setFirstName('');
+    } else {
+      setFirstName(data.first_name);
+    }
+    if (data.last_name === undefined) {
+      setLastName('');
+    } else {
+      setLastName(data.last_name);
+    }
+    if (data.email === undefined) {
+      setEmail('');
+    } else {
+      setEmail(data.email);
+    }
     setPassword('password');
   };
 
@@ -44,6 +64,7 @@ export default function UserInfoSettings() {
       method: 'PUT',
       url: '/api/accountSettings/userInfo',
       data: {
+        profile_picture_url: profilePictureUrl,
         first_name: firstName,
         last_name: lastName,
         email,
@@ -57,6 +78,11 @@ export default function UserInfoSettings() {
         setUserEdit(false);
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleImageChange = (event) => {
+    console.log(typeof event.target.files);
+    setProfilePicture([event.target.files]);
   };
 
   const handleFirstNameChange = (event) => {
@@ -82,17 +108,26 @@ export default function UserInfoSettings() {
     if (typeof password === 'object') {
       setPassword('password');
     }
+    if (profilePicture.length > 0) {
+      console.log(typeof profilePicture[0][0], profilePicture[0][0]);
+      setProfilePictureUrl(URL.createObjectURL(profilePicture[0][0]));
+    }
   });
 
   return (
-    <div>
+    <div style={{ minWidth: 500 }}>
       <SectionTitle>User Information</SectionTitle>
       <Button type="button" onClick={handleUserInformationEdit}>Edit User Information</Button>
 
       <br />
 
-      <form onSubmit={handleUserInformationUpdate}>
+      <form style={{ margin: 50 }} onSubmit={handleUserInformationUpdate}>
         <fieldset disabled={!userEdit}>
+          <ProfilePicture src={profilePictureUrl} alt="profile" />
+          <InputLabel>
+            Profile Picture
+            <Input type="file" accept="image/*" onChange={handleImageChange} />
+          </InputLabel>
           <InputLabel>
             First Name
             <input type="text" value={firstName} onChange={handleFirstNameChange} />
@@ -115,3 +150,27 @@ export default function UserInfoSettings() {
     </div>
   );
 }
+
+const ProfilePicture = styled.img`
+  width: 300px;
+  height: 300px;
+  border-radius: 300px;
+  margin: 20px 350px 20px;
+`;
+
+const Button = styled.button`
+  color: white;
+  background-color: #FF8700;
+  border-radius: 30px;
+  padding: 3px 10px;
+  margin: 5px;
+  border-radius: 30px;
+  border-color: #FF8700;
+  border-style: solid;
+  width: 200px;
+  height: 50px;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;
