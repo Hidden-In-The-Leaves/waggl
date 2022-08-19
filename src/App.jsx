@@ -1,10 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import styled from 'styled-components';
 // import NavBar from './components/NavBar/NavBar';
 // import { Button } from './styledComponents';
 
 export default function App() {
+  const navigate = useNavigate();
+
+  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+  if (cookies.session) {
+    navigate('/HomePage');
+  }
+
   return (
     <Main>
       {/* <NavBar type="welcome" /> */}
