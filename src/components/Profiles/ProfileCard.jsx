@@ -4,23 +4,33 @@ import * as SC from '../../styledComponents.js';
 
 export default function SmallCard(props) {
   return (
-   <ProfileCard>
+   <ProfileCard onClick={(e) => {e.preventDefault(); props.setQR(props.id)}}>
     <PictureContainer>
-      <PFP src={props.pfp}></PFP>
+      <PFP src={props.photos[0]}></PFP>
       <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => {e.preventDefault(); props.handleEditOpen()}}></EditIcon>
     </PictureContainer>
     <DetailsContainer>
-      <ProfileName>Doggie<span><GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png"></GlobeIcon></span></ProfileName><br></br>
+      <ProfileName>{props.name}<span><GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png"></GlobeIcon></span></ProfileName><br></br>
       {/* <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png"></GlobeIcon> */}
       <Pin src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/external-pin-interface-kiranshastry-solid-kiranshastry-1.png"></Pin><br></br>
       <QR onClick={(e) => {e.preventDefault(); props.handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
       <p>Description</p>
-      <p>Shy for all of 5 minutes before I will play chase around the dog park</p>
+      <p>{props.dislikes}</p>
       <p>Likes</p>
-      <p>When you drop pizza on the floor near me</p>
+      <p>{props.likes}</p>
       <p>Disikes</p>
-      <p>The Vet's office</p>
+      <p>{props.dislikes}</p>
       <p>Traits</p>
+      <div style={{ display: 'flex', padding: '10px 0' }}>
+          {Object.keys(personalities).map((name) => (
+            <ButtonDiv checked={personalities[name]}>
+              <label style={{ float: 'left', width: '4.0em' }}>
+                <CheckButton type="checkbox" value={name} onChange={handleCheckChange} />
+                <div style={{ textAlign: 'center', fontSize: '14px' }}>{name}</div>
+              </label>
+            </ButtonDiv>
+          ))}
+        </div>
     </DetailsContainer>
    </ProfileCard>
   )
@@ -99,4 +109,28 @@ const QR = styled.img`
   height: 30px;
   width: 30px;
   display: inline-block;
+`;
+
+const CheckButton = styled.input`
+  position: absolute;
+  top: -20px;
+  &:checked + label {
+    background-color: #FF8700;
+    color: white;
+  }
+`;
+
+const ButtonDiv = styled.div`
+  /* border-radius: 20px;
+  border: 1px solid #AFAFAF;
+  background: white;
+  width: 70px;
+  margin-right: 10px; */
+  margin:4px;
+  background-color: ${props => props.checked ? '#FF8700' : 'white'};
+  color: ${props => props.checked ? 'white' : 'black'};
+  border-radius: 20px;
+  border:1px solid #D0D0D0;
+  overflow:auto;
+  float:left;
 `;
