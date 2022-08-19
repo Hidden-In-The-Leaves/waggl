@@ -9,33 +9,36 @@ export const useSearchStore = create((set) => ({
 }));
 
 export const usePackStore = create((set, get) => ({
-  allPacks: [], // all packs including ones that user is joined
-  userPacks: [], // all packs that the user has joined
-  allPacksFiltered: [], // filtered "others" upon search
-  userPacksFiltered: [], // filtered "my packs" upon search
+  otherPacks: [], // other packs
+  joinedPacks: [], // joined packs
+  otherPacksFiltered: [],
+  joinedPacksFiltered: [],
   resetPack: async (userid) => {
-    try {
-      const config = {
-        method: 'GET',
-        url: '/api/packs',
-        params: { user_id: userid },
-      };
-      const response = await axios(config);
-      const all = response.data.filter((el) => el.joined === 'false');
-      const user = response.data.filter((el) => el.joined === 'true');
+    if (userid !== undefined) {
+      try {
+        const config = {
+          method: 'GET',
+          url: '/api/packs/joined',
+          params: { user_id: userid },
+        };
+        const response = await axios(config);
+        set((state) => ({ joinedPacks: response.data, joinedPacksFiltered: response.data }));
 
-      set((state) => ({
-        allPacks: all,
-        allPacksFiltered: all,
-        userPacks: user,
-        userPacksFiltered: user,
-      }));
-    } catch (e) {
-      console.log('error getting packs', e);
+        const config2 = {
+          method: 'GET',
+          url: '/api/packs/others',
+          params: { user_id: userid },
+        }
+
+        const response2 = await axios(config2);
+        set((state) => ({ otherPacks: response2.data, otherPacksFiltered: response2.data }));
+
+      } catch (e) {
+        console.log('error getting packs', e);
+      }
     }
   },
   filter: (term) => {
-    // const regex = new RegExp(`${term}`, 'gi');
     const filteredAll = get()
       .allPacks
       .filter((el) => el.name.toLowerCase().includes(term)

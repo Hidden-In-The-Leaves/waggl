@@ -3,42 +3,48 @@
 const db = require('../../database/postgres');
 
 module.exports = {
-  getPacks: ({ query }, res) => {
-    const { user_id } = query;
-    if (user_id === undefined) {
-      db.query(`
-      SELECT
-        p.id, p.pack_name, p.calendar_id, p.pack_profile_pic_url, p.description
-      FROM packs p
-      ORDER BY lower(p.pack_name);
-      `)
-        .then((result) => {
-          res.send(result.rows);
-        })
-        .catch((err) => {
-          console.log('database error - cannot get pack', err);
-          res.sendStatus(500);
-        });
-    } else {
-      db.query(`
+  getJoinedPacks: ({ query }, res) => {
+    db.query(`
         SELECT
-          p.id, p.pack_name as name, p.calendar_id, p.pack_profile_pic_url as url, p.description,
-          CASE
-            WHEN u.user_id = $1 THEN 'true'
-            WHEN p.owner_id = $1 THEN 'true'
-            ELSE 'false'
-          END as joined
-        FROM packs p FULL JOIN users_packs_join u ON p.id = u.pack_id
+          p.id, p.pack_name as name, p.calendar_id, p.pack_profile_pic_url as url, p.description
+        FROM packs p INNER JOIN users_packs_join u ON p.id = u.pack_id
+        WHERE u.user_id = $1
         ORDER BY lower(p.pack_name);
-      `, [user_id])
-        .then((result) => {
-          res.send(result.rows);
-        })
-        .catch((err) => {
-          console.log('database error - cannot get pack by userid', err);
-          res.sendStatus(500);
-        });
-    }
+      `, [query.user_id])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack by userid', err);
+        res.sendStatus(500);
+      });
+  },
+  getOtherPacks: ({ query }, res) => {
+    db.query(`
+    WITH RES AS
+      (SELECT DISTINCT P.ID,
+          P.PACK_NAME AS NAME,
+          P.CALENDAR_ID,
+          P.PACK_PROFILE_PIC_URL AS URL,
+          P.DESCRIPTION
+        FROM PACKS P
+        LEFT JOIN USERS_PACKS_JOIN U ON P.ID = U.PACK_ID
+        WHERE PACK_ID not in
+            (SELECT PACK_ID
+              FROM PACKS P2
+              INNER JOIN USERS_PACKS_JOIN U2 ON P2.ID = U2.PACK_ID
+              WHERE U2.USER_ID = $1) )
+    SELECT *
+    FROM RES
+    ORDER BY LOWER(NAME);
+    `, [query.user_id])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack by userid', err);
+        res.sendStatus(500);
+      });
   },
   createPack: ({ body }, res) => {
     /* TODO : generate calendar_id everytime a pack is created - ASK CHRIS*/
@@ -46,7 +52,7 @@ module.exports = {
     db.query(`SELECT count(*) FROM packs WHERE pack_name = $1`, [body.name])
       .then((result) => {
         if (result.rows[0].count > 0) {
-          res.status(404).end('pack name is already taken.');
+          res.status(404).end('Error: pack name is already taken.');
         } else {
           return db.query(
             `WITH insert1 AS (
@@ -94,14 +100,13 @@ module.exports = {
 
   getPosts: ({ query }, res) => {
     db.query(`
-      SELECT p.id, p.pack_id, p.text, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
+      SELECT p.id, p.pack_id, p.text, u.id as poster_id, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
       FROM pack_posts p
       INNER JOIN users_packs_join up
       ON p.pack_id = up.pack_id
       INNER JOIN users u
       ON p.poster_id = u.id
-      WHERE u.id = $1
-      OR p.poster_id = $1
+      WHERE up.user_id = $1
       ORDER BY p.posted_time DESC
     `, [query.user_id])
       .then((result) => {
@@ -147,6 +152,20 @@ module.exports = {
       .then(() => res.sendStatus(204))
       .catch((err) => {
         console.log('database error - cannot delete post', err);
+        res.sendStatus(500);
+      });
+  },
+  getPack: (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    db.query(`
+      SELECT * FROM packs
+      WHERE id = ${req.query.pack_id}
+    `)
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack', err);
         res.sendStatus(500);
       });
   },

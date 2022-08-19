@@ -57,7 +57,7 @@ export default function SignUp() {
       );
 
   const navigateHome = () => {
-    navigate('/HomePage/:userid');
+    navigate('/HomePage');
   };
 
   // ----------------- Event Handler ------------------
@@ -113,7 +113,7 @@ export default function SignUp() {
   // ----------------- Render ------------------
   return (
     <div>
-      <NavBar type="welcome" />
+      {/* <NavBar type="welcome" /> */}
       <Cols>
         <ContainerHalfForImage>
           <HalfImg

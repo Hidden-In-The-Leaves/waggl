@@ -16,4 +16,7 @@ router.route('/signUp/thirdParty')
 router.route('/')
   .get(userController.getUsers);
 
+router.route('/:userid')
+  .get(userController.getUserDetails);
+
 module.exports = router;

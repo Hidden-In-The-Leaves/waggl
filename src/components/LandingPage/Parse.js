@@ -12,7 +12,7 @@ export const getUser = (email) => {
 export const createUser = (firstName, lastName, password, email) => {
   const getUserConfig = {
     method: 'GET',
-    url: '/api/user/login',
+    url: 'api/user/login',
     params: { email },
   };
   const createUserConfig = {
