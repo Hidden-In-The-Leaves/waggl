@@ -3,22 +3,40 @@ const db = require('../../database/postgres');
 
 module.exports = {
   createProfile: (req, res) => {
-    let { name, age, size, user_id, likes, dislikes, gender, description, photos } = req.params;
-    let newID = '';
-    let urls = [];
+    let {
+      name, age, size, user_id, likes, dislikes, gender, description, photos, personalities
+    } = req.body;
     console.log('create profile request', req);
-    db.query(`INSERT INTO dogs (name, age, size, user_id, likes, dislikes, gender, description)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8)
-    RETURNING ID as dog_id`,
-    [name, age, size, user_id, likes, dislikes, gender, description])
-      .then((res) => {
-        newID = res.data.rows[0];
-        for (var i = 0; i < photos.length; i++) {
-          urls.push(db.query(`INSERT INTO dog_pictures (dog_id, url)`, [newID, photos[i]]));
+    db.query(`
+      INSERT INTO dogs
+        (name, age, size, user_id, likes, dislikes, gender, description)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING ID as dog_id`,
+    [name, age, size, user_id, likes || null, dislikes || null, gender, description || ''])
+      .then((result) => {
+        const newID = result.rows[0].dog_id;
+        const urls = [];
+        for (let i = 0; i < photos.length; i++) {
+          urls.push(db.query(
+            `INSERT INTO dog_pictures
+              (dog_id, url)
+            VALUES ($1, $2)`,
+            [newID, photos[i]],
+          ));
         }
-        promise.all(urls)
-          .then((res) => { res.send(200); })
-          .catch((err) => { console.log('🟥There was an error'); });
+
+        for (let i = 0; i < personalities.length; i++) {
+          urls.push(db.query(
+            `INSERT INTO traits
+              (trait, dog_id)
+            VALUES ($1, $2)`,
+            [personalities[i], newID]
+          ));
+        }
+
+        Promise.all(urls)
+          .then(() => res.sendStatus(200))
+          .catch((err) => { console.log('🟥There was an error', err); });
       })
       .catch((err) => { console.log('🟥There was an error creating profile', err); });
   },

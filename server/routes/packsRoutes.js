@@ -14,8 +14,10 @@ router.route('/others')
   .get(packsController.getOtherPacks);
 
 router.route('/:id')
-  .get(packsController.getPackDetails)
   .delete(packsController.deletePack);
+
+router.route('/pack')
+  .get(packsController.getPack);
 
 router.route('/posts')
   .get(packsController.getPosts)

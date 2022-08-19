@@ -155,15 +155,17 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  getPackDetails: (req, res) => {
+  getPack: (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
     db.query(`
-      SELECT * FROM packs WHERE id = $1
-    `, [req.params.id])
+      SELECT * FROM packs
+      WHERE id = ${req.query.pack_id}
+    `)
       .then((result) => {
         res.send(result.rows);
       })
       .catch((err) => {
-        console.log('database error - cannot get pack details', err);
+        console.log('database error - cannot get pack', err);
         res.sendStatus(500);
       });
   },

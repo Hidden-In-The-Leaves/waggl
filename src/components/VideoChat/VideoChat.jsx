@@ -37,7 +37,14 @@ export default function VideoChat() {
 
 
   const getPackDetails = () => {
-    axios.get(`/api/packs/${packid}`)
+    const config = {
+      method: 'GET',
+      url: '/api/packs/pack',
+      params: {
+        pack_id: packid,
+      },
+    };
+    axios(config)
       .then((result) => setPack(result.data[0]))
       .catch((err) => console.log('error fetching pack details', err));
   };

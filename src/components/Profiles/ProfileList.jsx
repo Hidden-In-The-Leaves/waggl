@@ -67,8 +67,8 @@ export default function ProfileList(props) {
       {/* <Link to="/">
         <button>This is a Link to App "Page"!</button>
       </Link> */}
-      <Modal open={showModal} onClose={handleClose} title={'Modal add Testing!'}>
-        <AddProfile profileData={profileData} setProfileData={setProfileData} />
+      <Modal open={showModal} onClose={handleClose} title={'Add Profile'}>
+        <AddProfile profileData={profileData} setProfileData={setProfileData} handleClose={handleClose} />
       </Modal>
       <Modal open={editModal} onClose={handleEditClose} title={'Modal edit Testing!'}>
         <EditProfile profileData={profileData} setProfileData={setProfileData} />
