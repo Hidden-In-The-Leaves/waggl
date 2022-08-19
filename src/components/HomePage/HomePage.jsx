@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 import PackBar from './PackBar/PackBar';
 import Feed from './Feed/Feed';
 import Events from './Events/Events';
 import { usePackStore, usePostsStore, useEventsStore } from './Store';
 import { useUserStore } from '../Store';
-import { registerCookie, getUserByCookie, removeCookieEntry } from '../../lib/cookie';
+// import { registerCookie, getUserByCookie, removeCookieEntry } from '../../lib/cookie';
 
 
 export default function HomePage() {
@@ -17,7 +17,7 @@ export default function HomePage() {
   const getEvents = useEventsStore((state) => state.getEvents);
   const userInfo = useUserStore((state) => state.userInfo);
 
-  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+  // const [cookies, setCookie, removeCookie] = useCookies(['session']);
   // upon signin, removeCookie('session');
 
   useEffect(() => {
@@ -26,22 +26,16 @@ export default function HomePage() {
     getEvents(userInfo.id);
 
     // TODO: add this function upon successfull signin.
-    (async () => {
-      if (cookies.session) {
-        // get userId and store that in state,
-        const userid = await getUserByCookie(cookies.session);
-      } else {
-        const sessionId = await registerCookie(1);
-        setCookie('session', sessionId);
-      }
-    })();
-
-    // TODO: add this function upon successful signout
-    (async () => {
-      removeCookie('session');
-      removeCookieEntry(userid);
-    })();
-  }, []);
+    // (async () => {
+    //   if (cookies.session) {
+    //     // get userId and store that in state,
+    //     const userid = await getUserByCookie(cookies.session);
+    //   } else {
+    //     const sessionId = await registerCookie(1);
+    //     setCookie('session', sessionId);
+    //   }
+    // })();
+  }, [userInfo]);
 
   return (
     <PageContainer>

@@ -17,10 +17,13 @@ export const useUserStore = create((set) => ({
   // initial sample data. should be populated with more columns i think
   // userInfo: { id: 1, firstName: 'a', lastName: 'b', email: 'fdsa'},
   userInfo: {
-    id: 1,
-    firstName: 'test',
-    lastName: 'test',
-    email: 'test@gmail.com',
+    // id: 1,
+    // firstName: 'test',
+    // lastName: 'test',
+    // email: 'test@gmail.com',
   },
-  setUserInfo: (userInfo) => set((state) => ({ userInfo })),
+  setUserInfo: (userInfo) => {
+    console.log(userInfo)
+    set((state) => ({ userInfo }))
+  },
 }));

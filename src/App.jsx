@@ -47,7 +47,7 @@ export default function App() {
       {/* <Link to="/DiscoverChat">
         <button type="button">This is a Link to the Discover Chat page!</button>
       </Link> */}
-      <Link to="/ProfileList/1">
+      {/* <Link to="/ProfileList/1">
         <button type="button">This is a Link to the Profile List page!</button>
       </Link>
       <Link to="/Profile/:dogid">
@@ -67,7 +67,7 @@ export default function App() {
         <button type="button">
           This is a Link to the Pack Video Chat page!
         </button>
-    </Link>{' '}
+    </Link>{' '} */}
     </Main>
   );
 }

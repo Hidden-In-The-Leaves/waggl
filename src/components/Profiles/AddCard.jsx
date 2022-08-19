@@ -13,23 +13,34 @@ export default function SmallCard(props) {
   );
 }
 
+// const AddCard = styled.div`
+//   display: flex;
+//   /* width: 24.64vw; */
+//   width: 32%;
+//   height: 556px;
+//   /* left: 115px;
+//   top: 222px; */
+//   /* text-align: center; */
+//   align-items: center;
+//   justify-content: center;
+//   background: #FFFFFF;
+//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+//   border-radius: 20px;
+// `;
 const AddCard = styled.div`
-  /* display: relative; */
-  /* width: 24.64vw; */
+  display: flex;
   width: 32%;
   height: 556px;
-  /* left: 115px;
-  top: 222px; */
-  text-align: center;
-
+  align-items: center;
+  justify-content: center;
   background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
   border-radius: 20px;
 `;
 
 const AddIcon = styled.svg`
   display: inline-block;
-  margin: auto;
+  margin-left: 120px;
   width: 130;
   height: 130;
   viewBox: 0 0 130 130;
