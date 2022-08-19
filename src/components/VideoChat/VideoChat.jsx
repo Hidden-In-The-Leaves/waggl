@@ -1,23 +1,22 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
 // import { v4 as uuidv4 } from 'uuid';
 import Room from './Room';
 import { useUserStore } from '../Store';
+import { Title, Button } from '../../styledComponents';
+
 // useCallback memoizes functions.
 // doesn't get redefined everytime this component is rendered/called.
 
-export default function VideoChat({
-  // user = { id: 1, firstName: 'Maria', lastName: 'Hirai' },
-  // pack = { name: 'chihuahua lovers', url: "https://images.unsplash.com/photo-1610041518868-f9284e7eecfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"}
-}) {
+export default function VideoChat() {
+  const [pack, setPack] = useState({});
+  // console.log(pack)
   const [token, setToken] = useState(null);
   const userInfo = useUserStore((state) => state.userInfo);
 
-  // const { packid } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const packid = searchParams.get('packid');
+  const { packid } = useParams();
 
   const getToken = useCallback(async () => {
     const config = {
@@ -25,8 +24,7 @@ export default function VideoChat({
       url: '/api/video/token',
       params: {
         // TODO: should be changed to below after testing phase
-        id: `${userInfo.id}:${userInfo.first_name} ${userInfo.last_name}`,
-        // id: `${uuidv4()}: Maria Hirai`,
+        id: `${userInfo.id}:${userInfo.firstName} ${userInfo.lastName}`,
         packname: packid,
       },
     };
@@ -37,6 +35,20 @@ export default function VideoChat({
       .catch((err) => console.log(err));
   }, [userInfo]);
 
+
+  const getPackDetails = () => {
+    const config = {
+      method: 'GET',
+      url: '/api/packs/pack',
+      params: {
+        pack_id: packid,
+      },
+    };
+    axios(config)
+      .then((result) => setPack(result.data[0]))
+      .catch((err) => console.log('error fetching pack details', err));
+  };
+
   const exit = useCallback(() => {
     setToken(null);
   }, []);
@@ -45,28 +57,70 @@ export default function VideoChat({
     if (userInfo.id) {
       getToken();
     }
+    getPackDetails();
     return () => exit();
   }, []);
 
-  if (token) {
-    return (
-      <div style={{ width: '66%', margin: 'auto', paddingBottom: '50px' }}>
-        <Room pack={pack} token={token} exit={exit} />
-      </div>
-    );
-  }
   return (
-    <Ended>
-      Ended Video Call
-    </Ended>
+    <div style={{ width: '66%', margin: 'auto', paddingBottom: '50px' }}>
+      <TitleBar>
+        <FlexContainer>
+          <RoundImg src={pack.pack_profile_pic_url} />
+          <FlexColumn>
+            <Title style={{ margin: '0' }}>{pack.pack_name}</Title>
+            <div style={{ fontSize: '14px' }}>{pack.description}</div>
+          </FlexColumn>
+        </FlexContainer>
+        {token && <Button type="button" onClick={exit}>exit</Button>}
+        {!token && (
+          <Link to={`/PackGroupChat/${packid}`}>
+            <Button type="button">Back to Chat</Button>
+          </Link>
+        )}
+      </TitleBar>
+      <Room pack={pack} token={token} />
+    </div>
   );
 }
 
-const Ended = styled.div`
+const FlexContainer = styled.div`
   display: flex;
-  justify-content: center;
+  box-sizing:border-box;
+  flex-direction: row;
   align-items: center;
-  height: 100vh;
-  font-size: 28px;
-  font-weight: bold;
+  width: 100%;
+  margin: 5% 0;
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  &:hover {
+    opacity: 60%;
+    cursor: pointer;
+  }
+`;
+
+const TitleBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 10vh;
+  border-bottom: 1px solid #D9D9D9;
+`;
+
+const RoundImg = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 3%;
+`;
+
+const SelfContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
