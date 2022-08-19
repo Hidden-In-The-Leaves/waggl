@@ -47,7 +47,6 @@ app.use('/api/events', eventsRoutes);
 app.use('/api/user', userRoutes);
 // for test
 app.use('/api/test', testRoutes);
-app.use('/api/user', userRoutes);
 app.use('/api/video', videoRoutes);
 app.use('/api/profile', profileRoutes);
 
