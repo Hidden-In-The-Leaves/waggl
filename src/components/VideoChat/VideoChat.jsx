@@ -59,7 +59,7 @@ export default function VideoChat() {
     }
     getPackDetails();
     return () => exit();
-  }, []);
+  }, [userInfo]);
 
   return (
     <div style={{ width: '66%', margin: 'auto', paddingBottom: '50px' }}>

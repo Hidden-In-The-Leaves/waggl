@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
+import { useCookies } from 'react-cookie';
 
 import { auth, provider } from '../../../Firebase/firebase-config';
 import {
@@ -21,8 +22,11 @@ import {
 import NavBar from '../../NavBar/NavBar';
 import { getUser } from '../Parse';
 import { useUserStore } from '../../Store';
+import { registerCookie } from '../../../lib/cookie';
 
 export default function LogIn() {
+  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+
   // ----------------- Zustand States ------------------
   const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
@@ -67,6 +71,10 @@ export default function LogIn() {
           alert('invaild username or password');
         } else {
           setZustandUser(response.data[0]);
+          (async () => {
+            const sessionId = await registerCookie(response.data[0].id);
+            setCookie('session', sessionId);
+          })();
           navigateHome();
         }
       })
@@ -84,6 +92,10 @@ export default function LogIn() {
       })
       .then((response) => {
         setZustandUser(response.data[0]);
+        (async () => {
+          const sessionId = await registerCookie(response.data[0].id);
+          setCookie('session', sessionId);
+        })();
         navigateHome();
       })
       .catch((error) => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
+import { useCookies } from 'react-cookie';
 
 import { auth, provider } from '../../../Firebase/firebase-config';
 import {
@@ -23,8 +24,11 @@ import {
 import NavBar from '../../NavBar/NavBar';
 import { createUser, createThirdProviderUser } from '../Parse';
 import { useUserStore } from '../../Store';
+import { registerCookie } from '../../../lib/cookie';
 
 export default function SignUp() {
+  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+
   // ----------------- Zustand States ------------------
   const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
@@ -80,6 +84,10 @@ export default function SignUp() {
       createUser(firstName, lastName, password, email)
         .then((response) => {
           setZustandUser(response.data[0], firstName, lastName, email);
+          (async () => {
+            const sessionId = await registerCookie(response.data[0].id);
+            setCookie('session', sessionId);
+          })();
           navigateHome();
         })
         .catch((error) => {
@@ -103,6 +111,10 @@ export default function SignUp() {
       })
       .then((response) => {
         setZustandUser(response.data[0], gFirstName, gLastName, gmail);
+        (async () => {
+          const sessionId = await registerCookie(response.data[0].id);
+          setCookie('session', sessionId);
+        })();
         navigateHome();
       })
       .catch((error) => {

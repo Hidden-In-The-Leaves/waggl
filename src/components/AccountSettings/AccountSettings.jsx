@@ -3,22 +3,30 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useCookies } from 'react-cookie';
+
 // import useUserStore from '../Store';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
 import PrivacySettings from './PrivacySettings';
 import { Title } from '../../styledComponents';
 import { useUserStore } from '../Store';
+import { removeCookieEntry } from '../../lib/cookie';
 
 export default function AccountSettings() {
+  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+
   const [onUserInfo, setOnUserInfo] = useState([]);
   const [onLocationInfo, setOnLocationInfo] = useState([]);
   const [onPrivacySettings, setOnPrivacySettings] = useState([]);
 
   // ----------------- Zustand States ------------------
+  const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
 
   const handleSignOutButton = () => {
+    removeCookie('session');
+    removeCookieEntry(userInfo.id);
     setUserInfo({});
   };
 
