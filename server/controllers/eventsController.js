@@ -19,6 +19,19 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  getUsers: ({ query }, res) => {
+    db.query(`
+     SELECT * FROM users
+     WHERE id = ${query.user_id}
+    `)
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get events', err);
+        res.sendStatus(500);
+      });
+  },
   postEvent: (req, res) => {
     const data = req.body;
     db.query(`
@@ -77,6 +90,7 @@ module.exports = {
     db.query(`
       SELECT * FROM event_posts
       WHERE event_id = ${req.query.event_id}
+      ORDER BY posted_time DESC
     ;`)
       .then((result) => {
         res.send(result.rows);

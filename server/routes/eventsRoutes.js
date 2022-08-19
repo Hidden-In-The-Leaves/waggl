@@ -6,6 +6,9 @@ const router = express.Router();
 router.route('/')
   .get(eventsController.getEvents);
 
+router.route('/user')
+  .get(eventsController.getUsers);
+
 router.route('/packs')
   .get(eventsController.getPackEvents);
 

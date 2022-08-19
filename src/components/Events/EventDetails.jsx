@@ -53,6 +53,7 @@ export default function EventDetails(props) {
       };
       const response = await axios(config);
       console.log(response);
+      getEventMessages(currentEvent);
     } catch (err) {
       console.log('error posting event message', err);
     }
@@ -102,16 +103,13 @@ export default function EventDetails(props) {
   };
 
   useEffect(() => {
-    getEventInfo(6);
-    getAttendees(6);
-    getEventMessages(6);
+    getEventInfo(currentEvent);
+    getAttendees(currentEvent);
+    getEventMessages(currentEvent);
   }, []);
 
   return (
     <div id="event-details-container">
-      <div style={{ width: '100%', height: '200px' }}>
-        <NavBar type="event" />
-      </div>
       <AddEvent />
       <div
         style={{
@@ -181,7 +179,13 @@ export default function EventDetails(props) {
               margin: '15px 20px',
             }}
           />
-          <button type="button" onClick={() => makeEventPost()}>Make Post</button>
+          <button type="button"
+            onClick={() => {
+              makeEventPost();
+            }}
+          >
+            Make Post
+          </button>
           <input type="file" />
         </div>
         <h1 style={{ marginLeft: '50px' }}> Event Posts!</h1>

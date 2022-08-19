@@ -43,13 +43,7 @@ export default function NavBar() {
   ];
   return (
     <HeaderContainer>
-<<<<<<< HEAD
-      <NameLink to={type === 'home' ? "/HomePage/:userid" : "/"}>
-        Waggl
-      </NameLink>
-=======
       <NameLink to={type === 'home' ? '/HomePage' : '/'}>Waggl</NameLink>
->>>>>>> bc5db761c3efa7d394e19587ba85897f57e3c199
       <NavItems>
         {type === 'home' &&
           homeNavs.map((nav, idx) => (
