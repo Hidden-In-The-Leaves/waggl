@@ -67,7 +67,7 @@ export default function Room({ pack, token, exit }) {
 
   return (
     <Container>
-      <TitleBar>
+      {/* <TitleBar>
         <FlexContainer>
           <RoundImg src={pack.url} />
           <FlexColumn>
@@ -76,7 +76,7 @@ export default function Room({ pack, token, exit }) {
           </FlexColumn>
         </FlexContainer>
         <Button type="button" onClick={closeConnection}>exit</Button>
-      </TitleBar>
+      </TitleBar> */}
       <div style={{ fontSize: '20px', padding: '20px', textAlign: 'center', fontWeight: 'bold' }}>Video Chat</div>
       {/* <SelfContainer>
         {room && (

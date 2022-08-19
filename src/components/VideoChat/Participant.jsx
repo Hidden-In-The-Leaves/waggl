@@ -74,20 +74,26 @@ export default function Participant({ participant, type }) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${props => props.type === 'self' ? '270px' : '230px'};
-  height: ${props => props.type === 'self' ? '210px' : '180px'};
+  /* width: ${props => props.type === 'self' ? '270px' : '230px'};
+  height: ${props => props.type === 'self' ? '210px' : '180px'}; */
+  width: 230px;
+  height: 180px;
   border: 1px solid #D9D9D9;
   border-radius: 10px;
   align-items: center;
   margin: 1%;
   overflow: hidden;
   @media (max-width: 768px) {
-    width: ${props => props.type === 'self' ? '200px' : '170px'};
-    height: ${props => props.type === 'self' ? '156px' : '132px'};
+    /* width: ${props => props.type === 'self' ? '200px' : '170px'};
+    height: ${props => props.type === 'self' ? '156px' : '132px'}; */
+    width: 170px;
+    height: 132px;
   }
   @media (max-height: 550px) {
-    width: ${props => props.type === 'self' ? '200px' : '170px'};
-    height: ${props => props.type === 'self' ? '156px' : '132px'};
+    /* width: ${props => props.type === 'self' ? '200px' : '170px'};
+    height: ${props => props.type === 'self' ? '156px' : '132px'}; */
+    width: 170px;
+    height: 132px;
   }
 `;
 

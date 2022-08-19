@@ -14,26 +14,28 @@ export const usePackStore = create((set, get) => ({
   otherPacksFiltered: [],
   joinedPacksFiltered: [],
   resetPack: async (userid) => {
-    try {
-      const config = {
-        method: 'GET',
-        url: '/api/packs/joined',
-        params: { user_id: userid },
-      };
-      const response = await axios(config);
-      set((state) => ({ joinedPacks: response.data, joinedPacksFiltered: response.data }));
+    if (userid !== undefined) {
+      try {
+        const config = {
+          method: 'GET',
+          url: '/api/packs/joined',
+          params: { user_id: userid },
+        };
+        const response = await axios(config);
+        set((state) => ({ joinedPacks: response.data, joinedPacksFiltered: response.data }));
 
-      const config2 = {
-        method: 'GET',
-        url: '/api/packs/others',
-        params: { user_id: userid },
+        const config2 = {
+          method: 'GET',
+          url: '/api/packs/others',
+          params: { user_id: userid },
+        }
+
+        const response2 = await axios(config2);
+        set((state) => ({ otherPacks: response2.data, otherPacksFiltered: response2.data }));
+
+      } catch (e) {
+        console.log('error getting packs', e);
       }
-
-      const response2 = await axios(config2);
-      set((state) => ({ otherPacks: response2.data, otherPacksFiltered: response2.data }));
-
-    } catch (e) {
-      console.log('error getting packs', e);
     }
   },
   filter: (term) => {

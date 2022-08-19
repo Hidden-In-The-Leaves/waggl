@@ -13,6 +13,7 @@ const io = require('socket.io')(server, {
     origin: '*',
   },
 });
+app.use(cors());
 
 const db = require('../database/postgres');
 const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
@@ -32,7 +33,6 @@ db.connect((err) => {
   }
 });
 app.use(express.json());
-app.use(cors());
 // const socketRouter = require('./routes/socketRouter')(io);
 
 app.use(express.static(path.join(__dirname, '../dist')));
