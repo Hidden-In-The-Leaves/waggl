@@ -21,7 +21,6 @@ const packsRoutes = require('./routes/packsRoutes');
 const userRoutes = require('./routes/userRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
 const testRoutes = require('./routes/testRoutes');
-const userRoutes = require('./routes/userRoutes');
 const socketRouter = require('./routes/socketRouter')(io);
 const messageRoutes = require('./routes/messageRoutes');
 const videoRoutes = require('./routes/videoRoutes');
