@@ -11,7 +11,7 @@ import Team from './Team';
 export default function AboutUs({ type = 'welcome' }) {
   return (
     <>
-      <NavBar type={type} />
+      {/* <NavBar type={type} /> */}
       <Container>
         <AboutUsMain />
         <WhoWeAre />
