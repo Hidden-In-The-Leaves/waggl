@@ -17,11 +17,10 @@ export default function ProfileList(props) {
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [profileData, setProfileData] = useState({});
-  const [showQR, setShowQR] = useState(false);
   const [dogs, setDogs] = useState([]);
-  const [qr, setQR] = useState('');
 
   useEffect(() => {
+<<<<<<< HEAD
     console.log('user id', userInfo.id);
     axios({
       method: 'get',
@@ -31,8 +30,20 @@ export default function ProfileList(props) {
       .then((res) => {
         console.log('axios call for dogs', res);
         setDogs(res.data);
+=======
+    if (userInfo.id) {
+      axios({
+        method: 'get',
+        url: '/api/profile/dogs',
+        params: {user_id: userInfo.id},
+>>>>>>> 1e3542faf1d6ced2d7ee56dad822d349be7d576d
       })
-      .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
+        .then((res) => {
+          console.log('data', res.data);
+          setDogs(res.data);
+        })
+        .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
+    }
   }, [userInfo]);
 
   useEffect(() => {
@@ -65,12 +76,7 @@ export default function ProfileList(props) {
     setEditModal(false);
   };
 
-  const handleOpenQR = () => {
-    setShowQR(true);
-  };
-  const handleCloseQR = () => {
-    setShowQR(false);
-  };
+
 
   const dogPhotos = [
     'https://cdn.webshopapp.com/shops/271423/files/325744194/is-your-dog-a-happy-dog-ways-to-know.jpg',
@@ -84,7 +90,7 @@ export default function ProfileList(props) {
       <div className="card-container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
 
           {/* {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})} */}
-          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} setQR={setQR} />})}
+          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} />})}
 
         <AddCard handleOpen={handleOpen} />
       </div>
@@ -96,9 +102,6 @@ export default function ProfileList(props) {
       </Modal>
       <Modal open={editModal} onClose={handleEditClose} title={'Modal edit Testing!'}>
         <EditProfile profileData={profileData} setProfileData={setProfileData} />
-      </Modal>
-      <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=localhost:3000/Profile/${qr}&size=150x150&bgcolor=FF8700&color=fff`} />
       </Modal>
     </PageContainer>
   );
