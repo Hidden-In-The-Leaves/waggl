@@ -2,27 +2,29 @@ import styled from 'styled-components';
 
 export const HalfImg = styled.img`
   object-fit:cover;
+  // top:-3vh;
 `;
 
-const Cols = styled.div`
+export const Cols = styled.div`
   display: flex;
   flex-direction: row;
   position:relative;
+  top:-3vh;
 `;
 
-const LinkButton = styled.button`
+export const LinkButton = styled.button`
   background-color: transparent;
   border: none;
   color: #ff8700;
   font-size: 15px;
 `;
 
-const CenterText = styled.div`
+export const CenterText = styled.div`
   text-align: center;
   color: gray;
 `;
 
-const BigButton = styled.button`
+export const BigButton = styled.button`
   color: white;
   background-color: #ff8700;
   &:hover {
@@ -36,7 +38,8 @@ const BigButton = styled.button`
   width: 100%;
 `;
 
-const GoogleButton = styled.button`
+// const GoogleButton = styled.button`
+export const GoogleButton = styled.div`
   text-align: center;
   color: black;
   background-color: transparent;
@@ -46,13 +49,14 @@ const GoogleButton = styled.button`
   }
   border: 1px solid #9f9f9f;
   border-radius: 10px;
-  margin: 5px 0 15px 0;
+  // margin: 5px 0 15px 0;
   height: 40px;
   width: 100%;
+  position:relative;
 `;
 
-const ContainerHalf = styled.div`
-  padding: 3% 10%;
+export const ContainerHalf = styled.div`
+  padding: 5% 10%;
   border-left: 0.5px solid #d9d9d9;
   border-right: 0.5px solid #d9d9d9;
   box-sizing: border-box;
@@ -60,21 +64,24 @@ const ContainerHalf = styled.div`
   width: 50%;
 `;
 
-const ContainerHalfForImage = styled.div`
+export const ContainerHalfForImage = styled.div`
   border-left: 0.5px solid #d9d9d9;
   border-right: 0.5px solid #d9d9d9;
-  height: 92vh;
+  height: 100vh;
   width: 50%;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
+  // top:-3vh;
 `;
 
-export {
-  Cols,
-  LinkButton,
-  CenterText,
-  BigButton,
-  GoogleButton,
-  ContainerHalf,
-  ContainerHalfForImage,
-};
+export const CenterImg = styled.img`
+  top: 25%;
+  left: 25%;
+  position: absolute;
+`;
+
+export const CenterSpan = styled.span`
+  top: 25%;
+  left: 35%;
+  position: absolute;
+`;

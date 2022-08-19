@@ -18,6 +18,7 @@ export default function Chat() {
   const [updateList, setUpdateList] = useState(true);
   const userInfo = useUserStore((state) => state.userInfo);
 
+  console.log(receiver);
   const getDefaultMatch = (data) => {
     setMatch(data);
   };
@@ -62,7 +63,7 @@ export default function Chat() {
             updateReceiver={updateReceiver}
           />
         )}
-        {chat !== undefined && receiver.id && (
+        {chat !== undefined && receiver && (
           <DiscoverChat
             user1={userInfo}
             user2={receiver}

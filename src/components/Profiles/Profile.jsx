@@ -1,14 +1,22 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
+import DogDetail from '../Discover/DogDetail';
 
 export default function Profile(props) {
+  const { dogid } = useParams();
+  const [dog, setDog] = useState({});
+  useEffect(() => {
+    axios
+      .get(`/api/test/dog?dogId=${dogid}`)
+      .then(({ data }) => setDog(data))
+      .catch((err) => console.log(err));
+  }, [dogid]);
+  console.log(dog);
   return (
-    <div>
-      <h1>This is the Profile Page!</h1>
-      <Link to="/">
-        <button>This is a Link to App "Page"!</button>
-      </Link>
+    <div style={{ margin: '5%' }}>
+      {dog.id && <DogDetail dog={dog} updateImageIndex={() => {}} />}
     </div>
-  )
+  );
 }

@@ -4,7 +4,7 @@ import GroupChat from '../Discover/GroupChat';
 import PackMemberList from './PackMemberList';
 import { useUserStore } from '../Store';
 import io from 'socket.io-client';
-const socket = io('http://localhost:5000');
+const socket = io();
 
 export default function PackGroupChat() {
   const [packName, setPackName] = useState('');

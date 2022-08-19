@@ -64,7 +64,7 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
     navigate('/DiscoverMain');
   };
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '70%' }}>
       <div
         style={{
           display: 'flex',

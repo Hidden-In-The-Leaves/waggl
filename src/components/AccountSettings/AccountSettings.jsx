@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
@@ -14,10 +15,6 @@ export default function AccountSettings() {
   const [onUserInfo, setOnUserInfo] = useState([]);
   const [onLocationInfo, setOnLocationInfo] = useState([]);
   const [onPrivacySettings, setOnPrivacySettings] = useState([]);
-
-  const handleSignOut = () => {
-    // SIGN OUT BUTTON
-  };
 
   const handleUserInfoButton = () => {
     setOnUserInfo(true);
@@ -50,7 +47,9 @@ export default function AccountSettings() {
       <div style={{ textAlign: 'center', alignItems: 'center' }}>
         <NavBar type="home" />
         <Title>Account Settings</Title>
-        <Button type="button" id="signoutButton" onClick={handleSignOut}>Sign Out</Button>
+        <Link to="/LogIn">
+          <Button type="button" id="signoutButton">Sign Out</Button>
+        </Link>
         <Container>
           <RowButtons>
             <Button type="button" id="userInfoButton" onClick={handleUserInfoButton}>User Information</Button>

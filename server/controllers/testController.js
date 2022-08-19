@@ -38,6 +38,42 @@ const getUsers = async (req, res) => {
 };
 
 /**
+ * @route /api/test/dog?dogId=?
+ * @method GET
+ * @desc get info about a dog
+ */
+const getDog = async (req, res) => {
+  const dog_id = req.query.dogId;
+  try {
+    const dog = await db.query(
+      `
+      select json_agg(st) as results
+    from (
+      select d.id, d.name, d.age, d.size, d.likes, d.dislikes, d.description, concat(u.first_name, ' ', u.last_name) as owner, u.id as owner_id,
+      u.latitude as lat, u.longitude as lng, u.city, u.state, u.email, u.profile_pic_url as image,
+      (
+        select json_agg(t.trait)
+        from (
+          select * from traits where dog_id = d.id
+        ) t
+        ) as traits,
+        (
+          select json_agg(dp.url)
+          from (
+          select * from dog_pictures where dog_id=d.id
+        ) dp
+        ) as images
+      from dogs as d, users as u where d.user_id=u.id and d.id=${dog_id}
+    ) st;
+      `
+    );
+    res.status(200).send(dog.rows[0].results[0]);
+  } catch (err) {
+    res.send({ Error: err.stack });
+  }
+};
+
+/**
  * @route /api/test/like
  * @method POST
  * @desc like or dislike a dog
@@ -102,4 +138,4 @@ const deleteMatch = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, likeDog, getMatchList, deleteMatch };
+module.exports = { getUsers, likeDog, getMatchList, deleteMatch, getDog };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SubTitle } from './Chat.styled';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   CircleImage,
   Members,
@@ -74,6 +74,12 @@ export default function MatchList({ user, updateReceiver, updateList }) {
             </Match>
           </MatchListContainer>
         ))}
+      {matchList.length === 0 && (
+        <div style={{ textAlign: 'center' }}>
+          You don't have any matches, go{' '}
+          <Link to="/DiscoverMain">Discover</Link>
+        </div>
+      )}
     </MatchContainer>
   );
 }

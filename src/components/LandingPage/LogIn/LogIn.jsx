@@ -36,7 +36,7 @@ export default function LogIn() {
 
   // ----------------- Functions ------------------
   const navigateHome = () => {
-    navigate('/HomePage/:userid');
+    navigate('/HomePage');
   };
 
   const setZustandUser = ({ id, first_name, last_name, email }) => {
@@ -95,7 +95,7 @@ export default function LogIn() {
   // ----------------- Render ------------------
   return (
     <div>
-      <NavBar type="welcome" />
+      {/* <NavBar type="welcome" /> */}
       <Cols>
         <ContainerHalfForImage>
           <HalfImg
