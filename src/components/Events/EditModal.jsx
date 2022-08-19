@@ -15,7 +15,7 @@ export default function EditEvent({event_id, close}) {
 
   return (
     <EditModal>
-      <div style={{ background: 'white', width: '40%', height:'50%', display:'flex', alignItems: 'center' }}>
+      <InputContainer>
         <div>Edit the event name:</div>
         <EditInput onChange={(e) => {setEventName(e.target.value)}} type="text" placeholder="Event Name"></EditInput>
         <div>Edit the event description:</div>
@@ -28,7 +28,7 @@ export default function EditEvent({event_id, close}) {
         <EditInput onChange={(e) => {setCity(e.target.value)}} type="text" placeholder="City"></EditInput>
         <div>Edit the event state:</div>
         <EditInput onChange={(e) => {setState(e.target.value)}} type="text" placeholder="State"></EditInput>
-        <div>Edit the event zip code:/</div>
+        <div>Edit the event zip code:</div>
         <EditInput onChange={(e) => {setZipcode(e.target.value)}} type="text" placeholder="Zip Code"></EditInput>
         <div>Edit the event picture URL:</div>
         <EditInput onChange={(e) => {setEventPicture(e.target.value)}} type="text" placeholder="Event Picture URL"></EditInput>
@@ -37,15 +37,34 @@ export default function EditEvent({event_id, close}) {
         <div>Edit the event end time:</div>
         <EditInput onChange={(e) => {setEndTime(e.target.value)}} type="text" placeholder="End Time"></EditInput>
         <div>
-          <button onClick={() => close(false)} type="button">Close Modal</button>
+          <EventButton onClick={console.log('Do something!')} type="button">Submit Changes</EventButton>
+          <EventButton onClick={() => close(false)} type="button">Close Modal</EventButton>
         </div>
-      </div>
+      </InputContainer>
     </EditModal>
   );
 }
 
+const EventButton = styled.button`
+  background: orange;
+  color: white;
+  margin: 10px;
+  border-radius: 10px;
+`;
+
+const InputContainer = styled.div`
+  height: 50%;
+  width: 30%;
+  overflow: auto;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const EditInput = styled.input`
-  height: 50px;
+  height: 1001px;
   margin: 25px;
   width: 50%;
 `;

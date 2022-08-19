@@ -25,7 +25,7 @@ export default function EventMessage({message}) {
     getPosterInfo(message.poster_id);
   }, []);
 
-  const picture = ((message.photo_url && !message.photo_url === 'undefined') ? <img style={{ height: '100px' }} src={message.photo_url} alt="pic in posted message" /> : null);
+  const picture = ((message.photo_url) ? <img style={{ height: '100px', margin: '15px' }} src={message.photo_url} alt="pic in posted message" /> : JSON.stringify(message.photo_url));
 
   return (
     <div style={{ margin: '10px 20px' }}>

@@ -15,7 +15,6 @@ const io = require('socket.io')(server, {
 });
 
 app.use(cors());
-app.use(express.json());
 
 const db = require('../database/postgres');
 const accountSettingsRoutes = require('./routes/accountSettingsRoutes');

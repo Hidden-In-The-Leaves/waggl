@@ -21,7 +21,25 @@ export default function EventDetails(props) {
     'https://media.istockphoto.com/photos/labradoodle-dog-ordering-online-by-internet-for-home-delivery-picture-id1365754761',
   );
   const [textInput, setTextInput] = useState('');
+  const [inputPicture, setInputPicture] = useState('');
   const [showEditModal, setShowEditModal] = useState(false);
+
+  let translateImagesToURLs = async function () {
+    Object.keys(document.getElementById('input').files).forEach((index) => {
+      const formData = new FormData();
+      formData.append('file', document.getElementById('input').files[index]);
+      formData.append('upload_preset', 'omvh5u77');
+      axios
+        .post(
+          'https://api.cloudinary.com/v1_1/juannncodes/image/upload',
+          formData
+        )
+        .then((res) => {
+          setInputPicture(res.data.secure_url);
+          console.log(inputPicture);
+        });
+    });
+  };
 
   const getEventMessages = async (event_id) => {
     try {
@@ -50,6 +68,7 @@ export default function EventDetails(props) {
           text: textInput,
           poster_id: currentUser,
           pack_id: currentPack,
+          photo_url: inputPicture,
         },
       };
       const response = await axios(config);
@@ -183,14 +202,16 @@ export default function EventDetails(props) {
               margin: '15px 20px',
             }}
           />
-          <button type="button"
-            onClick={() => {
-              makeEventPost();
-            }}
-          >
-            Make Post
-          </button>
-          <input type="file" />
+          <div style={{display: 'inline'}}>
+            <EventButton type="button"
+              onClick={() => {
+                makeEventPost();
+              }}
+            >
+              Make Post
+            </EventButton>
+            <input id="input" type="file" onChange={() => translateImagesToURLs()} />
+          </div>
         </div>
         <h1 style={{ marginLeft: '50px' }}> Event Posts!</h1>
         <div
@@ -231,4 +252,11 @@ const EditButton = styled.button`
   &:hover: {
     opacity: 60%,
     cursor: pointer;
+`;
+
+const EventButton = styled.button`
+  background: orange;
+  color: white;
+  margin: 10px;
+  border-radius: 10px;
 `;
