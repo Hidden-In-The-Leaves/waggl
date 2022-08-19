@@ -113,7 +113,7 @@ export default function SignUp() {
   // ----------------- Render ------------------
   return (
     <div>
-      <NavBar type="welcome" />
+      {/* <NavBar type="welcome" /> */}
       <Cols>
         <ContainerHalfForImage>
           <HalfImg
