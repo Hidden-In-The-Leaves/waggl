@@ -9,9 +9,9 @@ export default function PackItem({ pack }) {
     <FlexContainer>
       <RoundImg src={pack.url} />
       <FlexColumn>
-        {/* <Link to={`/PackDetails/${pack.id}`}> */}
+        <Link to={`/PackDetails/${pack.id}`} style={{ textDecoration: 'none', color: 'black' }}>
           <MainText>{pack.name}</MainText>
-        {/* </Link> */}
+        </Link>
         <SubText>{packDescription}</SubText>
       </FlexColumn>
     </FlexContainer>

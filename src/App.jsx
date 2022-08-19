@@ -62,7 +62,12 @@ export default function App() {
         <button type="button">
           This is a Link to the Account Settings page!
         </button>
-      </Link>{' '}
+      </Link>
+      <Link to="/PackVideoChat/:packid">
+        <button type="button">
+          This is a Link to the Pack Video Chat page!
+        </button>
+    </Link>{' '}
     </Main>
   );
 }

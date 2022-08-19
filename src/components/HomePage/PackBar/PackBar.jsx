@@ -9,8 +9,8 @@ import AddPack from './AddPack';
 import { usePackStore } from '../Store';
 
 export default function PackBar() {
-  const userPacks = usePackStore((state) => state.userPacksFiltered);
-  const otherPacks = usePackStore((state) => state.allPacksFiltered);
+  const userPacks = usePackStore((state) => state.joinedPacksFiltered);
+  const otherPacks = usePackStore((state) => state.otherPacksFiltered);
 
   return (
     <Container_1_4>
