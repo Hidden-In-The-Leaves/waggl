@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+// import useUserStore from '../Store';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
 import PrivacySettings from './PrivacySettings';
-import NavBar from '../NavBar/NavBar';
 import {
   Title,
 } from '../../styledComponents';
@@ -41,11 +41,11 @@ export default function AccountSettings() {
       setOnPrivacySettings(false);
     }
   });
+  // console.log(useUserStore);
 
   if (onUserInfo === true || onLocationInfo === true || onPrivacySettings === true) {
     return (
       <div style={{ textAlign: 'center', alignItems: 'center' }}>
-        <NavBar type="home" />
         <Title>Account Settings</Title>
         <Link to="/LogIn">
           <Button type="button" id="signoutButton">Sign Out</Button>
