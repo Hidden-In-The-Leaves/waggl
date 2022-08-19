@@ -42,7 +42,12 @@ export default function MainSection({
       axios
         .get('/api/test')
         .then(({ data }) => {
-          data = data.filter((d) => d.owner_id !== userInfo.id);
+          data = data.filter((d) => {
+            console.log(d);
+            return (
+              d.owner_id !== userInfo.id && d.lat !== null && d.lng !== null
+            );
+          });
           const list = sortBy(range, currentPosition, getDistance, data);
           getDefaultMatch(list[1]);
           // setMatchList(list);
@@ -95,19 +100,22 @@ export default function MainSection({
           placeholder="Enter a discover range"
           style={{ height: '100%' }}
           value={range}
-          onChange={(e) => setRange(Number(e.target.value))}
+          onChange={(e) => {
+            setRange(Number(e.target.value));
+            setIndex(0);
+          }}
         ></input>
         <button>Search</button>
       </div>
-      {matchList.length === 1 && (
+      {matchList.length === 0 && (
         <p style={{ textAlign: 'center' }}>No dog found within the range</p>
       )}
-      {matchList.length > 1 && (
+      {matchList.length > 0 && (
         <p style={{ textAlign: 'center' }}>
           {index + 1}/{matchList.length}
         </p>
       )}
-      {pointer === matchList.length && matchList.length !== 1 && (
+      {pointer === matchList.length && matchList.length !== 0 && (
         <p
           style={{
             textAlign: 'center',
@@ -118,13 +126,13 @@ export default function MainSection({
           You've reached the end of discover list
         </p>
       )}
-      {matchList.length > 1 && (
+      {matchList.length > 0 && (
         <DogDetail
           dog={matchList[index][1]}
           updateImageIndex={updateImageIndex}
         />
       )}
-      {pointer !== matchList.length && matchList.length > 1 && (
+      {pointer !== matchList.length && matchList.length > 0 && (
         <LikeContainer>
           <LikeIcon
             className="fa-solid fa-xmark"

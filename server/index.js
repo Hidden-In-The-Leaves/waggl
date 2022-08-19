@@ -52,7 +52,9 @@ app.use('/api/video', videoRoutes);
 app.use('/api/profile', profileRoutes);
 
 console.log('port is ', PORT);
-app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
+app.get('/*', (req, res) =>
+  res.sendFile(path.join(__dirname, '../dist/index.html'))
+);
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:
