@@ -26,7 +26,7 @@ export default function EventDetails(props) {
     try {
       const config = {
         method: 'GET',
-        url: 'http://localhost:3000/api/events/messages',
+        url: '/api/events/messages',
         params: { event_id },
       };
       const response = await axios(config);
@@ -40,7 +40,7 @@ export default function EventDetails(props) {
     try {
       const config = {
         method: 'POST',
-        url: 'http://localhost:3000/api/events/messages',
+        url: '/api/events/messages',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -62,7 +62,7 @@ export default function EventDetails(props) {
     try {
       const config = {
         method: 'GET',
-        url: 'http://localhost:3000/api/packs/pack',
+        url: '/api/packs/pack',
         params: { pack_id },
       };
       const response = await axios(config);
@@ -76,7 +76,7 @@ export default function EventDetails(props) {
     try {
       const config = {
         method: 'GET',
-        url: 'http://localhost:3000/api/events/event',
+        url: '/api/events/event',
         params: { event_id },
       };
       const response = await axios(config);
@@ -92,7 +92,7 @@ export default function EventDetails(props) {
     try {
       const config = {
         method: 'GET',
-        url: 'http://localhost:3000/api/events/attendees',
+        url: '/api/events/attendees',
         params: { event_id },
       };
       const response = await axios(config);

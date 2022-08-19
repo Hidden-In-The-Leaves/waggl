@@ -10,7 +10,7 @@ export default function EventMessage({message}) {
     try {
       const config = {
         method: 'GET',
-        url: 'http://localhost:3000/api/accountSettings/userInfo',
+        url: '/api/accountSettings/userInfo',
         params: { user_id },
       };
       const response = await axios(config);

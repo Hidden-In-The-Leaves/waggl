@@ -20,7 +20,6 @@ module.exports = {
       });
   },
   postEvent: (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
     const data = req.body;
     db.query(`
       INSERT INTO events (owner_id, event_name, description, pack_id, city, state, zipcode, start_time, end_time, event_profile_pic_url, street_address1, street_address2)
@@ -37,7 +36,6 @@ module.exports = {
       });
   },
   getPackEvents: ((req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
     db.query(`
     SELECT *
     FROM events
@@ -52,7 +50,6 @@ module.exports = {
       });
   }),
   getEventInfo: ((req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
     db.query(`
     SELECT * FROM events
     WHERE id = ${req.query.event_id}`)
@@ -65,7 +62,6 @@ module.exports = {
       });
   }),
   getAttendees: ((req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
     db.query(`
     SELECT * FROM attendees
     WHERE event_id = ${req.query.event_id};`)
@@ -78,7 +74,6 @@ module.exports = {
       });
   }),
   getMessages: ((req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
     db.query(`
       SELECT * FROM event_posts
       WHERE event_id = ${req.query.event_id}
@@ -92,11 +87,6 @@ module.exports = {
       });
   }),
   postMessage: ((req, res) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // update to match the domain you will make the request from
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept',
-    );
     console.log(req.body);
     const data = req.body;
     console.log(data);
