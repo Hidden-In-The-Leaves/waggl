@@ -24,7 +24,7 @@ module.exports = {
     db.query(`
       INSERT INTO events (owner_id, event_name, description, pack_id, city, state, zipcode, start_time, end_time, event_profile_pic_url, street_address1, street_address2)
       VALUES (
-        ${data.owner_id}, ${data.event_name}, ${data.description}, ${data.pack_id}, ${data.city}, ${data.state}, ${data.zipcode}, ${data.start_time}, ${data.end_time}, ${data.pic}, ${data.street_address1}, ${data.street_address2}
+        ${data.owner_id}, '${data.event_name}', '${data.description}', ${data.pack_id}, '${data.city}', '${data.state}', '${data.zipcode}', ${data.start_time}, ${data.end_time}, '${data.pic}', '${data.street_address1}', '${data.street_address2}'
       )
     `)
       .then((result) => {
@@ -87,12 +87,10 @@ module.exports = {
       });
   }),
   postMessage: ((req, res) => {
-    console.log(req.body);
     const data = req.body;
-    console.log(data);
     db.query(`
       INSERT INTO event_posts (event_id, text, poster_id, photo_url) VALUES
-      (${data.event_id}, ${data.text}, ${data.poster_id}, ${data.photo_url})
+      (${data.event_id}, '${data.text}', ${data.poster_id}, '${data.photo_url}');
     `)
       .then((result) => {
         res.send('pls');

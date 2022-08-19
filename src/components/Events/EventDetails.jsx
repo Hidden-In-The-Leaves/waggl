@@ -82,7 +82,6 @@ export default function EventDetails(props) {
       const response = await axios(config);
       setEventInfo(response.data[0]);
       getPackInfo(response.data[0].pack_id);
-      console.log({packInfo});
     } catch (e) {
       console.log('error getting events', e);
     }
@@ -96,7 +95,6 @@ export default function EventDetails(props) {
         params: { event_id },
       };
       const response = await axios(config);
-      console.log(response.data);
       setAttendees(response.data);
     } catch (e) {
       console.log('error getting attendees', e);
@@ -175,6 +173,7 @@ export default function EventDetails(props) {
             onChange={(e) => setTextInput(e.target.value)}
             type="textfield"
             style={{
+              fontSize: '40px',
               height: '200px',
               width: '75%',
               border: '1px solid #9F9F9F',
@@ -185,10 +184,12 @@ export default function EventDetails(props) {
           <button type="button" onClick={() => makeEventPost()}>Make Post</button>
           <input type="file" />
         </div>
+        <h1 style={{ marginLeft: '50px' }}> Event Posts!</h1>
         <div
-          style={{ background: 'orange', marginTop: '20px', height: '100%' }}
+          style={{
+            background: 'orange', marginTop: '20px', height: '100%', borderRadius: '10px', overflowY: 'auto',
+          }}
         >
-          Event Messages Here
           {eventMessages.map((message) => <EventMessage key={message.id} message={message} />)}
         </div>
       </div>
@@ -219,7 +220,7 @@ const EditButton = styled.button`
   border-radius: 30px;
   border-color: #FF8700;
   border-style: solid;
-  hover: {
+  &:hover: {
     opacity: 60%,
     cursor: pointer;
 `;

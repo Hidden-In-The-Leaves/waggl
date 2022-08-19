@@ -18,8 +18,6 @@ const privacySettings = {
 };
 
 const getUserInfo = async (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  console.log(req.query);
   db.query(`
   SELECT * FROM users where id = ${req.query.user_id};
   `)

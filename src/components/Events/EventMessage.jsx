@@ -14,7 +14,6 @@ export default function EventMessage({message}) {
         params: { user_id },
       };
       const response = await axios(config);
-      console.log(response.data[0]);
       setPosterInfo(response.data[0]);
       setProfilePic(response.data[0].profile_pic_url);
     } catch (e) {
@@ -26,20 +25,24 @@ export default function EventMessage({message}) {
     getPosterInfo(message.poster_id);
   }, []);
 
+  const picture = ((message.photo_url && !message.photo_url === 'undefined') ? <img style={{ height: '100px' }} src={message.photo_url} alt="pic in posted message" /> : null);
+
   return (
     <div style={{ margin: '10px 20px' }}>
-      <RoundImg src={profilePic} />
-      <span style={{ marginRight: '20px' }}>{posterInfo.first_name}</span>
-      <span>{message.posted_time}</span>
-      <p>{message.text}</p>
-      <img style={{ height: '100px' }} src={message.photo_url || null} alt="pic in posted message" />
+      <RoundImg src={profilePic} style={{ display: 'inline-block', marginTop: '20px' }} />
+      <span style={{ margin: '50px', fontSize: '40px' }}>{message.text}</span>
+      <div style={{ marginTop: '20px', marginLeft: '20px' }}>
+        <span style={{ marginRight: '20px', display: 'inline', fontSize: '25px' }}><u>{posterInfo.first_name}</u></span>
+        <span>{message.posted_time}</span>
+      </div>
+      {picture}
     </div>
   );
 }
 
 const RoundImg = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 3%;

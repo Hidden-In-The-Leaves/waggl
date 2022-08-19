@@ -5,7 +5,6 @@ import axios from "axios";
 export default function MapContainer({address}) {
   const [location, setLocation] = useState({ lat: 80.3036, lng: 25.9861 });
   const getLongLat = async () => {
-    console.log(address);
     axios
       .get(
         `http://api.positionstack.com/v1/forward?access_key=668e77a4799ab05a22e61b5b4c091091&query=
@@ -13,7 +12,6 @@ export default function MapContainer({address}) {
       )
       .then((res) => {
         const latLong = res.data.data[0];
-        console.log(latLong);
         setLocation({
           lat: Number(latLong.latitude),
           lng: Number(latLong.longitude),
