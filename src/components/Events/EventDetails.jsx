@@ -5,7 +5,7 @@ import axios from 'axios';
 import Participant from './Participant';
 import EventMessage from './EventMessage';
 import NavBar from '../NavBar/NavBar';
-import AddEvent from './AddEvent';
+import EditModal from './EditModal';
 import MapContainer from './Map';
 
 export default function EventDetails(props) {
@@ -21,6 +21,7 @@ export default function EventDetails(props) {
     'https://media.istockphoto.com/photos/labradoodle-dog-ordering-online-by-internet-for-home-delivery-picture-id1365754761',
   );
   const [textInput, setTextInput] = useState('');
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const getEventMessages = async (event_id) => {
     try {
@@ -102,6 +103,8 @@ export default function EventDetails(props) {
     }
   };
 
+  const editModal = (showEditModal ? <EditModal event_id={currentEvent} close={setShowEditModal}/> : null);
+
   useEffect(() => {
     getEventInfo(currentEvent);
     getAttendees(currentEvent);
@@ -110,7 +113,7 @@ export default function EventDetails(props) {
 
   return (
     <div id="event-details-container">
-      <AddEvent />
+      {editModal}
       <div
         style={{
           display: 'inline-block',
@@ -122,6 +125,7 @@ export default function EventDetails(props) {
       >
         <EditButton
           type="button"
+          onClick={() => setShowEditModal(true)}
         >
           Edit Event
         </EditButton>
