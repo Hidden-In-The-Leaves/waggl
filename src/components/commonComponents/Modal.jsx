@@ -7,9 +7,7 @@ export default function Modal({ open, title, onClose, children }) {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>{title}</DialogTitle>
-      <DialogContent>
-        {children}
-      </DialogContent>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
-  )
+  );
 }
