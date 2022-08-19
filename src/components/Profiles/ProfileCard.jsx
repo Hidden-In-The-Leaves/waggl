@@ -40,7 +40,7 @@ export default function SmallCard({ pfp, handleEditOpen }) {
         </div>
     </DetailsContainer>
     <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=localhost:3000/Profile/19&size=150x150&bgcolor=FF8700&color=fff`} />
+      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/Profile/19&size=150x150&bgcolor=FF8700&color=fff`} />
     </Modal>
    </ProfileCard>
   )
