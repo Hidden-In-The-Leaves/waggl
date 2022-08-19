@@ -22,9 +22,7 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:5000/api/messages?user1=${user1.id}&user2=${user2.id}`
-      )
+      .get(`/api/messages?user1=${user1.id}&user2=${user2.id}`)
       .then(({ data }) => {
         setMessagesList(data);
       })
@@ -45,15 +43,15 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
       let messageData = {
         sender_id: user1.id,
         receiver_id: user2.id,
-        from: user1.username,
-        to: user2.username,
+        from: user1.email,
+        to: user2.email,
         message_text: message,
         posted_time: new Date(),
       };
       socket.emit('send_private_message', messageData);
       setMessagesList([...messagesList, messageData]);
       axios
-        .post(`http://localhost:5000/api/messages`, messageData)
+        .post(`/api/messages`, messageData)
         .then(() => setMessage(''))
         .catch((err) => console.log(err));
     }

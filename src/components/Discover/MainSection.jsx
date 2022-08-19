@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Title } from './Chat.styled';
 import { getDistance, sortBy } from '../../helpers/geoLocation';
+import { useUserStore } from '../Store.js';
 import {
   MainContainer,
   LikeContainer,
@@ -25,11 +26,12 @@ export default function MainSection({
   updateReceiver,
 }) {
   const navigate = useNavigate();
+  const userInfo = useUserStore((state) => state.userInfo);
   const [matchList, setMatchList] = useState([]);
-  const [index, setIndex] = useState(1);
-  const [pointer, setPointer] = useState(1);
+  const [index, setIndex] = useState(0);
+  const [pointer, setPointer] = useState(0);
   const [imageIndex, setImageIndex] = useState(0);
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [range, setRange] = useState(10);
   const currentPosition = {
     lat: lat,
@@ -38,30 +40,35 @@ export default function MainSection({
   useEffect(() => {
     if (lat && lng) {
       axios
-        .get('http://localhost:5000/api/test')
+        .get('/api/test')
         .then(({ data }) => {
+          console.log('-----', data);
+          data = data.filter((d) => d.owner_id !== userInfo.id);
+          console.log('a-----', data);
           const list = sortBy(range, currentPosition, getDistance, data);
           getDefaultMatch(list[1]);
+          // setMatchList(list);
           setMatchList(list);
+          // console.log(list);
         })
         .catch((err) => console.log(err));
     }
-  }, [lat, lng, range]);
+  }, [lat, lng, range, userInfo.id]);
   const clickHandler = (data, like) => {
     const likeData = {
-      from_id: matchList[0][1].owner_id,
+      from_id: userInfo.id,
       to_id: data.id,
       like_level: like,
     };
     axios
-      .post(`http://localhost:5000/api/test/like`, likeData)
+      .post(`/api/test/like`, likeData)
       .then(() => {
         if (like === 0) {
           setIndex(index + 1 === matchList.length ? index : index + 1);
           setPointer(pointer + 1);
           setImageIndex(0);
-          updateMatchList();
         }
+        updateMatchList();
       })
       .catch((err) => console.log(err));
     if (like === 1 || like === 2) {
@@ -79,9 +86,9 @@ export default function MainSection({
     navigate('/DiscoverMain/1');
   };
   const updateImageIndex = (i) => {
-    console.log(i);
     setImageIndex(i);
   };
+  console.log(userInfo);
   return (
     <MainContainer>
       <Title>Discover</Title>
@@ -100,7 +107,7 @@ export default function MainSection({
       )}
       {matchList.length > 1 && (
         <p style={{ textAlign: 'center' }}>
-          {index}/{matchList.length - 1}
+          {index + 1}/{matchList.length}
         </p>
       )}
       {pointer === matchList.length && matchList.length !== 1 && (

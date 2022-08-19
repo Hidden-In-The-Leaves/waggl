@@ -73,7 +73,7 @@ export const MessageFromOther = styled.div`
   background-color: rgba(217, 217, 217, 0.35);
   font-size: 20px;
   justify-align: center;
-  margin: 10px 5%;
+  margin: 10px;
   text-align: center;
 `;
 

@@ -25,7 +25,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
   }, [user.id, updateList]);
   const getMatchList = () => {
     axios
-      .get(`http://localhost:5000/api/test/like?userid=${user.id}`)
+      .get(`/api/test/like?userid=${user.id}`)
       .then(({ data }) => {
         updateReceiver(data[0]);
         setMatchList(data);
@@ -45,7 +45,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
         to_id: data.id,
       };
       axios
-        .post(`http://localhost:5000/api/test/match`, config)
+        .post(`/api/test/match`, config)
         .then(() => getMatchList())
         .catch((err) => console.log(err));
     }

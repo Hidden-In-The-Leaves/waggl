@@ -5,7 +5,8 @@ import MatchList from './MatchList';
 import MainSection from './MainSection';
 import { useUserStore } from '../Store.js';
 import io from 'socket.io-client';
-const socket = io('http://localhost:5000');
+// const socket = io('http://localhost:5000');
+const socket = io();
 
 export default function Chat() {
   const [receiver, setReceiver] = useState({});

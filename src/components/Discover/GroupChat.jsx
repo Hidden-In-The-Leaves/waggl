@@ -28,31 +28,23 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
     axios
       .get(
         `
-      http://localhost:5000/api/messages/group?packId=${pack_id}`
+      /api/messages/group?packId=${pack_id}`
       )
       .then(({ data }) => {
         setMessageList(data);
       })
       .catch((err) => console.log(err));
     axios
-      .get(`http://localhost:5000/api/messages/pack/user?userid=${sender.id}`)
+      .get(`/api/messages/pack/user?userid=${sender.id}`)
       .then(({ data }) => {
         setCurrentUser(data);
       })
       .catch((err) => console.log(err));
-    getLocation();
   }, [pack_id]);
   socket.on('receive_message', (message) => {
     console.log(message, messageList);
     setMessageList([...messageList, message]);
   });
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((p) => {
-        console.log('lat: ', p.coords.latitude, 'lng: ', p.coords.longitude);
-      });
-    }
-  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -102,17 +94,24 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
                 </MessageContainer>
               )}
               {m.users.user_id !== sender.id && (
-                <div style={{ display: 'flex' }}>
-                  <CircleImage src={m.users.image} />
-                  <MessageFromOtherContainer>
-                    <Message>
-                      {m.users.first_name} {m.users.last_name}
-                    </Message>
-                    <MessageFromOther style={{ width: '100%' }}>
-                      <Message>{m.message_text}</Message>
-                    </MessageFromOther>
-                  </MessageFromOtherContainer>
-                </div>
+                <>
+                  <p style={{ textAlign: 'center' }}>
+                    {new Date(m.posted_time).toLocaleString()}
+                  </p>
+                  <div style={{ display: 'flex', paddingLeft: '5%' }}>
+                    <CircleImage src={m.users.image} />
+                    <MessageFromOtherContainer>
+                      <Message>
+                        {m.users.first_name} {m.users.last_name}
+                        {'   '}
+                      </Message>
+
+                      <MessageFromOther>
+                        <Message>{m.message_text}</Message>
+                      </MessageFromOther>
+                    </MessageFromOtherContainer>
+                  </div>
+                </>
               )}
               <div ref={bottomRef}></div>
             </div>
