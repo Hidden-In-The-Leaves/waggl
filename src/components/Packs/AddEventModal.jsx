@@ -40,19 +40,19 @@ function AddEventModal({
         <h3>Event Description</h3>
       </div>
       <div>
-        <input type="text" style={{ width: '100%' }} value={eventDescription} placeholder="Enter you nickname here" onChange={(e) => { setEventDescription(e.currentTarget.value); }} />
+        <input type="text" style={{ width: '100%' }} value={eventDescription} placeholder="Enter event description here" onChange={(e) => { setEventDescription(e.currentTarget.value); }} />
       </div>
       <div>
         <h3>Event Start Time</h3>
       </div>
       <div>
-        <input type="text" style={{ width: '100%' }} value={eventStart} placeholder="Enter your email address here" onChange={(e) => { setEventStart(e.currentTarget.value); }} />
+        <input type="text" style={{ width: '100%' }} value={eventStart} placeholder="Enter event start time here" onChange={(e) => { setEventStart(e.currentTarget.value); }} />
       </div>
       <div>
         <h3>Event End Time</h3>
       </div>
       <div>
-        <input type="text" style={{ width: '100%' }} value={eventEnd} placeholder="Enter your email address here" onChange={(e) => { setEventEnd(e.currentTarget.value); }} />
+        <input type="text" style={{ width: '100%' }} value={eventEnd} placeholder="Enter event end time here" onChange={(e) => { setEventEnd(e.currentTarget.value); }} />
       </div>
       <div>
         <p>
