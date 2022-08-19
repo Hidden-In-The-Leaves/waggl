@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
+
+import { usePackStore, usePostsStore, useEventsStore } from '../HomePage/Store';
+import { useUserStore } from '../Store';
 import Participant from './Participant';
 import EventMessage from './EventMessage';
 import NavBar from '../NavBar/NavBar';
@@ -9,9 +18,12 @@ import EditModal from './EditModal';
 import MapContainer from './Map';
 
 export default function EventDetails(props) {
-  const [currentUser, setCurrentUser] = useState(1);
+  const userInfo = useUserStore((state) => state.userInfo);
+
+  const { eventid } = useParams();
+  const [currentUser, setCurrentUser] = useState(userInfo.id);
   const [currentPack, setCurrentPack] = useState(3);
-  const [currentEvent, setCurrentEvent] = useState(6);
+  const [currentEvent, setCurrentEvent] = useState(eventid);
   const [eventInfo, setEventInfo] = useState({});
   const [attendees, setAttendees] = useState([]);
   const [packInfo, setPackInfo] = useState({});
@@ -102,6 +114,7 @@ export default function EventDetails(props) {
       };
       const response = await axios(config);
       setEventInfo(response.data[0]);
+      setEventPic(response.data[0].event_profile_pic_url);
       getPackInfo(response.data[0].pack_id);
     } catch (e) {
       console.log('error getting events', e);
@@ -170,7 +183,7 @@ export default function EventDetails(props) {
             justifyContent: 'center',
             height: '250px',
             position: 'relative',
-            background: 'orange',
+            background: '#FF8700',
             borderRadius: '10px',
           }}
         >
@@ -210,6 +223,7 @@ export default function EventDetails(props) {
             >
               Make Post
             </EventButton>
+            <p>Add a picture to your post:</p>
             <input id="input" type="file" onChange={() => translateImagesToURLs()} />
           </div>
         </div>
@@ -255,7 +269,7 @@ const EditButton = styled.button`
 `;
 
 const EventButton = styled.button`
-  background: orange;
+  background: #FF8700;
   color: white;
   margin: 10px;
   border-radius: 10px;
