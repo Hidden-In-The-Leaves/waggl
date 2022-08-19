@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import { CookiesProvider } from 'react-cookie';
 import './main.css';
 
 import NavBar from './components/NavBar/NavBar';
@@ -32,10 +33,12 @@ const PackVideoChat = lazy(() => import('./components/VideoChat/VideoChat.jsx'))
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+
 root.render(
   //The whole App is wrapped in a browser router component
   //which holds all of the "routes" which are basically endpoints
   <BrowserRouter>
+    <CookiesProvider>
     <NavBar />
     {/* for react routers code splitting */}
     <Suspense fallback={<div>Loading...</div>}>
@@ -64,5 +67,6 @@ root.render(
         <Route path="/PackVideoChat/:packid" element={<PackVideoChat />} />
       </Routes>
     </Suspense>
+    </CookiesProvider>
   </BrowserRouter>
 );

@@ -24,6 +24,7 @@ const testRoutes = require('./routes/testRoutes');
 const socketRouter = require('./routes/socketRouter')(io);
 const messageRoutes = require('./routes/messageRoutes');
 const videoRoutes = require('./routes/videoRoutes');
+const sessionRoutes = require('./routes/sessionRoutes');
 
 db.connect((err) => {
   if (err) {
@@ -47,6 +48,7 @@ app.use('/api/user', userRoutes);
 // for test
 app.use('/api/test', testRoutes);
 app.use('/api/video', videoRoutes);
+app.use('/api/session', sessionRoutes);
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
