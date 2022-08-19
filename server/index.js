@@ -54,7 +54,9 @@ app.use('/api/profile', profileRoutes);
 app.use('/api/session', sessionRoutes);
 
 console.log('port is ', PORT);
-app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
+app.get('/*', (req, res) =>
+  res.sendFile(path.join(__dirname, '../dist/index.html'))
+);
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:
