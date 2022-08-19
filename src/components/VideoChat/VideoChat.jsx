@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 // import { v4 as uuidv4 } from 'uuid';
 import Room from './Room';
 import { useUserStore } from '../Store';
@@ -11,9 +10,9 @@ import { Title, Button } from '../../styledComponents';
 // useCallback memoizes functions.
 // doesn't get redefined everytime this component is rendered/called.
 
-export default function VideoChat( { pack = { name: 'test', url: 'https://images.unsplash.com/photo-1561037404-61cd46aa615b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80', description: 'pack for test' } }) {
-  // const [pack, setPack] = useState({});
-  console.log(pack)
+export default function VideoChat() {
+  const [pack, setPack] = useState({});
+  // console.log(pack)
   const [token, setToken] = useState(null);
   const userInfo = useUserStore((state) => state.userInfo);
 
@@ -37,11 +36,11 @@ export default function VideoChat( { pack = { name: 'test', url: 'https://images
   }, [userInfo]);
 
 
-  // const getPackDetails = () => {
-  //   axios.get(`/api/packs/${packid}`)
-  //     .then((result) => setPack(result.data[0]))
-  //     .catch((err) => console.log('error fetching pack details', err));
-  // };
+  const getPackDetails = () => {
+    axios.get(`/api/packs/${packid}`)
+      .then((result) => setPack(result.data[0]))
+      .catch((err) => console.log('error fetching pack details', err));
+  };
 
   const exit = useCallback(() => {
     setToken(null);
@@ -51,7 +50,7 @@ export default function VideoChat( { pack = { name: 'test', url: 'https://images
     if (userInfo.id) {
       getToken();
     }
-    // getPackDetails();
+    getPackDetails();
     return () => exit();
   }, []);
 
@@ -59,9 +58,9 @@ export default function VideoChat( { pack = { name: 'test', url: 'https://images
     <div style={{ width: '66%', margin: 'auto', paddingBottom: '50px' }}>
       <TitleBar>
         <FlexContainer>
-          <RoundImg src={pack.url} />
+          <RoundImg src={pack.pack_profile_pic_url} />
           <FlexColumn>
-            <Title style={{ margin: '0' }}>{pack.name}</Title>
+            <Title style={{ margin: '0' }}>{pack.pack_name}</Title>
             <div style={{ fontSize: '14px' }}>{pack.description}</div>
           </FlexColumn>
         </FlexContainer>
@@ -72,7 +71,7 @@ export default function VideoChat( { pack = { name: 'test', url: 'https://images
           </Link>
         )}
       </TitleBar>
-      {/* <Room pack={pack} token={token} /> */}
+      <Room pack={pack} token={token} />
     </div>
   );
 }

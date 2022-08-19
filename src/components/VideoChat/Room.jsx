@@ -68,18 +68,20 @@ export default function Room({ pack, token }) {
 
   return (
     <Container>
-      <div style={{ fontSize: '20px', padding: '20px', textAlign: 'center', fontWeight: 'bold' }}>Video Chat</div>
       {token && (
-        <ParticipantsContainer>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', flex: '1 0 21%' }}>
-            {room && (
-              <>
-                <Participant participant={room.localParticipant} type="self" />
-                {participants.map((p) => <Participant key={p.identity} participant={p} />)}
-              </>
-            )}
-          </div>
-        </ParticipantsContainer>
+        <>
+        <div style={{ fontSize: '20px', padding: '20px', textAlign: 'center', fontWeight: 'bold' }}>Video Chat</div>
+          <ParticipantsContainer>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', flex: '1 0 21%' }}>
+              {room && (
+                <>
+                  <Participant participant={room.localParticipant} type="self" />
+                  {participants.map((p) => <Participant key={p.identity} participant={p} />)}
+                </>
+              )}
+            </div>
+          </ParticipantsContainer>
+        </>
       )}
       {!token && (
         <Ended>
@@ -94,7 +96,7 @@ const Ended = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 60vh;
   font-size: 28px;
   font-weight: bold;
 `;
