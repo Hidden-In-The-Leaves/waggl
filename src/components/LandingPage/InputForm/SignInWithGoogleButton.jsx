@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 // import { signInWithGoogle } from '../../../Firebase/firebase-config';
 import { GoogleButton, CnneterImg, CenterSpan } from '../StyledFormComponents';
@@ -16,7 +15,7 @@ export default function SignInWithGoogle({ value, userActionHandler }) {
           height="20"
           width="20"
         />
-        {'\xa0\xa0\xa0\xa0'}
+
         <CenterSpan>{value}</CenterSpan>
       </GoogleButton>
     </>
