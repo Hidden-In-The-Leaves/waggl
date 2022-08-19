@@ -158,10 +158,10 @@ export default function SignUp() {
           <Link to="/LogIn">
             <LinkButton type="button">Login</LinkButton>
           </Link>
-          <br />
+          {/* <br />
           <Link to="/">
             <Button>This is a Link to App "Page"!</Button>
-          </Link>
+          </Link> */}
         </ContainerHalf>
       </Cols>
     </div>
