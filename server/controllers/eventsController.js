@@ -9,7 +9,8 @@ module.exports = {
       FROM events e
       INNER JOIN packs p ON e.pack_id = p.id
       WHERE p.id IN (SELECT up.pack_id FROM users_packs_join up WHERE up.user_id = $1)
-      AND e.end_time > (SELECT now());
+      AND e.end_time > (SELECT now())
+      ORDER BY e.start_time;
     `, [query.user_id])
       .then((result) => {
         res.send(result.rows);
