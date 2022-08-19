@@ -2,12 +2,14 @@ import styled from 'styled-components';
 
 export const HalfImg = styled.img`
   object-fit:cover;
+  // top:-3vh;
 `;
 
 export const Cols = styled.div`
   display: flex;
   flex-direction: row;
   position:relative;
+  top:-3vh;
 `;
 
 export const LinkButton = styled.button`
@@ -54,7 +56,7 @@ export const GoogleButton = styled.div`
 `;
 
 export const ContainerHalf = styled.div`
-  padding: 3% 10%;
+  padding: 5% 10%;
   border-left: 0.5px solid #d9d9d9;
   border-right: 0.5px solid #d9d9d9;
   box-sizing: border-box;
@@ -65,13 +67,14 @@ export const ContainerHalf = styled.div`
 export const ContainerHalfForImage = styled.div`
   border-left: 0.5px solid #d9d9d9;
   border-right: 0.5px solid #d9d9d9;
-  height: 92vh;
+  height: 100vh;
   width: 50%;
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
+  // top:-3vh;
 `;
 
-export const CnneterImg = styled.img`
+export const CenterImg = styled.img`
   top: 25%;
   left: 25%;
   position: absolute;
