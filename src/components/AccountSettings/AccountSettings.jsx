@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCookies } from 'react-cookie';
 
-// import useUserStore from '../Store';
 import UserInfoSettings from './UserInfoSettings';
 import LocationInfoSettings from './LocationInfoSettings';
 import PrivacySettings from './PrivacySettings';
@@ -58,9 +57,7 @@ export default function AccountSettings() {
   // console.log(useUserStore);
 
   if (
-    onUserInfo === true ||
-    onLocationInfo === true ||
-    onPrivacySettings === true
+    onUserInfo === true || onLocationInfo === true || onPrivacySettings === true
   ) {
     return (
       <div style={{ textAlign: 'center', alignItems: 'center' }}>
@@ -102,8 +99,8 @@ export default function AccountSettings() {
           </RowButtons>
 
           {onUserInfo && <UserInfoSettings />}
-          {onLocationInfo && <LocationInfoSettings />}
-          {onPrivacySettings && <PrivacySettings />}
+          {onLocationInfo && <LocationInfoSettings id={userInfo.id} />}
+          {onPrivacySettings && <PrivacySettings id={userInfo.id} />}
         </Container>
       </div>
     );
