@@ -35,6 +35,7 @@ export default function AddProfile({ handleClose, renderList }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log('herer')
     const uploadPromises = [];
     images.forEach((image) => {
       uploadPromises.push(uploadPhoto(image));
@@ -42,6 +43,10 @@ export default function AddProfile({ handleClose, renderList }) {
 
     Promise.all(uploadPromises)
       .then((urls) => {
+        const per = [];
+        for (let key in personalities) {
+          if (personalities[key]) per.push(key);
+        }
         const config = {
           method: 'POST',
           url: '/api/profile',
@@ -49,7 +54,7 @@ export default function AddProfile({ handleClose, renderList }) {
             ...formValue,
             photos: urls,
             user_id: userInfo.id,
-            personality: personalities,
+            personalities: per,
           },
         };
         axios(config)
