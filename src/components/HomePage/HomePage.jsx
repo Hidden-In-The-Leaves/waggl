@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PackBar from './PackBar/PackBar';
-import NavBar from '../NavBar/NavBar';
 import Feed from './Feed/Feed';
 import Events from './Events/Events';
 
@@ -23,7 +22,6 @@ export default function HomePage() {
 
   return (
     <PageContainer>
-      <NavBar type="home" />
       {/* <h1>This is the Home Page!</h1> */}
       <Cols>
         <PackBar />

@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const cors = require('cors');
 
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,11 +13,15 @@ const io = require('socket.io')(server, {
     origin: '*',
   },
 });
+
 const db = require('../database/postgres');
 const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 const packsRoutes = require('./routes/packsRoutes');
-const eventsRoutes = require('./routes/eventsRoutes');
 const userRoutes = require('./routes/userRoutes');
+const eventsRoutes = require('./routes/eventsRoutes');
+const testRoutes = require('./routes/testRoutes');
+const socketRouter = require('./routes/socketRouter')(io);
+const messageRoutes = require('./routes/messageRoutes');
 const videoRoutes = require('./routes/videoRoutes');
 
 db.connect((err) => {
@@ -29,25 +32,20 @@ db.connect((err) => {
   }
 });
 app.use(express.json());
+app.use(cors());
 // const socketRouter = require('./routes/socketRouter')(io);
 
-const messageRoutes = require('./routes/messageRoutes');
-
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(cors());
-// app.use('/api/message', () => socketRouter());
+app.use('/api/message', () => socketRouter());
 app.use('/api/messages', messageRoutes);
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../dist')));
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../dist')));
+// app.use('/api/message', () => socketRouter());
 
 app.use('/api/accountSettings', accountSettingsRoutes);
-
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
 app.use('/api/user', userRoutes);
+// for test
+app.use('/api/test', testRoutes);
 app.use('/api/video', videoRoutes);
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
