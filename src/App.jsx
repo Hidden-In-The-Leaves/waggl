@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import NavBar from './components/NavBar/NavBar';
+// import NavBar from './components/NavBar/NavBar';
 // import { Button } from './styledComponents';
 
 export default function App() {
   return (
     <Main>
-      <NavBar type="welcome" />
+      {/* <NavBar type="welcome" /> */}
       <Center>
         {' '}
         <h1>This is the app!</h1>
@@ -15,7 +15,6 @@ export default function App() {
           <Button type="button">Join Today</Button>
         </Link>
       </Center>
-
       {/* to use react router you can wrap elements in a link component
       and use a route by setting attribute "to" equal
       to a route that is found in index.js */}
@@ -25,45 +24,50 @@ export default function App() {
       <Link to="/SignUp">
         <button type="button">This is a Link to the Sign Up page!</button>
       </Link>
-      <Link to="/HomePage/:userid">
+      <Link to="/HomePage">
         <button type="button">This is a Link to the Home page!</button>
       </Link>
       <Link to="/AboutUs">
         <button type="button">This is a Link to the About Us!</button>
       </Link>
-      <Link to="/PackDetails/:packid">
+      <Link to="/PackDetails/1">
         <button type="button">This is a Link to the Pack Details page!</button>
       </Link>
-      <Link to="/PackGroupChat/:packid">
+      <Link to="/PackGroupChat/2">
         <button type="button">
           This is a Link to the Pack Group Chat page!
         </button>
       </Link>
-      <Link to="/EventDetails/:eventid">
+      <Link to="/EventDetails/1">
         <button type="button">This is a Link to the Event Details page!</button>
       </Link>
-      <Link to="/DiscoverMain/:userid">
+      <Link to="/DiscoverMain">
         <button type="button">This is a Link to the Discover Main page!</button>
       </Link>
-      <Link to="/DiscoverChat/:chatid">
+      {/* <Link to="/DiscoverChat">
         <button type="button">This is a Link to the Discover Chat page!</button>
-      </Link>
-      <Link to="/ProfileList/:userid">
+      </Link> */}
+      <Link to="/ProfileList/1">
         <button type="button">This is a Link to the Profile List page!</button>
       </Link>
       <Link to="/Profile/:dogid">
         <button type="button">This is a Link to a profile page!</button>
       </Link>
-      <Link to="/ProfileSettings/:userid">
+      <Link to="/ProfileSettings/1">
         <button type="button">
           This is a Link to the Profile Settings page!
         </button>
       </Link>
-      <Link to="/AccountSettings/:userid">
+      <Link to="/AccountSettings/1">
         <button type="button">
           This is a Link to the Account Settings page!
         </button>
-      </Link> */}
+      </Link>
+      <Link to="/PackVideoChat/:packid">
+        <button type="button">
+          This is a Link to the Pack Video Chat page!
+        </button>
+    </Link>{' '}
     </Main>
   );
 }

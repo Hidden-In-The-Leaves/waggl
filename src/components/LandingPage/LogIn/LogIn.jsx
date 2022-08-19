@@ -95,7 +95,7 @@ export default function LogIn() {
   // ----------------- Render ------------------
   return (
     <div>
-      <NavBar type="welcome" />
+      {/* <NavBar type="welcome" /> */}
       <Cols>
         <ContainerHalfForImage>
           <HalfImg
