@@ -25,19 +25,22 @@ module.exports = {
   getOtherPacks: ({ query }, res) => {
     db.query(
       `
-      SELECT P.ID,
-        P.PACK_NAME AS NAME,
-        P.CALENDAR_ID,
-        P.PACK_PROFILE_PIC_URL AS URL,
-        P.DESCRIPTION
-      FROM PACKS P
-      INNER JOIN USERS_PACKS_JOIN U ON P.ID = U.PACK_ID
-      WHERE PACK_ID not in
-          (SELECT PACK_ID
-            FROM PACKS P2
-            INNER JOIN USERS_PACKS_JOIN U2 ON P2.ID = U2.PACK_ID
-            WHERE U2.USER_ID = $1)
-      ORDER BY LOWER(P.PACK_NAME);
+    WITH RES AS
+      (SELECT DISTINCT P.ID,
+          P.PACK_NAME AS NAME,
+          P.CALENDAR_ID,
+          P.PACK_PROFILE_PIC_URL AS URL,
+          P.DESCRIPTION
+        FROM PACKS P
+        LEFT JOIN USERS_PACKS_JOIN U ON P.ID = U.PACK_ID
+        WHERE PACK_ID not in
+            (SELECT PACK_ID
+              FROM PACKS P2
+              INNER JOIN USERS_PACKS_JOIN U2 ON P2.ID = U2.PACK_ID
+              WHERE U2.USER_ID = $1) )
+    SELECT *
+    FROM RES
+    ORDER BY LOWER(NAME);
     `,
       [query.user_id]
     )

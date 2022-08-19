@@ -21,10 +21,6 @@ export const useUserStore = create((set) => ({
     // firstName: 'test',
     // lastName: 'test',
     // email: 'test@gmail.com',
-    id: 2,
-    firstName: 'test2',
-    lastName: 'test2',
-    email: 'test2@gmail.com',
   },
   setUserInfo: (userInfo) => set((state) => ({ userInfo })),
 }));
