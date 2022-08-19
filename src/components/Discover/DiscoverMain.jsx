@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import DiscoverChat from './DiscoverChat';
 import MatchList from './MatchList';
 import MainSection from './MainSection';
@@ -17,8 +17,12 @@ export default function Chat() {
   const [showInfo, setShowInfo] = useState(chat === undefined ? true : false);
   const [updateList, setUpdateList] = useState(true);
   const userInfo = useUserStore((state) => state.userInfo);
-
-  console.log(receiver);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userInfo.id) {
+      navigate('/Login');
+    }
+  }, [userInfo.id]);
   const getDefaultMatch = (data) => {
     setMatch(data);
   };
@@ -45,9 +49,13 @@ export default function Chat() {
   };
   const updateMatchList = () => {
     setUpdateList(!updateList);
+    if (!receiver) {
+      setReceiver(updateList[0]);
+    }
   };
   return (
     <>
+      {}
       <div style={{ display: 'flex' }}>
         <MatchList
           user={userInfo}

@@ -42,9 +42,7 @@ export default function MainSection({
       axios
         .get('/api/test')
         .then(({ data }) => {
-          console.log('-----', data);
           data = data.filter((d) => d.owner_id !== userInfo.id);
-          console.log('a-----', data);
           const list = sortBy(range, currentPosition, getDistance, data);
           getDefaultMatch(list[1]);
           // setMatchList(list);
@@ -88,7 +86,6 @@ export default function MainSection({
   const updateImageIndex = (i) => {
     setImageIndex(i);
   };
-  console.log(userInfo);
   return (
     <MainContainer>
       <Title>Discover</Title>

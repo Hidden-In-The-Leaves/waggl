@@ -33,7 +33,6 @@ export default function MatchList({ user, updateReceiver, updateList }) {
       .catch((err) => console.log(err));
   };
   const clickHandler = (data) => {
-    console.log(data);
     setSelected(data);
     updateReceiver(data);
     navigate('/DiscoverMain/1');

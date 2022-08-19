@@ -14,7 +14,6 @@ export default function DogDetail({ dog, updateImageIndex }) {
   useEffect(() => {
     setImageIndex(0);
   }, [dog]);
-  console.log(dog);
   return (
     <SectionContainer>
       <ImageContainer>
