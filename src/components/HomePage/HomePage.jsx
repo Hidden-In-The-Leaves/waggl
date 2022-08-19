@@ -2,26 +2,26 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PackBar from './PackBar/PackBar';
-import NavBar from '../NavBar/NavBar';
 import Feed from './Feed/Feed';
 import Events from './Events/Events';
 
 import { usePackStore, usePostsStore, useEventsStore } from './Store';
+import { useUserStore } from '../Store';
 
 export default function HomePage() {
   const resetPacks = usePackStore((state) => state.resetPack);
   const getPosts = usePostsStore((state) => state.getPosts);
   const getEvents = useEventsStore((state) => state.getEvents);
+  const userInfo = useUserStore((state) => state.userInfo);
 
   useEffect(() => {
-    resetPacks(1);
-    getPosts(1);
-    getEvents(1);
+    resetPacks(userInfo.id);
+    getPosts(userInfo.id);
+    getEvents(userInfo.id);
   }, []);
 
   return (
     <PageContainer>
-      <NavBar type="home" />
       {/* <h1>This is the Home Page!</h1> */}
       <Cols>
         <PackBar />
