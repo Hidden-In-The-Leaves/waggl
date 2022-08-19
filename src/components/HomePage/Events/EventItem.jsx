@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import isTomorrow from 'date-fns/isTomorrow';
-import { SectionTitle } from '../../../styledComponents';
 
 const formatter = new Intl.DateTimeFormat('en', { month: 'short' });
 
@@ -28,38 +27,40 @@ export default function EventItem({ data }) {
   endTime = `${endTime[0].substring(0, endTime[0].length - 3)} ${endTime[1]}`;
 
   // add code below to link car to event detail
-  /* <Link to={`/EventDetails/${data.id}`}> </Link> */
+  /*  </Link> */
   return (
-    <CardContainer>
-      <DateContainer>
-        <StyledText fontSize="1.3rem" fontWeight="bold">
-          {startDate.getDate()}
-        </StyledText>
-        <StyledText fontSize="1.1rem">
-          {formatter.format(startDate)}
-        </StyledText>
-      </DateContainer>
-      <DetailsContainer>
-        <StyledText fontSize="16px" padding="1% 0" fontWeight="600">
-          {data.event_name}
-        </StyledText>
-        <StyledText>
-          {isTomorrow(startDate) ? (
-            <>Tomorrow</>
-          ) : (
-            DayOfWeek[startDate.getDay()]
-          )}
-          {`, ${startTime} - ${endTime}`}
-        </StyledText>
-        <StyledText>
-          {`${data.city}, ${data.state}`}
-        </StyledText>
-        <StyledText>
-          <b>Hosted by:</b>
-          {` ${data.pack_name}`}
-        </StyledText>
-      </DetailsContainer>
-    </CardContainer>
+    <Link to={`/EventDetails/${data.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+      <CardContainer>
+        <DateContainer>
+          <StyledText fontSize="1.3rem" fontWeight="bold">
+            {startDate.getDate()}
+          </StyledText>
+          <StyledText fontSize="1.1rem">
+            {formatter.format(startDate)}
+          </StyledText>
+        </DateContainer>
+        <DetailsContainer>
+          <StyledText fontSize="16px" padding="1% 0" fontWeight="600">
+            {data.event_name}
+          </StyledText>
+          <StyledText>
+            {isTomorrow(startDate) ? (
+              <>Tomorrow</>
+            ) : (
+              DayOfWeek[startDate.getDay()]
+            )}
+            {`, ${startTime} - ${endTime}`}
+          </StyledText>
+          <StyledText>
+            {`${data.city}, ${data.state}`}
+          </StyledText>
+          <StyledText>
+            <b>Hosted by:</b>
+            {` ${data.pack_name}`}
+          </StyledText>
+        </DetailsContainer>
+      </CardContainer>
+    </Link>
   );
 }
 

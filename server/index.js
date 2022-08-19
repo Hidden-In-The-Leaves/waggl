@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const cors = require('cors');
+
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -12,14 +13,19 @@ const io = require('socket.io')(server, {
     origin: '*',
   },
 });
+app.use(cors());
+
 const db = require('../database/postgres');
 const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 const packsRoutes = require('./routes/packsRoutes');
+const userRoutes = require('./routes/userRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
 const testRoutes = require('./routes/testRoutes');
 const userRoutes = require('./routes/userRoutes');
-
-dotenv.config();
+const socketRouter = require('./routes/socketRouter')(io);
+const messageRoutes = require('./routes/messageRoutes');
+const videoRoutes = require('./routes/videoRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 
 db.connect((err) => {
   if (err) {
@@ -29,28 +35,25 @@ db.connect((err) => {
   }
 });
 app.use(express.json());
-const socketRouter = require('./routes/socketRouter')(io);
-
-const messageRoutes = require('./routes/messageRoutes');
+// const socketRouter = require('./routes/socketRouter')(io);
 
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(cors());
 app.use('/api/message', () => socketRouter());
 app.use('/api/messages', messageRoutes);
-app.use(express.json());
-app.use(express.static(path.join(__dirname, '../dist')));
+// app.use('/api/message', () => socketRouter());
+
 app.use('/api/accountSettings', accountSettingsRoutes);
 app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
+app.use('/api/user', userRoutes);
 // for test
 app.use('/api/test', testRoutes);
 app.use('/api/user', userRoutes);
-
-app.get('/*', (req, res) =>
-  res.sendFile(path.join(__dirname, '../dist/index.html'))
-);
+app.use('/api/video', videoRoutes);
+app.use('/api/profile', profileRoutes);
 
 console.log('port is ', PORT);
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:

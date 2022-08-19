@@ -28,6 +28,7 @@ const AccountSettings = lazy(() =>
   import('./components/AccountSettings/AccountSettings.jsx')
 );
 const AboutUs = lazy(() => import('./components/AboutUs/AboutUs.jsx'));
+const PackVideoChat = lazy(() => import('./components/VideoChat/VideoChat.jsx'));
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -60,6 +61,7 @@ root.render(
         <Route path="/ProfileSettings/:userid" element={<ProfileSettings />} />
         <Route path="/AccountSettings/:userid" element={<AccountSettings />} />
         <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/PackVideoChat/:packid" element={<PackVideoChat />} />
       </Routes>
     </Suspense>
   </BrowserRouter>

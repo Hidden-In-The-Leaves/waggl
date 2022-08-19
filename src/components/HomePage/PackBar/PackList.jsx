@@ -11,6 +11,7 @@ export default function PackList({ title, packs }) {
         {title}
       </SectionTitle>
       <Scroller>
+        {packs.length === 0 && <div style={{ color: 'grey', paddingTop: '3%' }}>No Packs.</div>}
         {packs.map((pack) => <PackItem key={pack.id} pack={pack} />)}
       </Scroller>
     </Div>
