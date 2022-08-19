@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
+import { useCookies } from 'react-cookie';
 
 import { auth, provider } from '../../../Firebase/firebase-config';
 import {
@@ -21,22 +22,38 @@ import {
 import NavBar from '../../NavBar/NavBar';
 import { getUser } from '../Parse';
 import { useUserStore } from '../../Store';
+import { registerCookie } from '../../../lib/cookie';
 
 export default function LogIn() {
+  const [cookies, setCookie, removeCookie] = useCookies(['session']);
+
+  // ----------------- Zustand States ------------------
   const userInfo = useUserStore((state) => state.userInfo);
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+
+  // ----------------- States ------------------
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const setUser = ({ id, first_name, last_name, email }) => {
+
+  // ----------------- Router Navigate ------------------
+  const navigate = useNavigate();
+
+  // ----------------- Functions ------------------
+  const navigateHome = () => {
+    navigate('/HomePage');
+  };
+
+  const setZustandUser = ({ id, first_name, last_name, email }) => {
     const user = {
       id: id,
       firstName: first_name,
       lastName: last_name,
       email: email,
     };
-    console.log('user ', user);
     setUserInfo(user);
   };
+
+  // ----------------- Event Handlers ------------------
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
   };
@@ -53,27 +70,33 @@ export default function LogIn() {
         ) {
           alert('invaild username or password');
         } else {
-          setUser(response.data[0]);
+          setZustandUser(response.data[0]);
+          (async () => {
+            const sessionId = await registerCookie(response.data[0].id);
+            setCookie('session', sessionId);
+          })();
+          navigateHome();
         }
-        console.log(response.data);
-        console.log(userInfo);
       })
       .catch((error) => {
         console.log('unable to get user information', error);
       });
   };
 
-  const googleLoginClickHandler = (data) => {
-    let gFirst_name, gLast_name, gmail, photoUrl;
+  const googleLoginClickHandler = () => {
+    let gmail;
     signInWithPopup(auth, provider)
       .then((googleUser) => {
-        console.log('Google sign in ', googleUser._tokenResponse);
         gmail = googleUser._tokenResponse.email;
         return getUser(gmail);
       })
       .then((response) => {
-        setUser(response.data[0]);
-        console.log(response.data);
+        setZustandUser(response.data[0]);
+        (async () => {
+          const sessionId = await registerCookie(response.data[0].id);
+          setCookie('session', sessionId);
+        })();
+        navigateHome();
       })
       .catch((error) => {
         alert('Invaild google account');
@@ -81,9 +104,10 @@ export default function LogIn() {
       });
   };
 
+  // ----------------- Render ------------------
   return (
     <div>
-      <NavBar type="welcome" />
+      {/* <NavBar type="welcome" /> */}
       <Cols>
         <ContainerHalfForImage>
           <HalfImg
@@ -114,10 +138,10 @@ export default function LogIn() {
           <Link to="/SignUp">
             <LinkButton type="button">Sign up</LinkButton>
           </Link>
-          <br />
+          {/* <br />
           <Link to="/">
             <Button type="button">This is a Link to App "Page"!</Button>
-          </Link>
+          </Link> */}
         </ContainerHalf>
       </Cols>
     </div>

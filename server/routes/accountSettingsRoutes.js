@@ -3,15 +3,15 @@ const accountSettingsController = require('../controllers/accountSettingsControl
 
 const router = express.Router();
 
-router.route('/userInfo')
+router.route('/userInfo/:id')
   .get(accountSettingsController.getUserInfo)
   .put(accountSettingsController.putUserInfo);
 
-router.route('/privacySettings')
+router.route('/privacySettings/:id')
   .get(accountSettingsController.getPrivacySettings)
   .put(accountSettingsController.putPrivacySettings);
 
-router.route('/locationInfo')
+router.route('/locationInfo/:id')
   .get(accountSettingsController.getLocationInfo)
   .put(accountSettingsController.putLocationInfo);
 
