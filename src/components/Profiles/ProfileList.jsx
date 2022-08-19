@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import NavBar from '../NavBar/NavBar';
 import { Title } from '../../styledComponents.js';
 import AddCard from './AddCard';
 import ProfileCard from './ProfileCard';
@@ -58,8 +57,6 @@ export default function ProfileList(props) {
   ];
   return (
     <PageContainer>
-      {/* <h1>This is the Profile List!</h1> */}
-      <NavBar type="home" />
       <Title>Profiles</Title>
       <div className="card-container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
 
@@ -84,8 +81,9 @@ export default function ProfileList(props) {
 }
 
 const PageContainer = styled.div`
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   max-height: 100vh;
+
   /* display: flex; */
   /* flex-direction: row; */
   /* justify-content: space-between; */
