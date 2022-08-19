@@ -14,6 +14,7 @@ router.route('/others')
   .get(packsController.getOtherPacks);
 
 router.route('/:id')
+  .get(packsController.getPackDetails)
   .delete(packsController.deletePack);
 
 router.route('/posts')

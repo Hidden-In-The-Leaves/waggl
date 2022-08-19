@@ -152,4 +152,16 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  getPackDetails: (req, res) => {
+    db.query(`
+      SELECT * FROM packs WHERE id = $1
+    `, [req.params.id])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack details', err);
+        res.sendStatus(500);
+      });
+  },
 };
