@@ -29,11 +29,15 @@ export default function ProfileList(props) {
       params: {user_id: userInfo.id},
     })
       .then((res) => {
-        console.log(res.data);
+        console.log('axios call for dogs', res);
         setDogs(res.data);
       })
       .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
   }, [userInfo]);
+
+  useEffect(() => {
+    console.log('dogs', dogs);
+  }, [dogs]);
 
   const imageTransform = () => {
     axios({
