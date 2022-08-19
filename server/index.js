@@ -13,6 +13,7 @@ const io = require('socket.io')(server, {
     origin: '*',
   },
 });
+
 app.use(cors());
 
 const db = require('../database/postgres');
