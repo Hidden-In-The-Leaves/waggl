@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
   cors: {
@@ -17,6 +17,7 @@ const accountSettingsRoutes = require('./routes/accountSettingsRoutes');
 const packsRoutes = require('./routes/packsRoutes');
 const eventsRoutes = require('./routes/eventsRoutes');
 const testRoutes = require('./routes/testRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -43,11 +44,13 @@ app.use('/api/packs', packsRoutes);
 app.use('/api/events', eventsRoutes);
 // for test
 app.use('/api/test', testRoutes);
+app.use('/api/user', userRoutes);
 
 app.get('/*', (req, res) =>
   res.sendFile(path.join(__dirname, '../dist/index.html'))
 );
 
+console.log('port is ', PORT);
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
 
 // example query:
