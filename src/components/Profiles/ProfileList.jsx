@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Title } from '../../styledComponents.js';
@@ -8,13 +8,32 @@ import AddProfile from './AddProfile';
 import EditProfile from './EditProfile';
 import Modal from '../commonComponents/Modal.jsx';
 import axios from 'axios';
+import { useUserStore } from '../Store';
+
+// route for qr url `localhost:3000/Profile/`
 
 export default function ProfileList(props) {
-  const url = 'https://www.pokemon.com';
+  const userInfo = useUserStore((state) => state.userInfo);
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [profileData, setProfileData] = useState({});
   const [showQR, setShowQR] = useState(false);
+  const [dogs, setDogs] = useState([]);
+  const [qr, setQR] = useState('');
+
+  useEffect(() => {
+    console.log('user id', userInfo.id);
+    axios({
+      method: 'get',
+      url: '/api/profile/dogs',
+      params: {user_id: userInfo.id},
+    })
+      .then((res) => {
+        console.log(res.data);
+        setDogs(res.data);
+      })
+      .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
+  }, [userInfo]);
 
   const imageTransform = () => {
     axios({
@@ -60,7 +79,8 @@ export default function ProfileList(props) {
       <Title>Profiles</Title>
       <div className="card-container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
 
-          {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})}
+          {/* {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})} */}
+          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} setQR={setQR} />})}
 
         <AddCard handleOpen={handleOpen} />
       </div>
@@ -74,7 +94,7 @@ export default function ProfileList(props) {
         <EditProfile profileData={profileData} setProfileData={setProfileData} />
       </Modal>
       <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=150x150&bgcolor=FF8700&color=fff`} />
+        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=localhost:3000/Profile/${qr}&size=150x150&bgcolor=FF8700&color=fff`} />
       </Modal>
     </PageContainer>
   );
@@ -83,7 +103,7 @@ export default function ProfileList(props) {
 const PageContainer = styled.div`
   /* overflow-y: scroll; */
   max-height: 100vh;
-
+  /* width: 90vw; */
   /* display: flex; */
   /* flex-direction: row; */
   /* justify-content: space-between; */

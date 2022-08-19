@@ -26,6 +26,7 @@ const socketRouter = require('./routes/socketRouter')(io);
 const messageRoutes = require('./routes/messageRoutes');
 const videoRoutes = require('./routes/videoRoutes');
 const profileRoutes = require('./routes/profileRoutes');
+const sessionRoutes = require('./routes/sessionRoutes');
 
 db.connect((err) => {
   if (err) {
@@ -50,6 +51,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/test', testRoutes);
 app.use('/api/video', videoRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/session', sessionRoutes);
 
 console.log('port is ', PORT);
 app.get('/*', (req, res) =>
