@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 
+export const HalfImg = styled.img`
+  object-fit:cover;
+`;
+
 const Cols = styled.div`
   display: flex;
   flex-direction: row;
+  position:relative;
 `;
 
 const LinkButton = styled.button`

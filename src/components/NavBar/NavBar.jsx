@@ -9,6 +9,38 @@ import { useUserStore } from '../Store.js';
 export default function NavBar() {
   const userInfo = useUserStore((state) => state.userInfo);
   const type = userInfo.id ? 'home' : 'welcome';
+  const homeNavs = [
+    {
+      to: '/DiscoverMain',
+      src: 'https://img.icons8.com/glyph-neue/64/ff8700/dog-park.png',
+      alt: 'icon of a dog catching a ball',
+      text: 'Discover',
+    },
+    {
+      to: '/DiscoverMain/1',
+      src: 'https://img.icons8.com/ios-glyphs/30/ff8700/chat.png',
+      alt: 'chat icon',
+      text: 'Chat',
+    },
+    {
+      to: `/ProfileList/${userInfo.id}`,
+      src: 'https://img.icons8.com/ios-glyphs/30/ff8700/dog-tag.png',
+      alt: 'an icon of a person in a circle',
+      text: 'Profiles',
+    },
+    {
+      to: `/AccountSettings/${userInfo.id}`,
+      src: 'https://img.icons8.com/ios-glyphs/30/ff8700/settings--v1.png',
+      alt: 'an icon of a gear wheel',
+      text: 'Settings',
+    },
+    // {
+    //   to: '/AboutUs',
+    //   src: 'https://img.icons8.com/external-sbts2018-solid-sbts2018/58/ff8700/external-about-us-basic-ui-elements-2.3-sbts2018-solid-sbts2018.png',
+    //   alt: 'an icon of two person',
+    //   text: 'About Us',
+    // },
+  ];
   return (
     <HeaderContainer>
       <NameLink to={type === 'home' ? '/HomePage' : '/'}>Waggl</NameLink>
@@ -42,38 +74,38 @@ export default function NavBar() {
   );
 }
 
-const homeNavs = [
-  {
-    to: '/DiscoverMain',
-    src: 'https://img.icons8.com/glyph-neue/64/ff8700/dog-park.png',
-    alt: 'icon of a dog catching a ball',
-    text: 'Discover',
-  },
-  {
-    to: '/DiscoverMain/1',
-    src: 'https://img.icons8.com/ios-glyphs/30/ff8700/chat.png',
-    alt: 'chat icon',
-    text: 'Chat',
-  },
-  {
-    to: '/ProfileList',
-    src: 'https://img.icons8.com/ios-glyphs/30/ff8700/dog-tag.png',
-    alt: 'an icon of a person in a circle',
-    text: 'Profiles',
-  },
-  {
-    to: '/AccountSettings',
-    src: 'https://img.icons8.com/ios-glyphs/30/ff8700/settings--v1.png',
-    alt: 'an icon of a gear wheel',
-    text: 'Setting',
-  },
-  // {
-  //   to: '/AboutUs',
-  //   src: 'https://img.icons8.com/external-sbts2018-solid-sbts2018/58/ff8700/external-about-us-basic-ui-elements-2.3-sbts2018-solid-sbts2018.png',
-  //   alt: 'an icon of two person',
-  //   text: 'About Us',
-  // },
-];
+// const homeNavs = [
+//   {
+//     to: '/DiscoverMain',
+//     src: 'https://img.icons8.com/glyph-neue/64/ff8700/dog-park.png',
+//     alt: 'icon of a dog catching a ball',
+//     text: 'Discover',
+//   },
+//   {
+//     to: '/DiscoverMain/1',
+//     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/chat.png',
+//     alt: 'chat icon',
+//     text: 'Chat',
+//   },
+//   {
+//     to: `/ProfileList/${userInfo.id}`,
+//     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/dog-tag.png',
+//     alt: 'an icon of a person in a circle',
+//     text: 'Profiles',
+//   },
+//   {
+//     to: '/AccountSettings/:userid',
+//     src: 'https://img.icons8.com/ios-glyphs/30/ff8700/settings--v1.png',
+//     alt: 'an icon of a gear wheel',
+//     text: 'Settings',
+//   },
+// ];
+// {
+//   to: '/AboutUs',
+//   src: 'https://img.icons8.com/external-sbts2018-solid-sbts2018/58/ff8700/external-about-us-basic-ui-elements-2.3-sbts2018-solid-sbts2018.png',
+//   alt: 'an icon of two person',
+//   text: 'About Us',
+// },
 
 const HeaderContainer = styled.div`
   background-color: white;

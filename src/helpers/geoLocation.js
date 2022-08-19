@@ -2,7 +2,7 @@ const axios = require('axios');
 
 // GPS objects should be JS Objects with a lat and lng property
 // ex: {lat: 56564, lng: 775045}
-
+// 19307 Manor Church Road Boonsboro, MD 21713
 module.exports = {
   getGPS: (addy) => {
     let result = {};
