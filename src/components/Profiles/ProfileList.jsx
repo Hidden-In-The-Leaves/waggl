@@ -10,15 +10,16 @@ import Modal from '../commonComponents/Modal.jsx';
 import axios from 'axios';
 import { useUserStore } from '../Store';
 
+// route for qr url `localhost:3000/Profile/`
+
 export default function ProfileList(props) {
   const userInfo = useUserStore((state) => state.userInfo);
-  // const url = `localhost:8080/profile/user_id:${id}`;
-  const url = `localhost:8080/`;
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [profileData, setProfileData] = useState({});
   const [showQR, setShowQR] = useState(false);
   const [dogs, setDogs] = useState([]);
+  const [qr, setQR] = useState('');
 
   useEffect(() => {
     console.log('user id', userInfo.id);
@@ -79,7 +80,7 @@ export default function ProfileList(props) {
       <div className="card-container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
 
           {/* {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})} */}
-          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})}
+          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} setQR={setQR} />})}
 
         <AddCard handleOpen={handleOpen} />
       </div>
@@ -93,7 +94,7 @@ export default function ProfileList(props) {
         <EditProfile profileData={profileData} setProfileData={setProfileData} />
       </Modal>
       <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${url}&size=150x150&bgcolor=FF8700&color=fff`} />
+        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=localhost:3000/Profile/${qr}&size=150x150&bgcolor=FF8700&color=fff`} />
       </Modal>
     </PageContainer>
   );

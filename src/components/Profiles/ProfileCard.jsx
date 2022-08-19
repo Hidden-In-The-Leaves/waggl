@@ -4,7 +4,7 @@ import * as SC from '../../styledComponents.js';
 
 export default function SmallCard(props) {
   return (
-   <ProfileCard>
+   <ProfileCard onClick={(e) => {e.preventDefault(); props.setQR(props.id)}}>
     <PictureContainer>
       <PFP src={props.photos[0]}></PFP>
       <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => {e.preventDefault(); props.handleEditOpen()}}></EditIcon>
