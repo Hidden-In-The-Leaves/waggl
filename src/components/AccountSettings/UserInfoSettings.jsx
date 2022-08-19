@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useUserStore } from '../Store';
+
 import {
   InputLabel, SectionTitle, Input,
 } from '../../styledComponents';
@@ -14,6 +16,8 @@ export default function UserInfoSettings() {
   const [lastName, setLastName] = useState({});
   const [email, setEmail] = useState({});
   const [password, setPassword] = useState({});
+
+  const userInfo = useUserStore((state) => state.userInfo);
 
   const handleUserInformationEdit = () => {
     setUserEdit(true);
@@ -46,7 +50,7 @@ export default function UserInfoSettings() {
   const getUserInfo = () => {
     const config = {
       method: 'GET',
-      url: '/api/accountSettings/userInfo',
+      url: `/api/accountSettings/userInfo/${userInfo.id}`,
     };
 
     axios(config)
@@ -62,7 +66,7 @@ export default function UserInfoSettings() {
     // send updated info to server
     const config = {
       method: 'PUT',
-      url: '/api/accountSettings/userInfo',
+      url: `/api/accountSettings/userInfo/${userInfo.id}`,
       data: {
         profile_picture_url: profilePictureUrl,
         first_name: firstName,

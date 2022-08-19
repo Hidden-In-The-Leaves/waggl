@@ -4,7 +4,6 @@ const db = require('../../database/postgres');
 
 module.exports = {
   createUser: ({ body }, res) => {
-    console.log('body ', body);
     db.query(`
     INSERT INTO users (first_name, last_name, email, password)
     VALUES ( $1, $2, $3, $4 ) RETURNING ID as user_id
@@ -62,7 +61,6 @@ module.exports = {
   },
 
   getUserDetails: (req, res) => {
-    console.log('request', req);
     db.query(`
     WITH DOGSPICS AS
       (SELECT D.*,

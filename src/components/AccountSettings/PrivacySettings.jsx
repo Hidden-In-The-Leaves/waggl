@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useUserStore } from '../Store';
 import {
   InputLabel, SectionTitle, Input,
 } from '../../styledComponents';
@@ -10,6 +11,8 @@ export default function PrivacySettings() {
   const [privacySettingsEdit, setPrivacySettingsEdit] = useState([]);
   const [locationSharing, setLocationSharing] = useState([]);
   const [packVisibility, setPackVisibility] = useState([]);
+
+  const userInfo = useUserStore((state) => state.userInfo);
 
   const handlePrivacySettingsEdit = () => {
     setPrivacySettingsEdit(true);
@@ -47,7 +50,7 @@ export default function PrivacySettings() {
   const getPrivacySettings = () => {
     const config = {
       method: 'GET',
-      url: '/api/accountSettings/privacySettings',
+      url: `/api/accountSettings/privacySettings/${userInfo.id}`,
     };
 
     axios(config)
@@ -64,7 +67,7 @@ export default function PrivacySettings() {
 
     const config = {
       method: 'PUT',
-      url: '/api/accountSettings/privacySettings',
+      url: `/api/accountSettings/privacySettings/${userInfo.id}`,
       data: {
         location_sharing: locationSharing,
         packs_visible: packVisibility,
