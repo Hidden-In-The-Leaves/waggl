@@ -1,21 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import NavBar from '../NavBar/NavBar';
 import Feed from './Feed/Feed';
 import Nav from './Nav/Nav';
-
-export default function PackDetails(props) {
-  return (
-    <PageContainer>
-      <NavBar type="home" />
-      <Cols>
-        <Nav packData={dummyData} fakeUsers={fakeUsers} />
-        <Feed />
-      </Cols>
-    </PageContainer>
-  );
-}
+import AddEventModal from './AddEventModal';
 
 const PageContainer = styled.div`
   overflow-y: hidden;
@@ -35,3 +23,21 @@ const dummyData = {
 };
 
 const fakeUsers = [{ userName: 'Patt', userImageUrl: 'https://res.cloudinary.com/duzrmpk7h/image/upload/v1660860725/images/Ellipse_17_mcwn2c.png', userLocation: 'New York' }, { userName: 'Matt', userImageUrl: 'https://res.cloudinary.com/duzrmpk7h/image/upload/v1660860725/images/Ellipse_18_muu5bv.png', userLocation: 'Jersey City' }];
+
+export default function PackDetails(props) {
+  const [showAddEventPopUp, setShowAddEventPopUp] = useState(false);
+
+  return (
+    <PageContainer>
+      <Cols>
+        <Nav
+          packData={dummyData}
+          fakeUsers={fakeUsers}
+          setShowAddEventPopUp={setShowAddEventPopUp}
+        />
+        <Feed packData={dummyData} />
+      </Cols>
+      {showAddEventPopUp ? <AddEventModal setShowAddEventPopUp={setShowAddEventPopUp} /> : null}
+    </PageContainer>
+  );
+}

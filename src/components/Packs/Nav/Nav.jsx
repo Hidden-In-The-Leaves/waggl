@@ -14,7 +14,7 @@ const Row = styled.div`
   justify-content: space-between;
 `;
 
-function Nav({ packData, fakeUsers }) {
+function Nav({ packData, fakeUsers, setShowAddEventPopUp }) {
   return (
     <Container_1_3>
       <BannerImage bannerUrl={packData.bannerUrl} />
@@ -22,10 +22,13 @@ function Nav({ packData, fakeUsers }) {
       <p>{packData.aboutPack}</p>
       <Row>
         <Title>Events</Title>
-        <Button type="button">Add Event</Button>
+        <Button type="button" onClick={() => { setShowAddEventPopUp(true); }}>Add Event</Button>
       </Row>
       <Calendar calendarId={packData.calendarId} />
-      <Title>Group Members</Title>
+      <Row>
+        <Title>Group Members</Title>
+        <Button type="button">Group Chat</Button>
+      </Row>
       {fakeUsers.map((user) => (<MemberRow member={user} />))}
     </Container_1_3>
   );

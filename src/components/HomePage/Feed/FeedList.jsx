@@ -9,7 +9,7 @@ export default function FeedList() {
     <Scroller>
       {posts.map((post) => <Post key={post.id} post={post} />)}
     </Scroller>
-  )
+  );
 }
 
 const Scroller = styled.div`
