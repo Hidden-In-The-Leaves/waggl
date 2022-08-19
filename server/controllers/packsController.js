@@ -3,42 +3,45 @@
 const db = require('../../database/postgres');
 
 module.exports = {
-  getPacks: ({ query }, res) => {
-    const { user_id } = query;
-    if (user_id === undefined) {
-      db.query(`
-      SELECT
-        p.id, p.pack_name, p.calendar_id, p.pack_profile_pic_url, p.description
-      FROM packs p
-      ORDER BY lower(p.pack_name);
-      `)
-        .then((result) => {
-          res.send(result.rows);
-        })
-        .catch((err) => {
-          console.log('database error - cannot get pack', err);
-          res.sendStatus(500);
-        });
-    } else {
-      db.query(`
+  getJoinedPacks: ({ query }, res) => {
+    db.query(`
         SELECT
-          p.id, p.pack_name as name, p.calendar_id, p.pack_profile_pic_url as url, p.description,
-          CASE
-            WHEN u.user_id = $1 THEN 'true'
-            WHEN p.owner_id = $1 THEN 'true'
-            ELSE 'false'
-          END as joined
-        FROM packs p FULL JOIN users_packs_join u ON p.id = u.pack_id
+          p.id, p.pack_name as name, p.calendar_id, p.pack_profile_pic_url as url, p.description
+        FROM packs p INNER JOIN users_packs_join u ON p.id = u.pack_id
+        WHERE u.user_id = $1
         ORDER BY lower(p.pack_name);
-      `, [user_id])
-        .then((result) => {
-          res.send(result.rows);
-        })
-        .catch((err) => {
-          console.log('database error - cannot get pack by userid', err);
-          res.sendStatus(500);
-        });
-    }
+      `, [query.user_id])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack by userid', err);
+        res.sendStatus(500);
+      });
+  },
+  getOtherPacks: ({ query }, res) => {
+    db.query(`
+      SELECT P.ID,
+        P.PACK_NAME AS NAME,
+        P.CALENDAR_ID,
+        P.PACK_PROFILE_PIC_URL AS URL,
+        P.DESCRIPTION
+      FROM PACKS P
+      INNER JOIN USERS_PACKS_JOIN U ON P.ID = U.PACK_ID
+      WHERE PACK_ID not in
+          (SELECT PACK_ID
+            FROM PACKS P2
+            INNER JOIN USERS_PACKS_JOIN U2 ON P2.ID = U2.PACK_ID
+            WHERE U2.USER_ID = $1)
+      ORDER BY LOWER(P.PACK_NAME);
+    `, [query.user_id])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack by userid', err);
+        res.sendStatus(500);
+      });
   },
   createPack: ({ body }, res) => {
     /* TODO : generate calendar_id everytime a pack is created - ASK CHRIS*/

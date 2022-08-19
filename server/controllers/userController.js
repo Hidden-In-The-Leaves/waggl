@@ -62,6 +62,7 @@ module.exports = {
   },
 
   getUserDetails: (req, res) => {
+    console.log('request', req);
     db.query(`
     WITH DOGSPICS AS
       (SELECT D.*,
@@ -72,10 +73,10 @@ module.exports = {
     SELECT U.*,
       P.LOCATION_SHARING,
       P.PACKS_VISIBLE,
-      JSON_AGG(D.*) AS DOGS
+      COALESCE(json_agg(D.*), '[]'::json) AS DOGS
     FROM USERS U
     INNER JOIN SETTING_PREFERENCES P ON U.ID = P.USER_ID
-    INNER JOIN DOGSPICS D ON U.ID = D.USER_ID
+    LEFT JOIN DOGSPICS D ON U.ID = D.USER_ID
     WHERE U.ID = $1
     GROUP BY U.ID,
       P.LOCATION_SHARING,

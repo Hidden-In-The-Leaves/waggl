@@ -19,14 +19,14 @@ export default function OwnerDetails({ userId, open, onClose }) {
   if (!open) {
     return null;
   }
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState({ id: '', first_name: '', last_name: '', profile_pic_url: '', city: '', state: '', dogs: [] });
   const [userPacks, setUserPacks] = useState([]);
 
   useEffect(() => {
     if (open) {
       const config = {
         method: 'GET',
-        url: `/api/users/${userId}`,
+        url: `/api/user/${userId}`,
       };
       axios(config)
         .then((result) => setUserInfo(result.data[0]))
@@ -34,7 +34,7 @@ export default function OwnerDetails({ userId, open, onClose }) {
 
       const config2 = {
         method: 'GET',
-        url: '/api/packs',
+        url: '/api/packs/joined',
         params: { user_id: userId },
       };
       axios(config2)
@@ -61,7 +61,7 @@ export default function OwnerDetails({ userId, open, onClose }) {
               <b>Dogs</b>
             </Title>
             <List>
-              {userInfo.dogs && userInfo.dogs.map((dog) => (
+              {userInfo.dogs[0] && userInfo.dogs.map((dog) => (
                 <Item key={dog.id}>
                   <Link to={`/Profile/${dog.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                     <RoundImg src={dog.photos[0]} alt="dog" size="80px" />
@@ -76,7 +76,7 @@ export default function OwnerDetails({ userId, open, onClose }) {
               <b>Joined Packs</b>
             </Title>
             <List>
-              {userPacks && userPacks.filter((pack) => pack.joined).map((pack) => (
+              {userPacks && userPacks.map((pack) => (
                 <Item key={pack.id} packId={pack.id}>
                   <Link to={`/PackDetails/${pack.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                     <RoundImg src={pack.url} alt="a pack" size="80px" />
