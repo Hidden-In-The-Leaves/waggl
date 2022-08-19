@@ -6,7 +6,7 @@ import * as SC from '../../styledComponents.js';
 export default function AddProfile(props) {
   return (
     <div>
-      <h1>Edit this Dog Profile</h1>
+      <h1>Create this Dog Profile</h1>
       <div>
         <SC.Title>Add Profile</SC.Title>
         <SC.SubTitle>Basic Information</SC.SubTitle>
