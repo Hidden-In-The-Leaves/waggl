@@ -93,7 +93,7 @@ const getUserPacks = async (req, res) => {
     SELECT json_agg(pk) as packs FROM (
       SELECT upj.pack_id,
       (
-        SELECT json_agg(json_build_object('pack_name',pack_name, 'image', pack_profile_pic_url))
+        SELECT json_agg(json_build_object('pack_name',pack_name, 'image', pack_profile_pic_url, 'description', description))
         from packs where id = upj.pack_id
         ) as pack
         FROM users_packs_join AS upj WHERE upj.user_id=${userId}
@@ -118,7 +118,7 @@ const getPackMember = async (req, res) => {
     select json_agg(pk) as packs from (
       select p.pack_name,
       (
-        select json_agg(json_build_object('first_name', first_name, 'last_name', last_name,
+        select json_agg(json_build_object('first_name', first_name, 'last_name', last_name, 'city', city, 'state', state,
                          'image', profile_pic_url, 'id', id)) from users u where u.id
         in (select user_id from users_packs_join where pack_id=p.id)
       ) as users

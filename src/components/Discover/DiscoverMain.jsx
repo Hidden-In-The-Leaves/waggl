@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import DiscoverChat from './DiscoverChat';
 import MatchList from './MatchList';
 import MainSection from './MainSection';
 import { useUserStore } from '../Store.js';
 import io from 'socket.io-client';
-const socket = io('http://localhost:5000');
+// const socket = io('http://localhost:5000');
+const socket = io();
 
 export default function Chat() {
   const [receiver, setReceiver] = useState({});
@@ -16,7 +17,12 @@ export default function Chat() {
   const [showInfo, setShowInfo] = useState(chat === undefined ? true : false);
   const [updateList, setUpdateList] = useState(true);
   const userInfo = useUserStore((state) => state.userInfo);
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userInfo.id) {
+      navigate('/Login');
+    }
+  }, [userInfo.id]);
   const getDefaultMatch = (data) => {
     setMatch(data);
   };
@@ -43,9 +49,13 @@ export default function Chat() {
   };
   const updateMatchList = () => {
     setUpdateList(!updateList);
+    if (!receiver) {
+      setReceiver(updateList[0]);
+    }
   };
   return (
     <>
+      {}
       <div style={{ display: 'flex' }}>
         <MatchList
           user={userInfo}
@@ -61,7 +71,7 @@ export default function Chat() {
             updateReceiver={updateReceiver}
           />
         )}
-        {chat !== undefined && receiver.id && (
+        {chat !== undefined && receiver && (
           <DiscoverChat
             user1={userInfo}
             user2={receiver}

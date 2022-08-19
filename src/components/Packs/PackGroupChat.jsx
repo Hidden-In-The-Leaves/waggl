@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import GroupChat from '../Discover/GroupChat';
 import PackMemberList from './PackMemberList';
 import { useUserStore } from '../Store';
 import io from 'socket.io-client';
-const socket = io('http://localhost:5000');
+const socket = io();
 
 export default function PackGroupChat() {
   const [packName, setPackName] = useState('');
   const { packid } = useParams();
   const [packId, setPackId] = useState(packid);
-
+  const navigate = useNavigate();
   const userInfo = useUserStore((state) => state.userInfo);
 
   const updatePackId = (pId, name) => {
@@ -18,6 +18,11 @@ export default function PackGroupChat() {
     setPackName(name);
   };
 
+  // useEffect(() => {
+  //   if (!userInfo.id) {
+  //     navigate('/Login');
+  //   }
+  // }, [userInfo.id]);
   return (
     <div>
       <div style={{ display: 'flex' }}>

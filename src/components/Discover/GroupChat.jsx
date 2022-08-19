@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './index.css';
 import {
   Title,
+  VideoChatIcon,
   ChatContainer,
   MessageContainer,
   MessageFromMe,
@@ -22,37 +23,29 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
   const [message, setMessage] = useState('');
   const [currentUser, setCurrentUser] = useState({});
   const bottomRef = useRef(null);
-
+  const navigate = useNavigate();
   socket.emit('join_room', pack_name);
   useEffect(() => {
     axios
       .get(
         `
-      http://localhost:5000/api/messages/group?packId=${pack_id}`
+      /api/messages/group?packId=${pack_id}`
       )
       .then(({ data }) => {
         setMessageList(data);
       })
       .catch((err) => console.log(err));
     axios
-      .get(`http://localhost:5000/api/messages/pack/user?userid=${sender.id}`)
+      .get(`/api/messages/pack/user?userid=${sender.id}`)
       .then(({ data }) => {
         setCurrentUser(data);
       })
       .catch((err) => console.log(err));
-    getLocation();
   }, [pack_id]);
   socket.on('receive_message', (message) => {
     console.log(message, messageList);
     setMessageList([...messageList, message]);
   });
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((p) => {
-        console.log('lat: ', p.coords.latitude, 'lng: ', p.coords.longitude);
-      });
-    }
-  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -79,17 +72,24 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
         posted_time: new Date(),
       };
       axios
-        .post(
-          `http://localhost:5000/api/messages/group?packId=${pack_id}`,
-          newData
-        )
+        .post(`/api/messages/group?packId=${pack_id}`, newData)
         .then(() => setMessage(''))
         .catch((err) => console.log(err));
     }
   };
+  const toVideoChat = () => {
+    navigate(`/PackVideoChat/${pack_id}`);
+  };
   return (
     <div style={{ width: '100%' }}>
-      <Title>{pack_name}</Title>
+      <Title>
+        {pack_name}
+        <VideoChatIcon
+          className="fa-solid fa-video"
+          onClick={toVideoChat}
+          title="Start video chat"
+        ></VideoChatIcon>
+      </Title>
       <ChatContainer>
         {messageList.length !== 0 &&
           messageList.map((m, index) => (
@@ -102,17 +102,24 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
                 </MessageContainer>
               )}
               {m.users.user_id !== sender.id && (
-                <div style={{ display: 'flex' }}>
-                  <CircleImage src={m.users.image} />
-                  <MessageFromOtherContainer>
-                    <Message>
-                      {m.users.first_name} {m.users.last_name}
-                    </Message>
-                    <MessageFromOther style={{ width: '100%' }}>
-                      <Message>{m.message_text}</Message>
-                    </MessageFromOther>
-                  </MessageFromOtherContainer>
-                </div>
+                <>
+                  <p style={{ textAlign: 'center' }}>
+                    {new Date(m.posted_time).toLocaleString()}
+                  </p>
+                  <div style={{ display: 'flex', paddingLeft: '5%' }}>
+                    <CircleImage src={m.users.image} />
+                    <MessageFromOtherContainer>
+                      <Message>
+                        {m.users.first_name} {m.users.last_name}
+                        {'   '}
+                      </Message>
+
+                      <MessageFromOther>
+                        <Message>{m.message_text}</Message>
+                      </MessageFromOther>
+                    </MessageFromOtherContainer>
+                  </div>
+                </>
               )}
               <div ref={bottomRef}></div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SubTitle } from './Chat.styled';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   CircleImage,
   Members,
@@ -25,7 +25,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
   }, [user.id, updateList]);
   const getMatchList = () => {
     axios
-      .get(`http://localhost:5000/api/test/like?userid=${user.id}`)
+      .get(`/api/test/like?userid=${user.id}`)
       .then(({ data }) => {
         updateReceiver(data[0]);
         setMatchList(data);
@@ -33,7 +33,6 @@ export default function MatchList({ user, updateReceiver, updateList }) {
       .catch((err) => console.log(err));
   };
   const clickHandler = (data) => {
-    console.log(data);
     setSelected(data);
     updateReceiver(data);
     navigate('/DiscoverMain/1');
@@ -45,7 +44,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
         to_id: data.id,
       };
       axios
-        .post(`http://localhost:5000/api/test/match`, config)
+        .post(`/api/test/match`, config)
         .then(() => getMatchList())
         .catch((err) => console.log(err));
     }
@@ -74,6 +73,12 @@ export default function MatchList({ user, updateReceiver, updateList }) {
             </Match>
           </MatchListContainer>
         ))}
+      {matchList.length === 0 && (
+        <div style={{ textAlign: 'center' }}>
+          You don't have any matches, go{' '}
+          <Link to="/DiscoverMain">Discover</Link>
+        </div>
+      )}
     </MatchContainer>
   );
 }

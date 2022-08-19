@@ -9,6 +9,15 @@ export const Title = styled.div`
   margin: 20px 0;
 `;
 
+export const VideoChatIcon = styled.i`
+  font-size: 30px;
+  float: right;
+  margin-right: 10%;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export const NameTitle = styled.div`
   font-size: 28px;
   font-weight: 900;
@@ -73,7 +82,7 @@ export const MessageFromOther = styled.div`
   background-color: rgba(217, 217, 217, 0.35);
   font-size: 20px;
   justify-align: center;
-  margin: 10px 5%;
+  margin: 10px;
   text-align: center;
 `;
 

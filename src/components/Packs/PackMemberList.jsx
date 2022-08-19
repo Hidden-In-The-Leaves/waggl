@@ -24,13 +24,13 @@ export default function PackMemberList({
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/messages/pack?userId=${user.id}`)
+      .get(`/api/messages/pack?userId=${user.id}`)
       .then(({ data }) => setPacks(data))
       .catch((err) => console.log(err));
   }, [user.id]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/messages/pack/members?packId=${packId}`)
+      .get(`/api/messages/pack/members?packId=${packId}`)
       .then(({ data }) => {
         updatePackId(packId, data.pack_name);
         setMemberList(data);
@@ -61,7 +61,11 @@ export default function PackMemberList({
                 <MemberName>
                   {member.first_name} {member.last_name}
                 </MemberName>
-                <MemberLocation>default location</MemberLocation>
+                {member.city && member.state && (
+                  <MemberLocation>
+                    {member.city}, {member.state}
+                  </MemberLocation>
+                )}
               </div>
             </Members>
           ))}
@@ -81,7 +85,13 @@ export default function PackMemberList({
                   <CircleImage src={pack.pack[0].image} />
                   <div>
                     <MemberName>{pack.pack[0].pack_name}</MemberName>
-                    <MemberLocation>description</MemberLocation>
+                    {pack.pack[0].description && (
+                      <MemberLocation title={pack.pack[0].description}>
+                        {pack.pack[0].description.length > 35
+                          ? pack.pack[0].description.slice(0, 30).concat('....')
+                          : pack.pack[0].description}
+                      </MemberLocation>
+                    )}
                   </div>
                 </PacksList>
               );
