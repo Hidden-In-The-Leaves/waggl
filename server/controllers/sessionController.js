@@ -22,4 +22,14 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  deleteCookie: (req, res) => {
+    db.query(`
+      DELETE FROM session WHERE user_id = $1
+    `, [req.query.user_id])
+      .then(() => res.sendStatus(201))
+      .catch((err) => {
+        console.log('error deletingsession', err);
+        res.sendStatus(500);
+      });
+  }
 };
