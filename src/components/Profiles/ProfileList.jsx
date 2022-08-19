@@ -52,20 +52,41 @@ export default function ProfileList(props) {
       {/* <h1>This is the Profile List!</h1> */}
       <NavBar type="home" />
       <Title>Profiles</Title>
-      <div className="card-container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-          {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen}/>})}
+      <div
+        className="card-container"
+        style={{ display: 'flex', justifyContent: 'space-between' }}
+      >
+        {dogPhotos.map((item, index) => {
+          return (
+            <ProfileCard
+              key={index}
+              pfp={item}
+              handleEditOpen={handleEditOpen}
+            />
+          );
+        })}
 
         <AddCard handleOpen={handleOpen} />
       </div>
       <Link to="/">
         <button>This is a Link to App "Page"!</button>
       </Link>
-      <Modal open={showModal} onClose={handleClose} title={'Modal add Testing!'}>
+      <Modal
+        open={showModal}
+        onClose={handleClose}
+        title={'Modal add Testing!'}
+      >
         <AddProfile profileData={profileData} setProfileData={setProfileData} />
       </Modal>
-      <Modal open={editModal} onClose={handleEditClose} title={'Modal edit Testing!'}>
-        <EditProfile profileData={profileData} setProfileData={setProfileData} />
+      <Modal
+        open={editModal}
+        onClose={handleEditClose}
+        title={'Modal edit Testing!'}
+      >
+        <EditProfile
+          profileData={profileData}
+          setProfileData={setProfileData}
+        />
       </Modal>
     </PageContainer>
   );
@@ -86,7 +107,6 @@ const PageContainer = styled.div`
 //   height: 556px;
 //   left: 115px;
 //   top: 222px;
-
 
 //   background: #FFFFFF;
 //   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
