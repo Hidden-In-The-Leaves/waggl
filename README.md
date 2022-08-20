@@ -1,6 +1,6 @@
 <div id="top"/>
 
-# BookFace
+# Waggl
 Waggl is a social media platform to help dog owners find like-minded dogs!. This is the culmination of seven engineers working closely over the course of one week to complete an MVP based on client's request.
 
 
