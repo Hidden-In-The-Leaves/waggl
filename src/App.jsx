@@ -18,7 +18,7 @@ export default function App() {
       {/* <NavBar type="welcome" /> */}
       <Center>
         {' '}
-        <h1>This is the app!</h1>
+        <h1 style={{ fontWeight: '500' }}>Find new pals for your four legged friend!</h1>
         <Link to="/SignUp">
           <Button type="button">Join Today</Button>
         </Link>
@@ -81,10 +81,11 @@ export default function App() {
 }
 
 const Center = styled.div`
-  top: 45%;
-  left: 45%;
-  text-align: center;
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const Main = styled.div`
@@ -92,8 +93,10 @@ const Main = styled.div`
   top: 0;
   width: 100vw;
   z-index: -1;
-  background-image: url('https://images.unsplash.com/photo-1600077029182-92ac8906f9a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  position: absolute;
+  background-image: url('https://images.unsplash.com/photo-1597633425046-08f5110420b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
   background-size: cover;
+  background-position: center;
 `;
 
 export const Button = styled.button`
