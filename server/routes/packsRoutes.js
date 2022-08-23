@@ -27,4 +27,7 @@ router.route('/posts')
 router.route('/posts/:id')
   .delete(packsController.deletePost);
 
+router.route('/users')
+  .get(packsController.getPackUsers);
+
 module.exports = router;

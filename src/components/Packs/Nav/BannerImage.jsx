@@ -3,15 +3,8 @@ import React from 'react';
 
 function BannerImage({ bannerUrl }) {
   return (
-    <Img src={bannerUrl} />
+    <img src={bannerUrl} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/>
   );
 }
 
 export default BannerImage;
-
-const Img = styled.img`
-  width: 100%;
-  top: 0;
-  left: 0;
-  position: absolute;
-`;
