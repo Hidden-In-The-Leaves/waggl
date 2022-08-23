@@ -12,7 +12,7 @@ export default function FeedList({ posts }) {
 
 const Scroller = styled.div`
   overflow-y: auto;
-  height: 80vh;
+  height: 60vh;
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
   &::-webkit-scrollbar {
