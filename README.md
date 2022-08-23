@@ -46,8 +46,8 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 ## User Persona & Story
-![](assets/BookFace_Persona2.png)
-![](assets/BookFace_Persona1.png)
+![](assets/userPersona1.png)
+![](assets/userPersona2.png)
 
 ## Wireframes
 ![](assets/wireframe1.png)
