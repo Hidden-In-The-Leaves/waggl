@@ -13,7 +13,8 @@
     "pg:createdb": "createdb -h 127.0.0.1 waggl",
     "pg:start": "pg_ctl -D waggl start",
     "pg:stop": "pg_ctl -D waggl stop",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js",
+    "serve": "node ./server/index.js"
   },
   "repository": {
     "type": "git",

@@ -10,15 +10,19 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 - [Wireframes](#wireframes)
 - [Product Features](#product-features)
   - [Home](#home)
-  - [Login authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
-  - [Live search with smart filter](#live-search-with-smart-filter)
-  - [MyBooks](#mybooks)
-  - [Book detail page](#book-detail-page)
+  - [Login Authentication with Firebase OAuth](#login-authentication-with-firebase-oauth)
+  - [Home Feed](#home-feed)
+  - [Pack Details Page](#pack-detail-page)
+  - [Event Details Page](#event-detail-page)
   - [Reading Stats](#reading-stats)
-  - [MyClubs](#myclubs)
-  - [Club detail page](#club-detail-page)
-  - [Live Chat](#live-chat)
-  - [Video Chat](#video-chat)
+  - [Discover](#discover)
+  - [Live Chat](#discover-live-chat)
+  - [Live Group Chat](#group-live-chat)
+  - [Group Video Chat](#group-video-chat)
+  - [Dog Profile](#dog-profile)
+  - [Profile List](#profile-list)
+  - [Settings](#settings)
+  - [About Us](#about-us)
 - [Getting Started](#getting-started)
   - [Installation](#installation)
 - [Contributors](#contributors)
@@ -46,7 +50,9 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 ![](assets/BookFace_Persona1.png)
 
 ## Wireframes
-![](assets/WagglWirefame.png)
+![](assets/wireframe1.png)
+![](assets/wireframe2.png)
+![](assets/wireframe3.png)
 
 
 ## Product Features
@@ -58,12 +64,12 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 ![](assets/signup.png)
 ![](assets/login.png)
 
-### Live search with smart filter
+### Home Feed
+> Users can view packs, posts and upcoming events
+![](assets/homepage.png)
 
-> Users can perform search on packs
-![](assets/demo/BookFace_Search.gif)
+
 ### Pack detail page
-
 > Users can view pack details and add an event or post messages
 ![](assets/demo/BookFace_MyBooks.gif)
 
@@ -103,7 +109,7 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 ![](assets/demo/BookFace_VideoChat.gif)
 
 ### About us
-![](assets/demo/BookFace_VideoChat.gif)
+![](assets/AboutUs.gif)
 
 ## Getting Started
 
@@ -126,23 +132,14 @@ npm run dev
 3. To build for production
 
 ```
-npm run build
+npm run build-prod
 ```
 
-4. To locally preview production build
-```
-npm run preview
-```
-
-5. To connect to the server: use http://localhost:3030 to verify the server connection
+4. To connect to the server: use http://localhost:8080 to verify the server connection
 ```
 npm run serve
 ```
 
-6. To connect to socket for live chat
-```
-npm run socket
-```
 
 ## Contributors
 
@@ -160,7 +157,7 @@ While all members worked as full stack engineers to develop features, we also ha
 | ------------- | ------------- |
 | Product Managers  | [Chris Lathen](https://github.com/haleyjung)  |
 | App Architects  | [Juan Pinol](https://github.com/HuijunLu) & [Chenyou Huang](https://github.com/chenyou-H) & [Elizabeth Bivens-Tatum](https://github.com/katyfsy) |
-| UI Leads  |[Maria Hirai](https://github.com/jp-chang) & [Jordan Addleman](https://github.com/JosephSanfelippo) & [Xinyuan Zheng](https://github.com/katyfsy) |
+| UI Leads  |[Maria Hirai](https://github.com/maria6417) & [Jordan Addleman](https://github.com/JosephSanfelippo) & [Xinyuan Zheng](https://github.com/katyfsy) |
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
