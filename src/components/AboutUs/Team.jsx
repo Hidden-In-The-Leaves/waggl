@@ -92,7 +92,7 @@ const teamMembers = [
     photo_url:
       'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1660695544/Screen_Shot_2022-08-10_at_11.42.27_xiiuou.png',
     linked_in: 'https://www.linkedin.com/in/mariahirai/',
-    catchPhrase: 'I love seeing products come to real life.',
+    catchPhrase: 'I am a visual person. I love seeing products come to real life!',
   },
   {
     name: 'Jordan Addleman',
