@@ -43,12 +43,13 @@ export default function LogIn() {
     navigate('/HomePage');
   };
 
-  const setZustandUser = ({ id, first_name, last_name, email }) => {
+  const setZustandUser = ({ id, first_name, last_name, email, profile_pic_url }) => {
     const user = {
       id: id,
       firstName: first_name,
       lastName: last_name,
       email: email,
+      profile_pic_url,
     };
     setUserInfo(user);
   };
@@ -70,6 +71,7 @@ export default function LogIn() {
         ) {
           alert('invaild username or password');
         } else {
+          console.log(response.data[0])
           setZustandUser(response.data[0]);
           (async () => {
             const sessionId = await registerCookie(response.data[0].id);
@@ -105,6 +107,7 @@ export default function LogIn() {
   };
 
   if (cookies.session) {
+    console.log('here')
     navigateHome();
   }
 

@@ -5,7 +5,6 @@ import { Link, useParams } from 'react-router-dom';
 import {
   Container, Container_1_3, Button, SubTitle, TextArea, Title,
 } from '../../../styledComponents';
-import BannerImage from './BannerImage';
 import Calendar from './Calendar';
 import MemberRow from './MemberRow';
 
@@ -31,21 +30,10 @@ function Nav({ packData, setShowAddEventPopUp }) {
       .catch((err) => console.log('Error getting pack users', err));
   }, []);
 
-  useEffect(() => {
-    console.log(packUsers);
-  }, [packUsers])
-
-  if (!packData) {
-    return (
-      <div>
-        Loading...
-      </div>
-    )
-  }
 
   return (
     <NavContainer>
-      <BannerImage bannerUrl={packData.pack_profile_pic_url} />
+      <img src={packData.pack_profile_pic_url} style={{ width: '100%', height: '20vh', objectFit: 'cover' }}/>
       <Container>
         <SubTitle>About</SubTitle>
         <p>{packData.description}</p>
@@ -60,7 +48,7 @@ function Nav({ packData, setShowAddEventPopUp }) {
             <Button type="button" style={{ margin: '20px 0' }}>Group Chat</Button>
           </Link>
         </Row>
-        {packUsers.map((user) => (<MemberRow member={user} />))}
+        {packUsers.map((user) => (<MemberRow member={user} key={user.user_id} />))}
       </Container>
     </NavContainer>
   );
