@@ -104,6 +104,10 @@ export default function LogIn() {
       });
   };
 
+  if (cookies.session) {
+    navigateHome();
+  }
+
   // ----------------- Render ------------------
   return (
     <div>
