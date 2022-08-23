@@ -16,7 +16,7 @@ const Row = styled.div`
 
 function Nav({ packData, fakeUsers, setShowAddEventPopUp }) {
   return (
-    <Container_1_3>
+    <Container_1_3 style={{ position: 'relative' }}>
       <BannerImage bannerUrl={packData.bannerUrl} />
       <Title>About</Title>
       <p>{packData.aboutPack}</p>
