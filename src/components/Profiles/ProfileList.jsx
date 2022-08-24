@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Title } from '../../styledComponents.js';
+import { Title, Container } from '../../styledComponents.js';
 import AddCard from './AddCard';
 import ProfileCard from './ProfileCard';
 import AddProfile from './AddProfile';
@@ -60,19 +60,10 @@ export default function ProfileList(props) {
     setEditModal(false);
   };
 
-
-
-  const dogPhotos = [
-    'https://cdn.webshopapp.com/shops/271423/files/325744194/is-your-dog-a-happy-dog-ways-to-know.jpg',
-    'https://cdn.broadsheet.com.au/cache/c5/72/c5725cc5e42fdb9025c8631f1739873b.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmwbVhf4Xlxq_Q2UyiSyb3In4NUHyDJnAiKw&usqp=CAU',
-    'https://images.unsplash.com/photo-1552053831-71594a27632d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=662&q=80',
-  ];
   return (
-    <PageContainer>
-      <Title>Profiles</Title>
-      <div className="card-container" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
-
+    <Container>
+      <Title style={{ marginLeft: '3%' }}>Profiles</Title>
+      <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
           {/* {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})} */}
           {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} />})}
 
@@ -87,7 +78,7 @@ export default function ProfileList(props) {
       <Modal open={editModal} onClose={handleEditClose} title={'Modal edit Testing!'}>
         <EditProfile profileData={profileData} setProfileData={setProfileData} />
       </Modal>
-    </PageContainer>
+    </Container>
   );
 }
 
