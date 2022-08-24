@@ -31,39 +31,10 @@ export default function ProfileList(props) {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    console.log('user id', userInfo.id);
-    axios({
-      method: 'get',
-      url: '/api/profile/dogs',
-      params: {user_id: userInfo.id},
-    })
-      .then((res) => {
-        console.log('axios call for dogs', res);
-        setDogs(res.data);
-=======
     if (userInfo.id) {
-<<<<<<< HEAD
-      axios({
-        method: 'get',
-        url: '/api/profile/dogs',
-        params: {user_id: userInfo.id},
->>>>>>> 1e3542faf1d6ced2d7ee56dad822d349be7d576d
-      })
-        .then((res) => {
-          console.log('data', res.data);
-          setDogs(res.data);
-        })
-        .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
-=======
       getDogs();
->>>>>>> d79029cf38662b8b19f98bbf7567d67e5c626542
     }
   }, [userInfo]);
-
-  useEffect(() => {
-    console.log('dogs', dogs);
-  }, [dogs]);
 
   const imageTransform = () => {
     axios({
