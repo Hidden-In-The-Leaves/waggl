@@ -37,17 +37,25 @@ export default function MainSection({
     lat: lat,
     lng: lng,
   };
+
+  // get discover radius from privacy settings
+  useEffect(() => {
+    axios
+      .get(`/api/accountSettings/privacySettings/${userInfo.id}`)
+      .then((result) => {
+        setRange(result.data.discovery_radius || 1000);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   useEffect(() => {
     if (lat && lng) {
       axios
         .get('/api/test')
         .then(({ data }) => {
-          data = data.filter((d) => {
-            console.log(d);
-            return (
-              d.owner_id !== userInfo.id && d.lat !== null && d.lng !== null
-            );
-          });
+          data = data.filter((d) => (
+            d.owner_id !== userInfo.id && d.lat !== null && d.lng !== null
+          ));
           const list = sortBy(range, currentPosition, getDistance, data);
           getDefaultMatch(list[1]);
           // setMatchList(list);
@@ -94,7 +102,7 @@ export default function MainSection({
   return (
     <MainContainer>
       <Title>Discover</Title>
-      <div style={{ height: '30px', textAlign: 'center' }}>
+      {/* <div style={{ height: '30px', textAlign: 'center' }}>
         <input
           type="text"
           placeholder="Enter a discover range"
@@ -106,7 +114,7 @@ export default function MainSection({
           }}
         ></input>
         <button>Search</button>
-      </div>
+      </div> */}
       {matchList.length === 0 && (
         <p style={{ textAlign: 'center' }}>No dog found within the range</p>
       )}

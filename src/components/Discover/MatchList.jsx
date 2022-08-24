@@ -20,9 +20,11 @@ export default function MatchList({ user, updateReceiver, updateList }) {
   const [matchList, setMatchList] = useState([]);
   const [selected, setSelected] = useState({});
   const navigate = useNavigate();
+
   useEffect(() => {
     getMatchList();
   }, [user.id, updateList]);
+
   const getMatchList = () => {
     axios
       .get(`/api/test/like?userid=${user.id}`)

@@ -102,13 +102,31 @@ const getMatchList = async (req, res) => {
   console.log(userid);
   try {
     const matchList = await db.query(
-      `select id, concat(first_name, ' ', last_name) as owner, email, profile_pic_url as image
-      from users where id in (
-        select user_id from dogs where id in (
-          select to_id from likes_dislikes where like_level > 0 and from_id=${userid}
-        )
-      );`
-    );
+      `
+        WITH DOGPICS AS
+          (SELECT URL,
+              DOG_ID
+            FROM DOG_PICTURES
+            LIMIT 1)
+        SELECT U.ID,
+          CONCAT(U.FIRST_NAME, ' ', U.LAST_NAME) AS OWNER,
+          U.PROFILE_PIC_URL AS IMAGE,
+          DP.URL AS LIKED_DOG
+        FROM LIKES_DISLIKES L
+        INNER JOIN USERS U ON L.FROM_ID = U.ID
+        INNER JOIN DOGPICS DP ON DP.DOG_ID = TO_ID
+        WHERE TO_ID in
+            (SELECT ID
+              FROM DOGS
+              WHERE USER_ID = $1)
+          AND FROM_ID IN
+            (SELECT USER_ID
+              FROM DOGS
+              WHERE ID in
+                  (SELECT TO_ID
+                    FROM LIKES_DISLIKES
+                    WHERE FROM_ID = $1))
+    `, [userid]);
     res.status(200).send(matchList.rows);
   } catch (err) {
     res.send({ Error: err.stack });

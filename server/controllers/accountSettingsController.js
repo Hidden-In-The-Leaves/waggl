@@ -90,7 +90,7 @@ const putLocationInfo = async (req, res) => {
 
 const getPrivacySettings = async (req, res) => {
   db.query(`
-  SELECT location_sharing, packs_visible FROM setting_preferences WHERE user_id = ${req.params.id}`)
+  SELECT * FROM setting_preferences WHERE user_id = ${req.params.id}`)
     .then((data) => {
       res.send(data.rows[0]);
     })

@@ -24,7 +24,6 @@ export default function AddProfile({ handleClose, renderList, data }) {
         newPersonalities[trait] = true;
       });
       setPersonalities(newPersonalities);
-      setImages(data.photos);
     }
   }, []);
 
@@ -46,36 +45,37 @@ export default function AddProfile({ handleClose, renderList, data }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const uploadPromises = [];
-    images.forEach((image) => {
-      uploadPromises.push(uploadPhoto(image));
-    });
+      const uploadPromises = [];
+      images.forEach((image) => {
+        uploadPromises.push(uploadPhoto(image));
+      });
 
-    Promise.all(uploadPromises)
-      .then((urls) => {
-        const per = [];
-        for (let key in personalities) {
-          if (personalities[key]) per.push(key);
-        }
-        const config = {
-          method: 'POST',
-          url: '/api/profile',
-          data: {
-            ...formValue,
-            photos: urls,
-            user_id: userInfo.id,
-            personalities: per,
-          },
-        };
-        axios(config)
-          .then(() => {
-            handleClose();
-            // renders list ( like get all profiles again )
-            renderList();
-          })
-          .catch((err) => console.log('error posting profile', err));
-      })
-      .catch((err) => console.log('error uploading photo', err));
+      Promise.all(uploadPromises)
+        .then((urls) => {
+          const per = [];
+          for (let key in personalities) {
+            if (personalities[key]) per.push(key);
+          }
+          const config = {
+            method: 'POST',
+            url: '/api/profile',
+            data: {
+              ...formValue,
+              photos: urls,
+              user_id: userInfo.id,
+              personalities: per,
+            },
+          };
+          axios(config)
+            .then(() => {
+              handleClose();
+              // renders list ( like get all profiles again )
+              renderList();
+            })
+            .catch((err) => console.log('error posting profile', err));
+        })
+        .catch((err) => console.log('error uploading photo', err));
+
   };
 
   return (
@@ -137,9 +137,10 @@ export default function AddProfile({ handleClose, renderList, data }) {
         Photos
       </SC.SectionTitle>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {data && data.photos.map((image, index) => <PhotoContainer src={image} key={`${image}${index}`} />)}
         {images.map((image, index) => <PhotoContainer src={image} key={`${image}${index}`} />)}
         {tempImageArray
-          .slice(0, tempImageArray.length - images.length)
+          .slice(0, tempImageArray.length - images.length - (data?.photos.length || 0))
           .map((image, index) => {
             if (!index) {
               return <AddPictureCard key={`${image}${index}`} setImage={(i) => setImages([...images, i])} />;
@@ -162,7 +163,7 @@ export default function AddProfile({ handleClose, renderList, data }) {
         </div>
       </div> */}
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <SC.Button type="submit" style={{ width: '20%', margin: '3% 0' }}>Create</SC.Button>
+        <SC.Button type="submit" style={{ width: '20%', margin: '3% 0' }}>{data ? 'Edit' : 'Create'}</SC.Button>
       </div>
     </form>
   )

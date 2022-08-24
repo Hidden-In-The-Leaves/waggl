@@ -21,7 +21,6 @@ export default function Team() {
 }
 
 const Container = styled.div`
-  /* height: 100vh; */
   padding: 8vh 0;
   scroll-snap-align: start;
   width: 100vw;
