@@ -90,7 +90,7 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 ### Group live chat
 
 > Users can live chat with users in the same pack
-![](assets/demo/BookFace_MyBookClub.gif)
+![](assets/videochat.gif)
 
 ### Group Video Chat
 > Users can initiate a video call for pack members to join
