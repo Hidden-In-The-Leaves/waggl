@@ -99,16 +99,28 @@ const likeDog = async (req, res) => {
  */
 const getMatchList = async (req, res) => {
   const userid = req.query.userid;
-  console.log(userid);
   try {
     const matchList = await db.query(
-      `select id, concat(first_name, ' ', last_name) as owner, email, profile_pic_url as image
-      from users where id in (
-        select user_id from dogs where id in (
-          select to_id from likes_dislikes where like_level > 0 and from_id=${userid}
-        )
-      );`
-    );
+      `
+      SELECT DISTINCT U.ID,
+      CONCAT(U.FIRST_NAME, ' ', U.LAST_NAME) AS OWNER,
+      U.PROFILE_PIC_URL AS IMAGE
+    FROM LIKES_DISLIKES L
+    INNER JOIN USERS U ON L.FROM_ID = U.ID
+    WHERE TO_ID in
+        (SELECT ID
+          FROM DOGS
+          WHERE USER_ID = $1)
+      AND FROM_ID IN
+        (SELECT USER_ID
+          FROM DOGS
+          WHERE ID in
+              (SELECT TO_ID
+                FROM LIKES_DISLIKES
+                WHERE FROM_ID = $1
+                AND LIKE_LEVEL > 0))
+    AND L.LIKE_LEVEL > 0;
+    `, [userid]);
     res.status(200).send(matchList.rows);
   } catch (err) {
     res.send({ Error: err.stack });
@@ -121,7 +133,6 @@ const getMatchList = async (req, res) => {
  * @desc delete a match
  */
 const deleteMatch = async (req, res) => {
-  console.log(req.body);
   const from = req.body.from_id;
   const to = req.body.to_id;
   try {
@@ -131,11 +142,38 @@ const deleteMatch = async (req, res) => {
         SELECT id FROM dogs WHERE user_id=${to}
       );`
     );
-    console.log('success');
     res.send({ Success: 'removed a match' });
   } catch (err) {
     res.send({ Error: err.stack });
   }
 };
 
-module.exports = { getUsers, likeDog, getMatchList, deleteMatch, getDog };
+/**
+ * @route /api/test/matched
+ * @method GET
+ * @desc check if matched with given dog_id
+ */
+const didMatch = (req, res) => {
+  db.query(`
+    SELECT DP.URL
+    FROM LIKES_DISLIKES
+    LEFT JOIN DOG_PICTURES DP ON DP.DOG_ID = TO_ID
+    WHERE TO_ID in
+        (SELECT ID
+          FROM DOGS
+          WHERE USER_ID = $1)
+      AND FROM_ID =
+        (SELECT USER_ID
+          FROM DOGS
+          WHERE ID = $2)
+      AND LIKE_LEVEL > 0
+    LIMIT 1;
+  `, [req.query.user_id, req.query.dog_id])
+    .then((result) => res.json(result.rows))
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log(err);
+    });
+};
+
+module.exports = { getUsers, likeDog, getMatchList, deleteMatch, getDog, didMatch };

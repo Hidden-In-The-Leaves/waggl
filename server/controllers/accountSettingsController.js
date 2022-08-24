@@ -53,12 +53,12 @@ const getLocationInfo = async (req, res) => {
           res.send([data1.rows[0], data2.rows[0]]);
         })
         .catch((err) => {
-          console.log('database error - cannot get user information', err);
+          console.log('database error - cannot get user location', err);
           res.sendStatus(500);
         });
     })
     .catch((err) => {
-      console.log('database error - cannot get user information', err);
+      console.log('database error - cannot get user location', err);
       res.sendStatus(500);
     });
 };
@@ -90,12 +90,12 @@ const putLocationInfo = async (req, res) => {
 
 const getPrivacySettings = async (req, res) => {
   db.query(`
-  SELECT location_sharing, packs_visible FROM setting_preferences WHERE user_id = ${req.params.id}`)
+  SELECT * FROM setting_preferences WHERE user_id = ${req.params.id}`)
     .then((data) => {
       res.send(data.rows[0]);
     })
     .catch((err) => {
-      console.log('database error - cannot get user information', err);
+      console.log('database error - cannot get user privacy settings', err);
       res.sendStatus(500);
     });
 };
@@ -126,7 +126,7 @@ const putPrivacySettings = async (req, res) => {
       }
     })
     .catch((err) => {
-      console.log('database error - cannot get user information', err);
+      console.log('database error - cannot get update user privacy info', err);
       res.sendStatus(500);
     });
 };

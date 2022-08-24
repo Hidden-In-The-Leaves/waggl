@@ -13,7 +13,6 @@ export default function Profile(props) {
       .then(({ data }) => setDog(data))
       .catch((err) => console.log(err));
   }, [dogid]);
-  console.log(dog);
   return (
     <div style={{ margin: '5%' }}>
       {dog.id && <DogDetail dog={dog} updateImageIndex={() => {}} />}

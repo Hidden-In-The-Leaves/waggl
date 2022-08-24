@@ -8,9 +8,7 @@ export default function WhoWeAre() {
       <Main>
         <Title style={{ textAlign: 'center' }}>Who We Are</Title>
         <Description>
-          In a world where humans are able to connect and meet with people from all over the world, we think its time for the dogs.
-          We are here to create a world where dogs can connect, play, and communicate with other dogs from all over the city.
-          something like that. let us revise this paragraph later.
+          Our dogs are love making new friends, but sometimes they aren’t very good at it. My dogs have a set of friends, and a set of best friends, but it’s hard to know when their pals will be at the dog park. We are here to create a community where our four legged friends can connect, play, and communicate with other dogs from all over the city.
         </Description>
       </Main>
       <OurTeamContainer>
@@ -20,8 +18,7 @@ export default function WhoWeAre() {
         <Half>
           <Title>Our Team</Title>
           <Description>
-            We are a team of 7 people from Hack Reactor, where we all share the same goal of blah blah.
-            blah blah. something about the team interesting.
+            We are a team of seven engineers from Hack Reactor working closely over the course of one week. We place high value on teamwork, as well as diversity, equality and inclusion.
           </Description>
         </Half>
       </OurTeamContainer>

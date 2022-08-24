@@ -77,7 +77,7 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
           <CircleImage
             src={user2.image}
             alt="img"
-            style={{ margin: 'auto 15px auto 10%' }}
+            style={{ margin: 'auto 15px auto 10%', objectFit: 'cover' }}
           />
           <NameTitle onClick={clickHandler}>{user2.owner} </NameTitle>
         </div>

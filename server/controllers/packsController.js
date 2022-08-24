@@ -119,26 +119,49 @@ module.exports = {
   },
 
   getPosts: ({ query }, res) => {
-    db.query(
-      `
-      SELECT p.id, p.pack_id, p.text, u.id as poster_id, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
-      FROM pack_posts p
-      INNER JOIN users_packs_join up
-      ON p.pack_id = up.pack_id
-      INNER JOIN users u
-      ON p.poster_id = u.id
-      WHERE up.user_id = $1
-      ORDER BY p.posted_time DESC
-    `,
-      [query.user_id]
-    )
-      .then((result) => {
-        res.send(result.rows);
-      })
-      .catch((err) => {
-        console.log('database error - cannot get pack posts', err);
-        res.sendStatus(500);
-      });
+    if (query.user_id) {
+      db.query(
+        `
+        SELECT p.id, p.pack_id, p.text, u.id as poster_id, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
+        FROM pack_posts p
+        INNER JOIN users_packs_join up
+        ON p.pack_id = up.pack_id
+        INNER JOIN users u
+        ON p.poster_id = u.id
+        WHERE up.user_id = $1
+        ORDER BY p.posted_time DESC
+      `,
+        [query.user_id]
+      )
+        .then((result) => {
+          res.send(result.rows);
+        })
+        .catch((err) => {
+          console.log('database error - cannot get pack posts', err);
+          res.sendStatus(500);
+        });
+    } else if (query.pack_id) {
+      db.query(
+        `
+        SELECT p.id, p.text, p.poster_id, CONCAT(u.first_name, ' ', u.last_name) as poster, u.profile_pic_url as poster_photo_url, p.photo_url, p.posted_time
+        FROM pack_posts p
+        INNER JOIN packs pa
+        ON p.pack_id = pa.id
+        INNER JOIN users u
+        ON p.poster_id = u.id
+        WHERE p.pack_id = $1
+        ORDER BY p.posted_time DESC
+      `,
+        [query.pack_id]
+      )
+        .then((result) => {
+          res.send(result.rows);
+        })
+        .catch((err) => {
+          console.log('database error - cannot get pack posts', err);
+          res.sendStatus(500);
+        });
+    }
   },
 
   createPost: ({ body }, res) => {
@@ -203,4 +226,23 @@ module.exports = {
         res.sendStatus(500);
       });
   },
+  getPackUsers: ({ query }, res) => {
+    db.query(`
+      SELECT
+        up.user_id,
+        CONCAT(u.first_name, ' ', u.last_name) as name,
+        u.city, u.profile_pic_url, u.state
+      FROM users_packs_join up
+      INNER JOIN users u
+      ON up.user_id = u.id
+      WHERE up.pack_id = $1
+    `, [query.pack_id])
+      .then((result) => {
+        res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('database error - cannot get pack users', err);
+        res.sendStatus(500);
+      });
+  }
 };

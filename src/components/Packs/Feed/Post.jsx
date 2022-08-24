@@ -13,7 +13,7 @@ export default function Post({ post }) {
         <RoundImg src={post.poster_photo_url} />
         <MainText>{post.poster}</MainText>
         <SubText>
-          {post.posted_time}
+          {`${formatDistanceToNow(new Date(post.posted_time))} ago`}
         </SubText>
       </FlexRow>
       <Text>{post.text}</Text>
