@@ -65,6 +65,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
             <CircleImage
               src={match.image}
               onClick={() => clickHandler(match)}
+              style={{ objectFit: 'cover' }}
             ></CircleImage>
             <Match>
               <Name onClick={() => clickHandler(match)}>{match.owner}</Name>

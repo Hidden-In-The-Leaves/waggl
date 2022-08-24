@@ -41,7 +41,7 @@ module.exports = {
         res.send(result.rows);
       })
       .catch((err) => {
-        console.log('database error - cannot get user information', err);
+        console.log('database error - cannot get user info by email', err);
         res.sendStatus(500);
       });
   },
@@ -55,7 +55,7 @@ module.exports = {
         res.send(result.rows);
       })
       .catch((err) => {
-        console.log('database error - cannot get user information', err);
+        console.log('database error - cannot get all users', err);
         res.sendStatus(500);
       });
   },

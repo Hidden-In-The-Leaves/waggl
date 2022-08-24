@@ -59,10 +59,8 @@ function Index() {
       if (cookies.session) {
         // get userId and store that in state,
         const userid = await getUserByCookie(cookies.session);
-        console.log(userid)
         axios.get(`/api/user/${userid}`)
           .then((result) => {
-            console.log(result.data)
             setZustandUser(result.data[0])
           })
           .catch((err) => console.log('error getting userinfo cookies', err));

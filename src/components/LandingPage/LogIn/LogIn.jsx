@@ -71,7 +71,6 @@ export default function LogIn() {
         ) {
           alert('invaild username or password');
         } else {
-          console.log(response.data[0])
           setZustandUser(response.data[0]);
           (async () => {
             const sessionId = await registerCookie(response.data[0].id);
@@ -107,7 +106,6 @@ export default function LogIn() {
   };
 
   if (cookies.session) {
-    console.log('here')
     navigateHome();
   }
 
