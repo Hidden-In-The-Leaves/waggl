@@ -29,7 +29,6 @@ export default function SmallCard({ pfp, handleEditOpen }) {
         <QR onClick={(e) => {e.preventDefault(); handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
 
       </div>
-      {/* <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png"></GlobeIcon> */}
       <SubTitle>Description</SubTitle>
       <Desc>{pfp.description}</Desc>
       <SubTitle>Likes to..</SubTitle>
@@ -62,6 +61,7 @@ const traitColor = {
 const PictureContainer = styled.div`
   width: 100%;
   height: 51%;
+  position: relative;
 `;
 
 const DetailsContainer = styled.div`
@@ -93,14 +93,16 @@ const PFP = styled.img`
 `;
 
 const EditIcon = styled.img`
-position: relative;
-height: 30px;
-width: 30px;
-/* left: 330px;
-bottom: 283px; */
-left: 333px;
-bottom: 380px;
-&:hover{background-color: rgba(255, 135, 0, 0.8); border-radius: 10px; opacity: };
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 10px;
+  background-color: rgba(255,255, 255, 0.4);
+  &:hover{
+    background-color: rgba(255,255, 255, 0.8);
+  };
 `;
 
 const ProfileName = styled.span`
