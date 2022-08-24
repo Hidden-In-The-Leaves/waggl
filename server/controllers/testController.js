@@ -118,7 +118,9 @@ const getMatchList = async (req, res) => {
           WHERE ID in
               (SELECT TO_ID
                 FROM LIKES_DISLIKES
-                WHERE FROM_ID = $1));
+                WHERE FROM_ID = $1
+                AND LIKE_LEVEL > 0))
+    AND L.LIKE_LEVEL > 0;
     `, [userid]);
     res.status(200).send(matchList.rows);
   } catch (err) {
