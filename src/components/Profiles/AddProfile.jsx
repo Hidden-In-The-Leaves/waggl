@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import * as SC from '../../styledComponents.js';
@@ -6,9 +6,9 @@ import AddPictureCard from './AddPictureCard';
 import uploadPhoto from '../../lib/uploadPhoto';
 import { useUserStore } from '../Store';
 
-export default function AddProfile({ handleClose, renderList }) {
+export default function AddProfile({ handleClose, renderList, data }) {
   const userInfo = useUserStore((state) => state.userInfo);
-  const [formValue, setFormValue] = useState({});
+  const [formValue, setFormValue] = useState(data || {});
   const [personalities, setPersonalities] = useState({
     happy: false,
     active: false,
@@ -16,6 +16,17 @@ export default function AddProfile({ handleClose, renderList }) {
     shy: false,
   });
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    if (data) {
+      const newPersonalities = {...personalities};
+      data.traits.forEach((trait) => {
+        newPersonalities[trait] = true;
+      });
+      setPersonalities(newPersonalities);
+      setImages(data.photos);
+    }
+  }, []);
 
   const tempImageArray = ['', '', '', '', '', ''];
 
@@ -35,7 +46,6 @@ export default function AddProfile({ handleClose, renderList }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log('herer')
     const uploadPromises = [];
     images.forEach((image) => {
       uploadPromises.push(uploadPhoto(image));
@@ -74,15 +84,15 @@ export default function AddProfile({ handleClose, renderList }) {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <SC.InputLabel style={{ width: '40%' }}>
           Name
-          <SC.Input type="text" name="name" onChange={handleChange} required />
+          <SC.Input type="text" name="name" onChange={handleChange} required value={formValue.name} />
         </SC.InputLabel>
         <SC.InputLabel style={{ width: '15%' }}>
           Age
-          <SC.Input type="number" name="age" onChange={handleChange} required />
+          <SC.Input type="number" name="age" onChange={handleChange} required value={formValue.age} />
         </SC.InputLabel>
         <SC.InputLabel style={{ width: '22%' }}>
           Gender
-          <Select name="gender" onChange={handleChange} required>
+          <Select name="gender" onChange={handleChange} required defaultValue={formValue.gender}>
             <option value="">-- Choose One --</option>
             <option>Female</option>
             <option>Male</option>
@@ -90,7 +100,7 @@ export default function AddProfile({ handleClose, renderList }) {
         </SC.InputLabel>
         <SC.InputLabel style={{ width: '18%' }}>
           Size
-          <Select name="size" onChange={handleChange} required>
+          <Select name="size" onChange={handleChange} required defaultValue={formValue.size}>
             <option value="">-- Choose One --</option>
             <option>S</option>
             <option>M</option>
@@ -100,13 +110,13 @@ export default function AddProfile({ handleClose, renderList }) {
       </div>
       <SC.InputLabel>
         Description
-        <SC.TextArea style={{ height: '100px' }} name="description" onChange={handleChange} />
+        <SC.TextArea style={{ height: '100px' }} name="description" onChange={handleChange} value={formValue.description} />
       </SC.InputLabel>
       <SC.InputLabel>
         Personality
         <div style={{ display: 'flex', padding: '10px 0' }}>
           {Object.keys(personalities).map((name) => (
-            <ButtonDiv checked={personalities[name]}>
+            <ButtonDiv checked={personalities[name]} key={name}>
               <label style={{ float: 'left', width: '4.0em' }}>
                 <CheckButton type="checkbox" value={name} onChange={handleCheckChange} />
                 <div style={{ textAlign: 'center', fontSize: '14px' }}>{name}</div>
@@ -117,24 +127,24 @@ export default function AddProfile({ handleClose, renderList }) {
       </SC.InputLabel>
       <SC.InputLabel>
         Likes to...
-        <SC.Input type="text" name="likes" onChange={handleChange} />
+        <SC.Input type="text" name="likes" onChange={handleChange} value={formValue.likes} />
       </SC.InputLabel>
       <SC.InputLabel>
         Dislikes to...
-        <SC.Input type="text" name="dislikes" onChange={handleChange} />
+        <SC.Input type="text" name="dislikes" onChange={handleChange} value={formValue.dislikes} />
       </SC.InputLabel>
       <SC.SectionTitle>
         Photos
       </SC.SectionTitle>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {images.map((image) => <PhotoContainer src={image} />)}
+        {images.map((image, index) => <PhotoContainer src={image} key={`${image}${index}`} />)}
         {tempImageArray
           .slice(0, tempImageArray.length - images.length)
           .map((image, index) => {
             if (!index) {
-              return <AddPictureCard key={index} setImage={(i) => setImages([...images, i])} />;
+              return <AddPictureCard key={`${image}${index}`} setImage={(i) => setImages([...images, i])} />;
             }
-            return <PhotoContainer key={index} />;
+            return <PhotoContainer key={`${image}${index}`} />;
           })}
       </div>
       {/* <SC.SectionTitle>Profile Visibility</SC.SectionTitle>

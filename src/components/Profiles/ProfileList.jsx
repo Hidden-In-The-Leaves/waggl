@@ -5,7 +5,6 @@ import { Title, Container } from '../../styledComponents.js';
 import AddCard from './AddCard';
 import ProfileCard from './ProfileCard';
 import AddProfile from './AddProfile';
-import EditProfile from './EditProfile';
 import Modal from '../commonComponents/Modal.jsx';
 import axios from 'axios';
 import { useUserStore } from '../Store';
@@ -15,22 +14,25 @@ import { useUserStore } from '../Store';
 export default function ProfileList(props) {
   const userInfo = useUserStore((state) => state.userInfo);
   const [showModal, setShowModal] = useState(false);
-  const [editModal, setEditModal] = useState(false);
-  const [profileData, setProfileData] = useState({});
+  // const [editModal, setEditModal] = useState(false);
+  // const [profileData, setProfileData] = useState({});
   const [dogs, setDogs] = useState([]);
+
+  const getDogs = () => {
+    axios({
+      method: 'get',
+      url: '/api/profile/dogs',
+      params: {user_id: userInfo.id},
+    })
+      .then((res) => {
+        setDogs(res.data);
+      })
+      .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
+  };
 
   useEffect(() => {
     if (userInfo.id) {
-      axios({
-        method: 'get',
-        url: '/api/profile/dogs',
-        params: {user_id: userInfo.id},
-      })
-        .then((res) => {
-          console.log('data', res.data);
-          setDogs(res.data);
-        })
-        .catch((err) => {console.log('🟥Error on useEffect fetching dog profiles', err)})
+      getDogs();
     }
   }, [userInfo]);
 
@@ -53,31 +55,21 @@ export default function ProfileList(props) {
     setShowModal(false);
   };
 
-  const handleEditOpen = () => {
-    setEditModal(true);
-  };
-  const handleEditClose = () => {
-    setEditModal(false);
-  };
-
   return (
     <Container>
       <Title style={{ marginLeft: '3%' }}>Profiles</Title>
       <div className="card-container" style={{ display: 'flex', flexWrap: 'wrap', spaceBetween: '10px', width: '90vw', margin: 'auto', gap: '10px 0px 10px 0px' }}>
           {/* {dogPhotos.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} handleOpenQR={handleOpenQR} />})} */}
-          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} handleEditOpen={handleEditOpen} />})}
+          {dogs.map((item, index) => {return <ProfileCard key={index} pfp={item} renderList={getDogs} />})}
 
         <AddCard handleOpen={handleOpen} />
       </div>
-      {/* <Link to="/">
-        <button>This is a Link to App "Page"!</button>
-      </Link> */}
       <Modal open={showModal} onClose={handleClose} title={'Add Profile'}>
-        <AddProfile profileData={profileData} setProfileData={setProfileData} handleClose={handleClose} />
+        <AddProfile handleClose={handleClose} renderList={getDogs} />
       </Modal>
-      <Modal open={editModal} onClose={handleEditClose} title={'Modal edit Testing!'}>
+      {/* <Modal open={editModal} onClose={handleEditClose} title={'Modal edit Testing!'}>
         <EditProfile profileData={profileData} setProfileData={setProfileData} />
-      </Modal>
+      </Modal> */}
     </Container>
   );
 }

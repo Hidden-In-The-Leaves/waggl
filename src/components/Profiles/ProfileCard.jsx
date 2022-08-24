@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as SC from '../../styledComponents.js';
-import Modal from '../commonComponents/Modal.jsx';
+import * as SC from '../../styledComponents';
+import Modal from '../commonComponents/Modal';
+import AddProfile from './AddProfile';
 
-export default function SmallCard({ pfp, handleEditOpen }) {
-  console.log(pfp);
+export default function ProfileCard({ pfp, handleEditOpen, renderList }) {
   const [showQR, setShowQR] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const handleOpenQR = () => {
     setShowQR(true);
@@ -14,11 +15,19 @@ export default function SmallCard({ pfp, handleEditOpen }) {
     setShowQR(false);
   };
 
+  const handleOpen = () => {
+    setEditModal(true);
+  };
+
+  const handleClose = () => {
+    setEditModal(false);
+  };
+
   return (
-   <ProfileCard onClick={(e) => {e.preventDefault(); setQR(pfp.id)}}>
+   <ProfileCardDiv>
     <PictureContainer>
       <PFP src={pfp.photos[0]} style={{ objectFit: 'cover' }}></PFP>
-      <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => {e.preventDefault(); handleEditOpen()}}></EditIcon>
+      <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => handleOpen() }></EditIcon>
     </PictureContainer>
     <DetailsContainer>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -38,16 +47,19 @@ export default function SmallCard({ pfp, handleEditOpen }) {
       <SubTitle>Traits</SubTitle>
       <div style={{ display: 'flex', padding: '5px 0' }}>
           {pfp.traits.map((name) => (
-            <Trait color={traitColor[name]}>
+            <Trait color={traitColor[name]} key={name} >
               {name}
             </Trait>
           ))}
         </div>
     </DetailsContainer>
     <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/Profile/19&size=150x150&bgcolor=FF8700&color=fff`} />
+      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
     </Modal>
-   </ProfileCard>
+    <Modal open={editModal} onClose={handleClose} title={'Add Profile'}>
+        <AddProfile handleClose={handleClose} renderList={renderList} data={pfp} />
+    </Modal>
+   </ProfileCardDiv>
   )
 }
 
@@ -70,7 +82,7 @@ const DetailsContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const ProfileCard = styled.div`
+const ProfileCardDiv = styled.div`
   /* display: relative; */
   /* width: 24.64vw; */
   width: 30%;
