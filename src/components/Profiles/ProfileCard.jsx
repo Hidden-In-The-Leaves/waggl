@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as SC from '../../styledComponents.js';
-import Modal from '../commonComponents/Modal.jsx';
+import * as SC from '../../styledComponents';
+import Modal from '../commonComponents/Modal';
+import AddProfile from './AddProfile';
 
-export default function SmallCard({ pfp, handleEditOpen }) {
+export default function ProfileCard({ pfp, handleEditOpen, renderList }) {
   const [showQR, setShowQR] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const handleOpenQR = () => {
     setShowQR(true);
@@ -13,65 +15,84 @@ export default function SmallCard({ pfp, handleEditOpen }) {
     setShowQR(false);
   };
 
+  const handleOpen = () => {
+    setEditModal(true);
+  };
+
+  const handleClose = () => {
+    setEditModal(false);
+  };
+
   return (
-   <ProfileCard onClick={(e) => {e.preventDefault(); setQR(pfp.id)}}>
+   <ProfileCardDiv>
     <PictureContainer>
       <PFP src={pfp.photos[0]} style={{ objectFit: 'cover' }}></PFP>
-      <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => {e.preventDefault(); handleEditOpen()}}></EditIcon>
+      <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => handleOpen() }></EditIcon>
     </PictureContainer>
     <DetailsContainer>
-      <ProfileName>{pfp.name}<span><GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png"></GlobeIcon></span></ProfileName><br></br>
-      {/* <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png"></GlobeIcon> */}
-      <Pin src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/344/external-pin-interface-kiranshastry-solid-kiranshastry-1.png"></Pin><br></br>
-      <QR onClick={(e) => {e.preventDefault(); handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
-      <p>Description</p>
-      <p>{pfp.dislikes}</p>
-      <p>Likes</p>
-      <p>{pfp.likes}</p>
-      <p>Disikes</p>
-      <p>{pfp.dislikes}</p>
-      <p>Traits</p>
-      <div style={{ display: 'flex', padding: '10px 0' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div>
+          <ProfileName>{pfp.name}</ProfileName>
+          <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png" />
+        </div>
+        <QR onClick={(e) => {e.preventDefault(); handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
+
+      </div>
+      <SubTitle>Description</SubTitle>
+      <Desc>{pfp.description}</Desc>
+      <SubTitle>Likes to..</SubTitle>
+      <Desc>{pfp.likes}</Desc>
+      <SubTitle>Disikes to..</SubTitle>
+      <Desc>{pfp.dislikes}</Desc>
+      <SubTitle>Traits</SubTitle>
+      <div style={{ display: 'flex', padding: '5px 0' }}>
           {pfp.traits.map((name) => (
-            <div>
+            <Trait color={traitColor[name]} key={name} >
               {name}
-            </div>
+            </Trait>
           ))}
         </div>
     </DetailsContainer>
     <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/Profile/19&size=150x150&bgcolor=FF8700&color=fff`} />
+      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
     </Modal>
-   </ProfileCard>
+    <Modal open={editModal} onClose={handleClose} title={'Add Profile'}>
+        <AddProfile handleClose={handleClose} renderList={renderList} data={pfp} />
+    </Modal>
+   </ProfileCardDiv>
   )
 }
+
+const traitColor = {
+  active: 'red',
+  happy: 'orange',
+  shy: 'skyblue',
+  sleepy: 'green',
+};
 
 const PictureContainer = styled.div`
   width: 100%;
   height: 51%;
+  position: relative;
 `;
 
 const DetailsContainer = styled.div`
   height: 49%;
-  width: 90%;
-  padding-left: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 `;
 
-const ProfileCard = styled.div`
+const ProfileCardDiv = styled.div`
   /* display: relative; */
   /* width: 24.64vw; */
-  width: 32%;
+  width: 30%;
   /* height: 556px; */
-  height: 750px;
-  left: 115px;
-  top: 222px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-
+  height: 500px;
+  margin: 20px;
   background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 10%);
   border-radius: 20px;
+  /* border: 1px solid grey; */
 `;
 
 const PFP = styled.img`
@@ -84,27 +105,25 @@ const PFP = styled.img`
 `;
 
 const EditIcon = styled.img`
-position: relative;
-height: 30px;
-width: 30px;
-/* left: 330px;
-bottom: 283px; */
-left: 333px;
-bottom: 380px;
-&:hover{background-color: rgba(255, 135, 0, 0.8); border-radius: 10px; opacity: };
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border-radius: 10px;
+  background-color: rgba(255,255, 255, 0.4);
+  &:hover{
+    background-color: rgba(255,255, 255, 0.8);
+  };
 `;
 
-const ProfileName = styled.div`
-  width: 80%;
-  padding-left: 10px;
-  font-weight: 400;
-  font-family: 'Lato', Helvetica, sans-serif;
-  font-size: 1.25em;
+const ProfileName = styled.span`
+  font-size: 1.1em;
 `;
 
 const GlobeIcon = styled.img`
-  height: 30px;
-  width: 30px
+  height: 20px;
+  width: 20px;
   display: inline-block;
   top: 15px;
 `;
@@ -116,8 +135,8 @@ const Pin = styled.img`
 `;
 
 const QR = styled.img`
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   display: inline-block;
 `;
 
@@ -143,4 +162,22 @@ const ButtonDiv = styled.div`
   border:1px solid #D0D0D0;
   overflow:auto;
   float:left;
+`;
+
+const SubTitle = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  padding-top: 2%;
+`;
+
+const Desc = styled.div`
+  font-size: 14px;
+`;
+
+const Trait = styled.div`
+  padding: 0 5px;
+  border: ${props => `1px solid ${props.color}`};
+  border-radius: 20px;
+  margin-right: 5px;
+  font-size: 14px;
 `;

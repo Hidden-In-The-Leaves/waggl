@@ -39,17 +39,17 @@ export const usePackStore = create((set, get) => ({
     }
   },
   filter: (term) => {
-    const filteredAll = get()
-      .allPacks
+    const filteredOthers = get()
+      .otherPacks
       .filter((el) => el.name.toLowerCase().includes(term)
       || el.description?.toLowerCase().includes(term));
 
-    const filteredUser = get()
-      .userPacks
+    const filteredUsers = get()
+      .joinedPacks
       .filter((el) => el.name.toLowerCase().includes(term)
       || el.description?.toLowerCase().includes(term));
 
-    set((state) => ({ allPacksFiltered: filteredAll, userPacksFiltered: filteredUser }));
+    set((state) => ({ otherPacksFiltered: filteredOthers, joinedPacksFiltered: filteredUsers }));
   },
 }));
 

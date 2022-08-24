@@ -20,9 +20,11 @@ export default function MatchList({ user, updateReceiver, updateList }) {
   const [matchList, setMatchList] = useState([]);
   const [selected, setSelected] = useState({});
   const navigate = useNavigate();
+
   useEffect(() => {
     getMatchList();
   }, [user.id, updateList]);
+
   const getMatchList = () => {
     axios
       .get(`/api/test/like?userid=${user.id}`)
@@ -63,6 +65,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
             <CircleImage
               src={match.image}
               onClick={() => clickHandler(match)}
+              style={{ objectFit: 'cover' }}
             ></CircleImage>
             <Match>
               <Name onClick={() => clickHandler(match)}>{match.owner}</Name>

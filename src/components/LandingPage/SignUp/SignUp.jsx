@@ -122,6 +122,10 @@ export default function SignUp() {
       });
   };
 
+  if (cookies.session) {
+    navigateHome();
+  }
+
   // ----------------- Render ------------------
   return (
     <div>

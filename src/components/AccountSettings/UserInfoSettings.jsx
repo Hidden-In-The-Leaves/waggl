@@ -24,10 +24,10 @@ export default function UserInfoSettings() {
   };
 
   const setUserInfo = (data) => {
-    if (data.profile_picture_url === undefined) {
+    if (data.profile_pic_url === undefined) {
       setProfilePictureUrl('https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg');
     } else {
-      setProfilePictureUrl(data.profile_picture_url);
+      setProfilePictureUrl(data.profile_pic_url);
     }
     if (data.first_name === undefined) {
       setFirstName('');
@@ -103,6 +103,10 @@ export default function UserInfoSettings() {
   };
 
   useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  useEffect(() => {
     if (userEdit.length === 0) {
       setUserEdit(false);
     }
@@ -156,10 +160,11 @@ export default function UserInfoSettings() {
 }
 
 const ProfilePicture = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 300px;
   margin: 20px 350px 20px;
+  object-fit: cover;
 `;
 
 const Button = styled.button`

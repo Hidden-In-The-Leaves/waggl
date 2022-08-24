@@ -69,7 +69,6 @@ export const Trait = styled.div`
 export const LikeContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 15px;
   gap: 10px;
 `;
 

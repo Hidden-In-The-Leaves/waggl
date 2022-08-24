@@ -12,7 +12,6 @@ import { Title, Button } from '../../styledComponents';
 
 export default function VideoChat() {
   const [pack, setPack] = useState({});
-  // console.log(pack)
   const [token, setToken] = useState(null);
   const userInfo = useUserStore((state) => state.userInfo);
 

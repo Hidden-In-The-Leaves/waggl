@@ -29,7 +29,6 @@ export default function Room({ pack, token }) {
     };
     const participantDisconnected = (participant) => {
       setParticipants((prev) => prev.filter((p) => p.identity !== participant.identity));
-      console.log('someone disconnected');
     };
 
     if (token) {

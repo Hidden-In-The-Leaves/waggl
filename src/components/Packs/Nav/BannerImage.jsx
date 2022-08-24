@@ -3,7 +3,7 @@ import React from 'react';
 
 function BannerImage({ bannerUrl }) {
   return (
-    <img height="auto" min-width="100%" max-width="100%" src={bannerUrl} />
+    <img src={bannerUrl} style={{ width: '100%', height: '30vh', objectFit: 'cover' }}/>
   );
 }
 
