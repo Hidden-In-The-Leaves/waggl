@@ -5,6 +5,8 @@ import Modal from '../commonComponents/Modal';
 import AddProfile from './AddProfile';
 
 export default function ProfileCard({ pfp, handleEditOpen, renderList }) {
+  var qrBase = window.location.href.split('/ProfileList');
+
   const [showQR, setShowQR] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
@@ -54,7 +56,7 @@ export default function ProfileCard({ pfp, handleEditOpen, renderList }) {
         </div>
     </DetailsContainer>
     <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=http://localhost:3000/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
+      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${qrBase[0]}/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
     </Modal>
     <Modal open={editModal} onClose={handleClose} title={'Add Profile'}>
         <AddProfile handleClose={handleClose} renderList={renderList} data={pfp} />
