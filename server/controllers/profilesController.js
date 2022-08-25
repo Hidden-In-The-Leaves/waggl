@@ -6,7 +6,6 @@ module.exports = {
     let {
       name, age, size, user_id, likes, dislikes, gender, description, photos, personalities
     } = req.body;
-    console.log('create profile request', req);
     db.query(`
       INSERT INTO dogs
         (name, age, size, user_id, likes, dislikes, gender, description)
@@ -46,7 +45,6 @@ module.exports = {
   },
 
   getProfiles: (req, res) => {
-    console.log('get all profiles request', req);
     db.query(`
       SELECT D.*,
         (SELECT JSON_AGG(DP.URL)
