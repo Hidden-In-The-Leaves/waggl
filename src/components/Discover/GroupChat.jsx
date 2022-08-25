@@ -43,7 +43,6 @@ export default function GroupChat({ sender, pack_id, socket, pack_name }) {
       .catch((err) => console.log(err));
   }, [pack_id]);
   socket.on('receive_message', (message) => {
-    console.log(message, messageList);
     setMessageList([...messageList, message]);
   });
 

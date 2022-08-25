@@ -43,16 +43,13 @@ export default function MainSection({
         .get('/api/test')
         .then(({ data }) => {
           data = data.filter((d) => {
-            console.log(d);
             return (
               d.owner_id !== userInfo.id && d.lat !== null && d.lng !== null
             );
           });
           const list = sortBy(range, currentPosition, getDistance, data);
           getDefaultMatch(list[1]);
-          // setMatchList(list);
           setMatchList(list);
-          // console.log(list);
         })
         .catch((err) => console.log(err));
     }

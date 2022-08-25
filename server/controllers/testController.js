@@ -99,7 +99,6 @@ const likeDog = async (req, res) => {
  */
 const getMatchList = async (req, res) => {
   const userid = req.query.userid;
-  console.log(userid);
   try {
     const matchList = await db.query(
       `select id, concat(first_name, ' ', last_name) as owner, email, profile_pic_url as image
@@ -121,7 +120,6 @@ const getMatchList = async (req, res) => {
  * @desc delete a match
  */
 const deleteMatch = async (req, res) => {
-  console.log(req.body);
   const from = req.body.from_id;
   const to = req.body.to_id;
   try {
@@ -131,7 +129,6 @@ const deleteMatch = async (req, res) => {
         SELECT id FROM dogs WHERE user_id=${to}
       );`
     );
-    console.log('success');
     res.send({ Success: 'removed a match' });
   } catch (err) {
     res.send({ Error: err.stack });
