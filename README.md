@@ -79,22 +79,25 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 
 ### Discover
 > Users can discover other dogs in their neighborhood
-![](assets/demo/BookFace_Stats.gif)
+
+![](assets/discover.gif)
 
 
 ### Discover live chat
 
 > Users can live chat with other matched users
-![](assets/demo/BookFace_Clubs.gif)
+
+![](assets/discover_live_chat.gif)
 
 ### Group live chat
 
 > Users can live chat with users in the same pack
-![](assets/videochat.gif)
+
+![](assets/group_chat.gif)
 
 ### Group Video Chat
 > Users can initiate a video call for pack members to join
-![](assets/demo/BookFace_LiveChat.gif)
+![](assets/videochat.gif)
 
 ### Dog Profile
 > Users can open a dog profile to share with others
