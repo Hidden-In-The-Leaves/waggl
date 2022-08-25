@@ -25,44 +25,84 @@ export default function ProfileCard({ pfp, handleEditOpen, renderList }) {
     setEditModal(false);
   };
 
-  return (
-   <ProfileCardDiv>
-    <PictureContainer>
-      <PFP src={pfp.photos[0]} style={{ objectFit: 'cover' }}></PFP>
-      <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => handleOpen() }></EditIcon>
-    </PictureContainer>
-    <DetailsContainer>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>
-          <ProfileName>{pfp.name}</ProfileName>
-          <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png" />
+  console.log('here!', pfp.photos)
+  if (!pfp.photos) {
+    return (
+      <ProfileCardDiv>
+       <PictureContainer>
+         <PFP src={'https://i.pinimg.com/originals/0c/24/36/0c2436d19ec57dfd4a7f4a0076777429.png'} style={{ objectFit: 'cover' }}></PFP>
+         <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => handleOpen() }></EditIcon>
+       </PictureContainer>
+       <DetailsContainer>
+         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+           <div>
+             <ProfileName>{pfp.name}</ProfileName>
+             <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png" />
+           </div>
+           <QR onClick={(e) => {e.preventDefault(); handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
+         </div>
+         <SubTitle>Description</SubTitle>
+         <Desc>{pfp.description}</Desc>
+         <SubTitle>Likes to..</SubTitle>
+         <Desc>{pfp.likes}</Desc>
+         <SubTitle>Disikes to..</SubTitle>
+         <Desc>{pfp.dislikes}</Desc>
+         <SubTitle>Traits</SubTitle>
+         <div style={{ display: 'flex', padding: '5px 0' }}>
+             {pfp.traits.map((name) => (
+               <Trait color={traitColor[name]} key={name} >
+                 {name}
+               </Trait>
+             ))}
+           </div>
+       </DetailsContainer>
+       <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
+         <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${qrBase[0]}/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
+       </Modal>
+       <Modal open={editModal} onClose={handleClose} title={'Add Profile'}>
+           <AddProfile handleClose={handleClose} renderList={renderList} data={pfp} />
+       </Modal>
+      </ProfileCardDiv>
+     );
+  } else {
+    return (
+     <ProfileCardDiv>
+      <PictureContainer>
+        <PFP src={pfp.photos[0]} style={{ objectFit: 'cover' }}></PFP>
+        <EditIcon src='https://cdn4.iconfinder.com/data/icons/software-menu-icons/256/SoftwareIcons-68-512.png' onClick={(e) => handleOpen() }></EditIcon>
+      </PictureContainer>
+      <DetailsContainer>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>
+            <ProfileName>{pfp.name}</ProfileName>
+            <GlobeIcon src="https://img.icons8.com/ios-glyphs/344/globe--v1.png" />
+          </div>
+          <QR onClick={(e) => {e.preventDefault(); handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
         </div>
-        <QR onClick={(e) => {e.preventDefault(); handleOpenQR()}} src="https://img.icons8.com/external-fauzidea-detailed-outline-fauzidea/344/external-qr-code-e-commerce-fauzidea-detailed-outline-fauzidea.png"></QR>
-
-      </div>
-      <SubTitle>Description</SubTitle>
-      <Desc>{pfp.description}</Desc>
-      <SubTitle>Likes to..</SubTitle>
-      <Desc>{pfp.likes}</Desc>
-      <SubTitle>Disikes to..</SubTitle>
-      <Desc>{pfp.dislikes}</Desc>
-      <SubTitle>Traits</SubTitle>
-      <div style={{ display: 'flex', padding: '5px 0' }}>
-          {pfp.traits.map((name) => (
-            <Trait color={traitColor[name]} key={name} >
-              {name}
-            </Trait>
-          ))}
-        </div>
-    </DetailsContainer>
-    <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
-      <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${qrBase[0]}/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
-    </Modal>
-    <Modal open={editModal} onClose={handleClose} title={'Add Profile'}>
-        <AddProfile handleClose={handleClose} renderList={renderList} data={pfp} />
-    </Modal>
-   </ProfileCardDiv>
-  )
+        <SubTitle>Description</SubTitle>
+        <Desc>{pfp.description}</Desc>
+        <SubTitle>Likes to..</SubTitle>
+        <Desc>{pfp.likes}</Desc>
+        <SubTitle>Disikes to..</SubTitle>
+        <Desc>{pfp.dislikes}</Desc>
+        <SubTitle>Traits</SubTitle>
+        <div style={{ display: 'flex', padding: '5px 0' }}>
+            {pfp.traits.map((name) => (
+              <Trait color={traitColor[name]} key={name} >
+                {name}
+              </Trait>
+            ))}
+          </div>
+      </DetailsContainer>
+      <Modal open={showQR} onClose={handleCloseQR} title={'QR Code for your profile'}>
+        <img src={`https://api.qrserver.com/v1/create-qr-code/?data=${qrBase[0]}/Profile/${pfp.id}&size=150x150&bgcolor=FF8700&color=fff`} />
+      </Modal>
+      <Modal open={editModal} onClose={handleClose} title={'Add Profile'}>
+          <AddProfile handleClose={handleClose} renderList={renderList} data={pfp} />
+      </Modal>
+     </ProfileCardDiv>
+    );
+  }
 }
 
 const traitColor = {
