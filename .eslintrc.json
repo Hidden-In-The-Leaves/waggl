@@ -1,6 +1,6 @@
 {
-  "extends": "airbnb"
-  // "rules": {
-  //   "default-param-last": ["error", "never"]
-  // }
+  "extends": "airbnb",
+  "rules": {
+    "default-param-last": ["error", "never"]
+  }
 }

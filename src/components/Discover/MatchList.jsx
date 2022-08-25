@@ -27,6 +27,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
     axios
       .get(`/api/test/like?userid=${user.id}`)
       .then(({ data }) => {
+        console.log(data);
         updateReceiver(data[0]);
         setMatchList(data);
       })
@@ -49,6 +50,7 @@ export default function MatchList({ user, updateReceiver, updateList }) {
         .catch((err) => console.log(err));
     }
   };
+  console.log(matchList);
   return (
     <MatchContainer>
       <SubTitle>Match List</SubTitle>

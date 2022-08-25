@@ -18,11 +18,11 @@ export default function Chat() {
   const [updateList, setUpdateList] = useState(true);
   const userInfo = useUserStore((state) => state.userInfo);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!userInfo.id) {
-      navigate('/Login');
-    }
-  }, [userInfo.id]);
+  // useEffect(() => {
+  //   if (!userInfo.id) {
+  //     navigate('/Login');
+  //   }
+  // }, [userInfo.id]);
   const getDefaultMatch = (data) => {
     setMatch(data);
   };
@@ -49,9 +49,10 @@ export default function Chat() {
   };
   const updateMatchList = () => {
     setUpdateList(!updateList);
-    if (!receiver) {
-      setReceiver(updateList[0]);
-    }
+    // if (receiver === {}) {
+    //   console.log('hhhhhh');
+    //   setReceiver(updateList[0] || {});
+    // }
   };
   return (
     <>

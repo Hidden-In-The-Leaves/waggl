@@ -141,7 +141,7 @@ const getUser = async (req, res) => {
   const userId = req.query.userid;
   try {
     const user = await db.query(
-      `SELECT first_name, last_name, profile_pic_url as image from users where id=${userId};`
+      `SELECT first_name, last_name, email, profile_pic_url as image from users where id=${userId};`
     );
     res.status(200).send(user.rows[0]);
   } catch (err) {

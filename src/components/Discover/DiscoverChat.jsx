@@ -87,26 +87,27 @@ export default function DiscoverChat({ user1, user2, socket, updateChat }) {
         ></CloseIcon>
       </div>
       <ChatContainer>
-        {messagesList.map((m, index) => (
-          <div key={index}>
-            {/* <span>{m.posted_time}</span> */}
-            {m.sender_id === user1.id && (
-              <MessageContainer>
-                <MessageFromMe>
-                  <Message>{m.message_text}</Message>
-                </MessageFromMe>
-              </MessageContainer>
-            )}
-            {m.sender_id === user2.id && (
-              <div style={{ display: 'flex' }}>
-                <MessageFromOther>
-                  <Message>{m.message_text}</Message>
-                </MessageFromOther>
-              </div>
-            )}
-            <div ref={bottomRef}></div>
-          </div>
-        ))}
+        {messagesList.length !== 0 &&
+          messagesList.map((m, index) => (
+            <div key={index}>
+              {/* <span>{m.posted_time}</span> */}
+              {m.sender_id === user1.id && (
+                <MessageContainer>
+                  <MessageFromMe>
+                    <Message>{m.message_text}</Message>
+                  </MessageFromMe>
+                </MessageContainer>
+              )}
+              {m.sender_id === user2.id && (
+                <div style={{ display: 'flex' }}>
+                  <MessageFromOther>
+                    <Message>{m.message_text}</Message>
+                  </MessageFromOther>
+                </div>
+              )}
+              <div ref={bottomRef}></div>
+            </div>
+          ))}
       </ChatContainer>
       <div style={{ height: '60px' }}>
         <MessageInput
