@@ -106,7 +106,7 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 
 ### Settings
 > Users can edit personal settings
-![](assets/demo/BookFace_VideoChat.gif)
+![](assets/Settings.gif)
 
 ### About us
 ![](assets/AboutUs.gif)
