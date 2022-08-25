@@ -33,20 +33,31 @@ export default function MainSection({
   const [imageIndex, setImageIndex] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [range, setRange] = useState(10);
+  const [matchedImage, setMatchedImage] = useState('');
   const currentPosition = {
     lat: lat,
     lng: lng,
   };
+
+  // get discover radius from privacy settings
+  useEffect(() => {
+    axios
+      .get(`/api/accountSettings/privacySettings/${userInfo.id}`)
+      .then((result) => {
+        setRange(result.data.discovery_radius || 1000);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   useEffect(() => {
     if (lat && lng) {
       axios
         .get('/api/test')
         .then(({ data }) => {
-          data = data.filter((d) => {
-            return (
+          data = data.filter(
+            (d) =>
               d.owner_id !== userInfo.id && d.lat !== null && d.lng !== null
-            );
-          });
+          );
           const list = sortBy(range, currentPosition, getDistance, data);
           getDefaultMatch(list[1]);
           setMatchList(list);
@@ -54,6 +65,7 @@ export default function MainSection({
         .catch((err) => console.log(err));
     }
   }, [lat, lng, range, userInfo.id]);
+
   const clickHandler = (data, like) => {
     const likeData = {
       from_id: userInfo.id,
@@ -67,13 +79,26 @@ export default function MainSection({
           setIndex(index + 1 === matchList.length ? index : index + 1);
           setPointer(pointer + 1);
           setImageIndex(0);
+        } else {
+          axios
+            .get('/api/test/matched', {
+              params: { user_id: userInfo.id, dog_id: data.id },
+            })
+            .then((result) => {
+              if (result.data[0]) {
+                setOpenModal(true);
+                setMatchedImage(result.data[0].url);
+                updateMatchList();
+              } else {
+                setIndex(index + 1);
+              }
+            });
         }
-        updateMatchList();
       })
       .catch((err) => console.log(err));
-    if (like === 1 || like === 2) {
-      setOpenModal(true);
-    }
+    // if (like === 1 || like === 2) {
+    //   setOpenModal(true);
+    // }
   };
   const startChat = (data) => {
     const receiverData = {
@@ -91,7 +116,7 @@ export default function MainSection({
   return (
     <MainContainer>
       <Title>Discover</Title>
-      <div style={{ height: '30px', textAlign: 'center' }}>
+      {/* <div style={{ height: '30px', textAlign: 'center' }}>
         <input
           type="text"
           placeholder="Enter a discover range"
@@ -103,7 +128,7 @@ export default function MainSection({
           }}
         ></input>
         <button>Search</button>
-      </div>
+      </div> */}
       {matchList.length === 0 && (
         <p style={{ textAlign: 'center' }}>No dog found within the range</p>
       )}
@@ -123,7 +148,7 @@ export default function MainSection({
           You've reached the end of discover list
         </p>
       )}
-      {matchList.length > 0 && (
+      {matchList.length > 0 && index < matchList.length && (
         <DogDetail
           dog={matchList[index][1]}
           updateImageIndex={updateImageIndex}
@@ -170,12 +195,13 @@ export default function MainSection({
                 <div style={{ position: 'relative' }}>
                   <ModalImage
                     src={matchList[index][1].images[imageIndex]}
-                    style={{ left: '25%' }}
+                    style={{ left: '25%', objectFit: 'cover' }}
                   />
                   <ModalImage
-                    src={matchList[0][1].images[0]}
+                    src={matchedImage}
                     style={{
                       right: '25%',
+                      objectFit: 'cover',
                     }}
                   />
                   <HeartIcon className="fa-solid fa-heart"></HeartIcon>

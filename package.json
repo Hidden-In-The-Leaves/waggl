@@ -13,7 +13,8 @@
     "pg:createdb": "createdb -h 127.0.0.1 waggl",
     "pg:start": "pg_ctl -D waggl start",
     "pg:stop": "pg_ctl -D waggl stop",
-    "start": "nodemon ./server/index.js"
+    "start": "nodemon ./server/index.js",
+    "serve": "node ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "firebase": "^9.9.2",
+    "googleapis": "^105.0.0",
     "http": "^0.0.1-security",
     "node-pg": "^1.0.1",
     "nodemon": "^2.0.19",
@@ -41,6 +43,7 @@
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.15.1",
     "react-router-dom": "^6.3.0",
     "socket.io": "^4.5.1",
     "socket.io-client": "^4.5.1",

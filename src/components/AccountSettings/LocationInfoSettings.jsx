@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useUserStore } from '../Store';
 import {
   InputLabel, SectionTitle, Input,
 } from '../../styledComponents';
@@ -11,6 +12,8 @@ export default function LocationInfoSettings() {
   const [city, setCity] = useState({});
   const [userState, setUserState] = useState({});
   const [discoveryRadius, setDiscoveryRadius] = useState({});
+
+  const userInfo = useUserStore((state) => state.userInfo);
 
   const handleLocationSettingsEdit = () => {
     setLocationEdit(true);
@@ -38,7 +41,7 @@ export default function LocationInfoSettings() {
   const getLocationInfo = () => {
     const config = {
       method: 'GET',
-      url: '/api/accountSettings/locationInfo',
+      url: `/api/accountSettings/locationInfo/${userInfo.id}`,
     };
 
     axios(config)
@@ -54,7 +57,7 @@ export default function LocationInfoSettings() {
     // send updated info to server
     const config = {
       method: 'PUT',
-      url: '/api/accountSettings/locationInfo',
+      url: `/api/accountSettings/locationInfo/${userInfo.id}`,
       data: {
         city,
         state: userState,

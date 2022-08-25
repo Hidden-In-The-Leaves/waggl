@@ -6,7 +6,6 @@ module.exports = {
     let {
       name, age, size, user_id, likes, dislikes, gender, description, photos, personalities
     } = req.body;
-    console.log('create profile request', req);
     db.query(`
       INSERT INTO dogs
         (name, age, size, user_id, likes, dislikes, gender, description)
@@ -46,15 +45,15 @@ module.exports = {
   },
 
   getProfiles: (req, res) => {
-    console.log('get all profiles request', req);
     db.query(`
-    SELECT
-        D.*,
-        JSON_AGG(DP.URL) AS PHOTOS,
-    JSON_AGG(T.trait) AS TRAITS
+      SELECT D.*,
+        (SELECT JSON_AGG(DP.URL)
+          FROM DOG_PICTURES DP
+          WHERE DP.DOG_ID = D.ID) AS PHOTOS,
+        (SELECT JSON_AGG(T.TRAIT)
+          FROM TRAITS T
+          WHERE T.DOG_ID = D.ID) AS TRAITS
       FROM DOGS D
-      INNER JOIN DOG_PICTURES DP ON D.ID = DP.DOG_ID
-    INNER JOIN TRAITS T ON D.ID = T.DOG_ID
       WHERE D.USER_ID = $1
       GROUP BY D.ID
     `, [req.query.user_id])

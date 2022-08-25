@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useUserStore } from '../Store';
+
 import {
   InputLabel, SectionTitle, Input,
 } from '../../styledComponents';
@@ -15,15 +17,17 @@ export default function UserInfoSettings() {
   const [email, setEmail] = useState({});
   const [password, setPassword] = useState({});
 
+  const userInfo = useUserStore((state) => state.userInfo);
+
   const handleUserInformationEdit = () => {
     setUserEdit(true);
   };
 
   const setUserInfo = (data) => {
-    if (data.profile_picture_url === undefined) {
+    if (data.profile_pic_url === undefined) {
       setProfilePictureUrl('https://upload.wikimedia.org/wikipedia/commons/4/43/Cute_dog.jpg');
     } else {
-      setProfilePictureUrl(data.profile_picture_url);
+      setProfilePictureUrl(data.profile_pic_url);
     }
     if (data.first_name === undefined) {
       setFirstName('');
@@ -46,7 +50,7 @@ export default function UserInfoSettings() {
   const getUserInfo = () => {
     const config = {
       method: 'GET',
-      url: '/api/accountSettings/userInfo',
+      url: `/api/accountSettings/userInfo/${userInfo.id}`,
     };
 
     axios(config)
@@ -62,7 +66,7 @@ export default function UserInfoSettings() {
     // send updated info to server
     const config = {
       method: 'PUT',
-      url: '/api/accountSettings/userInfo',
+      url: `/api/accountSettings/userInfo/${userInfo.id}`,
       data: {
         profile_picture_url: profilePictureUrl,
         first_name: firstName,
@@ -97,6 +101,10 @@ export default function UserInfoSettings() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   useEffect(() => {
     if (userEdit.length === 0) {
@@ -152,10 +160,11 @@ export default function UserInfoSettings() {
 }
 
 const ProfilePicture = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   border-radius: 300px;
   margin: 20px 350px 20px;
+  object-fit: cover;
 `;
 
 const Button = styled.button`

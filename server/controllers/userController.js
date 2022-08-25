@@ -4,7 +4,6 @@ const db = require('../../database/postgres');
 
 module.exports = {
   createUser: ({ body }, res) => {
-    console.log('body ', body);
     db.query(`
     INSERT INTO users (first_name, last_name, email, password)
     VALUES ( $1, $2, $3, $4 ) RETURNING ID as user_id
@@ -42,7 +41,7 @@ module.exports = {
         res.send(result.rows);
       })
       .catch((err) => {
-        console.log('database error - cannot get user information', err);
+        console.log('database error - cannot get user info by email', err);
         res.sendStatus(500);
       });
   },
@@ -56,13 +55,12 @@ module.exports = {
         res.send(result.rows);
       })
       .catch((err) => {
-        console.log('database error - cannot get user information', err);
+        console.log('database error - cannot get all users', err);
         res.sendStatus(500);
       });
   },
 
   getUserDetails: (req, res) => {
-    console.log('request', req);
     db.query(`
     WITH DOGSPICS AS
       (SELECT D.*,
@@ -75,7 +73,7 @@ module.exports = {
       P.PACKS_VISIBLE,
       COALESCE(json_agg(D.*), '[]'::json) AS DOGS
     FROM USERS U
-    INNER JOIN SETTING_PREFERENCES P ON U.ID = P.USER_ID
+    LEFT JOIN SETTING_PREFERENCES P ON U.ID = P.USER_ID
     LEFT JOIN DOGSPICS D ON U.ID = D.USER_ID
     WHERE U.ID = $1
     GROUP BY U.ID,

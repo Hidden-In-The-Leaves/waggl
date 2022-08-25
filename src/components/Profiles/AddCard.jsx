@@ -5,10 +5,11 @@ export default function SmallCard(props) {
   return (
    <AddCard>
       {/* <svg width="130" height="130" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg"> */}
-      <AddIcon preserveAspectRatio="xMidYMin" onClick={(e) => {e.preventDefault(); props.handleOpen()}}>
+      {/* <AddIcon preserveAspectRatio="xMidYMin" onClick={(e) => {e.preventDefault(); props.handleOpen()}}>
         <line x1='0' y1='60' x2='120' y2='60' stroke='#FF8700' strokeWidth="9" />
         <line x1='60' y1='0' x2='60' y2='120' stroke='#FF8700' strokeWidth="9" />
-      </AddIcon>
+      </AddIcon> */}
+      <AddImg src="https://img.icons8.com/ios-glyphs/90/ff8700/plus-math.png" onClick={(e) => {e.preventDefault(); props.handleOpen()}}/>
    </AddCard>
   );
 }
@@ -29,13 +30,14 @@ export default function SmallCard(props) {
 // `;
 const AddCard = styled.div`
   display: flex;
-  width: 32%;
-  height: 556px;
+  width: 30%;
+  height: 500px;
   align-items: center;
   justify-content: center;
   background: #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 10%);
   border-radius: 20px;
+  margin: 20px;
 `;
 
 const AddIcon = styled.svg`
@@ -46,4 +48,8 @@ const AddIcon = styled.svg`
   viewBox: 0 0 130 130;
   version: 1.1;
   xmlns: 'http://www.w3.org/2000/svg;'
+`;
+
+const AddImg = styled.img`
+
 `;

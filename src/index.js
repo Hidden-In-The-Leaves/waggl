@@ -49,12 +49,13 @@ function Index() {
 
   const [cookies, setCookie, removeCookie] = useCookies(['session']);
 
-  const setZustandUser = ({ id, first_name, last_name, email }) => {
+  const setZustandUser = ({ id, first_name, last_name, email, profile_pic_url }) => {
     const user = {
       id: id,
       firstName: first_name,
       lastName: last_name,
       email: email,
+      profile_pic_url
     };
     setUserInfo(user);
   };
