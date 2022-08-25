@@ -15,12 +15,12 @@ export const useUserStore = create((set) => ({
   // should populate this store with data like the users database table.
   // { id: 1, firstName: 'a', lastName: 'b', email: 'fdsa' ...
   // initial sample data. should be populated with more columns i think
-  userInfo: {
-    id: 1,
-    firstName: 'test',
-    lastName: 'test',
-    email: 'test@gmail.com',
-  },
-  // userInfo: {},
+  // userInfo: {
+  //   id: 1,
+  //   firstName: 'test',
+  //   lastName: 'test',
+  //   email: 'test@gmail.com',
+  // },
+  userInfo: {},
   setUserInfo: (userInfo) => set((state) => ({ userInfo })),
 }));
