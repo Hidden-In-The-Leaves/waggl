@@ -25,7 +25,6 @@ export default function ProfileCard({ pfp, handleEditOpen, renderList }) {
     setEditModal(false);
   };
 
-  console.log('here!', pfp.photos)
   if (!pfp.photos) {
     return (
       <ProfileCardDiv>
