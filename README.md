@@ -158,9 +158,9 @@ While all members worked as full stack engineers to develop features, we also ha
 
 |   |  |
 | ------------- | ------------- |
-| Product Managers  | [Chris Lathen](https://github.com/haleyjung)  |
-| App Architects  | [Juan Pinol](https://github.com/HuijunLu) & [Chenyou Huang](https://github.com/chenyou-H) & [Elizabeth Bivens-Tatum](https://github.com/katyfsy) |
-| UI Leads  |[Maria Hirai](https://github.com/maria6417) & [Jordan Addleman](https://github.com/JosephSanfelippo) & [Xinyuan Zheng](https://github.com/katyfsy) |
+| Product Managers  | [Chris Lathen](https://github.com/clathen)  |
+| App Architects  | [Juan Pinol](https://github.com/JuanOfMany) & [Chenyou Huang](https://github.com/chenyou-H) & [Elizabeth Bivens-Tatum](https://github.com/ebivenstatum) |
+| UI Leads  |[Maria Hirai](https://github.com/maria6417) & [Jordan Addleman](https://github.com/maximumjpeg) & [Xinyuan Zheng](https://github.com/xinyuanzheng001) |
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
