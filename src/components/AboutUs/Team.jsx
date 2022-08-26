@@ -60,15 +60,15 @@ const teamMembers = [
       'https://ca.slack-edge.com/T01J1BRG8E4-U03AZB6M29Y-60edf7297b54-512',
     linked_in: 'https://www.linkedin.com/in/christopherlathen/',
     catchPhrase:
-      'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
+      '',
   },
   {
     name: 'Juan Pinol',
     role: 'Architecture Owner / Fullstack Developer',
-    photo_url: '',
+    photo_url: 'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1661355800/1bfe955d-a0ba-4b56-b8ee-06660bc638ad_so6kze.jpg',
     linked_in: 'https://www.linkedin.com/in/juannnpinol/',
     catchPhrase:
-      'somethingsomethingsomethingsomethingsomethingsomethingsomethingsomething',
+      'Voted most likely to travel across the world to pet cute animals.',
   },
   {
     name: 'Chenyou Huang',
@@ -76,14 +76,14 @@ const teamMembers = [
     photo_url:
       'https://res.cloudinary.com/djgwnnspi/image/upload/v1660862234/Screen_Shot_2022-08-18_at_4.25.55_PM_mruci4.png',
     linked_in: 'https://www.linkedin.com/in/chenyou-huang/',
-    catchPhrase: 'nothing',
+    catchPhrase: '',
   },
   {
     name: 'Elizabeth Bivens-Tatum',
     role: 'Architecture Owner / Fullstack Developer',
-    photo_url: '',
+    photo_url: 'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1661355799/2022-08-23_14.58.37_1_owns02.jpg',
     linked_in: 'https://www.linkedin.com/in/elizabeth-bivens-tatum/',
-    catchPhrase: 'something',
+    catchPhrase: 'Dog lover and passionate web developer',
   },
   {
     name: 'Maria Hirai',
@@ -91,21 +91,21 @@ const teamMembers = [
     photo_url:
       'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1660695544/Screen_Shot_2022-08-10_at_11.42.27_xiiuou.png',
     linked_in: 'https://www.linkedin.com/in/mariahirai/',
-    catchPhrase: 'I am a visual person. I love seeing products come to real life!',
+    catchPhrase: 'I love coding and talking to my dogs!',
   },
   {
     name: 'Jordan Addleman',
     role: 'UI Owner / Fullstack Developer',
     photo_url:
-      'https://ca.slack-edge.com/T01J1BRG8E4-U03ASMF34DU-f7156d5b60c5-512',
+      'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1661368420/Screen_Shot_2022-08-22_at_4.17.57_PM_audauo.png',
     linked_in: 'https://www.linkedin.com/in/jordan-addleman/',
-    catchPhrase: 'something',
+    catchPhrase: 'Software Developer and Dog\'s Best Friend.',
   },
   {
     name: 'Xinyuan Zheng',
     role: 'UI Owner / Fullstack Developer',
-    photo_url: '',
+    photo_url: 'https://res.cloudinary.com/dl9zxpaoq/image/upload/v1661368340/Image_from_iOS_1_pcensh.jpg',
     linked_in: 'https://www.linkedin.com/in/xinyuanzheng001/',
-    catchPhrase: 'something',
+    catchPhrase: 'Corgi lover and developer that likes to create new stuff',
   },
 ];
