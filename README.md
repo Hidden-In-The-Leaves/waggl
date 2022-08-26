@@ -75,7 +75,7 @@ Waggl is a social media platform to help dog owners find like-minded dogs!. This
 
 ### Event detail page
 > Users can view an event detail and post messages
-![](assets/Screen Shot 2022-08-26 at 12.00.56 AM.png)
+![](assets/EventDetails.png)
 
 ### Discover
 > Users can discover other dogs in their neighborhood
